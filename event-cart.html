@@ -7,8 +7,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Reutiliza los estilos principales del archivo principal */
-        /* Solo necesitas agregar los estilos específicos para la página del carrito */
         :root {
             --color-rojo-fuego: #DB3606;
             --color-amarillo-cheddar: #F8A814;
@@ -53,6 +51,12 @@
             gap: 10px;
             z-index: 1000;
             text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: var(--color-rojo-fuego);
+            transform: translateX(-5px);
         }
 
         .cart-page-title {
@@ -107,6 +111,8 @@
             color: var(--color-amarillo-cheddar);
             font-weight: bold;
             margin-top: 1rem;
+            border-top: 2px solid var(--color-purpura-berry);
+            padding-top: 1rem;
         }
 
         .event-form {
@@ -135,6 +141,7 @@
             color: white;
             font-size: 1rem;
             font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
         }
 
         .form-group input:focus,
@@ -143,6 +150,7 @@
             outline: none;
             border-color: var(--color-purpura-berry);
             box-shadow: 0 0 10px rgba(186, 105, 144, 0.3);
+            background: rgba(255, 255, 255, 0.15);
         }
 
         .submit-btn {
@@ -157,11 +165,20 @@
             cursor: pointer;
             margin-top: 1rem;
             transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
 
         .submit-btn:hover {
             background: linear-gradient(135deg, #9d5b85 0%, var(--color-purpura-berry) 100%);
             transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(186, 105, 144, 0.3);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
         }
 
         .event-cart-item {
@@ -172,6 +189,13 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .event-cart-item:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--color-purpura-berry);
         }
 
         .item-details h4 {
@@ -199,6 +223,12 @@
             height: 30px;
             border-radius: 50%;
             cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quantity-btn:hover {
+            background: var(--color-rojo-fuego);
+            transform: scale(1.1);
         }
 
         .quantity-input {
@@ -211,6 +241,27 @@
             border-radius: 5px;
         }
 
+        .required {
+            color: var(--color-rojo-fuego);
+        }
+
+        .whatsapp-notice {
+            background: rgba(37, 211, 102, 0.1);
+            border: 2px solid #25D366;
+            border-radius: 10px;
+            padding: 1rem;
+            margin-top: 2rem;
+            text-align: center;
+            color: #ccc;
+        }
+
+        .whatsapp-notice i {
+            color: #25D366;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+
         @media (max-width: 768px) {
             .cart-grid {
                 grid-template-columns: 1fr;
@@ -218,6 +269,22 @@
             
             .cart-page-title {
                 font-size: 2.5rem;
+            }
+            
+            .event-cart-page {
+                padding: 80px 20px 30px;
+            }
+            
+            .cart-items-section,
+            .cart-summary {
+                padding: 1.5rem;
+            }
+            
+            .back-btn {
+                top: 15px;
+                left: 15px;
+                padding: 8px 15px;
+                font-size: 0.9rem;
             }
         }
     </style>
@@ -258,16 +325,21 @@
                     <span id="summaryTotal">$0.00</span>
                 </div>
                 
+                <div class="whatsapp-notice">
+                    <i class="fab fa-whatsapp"></i>
+                    <p>After submitting, WhatsApp will open automatically to send booking details to the owner.</p>
+                </div>
+                
                 <div class="event-form">
                     <h3 style="color: var(--color-amarillo-cheddar); margin-bottom: 1.5rem;">Event Information</h3>
                     
                     <div class="form-group">
-                        <label for="eventDate">Event Date *</label>
+                        <label for="eventDate">Event Date <span class="required">*</span></label>
                         <input type="date" id="eventDate" required>
                     </div>
                     
                     <div class="form-group">
-                        <label for="eventType">Event Type *</label>
+                        <label for="eventType">Event Type <span class="required">*</span></label>
                         <select id="eventType" required>
                             <option value="">Select event type</option>
                             <option value="birthday">Birthday Party</option>
@@ -275,38 +347,39 @@
                             <option value="wedding">Wedding</option>
                             <option value="graduation">Graduation</option>
                             <option value="sports">Sports Event</option>
+                            <option value="family">Family Reunion</option>
                             <option value="other">Other</option>
                         </select>
                     </div>
                     
                     <div class="form-group">
-                        <label for="guestCount">Number of Guests *</label>
-                        <input type="number" id="guestCount" min="10" max="500" required>
+                        <label for="guestCount">Number of Guests <span class="required">*</span></label>
+                        <input type="number" id="guestCount" min="10" max="500" required placeholder="Minimum 10 guests">
                     </div>
                     
                     <div class="form-group">
-                        <label for="eventAddress">Event Address *</label>
-                        <textarea id="eventAddress" rows="3" required></textarea>
+                        <label for="eventAddress">Event Address <span class="required">*</span></label>
+                        <textarea id="eventAddress" rows="3" required placeholder="Full address with city and zip code"></textarea>
                     </div>
                     
                     <div class="form-group">
-                        <label for="contactName">Contact Name *</label>
-                        <input type="text" id="contactName" required>
+                        <label for="contactName">Contact Name <span class="required">*</span></label>
+                        <input type="text" id="contactName" required placeholder="Your full name">
                     </div>
                     
                     <div class="form-group">
-                        <label for="contactPhone">Phone Number *</label>
-                        <input type="tel" id="contactPhone" required>
+                        <label for="contactPhone">Phone Number <span class="required">*</span></label>
+                        <input type="tel" id="contactPhone" required placeholder="For contact and WhatsApp">
                     </div>
                     
                     <div class="form-group">
-                        <label for="contactEmail">Email Address *</label>
-                        <input type="email" id="contactEmail" required>
+                        <label for="contactEmail">Email Address <span class="required">*</span></label>
+                        <input type="email" id="contactEmail" required placeholder="For confirmation email">
                     </div>
                     
                     <div class="form-group">
                         <label for="specialRequests">Special Requests / Theme Ideas</label>
-                        <textarea id="specialRequests" rows="3" placeholder="Tell us about your theme or special requests..."></textarea>
+                        <textarea id="specialRequests" rows="3" placeholder="Tell us about your theme, decorations, or special requests..."></textarea>
                     </div>
                     
                     <button class="submit-btn" onclick="submitEventBooking()">
@@ -314,7 +387,7 @@
                     </button>
                     
                     <p style="margin-top: 1rem; color: #ccc; font-size: 0.9rem; text-align: center;">
-                        * We'll contact you within 24 hours to confirm your booking
+                        <i class="fas fa-info-circle"></i> We'll contact you within 24 hours to confirm your booking
                     </p>
                 </div>
             </div>
@@ -335,8 +408,8 @@
                         <i class="fas fa-shopping-cart" style="font-size: 3rem; margin-bottom: 1rem;"></i>
                         <h3>No items in your event cart</h3>
                         <p>Add items from our menu to start planning your event!</p>
-                        <a href="index.html" style="color: var(--color-amarillo-cheddar); text-decoration: none; font-weight: bold;">
-                            Back to Menu
+                        <a href="index.html" style="color: var(--color-amarillo-cheddar); text-decoration: none; font-weight: bold; display: inline-block; margin-top: 1rem;">
+                            <i class="fas fa-arrow-left"></i> Back to Menu
                         </a>
                     </div>
                 `;
@@ -399,6 +472,11 @@
                 return;
             }
             
+            if (guestCount < 10) {
+                alert('Minimum number of guests is 10');
+                return;
+            }
+            
             if (cartItems.length === 0) {
                 alert('Please add items to your event cart first!');
                 return;
@@ -410,11 +488,24 @@
             const tax = subtotal * 0.0825;
             const total = subtotal + serviceFee + tax;
             
-            // Create booking summary
+            // Create booking ID
+            const bookingId = 'SUP' + Date.now().toString().slice(-6) + Math.floor(Math.random() * 100).toString().padStart(2, '0');
+            
+            // Format date
+            const formattedDate = new Date(eventDate).toLocaleDateString('es-ES', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            
+            // Create booking summary for localStorage
             const bookingSummary = {
+                id: bookingId,
                 items: cartItems,
                 eventDetails: {
                     date: eventDate,
+                    formattedDate: formattedDate,
                     type: eventType,
                     guests: guestCount,
                     address: eventAddress,
@@ -431,20 +522,74 @@
                     tax: tax,
                     total: total
                 },
-                timestamp: new Date().toISOString()
+                timestamp: new Date().toISOString(),
+                status: 'pending'
             };
             
-            // Save booking to localStorage
-            localStorage.setItem('supdogEventBooking', JSON.stringify(bookingSummary));
+            // Get existing bookings from localStorage
+            let allBookings = JSON.parse(localStorage.getItem('supdogAllBookings')) || [];
             
-            // Show confirmation
-            alert('🎉 Event booking request submitted successfully!\n\nWe will contact you within 24 hours to confirm your booking.\n\nThank you for choosing SupDog!');
+            // Add new booking
+            allBookings.push(bookingSummary);
+            
+            // Save to localStorage
+            localStorage.setItem('supdogAllBookings', JSON.stringify(allBookings));
+            localStorage.setItem('supdogLastBooking', JSON.stringify(bookingSummary));
+            
+            // ===========================================
+            // TU NÚMERO DE VENEZUELA - CORREGIDO
+            // ===========================================
+            const ownerWhatsappNumber = "584245489939"; // ¡TU NÚMERO DE VENEZUELA!
+            
+            // Crear mensaje para WhatsApp
+            let whatsappMessage = `*NUEVA RESERVA SUPDOG*%0A%0A`;
+            whatsappMessage += `*Código:* ${bookingId}%0A`;
+            whatsappMessage += `*Fecha:* ${formattedDate}%0A`;
+            whatsappMessage += `*Evento:* ${eventType}%0A`;
+            whatsappMessage += `*Invitados:* ${guestCount}%0A`;
+            whatsappMessage += `*Dirección:* ${eventAddress}%0A%0A`;
+            
+            whatsappMessage += `*CLIENTE*%0A`;
+            whatsappMessage += `Nombre: ${contactName}%0A`;
+            whatsappMessage += `Teléfono: ${contactPhone}%0A`;
+            whatsappMessage += `Email: ${contactEmail}%0A%0A`;
+            
+            whatsappMessage += `*PEDIDO*%0A`;
+            cartItems.forEach(item => {
+                whatsappMessage += `• ${item.name} x${item.quantity} - $${(item.price * item.quantity).toFixed(2)}%0A`;
+            });
+            whatsappMessage += `%0A`;
+            
+            whatsappMessage += `*TOTAL: $${total.toFixed(2)}*%0A%0A`;
+            
+            if (specialRequests) {
+                whatsappMessage += `*NOTAS:*%0A${specialRequests}%0A%0A`;
+            }
+            
+            whatsappMessage += `*Solicitado:* ${new Date().toLocaleString('es-ES')}`;
+            
+            // Crear enlace de WhatsApp - FORMA MÁS CONFIABLE
+            const whatsappUrl = `https://wa.me/${ownerWhatsappNumber}?text=${whatsappMessage}`;
+            
+            // Guardar el enlace para usarlo en la confirmación
+            localStorage.setItem('whatsappUrl', whatsappUrl);
+            localStorage.setItem('bookingId', bookingId);
+            
+            // Mostrar mensaje de confirmación
+            alert(`✅ Reserva creada: ${bookingId}\n\nSe abrirá WhatsApp para enviar los detalles. Si no se abre, usa el botón en la siguiente página.`);
+            
+            // Intentar abrir WhatsApp inmediatamente
+            setTimeout(() => {
+                window.open(whatsappUrl, '_blank');
+            }, 300);
             
             // Clear cart
             localStorage.removeItem('supdogEventCart');
             
-            // Redirect to home page
-            window.location.href = 'index.html';
+            // Redirigir a página de confirmación
+            setTimeout(() => {
+                window.location.href = 'confirmation.html';
+            }, 800);
         }
         
         // Load cart items when page loads
@@ -453,8 +598,14 @@
         // Set minimum date to today
         const today = new Date().toISOString().split('T')[0];
         document.getElementById('eventDate').min = today;
+        
+        // Set default date to 14 days from now (minimum 2 weeks notice)
+        const twoWeeksFromNow = new Date();
+        twoWeeksFromNow.setDate(twoWeeksFromNow.getDate() + 14);
+        const defaultDate = twoWeeksFromNow.toISOString().split('T')[0];
+        document.getElementById('eventDate').value = defaultDate;
     </script>
 </body>
-
 </html>
+
 
