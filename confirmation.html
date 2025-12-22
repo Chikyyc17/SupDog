@@ -27,7 +27,7 @@
         }
         
         .confirmation-container {
-            max-width: 600px;
+            max-width: 700px;
             background: rgba(255, 255, 255, 0.1);
             padding: 40px;
             border-radius: 20px;
@@ -52,44 +52,68 @@
         h1 {
             color: var(--color-amarillo-cheddar);
             font-size: 2.5rem;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
             text-shadow: 2px 2px 0px rgba(0,0,0,0.5);
+        }
+        
+        .subtitle {
+            color: #ccc;
+            margin-bottom: 30px;
+            font-size: 1.2rem;
         }
         
         .booking-id {
             background: linear-gradient(135deg, var(--color-purpura-berry) 0%, #9d5b85 100%);
             color: white;
-            padding: 15px 30px;
+            padding: 20px 40px;
             border-radius: 50px;
-            font-size: 1.8rem;
+            font-size: 2rem;
             font-weight: bold;
-            margin: 20px 0;
+            margin: 30px 0;
             display: inline-block;
-            box-shadow: 0 5px 15px rgba(186, 105, 144, 0.4);
+            box-shadow: 0 10px 20px rgba(186, 105, 144, 0.4);
+            letter-spacing: 2px;
+        }
+        
+        .whatsapp-section {
+            background: rgba(37, 211, 102, 0.1);
+            border: 3px solid #25D366;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 0;
+            text-align: center;
+        }
+        
+        .whatsapp-icon {
+            font-size: 3rem;
+            color: #25D366;
+            margin-bottom: 15px;
         }
         
         .whatsapp-btn {
             background: #25D366;
             color: white;
             border: none;
-            padding: 15px 30px;
+            padding: 18px 40px;
             border-radius: 50px;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             font-weight: bold;
             cursor: pointer;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
-            gap: 10px;
-            margin: 20px 10px 10px;
+            justify-content: center;
+            gap: 12px;
+            margin: 15px 0;
             transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
+            width: 100%;
         }
         
         .whatsapp-btn:hover {
             background: #128C7E;
             transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
+            box-shadow: 0 12px 25px rgba(37, 211, 102, 0.4);
         }
         
         .instructions {
@@ -114,7 +138,7 @@
             text-decoration: none;
             font-weight: bold;
             display: inline-block;
-            padding: 12px 25px;
+            padding: 15px 30px;
             border: 2px solid var(--color-amarillo-cheddar);
             border-radius: 50px;
             transition: all 0.3s ease;
@@ -157,6 +181,36 @@
             font-weight: bold;
         }
         
+        .manual-whatsapp {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            border: 1px dashed #25D366;
+        }
+        
+        .manual-whatsapp p {
+            margin: 10px 0;
+            color: #ccc;
+        }
+        
+        .copy-btn {
+            background: var(--color-purpura-berry);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .copy-btn:hover {
+            background: var(--color-rojo-fuego);
+        }
+        
         @media (max-width: 600px) {
             .confirmation-container {
                 padding: 25px;
@@ -169,11 +223,16 @@
             
             .booking-id {
                 font-size: 1.4rem;
-                padding: 12px 20px;
+                padding: 15px 25px;
             }
             
             .steps {
                 flex-direction: column;
+            }
+            
+            .whatsapp-btn {
+                padding: 15px 25px;
+                font-size: 1.1rem;
             }
         }
     </style>
@@ -181,9 +240,8 @@
 <body>
     <div class="confirmation-container">
         <div class="success-icon">🎉</div>
-        <h1>¡Reserva Enviada Exitosamente!</h1>
-        
-        <p>Tu reserva ha sido procesada correctamente. Pronto nos pondremos en contacto contigo para confirmar todos los detalles.</p>
+        <h1>¡Reserva Creada Exitosamente!</h1>
+        <p class="subtitle">Tu reserva ha sido procesada correctamente</p>
         
         <div class="booking-id" id="bookingIdDisplay">
             Cargando código...
@@ -192,28 +250,45 @@
         <div class="steps">
             <div class="step">
                 <div class="step-number">1</div>
-                <p>Se abrió WhatsApp automáticamente</p>
+                <p>Envía los detalles por WhatsApp</p>
             </div>
             <div class="step">
                 <div class="step-number">2</div>
-                <p>Envía el mensaje al dueño</p>
+                <p>Espera confirmación</p>
             </div>
             <div class="step">
                 <div class="step-number">3</div>
-                <p>Espera confirmación en 24h</p>
+                <p>Disfruta tu evento</p>
             </div>
         </div>
         
-        <p>Si WhatsApp no se abrió automáticamente, haz clic aquí:</p>
-        
-        <a href="#" class="whatsapp-btn" id="whatsappBtn">
-            <i class="fab fa-whatsapp"></i> Enviar por WhatsApp
-        </a>
+        <div class="whatsapp-section">
+            <div class="whatsapp-icon">
+                <i class="fab fa-whatsapp"></i>
+            </div>
+            <h3>Enviar por WhatsApp</h3>
+            <p>Haz clic en el botón para enviar los detalles de tu reserva al dueño:</p>
+            
+            <button class="whatsapp-btn" id="whatsappBtn">
+                <i class="fab fa-whatsapp"></i> Enviar Reserva por WhatsApp
+            </button>
+            
+            <div class="manual-whatsapp">
+                <p><strong>Si el botón no funciona:</strong></p>
+                <p>1. Abre WhatsApp en tu teléfono</p>
+                <p>2. Envía un mensaje al número: <strong id="ownerNumber">+58 424 5489939</strong></p>
+                <p>3. Copia y pega este mensaje:</p>
+                <textarea id="whatsappMessage" rows="4" style="width: 100%; background: rgba(0,0,0,0.5); color: white; border: 1px solid #25D366; border-radius: 8px; padding: 10px; font-family: monospace; margin: 10px 0;"></textarea>
+                <button class="copy-btn" onclick="copyMessage()">
+                    <i class="fas fa-copy"></i> Copiar Mensaje
+                </button>
+            </div>
+        </div>
         
         <div class="instructions">
             <h3><i class="fas fa-info-circle"></i> ¿Qué sigue?</h3>
-            <p>1. El dueño recibirá tu mensaje por WhatsApp con todos los detalles</p>
-            <p>2. Te contactará en las próximas 24 horas para confirmar disponibilidad</p>
+            <p>1. El dueño recibirá tu mensaje por WhatsApp</p>
+            <p>2. Te contactará en las próximas 24 horas para confirmar</p>
             <p>3. Coordinarán los detalles finales y el pago</p>
             <p>4. ¡Disfruta de tu evento con SupDog!</p>
         </div>
@@ -224,42 +299,79 @@
     </div>
     
     <script>
-        // Obtener la última reserva del localStorage
+        // Obtener datos del localStorage
+        const whatsappUrl = localStorage.getItem('whatsappUrl');
+        const bookingId = localStorage.getItem('bookingId') || 'No encontrado';
         const lastBooking = JSON.parse(localStorage.getItem('supdogLastBooking')) || null;
         
+        // Mostrar ID de reserva
+        document.getElementById('bookingIdDisplay').textContent = `Código: ${bookingId}`;
+        
+        // Crear mensaje para WhatsApp si no hay URL guardada
+        let message = '';
         if (lastBooking) {
-            // Mostrar ID de reserva
-            document.getElementById('bookingIdDisplay').textContent = `Código: ${lastBooking.id}`;
-            
-            // ===========================================
-            // 🚨🚨🚨 IMPORTANTE: REEMPLAZA ESTE NÚMERO 🚨🚨🚨
-            // Mismo número que en event-cart.html
-            // ===========================================
-            const ownerWhatsappNumber = "584245489939"; // ← REEMPLAZA ESTE NÚMERO
-            
-            // Crear mensaje corto para WhatsApp
-            const whatsappMessage = `Hola SupDog, tengo una reserva con código ${lastBooking.id}. Por favor confirmen los detalles.`;
-            
-            // Configurar botón de WhatsApp
-            document.getElementById('whatsappBtn').href = `https://wa.me/${ownerWhatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
-            
-            // Guardar en historial de reservas
-            let bookingHistory = JSON.parse(localStorage.getItem('supdogBookingHistory')) || [];
-            bookingHistory.push({
-                id: lastBooking.id,
-                date: new Date().toLocaleString(),
-                status: 'pending'
-            });
-            localStorage.setItem('supdogBookingHistory', JSON.stringify(bookingHistory));
+            message = `Hola SupDog, tengo una reserva con código ${lastBooking.id}. Fecha: ${lastBooking.eventDetails.formattedDate}. Tipo: ${lastBooking.eventDetails.type}. Invitados: ${lastBooking.eventDetails.guests}. Cliente: ${lastBooking.eventDetails.contact.name}. Tel: ${lastBooking.eventDetails.contact.phone}. Total: $${lastBooking.pricing.total.toFixed(2)}. Por favor confirmen.`;
         } else {
-            document.getElementById('bookingIdDisplay').textContent = "No se encontró la reserva";
-            document.getElementById('whatsappBtn').style.display = 'none';
-            
-            // Si no hay reserva, redirigir al carrito después de 3 segundos
-            setTimeout(() => {
-                window.location.href = 'event-cart.html';
-            }, 3000);
+            message = `Hola SupDog, tengo una reserva con código ${bookingId}. Por favor confirmen los detalles.`;
         }
+        
+        // Mostrar mensaje en textarea
+        document.getElementById('whatsappMessage').value = message;
+        
+        // Configurar botón de WhatsApp
+        const whatsappBtn = document.getElementById('whatsappBtn');
+        
+        if (whatsappUrl) {
+            // Usar URL guardada
+            whatsappBtn.onclick = function() {
+                // Intentar abrir WhatsApp de varias formas
+                window.open(whatsappUrl, '_blank');
+                
+                // También intentar con location.href después de un retraso
+                setTimeout(() => {
+                    window.location.href = whatsappUrl;
+                }, 500);
+            };
+        } else {
+            // Crear URL si no existe
+            const ownerNumber = "584245489939"; // Tu número de Venezuela
+            const whatsappUrlNew = `https://wa.me/${ownerNumber}?text=${encodeURIComponent(message)}`;
+            
+            whatsappBtn.onclick = function() {
+                window.open(whatsappUrlNew, '_blank');
+                setTimeout(() => {
+                    window.location.href = whatsappUrlNew;
+                }, 500);
+            };
+        }
+        
+        // Función para copiar mensaje
+        function copyMessage() {
+            const messageText = document.getElementById('whatsappMessage');
+            messageText.select();
+            messageText.setSelectionRange(0, 99999); // Para dispositivos móviles
+            
+            try {
+                navigator.clipboard.writeText(messageText.value);
+                alert('Mensaje copiado al portapapeles');
+            } catch (err) {
+                // Fallback para navegadores antiguos
+                document.execCommand('copy');
+                alert('Mensaje copiado al portapapeles');
+            }
+        }
+        
+        // Intentar abrir WhatsApp automáticamente después de 1 segundo
+        setTimeout(() => {
+            if (whatsappUrl) {
+                window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+            }
+        }, 1000);
+        
+        // Limpiar localStorage después de 5 minutos
+        setTimeout(() => {
+            localStorage.removeItem('whatsappUrl');
+        }, 5 * 60 * 1000);
     </script>
 </body>
 </html>
