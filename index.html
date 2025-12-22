@@ -851,7 +851,7 @@
             max-width: 300px;
         }
 
-        /* --- LOCATION MOBILE --- */
+        /* --- LOCATION MAP STYLES --- */
         .location-section { 
             padding: 4rem 1.5rem; 
             background: linear-gradient(135deg, var(--color-mostaza-suave) 0%, #d1984a 100%);
@@ -875,7 +875,7 @@
             padding: 2rem 1.5rem; 
             border-radius: 20px; 
             display: inline-block; 
-            max-width: 400px;
+            max-width: 500px;
             width: 100%; 
             box-shadow: 0 12px 24px rgba(0,0,0,0.15); 
             position: relative;
@@ -883,6 +883,24 @@
             animation: fadeIn 1s ease-out 0.5s both;
             border: 2px solid var(--color-rojo-fuego);
             transition: all 0.3s ease;
+        }
+
+        .map-container {
+            width: 100%;
+            height: 300px;
+            border-radius: 16px;
+            overflow: hidden;
+            margin: 1.5rem 0;
+            border: 2px solid #ccc;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            position: relative;
+            background: #eee;
+        }
+        
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
         }
 
         /* --- CONTACT MOBILE --- */
@@ -1075,7 +1093,6 @@
 <body>
     <div class="overlay" id="overlay"></div>
     
-    <!-- Event Cart Modal -->
     <div class="event-cart-modal" id="eventCartModal">
         <div class="cart-header">
             <button class="close-cart" id="closeCartBtn">
@@ -1086,8 +1103,7 @@
         </div>
         
         <div class="cart-items" id="cartItemsContainer">
-            <!-- Cart items will be dynamically inserted here -->
-        </div>
+            </div>
         
         <div class="cart-footer">
             <div class="cart-total">
@@ -1100,7 +1116,6 @@
         </div>
     </div>
     
-    <!-- Scroll to Top Button -->
     <div class="scroll-top" id="scrollTop">
         <i class="fas fa-chevron-up"></i>
     </div>
@@ -1125,7 +1140,6 @@
             <li><a href="#sides" class="menu-link" onclick="toggleMenu()">SIDES</a></li>
             <li><a href="#location" class="menu-link" onclick="toggleMenu()">LOCATION</a></li>
             
-            <!-- SPECIAL EVENT OPTION -->
             <li class="event-link-special" onclick="toggleMenu()">
                 <a href="event-cart.html" class="menu-link">
                     🎪 EVENT CART
@@ -1340,7 +1354,6 @@
         </div>
     </section>
 
-    <!-- EVENT PROMO BANNER -->
     <section class="event-promo-section" id="eventPromo">
         <div class="event-promo-container">
             <div class="promo-badge">
@@ -1392,18 +1405,26 @@
         <h2>Where to Find Us?</h2>
        
         <div class="location-box">
-            <h3 style="font-size: 2rem; margin-bottom: 1rem; color: var(--color-rojo-fuego);">📍 Grapevine, TX</h3>
-            <p style="font-size: 1.2rem; margin-bottom: 0.5rem; font-weight: bold; color: #333;">815 S Main St</p>
-            <p style="color: #666; margin-bottom: 1.5rem; font-size: 1rem;">Grapevine, TX 76051</p>
-           
-            <div style="border-top: 2px dashed #ccc; margin: 1.5rem 0; padding-top: 1.2rem;">
+            <h3 style="font-size: 2rem; margin-bottom: 0.5rem; color: var(--color-rojo-fuego);">📍 Grapevine, TX</h3>
+            <p style="font-size: 1.1rem; font-weight: bold; color: #333;">815 S Main St, Grapevine, TX 76051</p>
+            
+            <div class="map-container">
+                <iframe 
+                    src="https://maps.google.com/maps?q=815+S+Main+St,+Grapevine,+TX+76051&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+
+            <div style="border-top: 2px dashed #ccc; padding-top: 1rem;">
                 <p style="font-weight: bold; color: #333; font-size: 1.1rem;">🕒 Open Hours:</p>
                 <p style="color: #555; font-size: 1rem; margin: 0.4rem 0;">Sun - Thu: 11:00 AM - 9:00 PM</p>
                 <p style="color: #555; font-size: 1rem;">Fri - Sat: 11:00 AM - 11:00 PM</p>
             </div>
 
-            <a href="https://www.google.com/maps/search/?api=1&query=Sup+Dog+Hot+Dogs+815+S+Main+St+Grapevine+TX+76051" target="_blank" class="btn" style="background: #1a1a1a; margin-top: 1rem; width: 100%; max-width: 250px;">
-                Get Directions <i class="fas fa-map-marker-alt"></i>
+            <a href="https://www.google.com/maps/dir//815+S+Main+St,+Grapevine,+TX+76051" target="_blank" class="btn" style="background: #1a1a1a; margin-top: 1.5rem; width: 100%; max-width: 250px;">
+                Open in Maps App <i class="fas fa-location-arrow"></i>
             </a>
         </div>
     </section>
@@ -1421,7 +1442,7 @@
     </section>
 
     <footer>
-        <p style="font-size: 1rem; margin-bottom: 1rem; color: #aaa;">© 2023 SupDog Hot Dogs. All rights reserved.</p>
+        <p style="font-size: 1rem; margin-bottom: 1rem; color: #aaa;">© 2025 SupDog Hot Dogs. All rights reserved.</p>
         <div class="social-links">
             <p style="font-size: 1rem;">
                 Follow:
