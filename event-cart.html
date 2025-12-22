@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SupDog - Event Cart Booking</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reutiliza los estilos principales del archivo principal */
+        /* Solo necesitas agregar los estilos específicos para la página del carrito */
+        :root {
+            --color-rojo-fuego: #DB3606;
+            --color-amarillo-cheddar: #F8A814;
+            --color-mostaza-suave: #E0A851;
+            --color-purpura-berry: #BA6990;
+            --color-fondo-oscuro: #0f0f0f;
+            --color-texto-claro: #ffffff;
+            --color-gris-claro: #e0e0e0;
+        }
+
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1a0f0f 0%, #2a1a1a 100%);
+            color: var(--color-texto-claro);
+            min-height: 100vh;
+        }
+
+        .event-cart-page {
+            padding: 100px 5% 50px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: var(--color-purpura-berry);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1000;
+            text-decoration: none;
+        }
+
+        .cart-page-title {
+            color: var(--color-amarillo-cheddar);
+            font-size: 3.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            text-shadow: 2px 2px 0px var(--color-purpura-berry);
+            font-family: 'Bangers', cursive;
+        }
+
+        .cart-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+        }
+
+        .cart-items-section {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 2.5rem;
+            border: 2px solid var(--color-purpura-berry);
+        }
+
+        .cart-summary {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 2.5rem;
+            border: 2px solid var(--color-purpura-berry);
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+        }
+
+        .summary-title {
+            color: var(--color-amarillo-cheddar);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            font-family: 'Bangers', cursive;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .summary-total {
+            font-size: 1.8rem;
+            color: var(--color-amarillo-cheddar);
+            font-weight: bold;
+            margin-top: 1rem;
+        }
+
+        .event-form {
+            margin-top: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--color-gris-claro);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            color: white;
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--color-purpura-berry);
+            box-shadow: 0 0 10px rgba(186, 105, 144, 0.3);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--color-purpura-berry) 0%, #9d5b85 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background: linear-gradient(135deg, #9d5b85 0%, var(--color-purpura-berry) 100%);
+            transform: translateY(-3px);
+        }
+
+        .event-cart-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .item-details h4 {
+            color: white;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .item-details .price {
+            color: var(--color-amarillo-cheddar);
+            font-weight: bold;
+        }
+
+        .item-quantity {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .quantity-btn {
+            background: var(--color-purpura-berry);
+            border: none;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .quantity-input {
+            width: 50px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 5px;
+            border-radius: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .cart-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cart-page-title {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-btn">
+        <i class="fas fa-arrow-left"></i> Back to Menu
+    </a>
+
+    <div class="event-cart-page">
+        <h1 class="cart-page-title">🎪 EVENT CART BOOKING</h1>
+        
+        <div class="cart-grid">
+            <div class="cart-items-section">
+                <h2 class="summary-title">Your Event Items</h2>
+                <div id="cartItemsList">
+                    <!-- Items will be loaded here via JavaScript -->
+                </div>
+            </div>
+            
+            <div class="cart-summary">
+                <h2 class="summary-title">Event Details</h2>
+                
+                <div class="summary-item">
+                    <span>Subtotal:</span>
+                    <span id="summarySubtotal">$0.00</span>
+                </div>
+                <div class="summary-item">
+                    <span>Service Fee (15%):</span>
+                    <span id="summaryFee">$0.00</span>
+                </div>
+                <div class="summary-item">
+                    <span>Tax (8.25%):</span>
+                    <span id="summaryTax">$0.00</span>
+                </div>
+                <div class="summary-total">
+                    <span>Total Estimate:</span>
+                    <span id="summaryTotal">$0.00</span>
+                </div>
+                
+                <div class="event-form">
+                    <h3 style="color: var(--color-amarillo-cheddar); margin-bottom: 1.5rem;">Event Information</h3>
+                    
+                    <div class="form-group">
+                        <label for="eventDate">Event Date *</label>
+                        <input type="date" id="eventDate" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="eventType">Event Type *</label>
+                        <select id="eventType" required>
+                            <option value="">Select event type</option>
+                            <option value="birthday">Birthday Party</option>
+                            <option value="corporate">Corporate Event</option>
+                            <option value="wedding">Wedding</option>
+                            <option value="graduation">Graduation</option>
+                            <option value="sports">Sports Event</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="guestCount">Number of Guests *</label>
+                        <input type="number" id="guestCount" min="10" max="500" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="eventAddress">Event Address *</label>
+                        <textarea id="eventAddress" rows="3" required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="contactName">Contact Name *</label>
+                        <input type="text" id="contactName" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="contactPhone">Phone Number *</label>
+                        <input type="tel" id="contactPhone" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="contactEmail">Email Address *</label>
+                        <input type="email" id="contactEmail" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="specialRequests">Special Requests / Theme Ideas</label>
+                        <textarea id="specialRequests" rows="3" placeholder="Tell us about your theme or special requests..."></textarea>
+                    </div>
+                    
+                    <button class="submit-btn" onclick="submitEventBooking()">
+                        <i class="fas fa-paper-plane"></i> Submit Event Request
+                    </button>
+                    
+                    <p style="margin-top: 1rem; color: #ccc; font-size: 0.9rem; text-align: center;">
+                        * We'll contact you within 24 hours to confirm your booking
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Load cart items from localStorage
+        const cartItems = JSON.parse(localStorage.getItem('supdogEventCart')) || [];
+        
+        function loadCartItems() {
+            const cartItemsList = document.getElementById('cartItemsList');
+            let subtotal = 0;
+            
+            if (cartItems.length === 0) {
+                cartItemsList.innerHTML = `
+                    <div style="text-align: center; padding: 3rem; color: #ccc;">
+                        <i class="fas fa-shopping-cart" style="font-size: 3rem; margin-bottom: 1rem;"></i>
+                        <h3>No items in your event cart</h3>
+                        <p>Add items from our menu to start planning your event!</p>
+                        <a href="index.html" style="color: var(--color-amarillo-cheddar); text-decoration: none; font-weight: bold;">
+                            Back to Menu
+                        </a>
+                    </div>
+                `;
+                updateSummary(0);
+                return;
+            }
+            
+            cartItemsList.innerHTML = cartItems.map((item, index) => {
+                const itemTotal = item.price * item.quantity;
+                subtotal += itemTotal;
+                
+                return `
+                    <div class="event-cart-item">
+                        <div class="item-details">
+                            <h4>${item.name}</h4>
+                            <div class="price">$${item.price.toFixed(2)} each</div>
+                        </div>
+                        <div class="item-quantity">
+                            <div style="text-align: right;">
+                                <div style="color: var(--color-amarillo-cheddar); font-weight: bold; margin-bottom: 5px;">
+                                    $${itemTotal.toFixed(2)}
+                                </div>
+                                <div style="color: #ccc; font-size: 0.9rem;">
+                                    Qty: ${item.quantity}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            
+            updateSummary(subtotal);
+        }
+        
+        function updateSummary(subtotal) {
+            const serviceFee = subtotal * 0.15;
+            const tax = subtotal * 0.0825;
+            const total = subtotal + serviceFee + tax;
+            
+            document.getElementById('summarySubtotal').textContent = `$${subtotal.toFixed(2)}`;
+            document.getElementById('summaryFee').textContent = `$${serviceFee.toFixed(2)}`;
+            document.getElementById('summaryTax').textContent = `$${tax.toFixed(2)}`;
+            document.getElementById('summaryTotal').textContent = `$${total.toFixed(2)}`;
+        }
+        
+        function submitEventBooking() {
+            // Get form values
+            const eventDate = document.getElementById('eventDate').value;
+            const eventType = document.getElementById('eventType').value;
+            const guestCount = document.getElementById('guestCount').value;
+            const eventAddress = document.getElementById('eventAddress').value;
+            const contactName = document.getElementById('contactName').value;
+            const contactPhone = document.getElementById('contactPhone').value;
+            const contactEmail = document.getElementById('contactEmail').value;
+            const specialRequests = document.getElementById('specialRequests').value;
+            
+            // Simple validation
+            if (!eventDate || !eventType || !guestCount || !eventAddress || !contactName || !contactPhone || !contactEmail) {
+                alert('Please fill in all required fields marked with *');
+                return;
+            }
+            
+            if (cartItems.length === 0) {
+                alert('Please add items to your event cart first!');
+                return;
+            }
+            
+            // Calculate totals
+            const subtotal = cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
+            const serviceFee = subtotal * 0.15;
+            const tax = subtotal * 0.0825;
+            const total = subtotal + serviceFee + tax;
+            
+            // Create booking summary
+            const bookingSummary = {
+                items: cartItems,
+                eventDetails: {
+                    date: eventDate,
+                    type: eventType,
+                    guests: guestCount,
+                    address: eventAddress,
+                    contact: {
+                        name: contactName,
+                        phone: contactPhone,
+                        email: contactEmail
+                    },
+                    requests: specialRequests
+                },
+                pricing: {
+                    subtotal: subtotal,
+                    serviceFee: serviceFee,
+                    tax: tax,
+                    total: total
+                },
+                timestamp: new Date().toISOString()
+            };
+            
+            // Save booking to localStorage
+            localStorage.setItem('supdogEventBooking', JSON.stringify(bookingSummary));
+            
+            // Show confirmation
+            alert('🎉 Event booking request submitted successfully!\n\nWe will contact you within 24 hours to confirm your booking.\n\nThank you for choosing SupDog!');
+            
+            // Clear cart
+            localStorage.removeItem('supdogEventCart');
+            
+            // Redirect to home page
+            window.location.href = 'index.html';
+        }
+        
+        // Load cart items when page loads
+        document.addEventListener('DOMContentLoaded', loadCartItems);
+        
+        // Set minimum date to today
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('eventDate').min = today;
+    </script>
+</body>
+</html>
