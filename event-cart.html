@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SupDog - Event Cart Booking</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>SupDog - Event Booking</title>
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -21,6 +21,7 @@
             margin: 0; 
             padding: 0; 
             box-sizing: border-box; 
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
@@ -28,11 +29,13 @@
             background: linear-gradient(135deg, #1a0f0f 0%, #2a1a1a 100%);
             color: var(--color-texto-claro);
             min-height: 100vh;
+            line-height: 1.5;
+            -webkit-text-size-adjust: 100%;
         }
 
         .event-cart-page {
-            padding: 100px 5% 50px;
-            max-width: 1400px;
+            padding: 90px 5% 40px;
+            max-width: 1200px;
             margin: 0 auto;
         }
 
@@ -43,80 +46,84 @@
             background: var(--color-purpura-berry);
             color: white;
             border: none;
-            padding: 10px 20px;
+            padding: 12px 20px;
             border-radius: 50px;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             z-index: 1000;
             text-decoration: none;
             transition: all 0.3s ease;
+            font-size: 1rem;
+            box-shadow: 0 4px 12px rgba(186, 105, 144, 0.3);
+            min-height: 44px;
         }
 
         .back-btn:hover {
             background: var(--color-rojo-fuego);
-            transform: translateX(-5px);
+            transform: translateX(-3px);
         }
 
         .cart-page-title {
             color: var(--color-amarillo-cheddar);
-            font-size: 3.5rem;
+            font-size: 2.5rem;
             text-align: center;
-            margin-bottom: 3rem;
-            text-shadow: 2px 2px 0px var(--color-purpura-berry);
+            margin-bottom: 2.5rem;
+            text-shadow: 1px 1px 0px var(--color-purpura-berry);
             font-family: 'Bangers', cursive;
+            letter-spacing: 1px;
         }
 
-        .cart-grid {
+        .booking-container {
             display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 3rem;
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+            max-width: 800px;
+            margin: 0 auto;
         }
 
-        .cart-items-section {
+        .booking-section {
             background: rgba(255, 255, 255, 0.05);
             border-radius: 20px;
-            padding: 2.5rem;
+            padding: 2rem;
             border: 2px solid var(--color-purpura-berry);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
 
-        .cart-summary {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            padding: 2.5rem;
-            border: 2px solid var(--color-purpura-berry);
-            position: sticky;
-            top: 100px;
-            height: fit-content;
-        }
-
-        .summary-title {
+        .section-title {
             color: var(--color-amarillo-cheddar);
-            font-size: 2rem;
+            font-size: 1.8rem;
             margin-bottom: 1.5rem;
             font-family: 'Bangers', cursive;
+            text-align: center;
         }
 
-        .summary-item {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 1rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        .whatsapp-notice {
+            background: rgba(37, 211, 102, 0.1);
+            border: 2px solid #25D366;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            color: #ccc;
         }
 
-        .summary-total {
-            font-size: 1.8rem;
-            color: var(--color-amarillo-cheddar);
-            font-weight: bold;
-            margin-top: 1rem;
-            border-top: 2px solid var(--color-purpura-berry);
-            padding-top: 1rem;
+        .whatsapp-notice i {
+            color: #25D366;
+            font-size: 2rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .whatsapp-notice h3 {
+            color: white;
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
         }
 
         .event-form {
-            margin-top: 2rem;
+            margin-top: 1rem;
         }
 
         .form-group {
@@ -127,17 +134,18 @@
             display: block;
             color: var(--color-gris-claro);
             margin-bottom: 0.5rem;
-            font-size: 1.1rem;
+            font-size: 1rem;
+            font-weight: 500;
         }
 
         .form-group input,
         .form-group textarea,
         .form-group select {
             width: 100%;
-            padding: 0.8rem;
+            padding: 14px;
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 8px;
+            border-radius: 10px;
             color: white;
             font-size: 1rem;
             font-family: 'Poppins', sans-serif;
@@ -149,245 +157,359 @@
         .form-group select:focus {
             outline: none;
             border-color: var(--color-purpura-berry);
-            box-shadow: 0 0 10px rgba(186, 105, 144, 0.3);
+            box-shadow: 0 0 15px rgba(186, 105, 144, 0.3);
             background: rgba(255, 255, 255, 0.15);
-        }
-
-        .submit-btn {
-            width: 100%;
-            padding: 1rem;
-            background: linear-gradient(135deg, var(--color-purpura-berry) 0%, #9d5b85 100%);
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: 1rem;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        .submit-btn:hover {
-            background: linear-gradient(135deg, #9d5b85 0%, var(--color-purpura-berry) 100%);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(186, 105, 144, 0.3);
-        }
-
-        .submit-btn:active {
-            transform: translateY(0);
-        }
-
-        .event-cart-item {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .event-cart-item:hover {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: var(--color-purpura-berry);
-        }
-
-        .item-details h4 {
-            color: white;
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .item-details .price {
-            color: var(--color-amarillo-cheddar);
-            font-weight: bold;
-        }
-
-        .item-quantity {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .quantity-btn {
-            background: var(--color-purpura-berry);
-            border: none;
-            color: white;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .quantity-btn:hover {
-            background: var(--color-rojo-fuego);
-            transform: scale(1.1);
-        }
-
-        .quantity-input {
-            width: 50px;
-            text-align: center;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: white;
-            padding: 5px;
-            border-radius: 5px;
         }
 
         .required {
             color: var(--color-rojo-fuego);
         }
 
-        .whatsapp-notice {
-            background: rgba(37, 211, 102, 0.1);
-            border: 2px solid #25D366;
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, var(--color-purpura-berry) 0%, #9d5b85 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 1.5rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            min-height: 56px;
+        }
+
+        .submit-btn:hover {
+            background: linear-gradient(135deg, #9d5b85 0%, var(--color-purpura-berry) 100%);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(186, 105, 144, 0.4);
+        }
+
+        .event-features {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.2rem;
+            margin-top: 2rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.05);
             border-radius: 10px;
-            padding: 1rem;
+            border-left: 3px solid var(--color-amarillo-cheddar);
+        }
+
+        .feature-item i {
+            color: var(--color-amarillo-cheddar);
+            font-size: 1.2rem;
+            min-width: 24px;
+        }
+
+        .price-estimate {
+            background: rgba(248, 168, 20, 0.1);
+            border: 2px dashed var(--color-amarillo-cheddar);
+            border-radius: 12px;
+            padding: 1.5rem;
             margin-top: 2rem;
             text-align: center;
+        }
+
+        .price-estimate h3 {
+            color: var(--color-amarillo-cheddar);
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .price-estimate p {
             color: #ccc;
+            font-size: 0.95rem;
+            margin-top: 0.5rem;
         }
 
-        .whatsapp-notice i {
-            color: #25D366;
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-            display: block;
+        .optional-section {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        @media (max-width: 768px) {
-            .cart-grid {
-                grid-template-columns: 1fr;
+        .optional-section h3 {
+            color: var(--color-gris-claro);
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            font-weight: normal;
+        }
+
+        /* Responsive Design */
+        @media (min-width: 768px) {
+            .booking-container {
+                grid-template-columns: 1fr 1fr;
+                max-width: 1000px;
             }
             
             .cart-page-title {
-                font-size: 2.5rem;
+                font-size: 3rem;
             }
             
+            .event-features {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
             .event-cart-page {
-                padding: 80px 20px 30px;
+                padding: 80px 4% 30px;
             }
             
-            .cart-items-section,
-            .cart-summary {
+            .booking-section {
                 padding: 1.5rem;
+            }
+            
+            .cart-page-title {
+                font-size: 2.2rem;
+                margin-bottom: 2rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
             }
             
             .back-btn {
                 top: 15px;
                 left: 15px;
-                padding: 8px 15px;
+                padding: 10px 16px;
                 font-size: 0.9rem;
             }
+            
+            .form-group input,
+            .form-group textarea,
+            .form-group select {
+                padding: 12px;
+            }
+        }
+
+        /* Input number fix for mobile */
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+
+        input[type="number"]::-webkit-outer-spin-button,
+        input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        /* Date input styling */
+        input[type="date"] {
+            color-scheme: dark;
+        }
+
+        /* Success message */
+        .success-message {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(15, 15, 15, 0.95);
+            border: 2px solid var(--color-purpura-berry);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            z-index: 2000;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .success-message i {
+            color: #25D366;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .success-message h3 {
+            color: var(--color-amarillo-cheddar);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .success-message p {
+            color: #ccc;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .success-btn {
+            background: var(--color-purpura-berry);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .success-btn:hover {
+            background: var(--color-rojo-fuego);
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            z-index: 1999;
         }
     </style>
 </head>
 <body>
     <a href="index.html" class="back-btn">
-        <i class="fas fa-arrow-left"></i> Back to Menu
+        <i class="fas fa-arrow-left"></i> Volver al Menú
     </a>
 
+    <div class="overlay" id="overlay"></div>
+    
+    <div class="success-message" id="successMessage">
+        <i class="fab fa-whatsapp"></i>
+        <h3>¡Reserva Enviada!</h3>
+        <p id="bookingDetails"></p>
+        <p style="margin-top: 1rem; color: #25D366; font-weight: bold;">
+            WhatsApp se abrirá automáticamente en 3 segundos...
+        </p>
+        <button class="success-btn" onclick="closeSuccess()">Cerrar</button>
+    </div>
+
     <div class="event-cart-page">
-        <h1 class="cart-page-title">🎪 EVENT CART BOOKING</h1>
+        <h1 class="cart-page-title">🎪 RESERVA DE EVENTO SUPDOG</h1>
         
-        <div class="cart-grid">
-            <div class="cart-items-section">
-                <h2 class="summary-title">Your Event Items</h2>
-                <div id="cartItemsList">
-                    <!-- Items will be loaded here via JavaScript -->
+        <div class="booking-container">
+            <div class="booking-section">
+                <div class="whatsapp-notice">
+                    <i class="fab fa-whatsapp"></i>
+                    <h3>Coordinación Directa por WhatsApp</h3>
+                    <p>Reserva ahora y coordina los detalles de menú directamente con nuestro equipo por WhatsApp</p>
+                </div>
+                
+                <div class="price-estimate">
+                    <h3>🎯 ¿Cómo funciona?</h3>
+                    <p>1. Completa el formulario de reserva</p>
+                    <p>2. Te contactaremos por WhatsApp para coordinar menú y detalles</p>
+                    <p>3. Confirmamos fecha y presupuesto final</p>
+                </div>
+                
+                <div class="event-features">
+                    <div class="feature-item">
+                        <i class="fas fa-calendar-check"></i>
+                        <span>Reserva rápida sin menú</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-comments"></i>
+                        <span>Coordinación por WhatsApp</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-theater-masks"></i>
+                        <span>Temática personalizada</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-truck"></i>
+                        <span>Llegamos a tu ubicación</span>
+                    </div>
                 </div>
             </div>
             
-            <div class="cart-summary">
-                <h2 class="summary-title">Event Details</h2>
-                
-                <div class="summary-item">
-                    <span>Subtotal:</span>
-                    <span id="summarySubtotal">$0.00</span>
-                </div>
-                <div class="summary-item">
-                    <span>Service Fee (15%):</span>
-                    <span id="summaryFee">$0.00</span>
-                </div>
-                <div class="summary-item">
-                    <span>Tax (8.25%):</span>
-                    <span id="summaryTax">$0.00</span>
-                </div>
-                <div class="summary-total">
-                    <span>Total Estimate:</span>
-                    <span id="summaryTotal">$0.00</span>
-                </div>
-                
-                <div class="whatsapp-notice">
-                    <i class="fab fa-whatsapp"></i>
-                    <p>After submitting, WhatsApp will open automatically to send booking details to the owner.</p>
-                </div>
+            <div class="booking-section">
+                <h2 class="section-title">Información del Evento</h2>
                 
                 <div class="event-form">
-                    <h3 style="color: var(--color-amarillo-cheddar); margin-bottom: 1.5rem;">Event Information</h3>
-                    
                     <div class="form-group">
-                        <label for="eventDate">Event Date <span class="required">*</span></label>
+                        <label for="eventDate">Fecha del Evento <span class="required">*</span></label>
                         <input type="date" id="eventDate" required>
                     </div>
                     
                     <div class="form-group">
-                        <label for="eventType">Event Type <span class="required">*</span></label>
+                        <label for="eventType">Tipo de Evento <span class="required">*</span></label>
                         <select id="eventType" required>
-                            <option value="">Select event type</option>
-                            <option value="birthday">Birthday Party</option>
-                            <option value="corporate">Corporate Event</option>
-                            <option value="wedding">Wedding</option>
-                            <option value="graduation">Graduation</option>
-                            <option value="sports">Sports Event</option>
-                            <option value="family">Family Reunion</option>
-                            <option value="other">Other</option>
+                            <option value="">Selecciona tipo de evento</option>
+                            <option value="birthday">🎂 Cumpleaños</option>
+                            <option value="corporate">💼 Evento Corporativo</option>
+                            <option value="wedding">💍 Boda</option>
+                            <option value="graduation">🎓 Graduación</option>
+                            <option value="sports">⚽ Evento Deportivo</option>
+                            <option value="family">👨‍👩‍👧‍👦 Reunión Familiar</option>
+                            <option value="other">🎉 Otro</option>
                         </select>
                     </div>
                     
                     <div class="form-group">
-                        <label for="guestCount">Number of Guests <span class="required">*</span></label>
-                        <input type="number" id="guestCount" min="10" max="500" required placeholder="Minimum 10 guests">
+                        <label for="guestCount">Número Aproximado de Personas <span class="required">*</span></label>
+                        <input type="number" id="guestCount" min="20" max="500" required placeholder="Mínimo 20 personas">
                     </div>
                     
                     <div class="form-group">
-                        <label for="eventAddress">Event Address <span class="required">*</span></label>
-                        <textarea id="eventAddress" rows="3" required placeholder="Full address with city and zip code"></textarea>
+                        <label for="eventAddress">Dirección del Evento <span class="required">*</span></label>
+                        <textarea id="eventAddress" rows="3" required placeholder="Dirección completa con ciudad y código postal"></textarea>
                     </div>
                     
                     <div class="form-group">
-                        <label for="contactName">Contact Name <span class="required">*</span></label>
-                        <input type="text" id="contactName" required placeholder="Your full name">
+                        <label for="contactName">Nombre Completo <span class="required">*</span></label>
+                        <input type="text" id="contactName" required placeholder="Tu nombre completo">
                     </div>
                     
                     <div class="form-group">
-                        <label for="contactPhone">Phone Number <span class="required">*</span></label>
-                        <input type="tel" id="contactPhone" required placeholder="For contact and WhatsApp">
+                        <label for="contactPhone">Teléfono <span class="required">*</span></label>
+                        <input type="tel" id="contactPhone" required placeholder="Para contactarte por WhatsApp">
                     </div>
                     
-                    <div class="form-group">
-                        <label for="contactEmail">Email Address <span class="required">*</span></label>
-                        <input type="email" id="contactEmail" required placeholder="For confirmation email">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="specialRequests">Special Requests / Theme Ideas</label>
-                        <textarea id="specialRequests" rows="3" placeholder="Tell us about your theme, decorations, or special requests..."></textarea>
+                    <div class="optional-section">
+                        <h3>Información Adicional (Opcional)</h3>
+                        
+                        <div class="form-group">
+                            <label for="contactEmail">Correo Electrónico</label>
+                            <input type="email" id="contactEmail" placeholder="Para confirmación por email">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="eventTime">Hora Aproximada del Evento</label>
+                            <input type="time" id="eventTime">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="budgetRange">Presupuesto Aproximado</label>
+                            <select id="budgetRange">
+                                <option value="">Selecciona rango</option>
+                                <option value="500-1000">$500 - $1,000</option>
+                                <option value="1000-2000">$1,000 - $2,000</option>
+                                <option value="2000-3000">$2,000 - $3,000</option>
+                                <option value="3000+">Más de $3,000</option>
+                                <option value="not-sure">No estoy seguro</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="specialRequests">Ideas de Temática o Pedidos Especiales</label>
+                            <textarea id="specialRequests" rows="3" placeholder="Cuéntanos sobre tu temática, colores, decoraciones o necesidades especiales..."></textarea>
+                        </div>
                     </div>
                     
                     <button class="submit-btn" onclick="submitEventBooking()">
-                        <i class="fas fa-paper-plane"></i> Submit Event Request
+                        <i class="fab fa-whatsapp"></i> ENVIAR RESERVA POR WHATSAPP
                     </button>
                     
                     <p style="margin-top: 1rem; color: #ccc; font-size: 0.9rem; text-align: center;">
-                        <i class="fas fa-info-circle"></i> We'll contact you within 24 hours to confirm your booking
+                        <i class="fas fa-shield-alt"></i> Tus datos están seguros. Solo los usaremos para coordinar tu evento.
                     </p>
                 </div>
             </div>
@@ -395,65 +517,18 @@
     </div>
 
     <script>
-        // Load cart items from localStorage
-        const cartItems = JSON.parse(localStorage.getItem('supdogEventCart')) || [];
+        // Set minimum date to today
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('eventDate').min = today;
         
-        function loadCartItems() {
-            const cartItemsList = document.getElementById('cartItemsList');
-            let subtotal = 0;
-            
-            if (cartItems.length === 0) {
-                cartItemsList.innerHTML = `
-                    <div style="text-align: center; padding: 3rem; color: #ccc;">
-                        <i class="fas fa-shopping-cart" style="font-size: 3rem; margin-bottom: 1rem;"></i>
-                        <h3>No items in your event cart</h3>
-                        <p>Add items from our menu to start planning your event!</p>
-                        <a href="index.html" style="color: var(--color-amarillo-cheddar); text-decoration: none; font-weight: bold; display: inline-block; margin-top: 1rem;">
-                            <i class="fas fa-arrow-left"></i> Back to Menu
-                        </a>
-                    </div>
-                `;
-                updateSummary(0);
-                return;
-            }
-            
-            cartItemsList.innerHTML = cartItems.map((item, index) => {
-                const itemTotal = item.price * item.quantity;
-                subtotal += itemTotal;
-                
-                return `
-                    <div class="event-cart-item">
-                        <div class="item-details">
-                            <h4>${item.name}</h4>
-                            <div class="price">$${item.price.toFixed(2)} each</div>
-                        </div>
-                        <div class="item-quantity">
-                            <div style="text-align: right;">
-                                <div style="color: var(--color-amarillo-cheddar); font-weight: bold; margin-bottom: 5px;">
-                                    $${itemTotal.toFixed(2)}
-                                </div>
-                                <div style="color: #ccc; font-size: 0.9rem;">
-                                    Qty: ${item.quantity}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            }).join('');
-            
-            updateSummary(subtotal);
-        }
+        // Set default date to 14 days from now (minimum 2 weeks notice)
+        const twoWeeksFromNow = new Date();
+        twoWeeksFromNow.setDate(twoWeeksFromNow.getDate() + 14);
+        const defaultDate = twoWeeksFromNow.toISOString().split('T')[0];
+        document.getElementById('eventDate').value = defaultDate;
         
-        function updateSummary(subtotal) {
-            const serviceFee = subtotal * 0.15;
-            const tax = subtotal * 0.0825;
-            const total = subtotal + serviceFee + tax;
-            
-            document.getElementById('summarySubtotal').textContent = `$${subtotal.toFixed(2)}`;
-            document.getElementById('summaryFee').textContent = `$${serviceFee.toFixed(2)}`;
-            document.getElementById('summaryTax').textContent = `$${tax.toFixed(2)}`;
-            document.getElementById('summaryTotal').textContent = `$${total.toFixed(2)}`;
-        }
+        // Set default time to 18:00 (6 PM)
+        document.getElementById('eventTime').value = "18:00";
         
         function submitEventBooking() {
             // Get form values
@@ -464,34 +539,22 @@
             const contactName = document.getElementById('contactName').value;
             const contactPhone = document.getElementById('contactPhone').value;
             const contactEmail = document.getElementById('contactEmail').value;
+            const eventTime = document.getElementById('eventTime').value;
+            const budgetRange = document.getElementById('budgetRange').value;
             const specialRequests = document.getElementById('specialRequests').value;
             
             // Simple validation
-            if (!eventDate || !eventType || !guestCount || !eventAddress || !contactName || !contactPhone || !contactEmail) {
-                alert('Please fill in all required fields marked with *');
+            if (!eventDate || !eventType || !guestCount || !eventAddress || !contactName || !contactPhone) {
+                alert('Por favor completa todos los campos obligatorios marcados con *');
                 return;
             }
             
-            if (guestCount < 10) {
-                alert('Minimum number of guests is 10');
+            if (guestCount < 20) {
+                alert('El número mínimo de personas es 20 para eventos con carrito temático');
                 return;
             }
             
-            if (cartItems.length === 0) {
-                alert('Please add items to your event cart first!');
-                return;
-            }
-            
-            // Calculate totals
-            const subtotal = cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
-            const serviceFee = subtotal * 0.15;
-            const tax = subtotal * 0.0825;
-            const total = subtotal + serviceFee + tax;
-            
-            // Create booking ID
-            const bookingId = 'SUP' + Date.now().toString().slice(-6) + Math.floor(Math.random() * 100).toString().padStart(2, '0');
-            
-            // Format date
+            // Format date nicely
             const formattedDate = new Date(eventDate).toLocaleDateString('es-ES', {
                 weekday: 'long',
                 year: 'numeric',
@@ -499,113 +562,153 @@
                 day: 'numeric'
             });
             
+            // Create booking ID
+            const bookingId = 'SUP' + Date.now().toString().slice(-6) + Math.floor(Math.random() * 100).toString().padStart(2, '0');
+            
             // Create booking summary for localStorage
             const bookingSummary = {
                 id: bookingId,
-                items: cartItems,
                 eventDetails: {
                     date: eventDate,
                     formattedDate: formattedDate,
+                    time: eventTime || "Por definir",
                     type: eventType,
                     guests: guestCount,
                     address: eventAddress,
                     contact: {
                         name: contactName,
                         phone: contactPhone,
-                        email: contactEmail
+                        email: contactEmail || "No proporcionado"
                     },
-                    requests: specialRequests
-                },
-                pricing: {
-                    subtotal: subtotal,
-                    serviceFee: serviceFee,
-                    tax: tax,
-                    total: total
+                    budget: budgetRange || "Por definir",
+                    requests: specialRequests || "Ninguno"
                 },
                 timestamp: new Date().toISOString(),
                 status: 'pending'
             };
             
-            // Get existing bookings from localStorage
-            let allBookings = JSON.parse(localStorage.getItem('supdogAllBookings')) || [];
-            
-            // Add new booking
-            allBookings.push(bookingSummary);
-            
-            // Save to localStorage
-            localStorage.setItem('supdogAllBookings', JSON.stringify(allBookings));
+            // Save booking to localStorage
             localStorage.setItem('supdogLastBooking', JSON.stringify(bookingSummary));
             
             // ===========================================
-            // TU NÚMERO DE VENEZUELA - CORREGIDO
+            // TU NÚMERO DE WHATSAPP (REEMPLAZA CON TU NÚMERO)
+            // Formato: código de país + número sin signos
+            // Ejemplo Venezuela: 584245489939
             // ===========================================
-            const ownerWhatsappNumber = "584245489939"; // ¡TU NÚMERO DE VENEZUELA!
+            const ownerWhatsappNumber = "584245489939"; // ¡REEMPLAZA CON TU NÚMERO!
             
-            // Crear mensaje para WhatsApp
-            let whatsappMessage = `*NUEVA RESERVA SUPDOG*%0A%0A`;
+            // Get event type text for WhatsApp
+            const eventTypeText = {
+                'birthday': '🎂 Cumpleaños',
+                'corporate': '💼 Evento Corporativo',
+                'wedding': '💍 Boda',
+                'graduation': '🎓 Graduación',
+                'sports': '⚽ Evento Deportivo',
+                'family': '👨‍👩‍👧‍👦 Reunión Familiar',
+                'other': '🎉 Otro'
+            }[eventType] || eventType;
+            
+            // Get budget text
+            const budgetText = {
+                '500-1000': '$500 - $1,000',
+                '1000-2000': '$1,000 - $2,000',
+                '2000-3000': '$2,000 - $3,000',
+                '3000+': 'Más de $3,000',
+                'not-sure': 'Por definir'
+            }[budgetRange] || budgetRange || 'Por definir';
+            
+            // Create WhatsApp message
+            let whatsappMessage = `*📋 NUEVA SOLICITUD DE EVENTO SUPDOG*%0A%0A`;
             whatsappMessage += `*Código:* ${bookingId}%0A`;
             whatsappMessage += `*Fecha:* ${formattedDate}%0A`;
-            whatsappMessage += `*Evento:* ${eventType}%0A`;
-            whatsappMessage += `*Invitados:* ${guestCount}%0A`;
-            whatsappMessage += `*Dirección:* ${eventAddress}%0A%0A`;
+            whatsappMessage += `*Hora:* ${eventTime || "Por definir"}%0A`;
+            whatsappMessage += `*Evento:* ${eventTypeText}%0A`;
+            whatsappMessage += `*Personas:* ${guestCount}%0A`;
+            whatsappMessage += `*Presupuesto aproximado:* ${budgetText}%0A%0A`;
             
-            whatsappMessage += `*CLIENTE*%0A`;
-            whatsappMessage += `Nombre: ${contactName}%0A`;
-            whatsappMessage += `Teléfono: ${contactPhone}%0A`;
-            whatsappMessage += `Email: ${contactEmail}%0A%0A`;
-            
-            whatsappMessage += `*PEDIDO*%0A`;
-            cartItems.forEach(item => {
-                whatsappMessage += `• ${item.name} x${item.quantity} - $${(item.price * item.quantity).toFixed(2)}%0A`;
-            });
+            whatsappMessage += `*👤 INFORMACIÓN DEL CLIENTE*%0A`;
+            whatsappMessage += `• Nombre: ${contactName}%0A`;
+            whatsappMessage += `• Teléfono: ${contactPhone}%0A`;
+            if (contactEmail) {
+                whatsappMessage += `• Email: ${contactEmail}%0A`;
+            }
             whatsappMessage += `%0A`;
             
-            whatsappMessage += `*TOTAL: $${total.toFixed(2)}*%0A%0A`;
+            whatsappMessage += `*📍 DIRECCIÓN*%0A`;
+            whatsappMessage += `${eventAddress}%0A%0A`;
             
             if (specialRequests) {
-                whatsappMessage += `*NOTAS:*%0A${specialRequests}%0A%0A`;
+                whatsappMessage += `*🎨 PEDIDOS ESPECIALES / TEMÁTICA*%0A`;
+                whatsappMessage += `${specialRequests}%0A%0A`;
             }
             
-            whatsappMessage += `*Solicitado:* ${new Date().toLocaleString('es-ES')}`;
+            whatsappMessage += `*📝 NOTA:* El cliente coordinará el menú específico directamente por WhatsApp.%0A%0A`;
+            whatsappMessage += `*⏰ Solicitado:* ${new Date().toLocaleString('es-ES')}%0A`;
+            whatsappMessage += `*🔗 Viene de:* Página de Reservas Web`;
             
-            // Crear enlace de WhatsApp - FORMA MÁS CONFIABLE
+            // Create WhatsApp URL
             const whatsappUrl = `https://wa.me/${ownerWhatsappNumber}?text=${whatsappMessage}`;
             
-            // Guardar el enlace para usarlo en la confirmación
-            localStorage.setItem('whatsappUrl', whatsappUrl);
-            localStorage.setItem('bookingId', bookingId);
+            // Show success message with booking ID
+            document.getElementById('bookingDetails').innerHTML = `
+                Código de reserva: <strong style="color: var(--color-amarillo-cheddar);">${bookingId}</strong><br><br>
+                Pronto te contactaremos por WhatsApp para coordinar los detalles del menú.
+            `;
             
-            // Mostrar mensaje de confirmación
-            alert(`✅ Reserva creada: ${bookingId}\n\nSe abrirá WhatsApp para enviar los detalles. Si no se abre, usa el botón en la siguiente página.`);
+            // Show overlay and success message
+            document.getElementById('overlay').style.display = 'block';
+            document.getElementById('successMessage').style.display = 'block';
             
-            // Intentar abrir WhatsApp inmediatamente
+            // Open WhatsApp after 3 seconds
             setTimeout(() => {
                 window.open(whatsappUrl, '_blank');
-            }, 300);
-            
-            // Clear cart
-            localStorage.removeItem('supdogEventCart');
-            
-            // Redirigir a página de confirmación
-            setTimeout(() => {
-                window.location.href = 'confirmation.html';
-            }, 800);
+                
+                // Optional: Clear form after successful submission
+                setTimeout(() => {
+                    document.getElementById('overlay').style.display = 'none';
+                    document.getElementById('successMessage').style.display = 'none';
+                    
+                    // Reset form (optional)
+                    document.getElementById('eventDate').value = defaultDate;
+                    document.getElementById('eventType').value = '';
+                    document.getElementById('guestCount').value = '';
+                    document.getElementById('eventAddress').value = '';
+                    document.getElementById('contactName').value = '';
+                    document.getElementById('contactPhone').value = '';
+                    document.getElementById('contactEmail').value = '';
+                    document.getElementById('eventTime').value = '18:00';
+                    document.getElementById('budgetRange').value = '';
+                    document.getElementById('specialRequests').value = '';
+                }, 3000);
+            }, 3000);
         }
         
-        // Load cart items when page loads
-        document.addEventListener('DOMContentLoaded', loadCartItems);
+        function closeSuccess() {
+            document.getElementById('overlay').style.display = 'none';
+            document.getElementById('successMessage').style.display = 'none';
+        }
         
-        // Set minimum date to today
-        const today = new Date().toISOString().split('T')[0];
-        document.getElementById('eventDate').min = today;
+        // Close success message when clicking overlay
+        document.getElementById('overlay').addEventListener('click', closeSuccess);
         
-        // Set default date to 14 days from now (minimum 2 weeks notice)
-        const twoWeeksFromNow = new Date();
-        twoWeeksFromNow.setDate(twoWeeksFromNow.getDate() + 14);
-        const defaultDate = twoWeeksFromNow.toISOString().split('T')[0];
-        document.getElementById('eventDate').value = defaultDate;
+        // Prevent form submission on Enter key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter' && event.target.tagName !== 'TEXTAREA') {
+                event.preventDefault();
+            }
+        });
+        
+        // Set min time to 8 AM and max to 10 PM
+        const timeInput = document.getElementById('eventTime');
+        timeInput.addEventListener('change', function() {
+            if (this.value) {
+                const [hours, minutes] = this.value.split(':').map(Number);
+                if (hours < 8 || hours > 22) {
+                    alert('Los horarios de evento deben ser entre 8:00 AM y 10:00 PM');
+                    this.value = '18:00';
+                }
+            }
+        });
     </script>
 </body>
 </html>
-
-
