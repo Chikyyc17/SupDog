@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SupDog - Admin Panel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --color-rojo-fuego: #DB3606;
+            --color-amarillo-cheddar: #F8A814;
+            --color-mostaza-suave: #E0A851;
+            --color-purpura-berry: #BA6990;
+            --color-fondo-oscuro: #0f0f0f;
+            --color-texto-claro: #ffffff;
+            --color-gris-claro: #e0e0e0;
+        }
+
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            color: var(--color-texto-claro);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .admin-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 3px solid var(--color-purpura-berry);
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .logo-text {
+            font-family: 'Bangers', cursive;
+            font-size: 2.5rem;
+            color: white;
+            text-shadow: 3px 3px 0px var(--color-rojo-fuego);
+        }
+
+        .logo-text span {
+            color: var(--color-amarillo-cheddar);
+        }
+
+        .admin-nav {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            background: linear-gradient(135deg, var(--color-purpura-berry) 0%, #9d5b85 100%);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(186, 105, 144, 0.4);
+        }
+
+        .admin-title {
+            font-size: 2.5rem;
+            color: var(--color-amarillo-cheddar);
+            margin-bottom: 30px;
+            font-family: 'Bangers', cursive;
+            text-align: center;
+            text-shadow: 2px 2px 0px var(--color-purpura-berry);
+        }
+
+        .stats-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+            border-radius: 15px;
+            padding: 25px;
+            border: 2px solid var(--color-purpura-berry);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(186, 105, 144, 0.2);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            color: var(--color-amarillo-cheddar);
+            font-weight: bold;
+            margin: 10px 0;
+            font-family: 'Bangers', cursive;
+        }
+
+        .stat-label {
+            color: var(--color-gris-claro);
+            font-size: 1.1rem;
+        }
+
+        .bookings-table-container {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 25px;
+            border: 2px solid var(--color-purpura-berry);
+            margin-bottom: 40px;
+            overflow-x: auto;
+        }
+
+        .bookings-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 1000px;
+        }
+
+        .bookings-table th {
+            background: linear-gradient(135deg, var(--color-purpura-berry) 0%, #9d5b85 100%);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: bold;
+            position: sticky;
+            top: 0;
+        }
+
+        .bookings-table td {
+            padding: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .bookings-table tr:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .status-pending {
+            background: rgba(255, 193, 7, 0.2);
+            color: #ffc107;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .status-confirmed {
+            background: rgba(76, 175, 80, 0.2);
+            color: #4CAF50;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .status-completed {
+            background: rgba(33, 150, 243, 0.2);
+            color: #2196F3;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .status-cancelled {
+            background: rgba(244, 67, 54, 0.2);
+            color: #f44336;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .action-btn {
+            background: var(--color-purpura-berry);
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .action-btn:hover {
+            background: var(--color-rojo-fuego);
+            transform: scale(1.05);
+        }
+
+        .whatsapp-btn {
+            background: #25D366;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 5px;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .whatsapp-btn:hover {
+            background: #128C7E;
+            transform: scale(1.05);
+        }
+
+        .export-btn {
+            background: var(--color-amarillo-cheddar);
+            color: #000;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 20px auto;
+            transition: all 0.3s ease;
+        }
+
+        .export-btn:hover {
+            background: var(--color-rojo-fuego);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 50px;
+            color: #ccc;
+        }
+
+        .empty-state i {
+            font-size: 4rem;
+            color: var(--color-purpura-berry);
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .admin-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .admin-title {
+                font-size: 2rem;
+            }
+            
+            .stats-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .bookings-table-container {
+                padding: 15px;
+            }
+            
+            .bookings-table {
+                min-width: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <div class="admin-header">
+            <div class="logo-text">SUP<span>DOG</span> ADMIN</div>
+            <div class="admin-nav">
+                <a href="index.html" class="nav-btn">
+                    <i class="fas fa-home"></i> Home
+                </a>
+                <button class="nav-btn" onclick="refreshBookings()">
+                    <i class="fas fa-sync-alt"></i> Refresh
+                </button>
+                <button class="nav-btn" onclick="exportBookings()">
+                    <i class="fas fa-download"></i> Export
+                </button>
+                <button class="nav-btn" onclick="clearAllBookings()" style="background: var(--color-rojo-fuego);">
+                    <i class="fas fa-trash"></i> Clear All
+                </button>
+            </div>
+        </div>
+        
+        <h1 class="admin-title">📊 Booking Management</h1>
+        
+        <div class="stats-cards">
+            <div class="stat-card">
+                <div class="stat-label">Total Bookings</div>
+                <div class="stat-number" id="totalBookings">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Pending</div>
+                <div class="stat-number" id="pendingBookings">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Confirmed</div>
+                <div class="stat-number" id="confirmedBookings">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Total Revenue</div>
+                <div class="stat-number" id="totalRevenue">$0</div>
+            </div>
+        </div>
+        
+        <div class="bookings-table-container">
+            <h2 style="color: var(--color-amarillo-cheddar); margin-bottom: 20px; font-family: 'Bangers', cursive; font-size: 1.8rem;">
+                <i class="fas fa-list"></i> All Bookings
+            </h2>
+            
+            <table class="bookings-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Date</th>
+                        <th>Customer</th>
+                        <th>Event Type</th>
+                        <th>Guests</th>
+                        <th>Total</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="bookingsTableBody">
+                    <!-- Bookings will be loaded here -->
+                </tbody>
+            </table>
+            
+            <div id="emptyBookings" class="empty-state" style="display: none;">
+                <i class="fas fa-calendar-times"></i>
+                <h3>No bookings yet</h3>
+                <p>When customers make reservations, they will appear here.</p>
+            </div>
+        </div>
+        
+        <button class="export-btn" onclick="exportBookings()">
+            <i class="fas fa-file-export"></i> Export to CSV
+        </button>
+    </div>
+
+    <script>
+        // Load bookings from localStorage
+        let allBookings = JSON.parse(localStorage.getItem('supdogAllBookings')) || [];
+        
+        function refreshBookings() {
+            allBookings = JSON.parse(localStorage.getItem('supdogAllBookings')) || [];
+            loadBookingsTable();
+            updateStats();
+        }
+        
+        function loadBookingsTable() {
+            const tableBody = document.getElementById('bookingsTableBody');
+            const emptyState = document.getElementById('emptyBookings');
+            
+            if (allBookings.length === 0) {
+                tableBody.innerHTML = '';
+                emptyState.style.display = 'block';
+                return;
+            }
+            
+            emptyState.style.display = 'none';
+            
+            // Sort bookings by date (newest first)
+            allBookings.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+            
+            tableBody.innerHTML = allBookings.map((booking, index) => {
+                const date = new Date(booking.eventDetails.date).toLocaleDateString('en-US', {
+                    month: 'short',
+                    day: 'numeric',
+                    year: 'numeric'
+                });
+                
+                const statusClass = `status-${booking.status || 'pending'}`;
+                const statusText = booking.status ? booking.status.charAt(0).toUpperCase() + booking.status.slice(1) : 'Pending';
+                
+                return `
+                    <tr>
+                        <td><strong>${booking.id}</strong></td>
+                        <td>${date}</td>
+                        <td>
+                            <div>${booking.eventDetails.contact.name}</div>
+                            <div style="font-size: 0.8rem; color: #ccc;">${booking.eventDetails.contact.phone}</div>
+                        </td>
+                        <td>${booking.eventDetails.type}</td>
+                        <td>${booking.eventDetails.guests}</td>
+                        <td><strong>$${booking.pricing.total.toFixed(2)}</strong></td>
+                        <td><span class="${statusClass}">${statusText}</span></td>
+                        <td>
+                            <button class="whatsapp-btn" onclick="contactCustomer('${booking.eventDetails.contact.phone}', '${booking.id}', '${booking.eventDetails.contact.name}')">
+                                <i class="fab fa-whatsapp"></i> WhatsApp
+                            </button>
+                            <button class="action-btn" onclick="viewBookingDetails(${index})">
+                                <i class="fas fa-eye"></i> View
+                            </button>
+                            <button class="action-btn" onclick="changeStatus(${index}, 'confirmed')" style="background: #4CAF50;">
+                                <i class="fas fa-check"></i> Confirm
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+        
+        function updateStats() {
+            const totalBookings = allBookings.length;
+            const pendingBookings = allBookings.filter(b => !b.status || b.status === 'pending').length;
+            const confirmedBookings = allBookings.filter(b => b.status === 'confirmed').length;
+            const totalRevenue = allBookings.reduce((sum, booking) => sum + booking.pricing.total, 0);
+            
+            document.getElementById('totalBookings').textContent = totalBookings;
+            document.getElementById('pendingBookings').textContent = pendingBookings;
+            document.getElementById('confirmedBookings').textContent = confirmedBookings;
+            document.getElementById('totalRevenue').textContent = `$${totalRevenue.toFixed(2)}`;
+        }
+        
+        function contactCustomer(phone, bookingId, customerName) {
+            // ===========================================
+            // 🚨🚨🚨 IMPORTANTE: REEMPLAZA ESTE NÚMERO 🚨🚨🚨
+            // Si quieres que el mensaje vaya desde TU WhatsApp
+            // Deja esto como está. Si quieres que vaya al cliente,
+            // cambia ownerNumber por `phone`
+            // ===========================================
+            const ownerNumber = "584245489939"; // ← REEMPLAZA CON TU NÚMERO
+            
+            const message = `Hola ${customerName}, soy de SupDog. Hablamos respecto a tu reserva ${bookingId}. ¿Podemos coordinar los detalles?`;
+            const whatsappUrl = `https://wa.me/${ownerNumber}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+        
+        function viewBookingDetails(index) {
+            const booking = allBookings[index];
+            
+            let itemsList = booking.items.map(item => 
+                `${item.name} x${item.quantity}: $${(item.price * item.quantity).toFixed(2)}`
+            ).join('\n');
+            
+            const details = `
+📋 BOOKING DETAILS
+===================
+ID: ${booking.id}
+Date: ${new Date(booking.eventDetails.date).toLocaleDateString()}
+Type: ${booking.eventDetails.type}
+Guests: ${booking.eventDetails.guests}
+Address: ${booking.eventDetails.address}
+
+👤 CUSTOMER
+Name: ${booking.eventDetails.contact.name}
+Phone: ${booking.eventDetails.contact.phone}
+Email: ${booking.eventDetails.contact.email}
+
+🛒 ORDER
+${itemsList}
+
+💰 PAYMENT
+Subtotal: $${booking.pricing.subtotal.toFixed(2)}
+Service Fee: $${booking.pricing.serviceFee.toFixed(2)}
+Tax: $${booking.pricing.tax.toFixed(2)}
+TOTAL: $${booking.pricing.total.toFixed(2)}
+
+📝 NOTES
+${booking.eventDetails.requests || 'None'}
+
+⏰ SUBMITTED
+${new Date(booking.timestamp).toLocaleString()}
+            `;
+            
+            alert(details);
+        }
+        
+        function changeStatus(index, newStatus) {
+            allBookings[index].status = newStatus;
+            localStorage.setItem('supdogAllBookings', JSON.stringify(allBookings));
+            refreshBookings();
+            
+            const statusNames = {
+                'pending': 'Pending',
+                'confirmed': 'Confirmed',
+                'completed': 'Completed',
+                'cancelled': 'Cancelled'
+            };
+            
+            alert(`Booking ${allBookings[index].id} status changed to ${statusNames[newStatus]}`);
+        }
+        
+        function exportBookings() {
+            if (allBookings.length === 0) {
+                alert('No bookings to export');
+                return;
+            }
+            
+            // Convert to CSV
+            let csv = 'ID,Date,Customer Name,Phone,Email,Event Type,Guests,Address,Subtotal,Service Fee,Tax,Total,Status,Requests,Timestamp\n';
+            
+            allBookings.forEach(booking => {
+                const row = [
+                    `"${booking.id}"`,
+                    `"${booking.eventDetails.date}"`,
+                    `"${booking.eventDetails.contact.name}"`,
+                    `"${booking.eventDetails.contact.phone}"`,
+                    `"${booking.eventDetails.contact.email}"`,
+                    `"${booking.eventDetails.type}"`,
+                    booking.eventDetails.guests,
+                    `"${booking.eventDetails.address}"`,
+                    booking.pricing.subtotal.toFixed(2),
+                    booking.pricing.serviceFee.toFixed(2),
+                    booking.pricing.tax.toFixed(2),
+                    booking.pricing.total.toFixed(2),
+                    `"${booking.status || 'pending'}"`,
+                    `"${(booking.eventDetails.requests || '').replace(/"/g, '""')}"`,
+                    `"${booking.timestamp}"`
+                ].join(',');
+                
+                csv += row + '\n';
+            });
+            
+            // Create download link
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `supdog-bookings-${new Date().toISOString().split('T')[0]}.csv`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+            
+            alert(`Exported ${allBookings.length} bookings to CSV file`);
+        }
+        
+        function clearAllBookings() {
+            if (confirm('⚠️ WARNING: This will delete ALL bookings. This action cannot be undone. Are you sure?')) {
+                localStorage.removeItem('supdogAllBookings');
+                localStorage.removeItem('supdogLastBooking');
+                localStorage.removeItem('supdogBookingHistory');
+                allBookings = [];
+                refreshBookings();
+                alert('All bookings have been cleared.');
+            }
+        }
+        
+        // Load bookings on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            refreshBookings();
+            
+            // Auto-refresh every 30 seconds
+            setInterval(refreshBookings, 30000);
+        });
+    </script>
+</body>
+</html>
