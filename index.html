@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SupDog - Hot Dogs & Nachos with Attitude</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>SupDog - Hot Dogs & Nachos</title>
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -23,11 +23,13 @@
             margin: 0; 
             padding: 0; 
             box-sizing: border-box; 
+            -webkit-tap-highlight-color: transparent;
         }
 
         html {
             scroll-behavior: smooth;
-            scroll-padding-top: 100px;
+            scroll-padding-top: 70px;
+            font-size: 16px;
         }
 
         body {
@@ -35,101 +37,64 @@
             background-color: var(--color-fondo-oscuro);
             color: var(--color-texto-claro);
             overflow-x: hidden;
-            line-height: 1.6;
+            line-height: 1.5;
+            -webkit-text-size-adjust: 100%;
+            -webkit-font-smoothing: antialiased;
         }
 
         h1, h2, h3, .menu-link, .btn, .price-badge, .logo-text { 
             font-family: 'Bangers', cursive; 
-            letter-spacing: 1px; 
+            letter-spacing: 0.5px; 
         }
 
-        /* --- ANIMATIONS INSPIRED BY FUEGO BURGER --- */
+        /* --- ANIMATIONS --- */
         @keyframes float {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+            50% { transform: translateY(-5px); }
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(30px); }
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes slideInLeft {
-            from { opacity: 0; transform: translateX(-50px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
-        @keyframes slideInRight {
-            from { opacity: 0; transform: translateX(50px); }
-            to { opacity: 1; transform: translateX(0); }
         }
 
         @keyframes pulse {
             0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+            50% { transform: scale(1.03); }
             100% { transform: scale(1); }
         }
 
         @keyframes fireGlow {
-            0%, 100% { text-shadow: 0 0 5px var(--color-rojo-fuego), 0 0 10px var(--color-rojo-fuego); }
-            50% { text-shadow: 0 0 15px var(--color-rojo-fuego), 0 0 25px var(--color-rojo-fuego), 0 0 35px var(--color-rojo-fuego); }
+            0%, 100% { text-shadow: 0 0 3px var(--color-rojo-fuego), 0 0 6px var(--color-rojo-fuego); }
+            50% { text-shadow: 0 0 10px var(--color-rojo-fuego), 0 0 15px var(--color-rojo-fuego); }
         }
 
-        @keyframes borderGlow {
-            0%, 100% { box-shadow: 0 0 5px var(--color-amarillo-cheddar), 0 0 10px rgba(248, 168, 20, 0.3); }
-            50% { box-shadow: 0 0 20px var(--color-amarillo-cheddar), 0 0 30px rgba(248, 168, 20, 0.6); }
-        }
-
-        @keyframes shake {
-            0%, 100% { transform: rotate(0deg); }
-            25% { transform: rotate(-2deg); }
-            75% { transform: rotate(2deg); }
-        }
-
-        @keyframes partyGlow {
-            0%, 100% { 
-                color: var(--color-purpura-berry);
-                text-shadow: 0 0 10px rgba(186, 105, 144, 0.5);
-            }
-            50% { 
-                color: var(--color-amarillo-cheddar);
-                text-shadow: 0 0 20px rgba(248, 168, 20, 0.7),
-                             0 0 30px rgba(186, 105, 144, 0.5);
-            }
-        }
-
-        /* --- HEADER WITH IMPROVED ANIMATIONS --- */
+        /* --- HEADER MOBILE OPTIMIZED --- */
         header {
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
-            padding: 0.5rem 5%;
-            background-color: rgba(15, 15, 15, 0.95);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 3px solid transparent;
-            height: 80px;
-            position: relative;
-            animation: borderGlow 3s infinite alternate;
-            backdrop-filter: blur(10px);
-            transition: all 0.4s ease;
-        }
-
-        header.scrolled {
-            height: 70px;
+            padding: 0.8rem 5%;
             background-color: rgba(15, 15, 15, 0.98);
-            box-shadow: 0 5px 20px rgba(219, 54, 6, 0.2);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 2px solid transparent;
+            height: 70px;
+            animation: none;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
         }
 
         .logo-text {
             font-family: 'Bangers', cursive;
-            font-size: 3.2rem;
+            font-size: 2.2rem;
             line-height: 1;
             text-transform: uppercase;
             cursor: pointer;
             color: white;
-            text-shadow: 3px 3px 0px var(--color-rojo-fuego);
+            text-shadow: 2px 2px 0px var(--color-rojo-fuego);
             transition: all 0.3s ease;
             animation: fireGlow 2s infinite alternate;
             position: relative;
@@ -137,16 +102,10 @@
        
         .logo-text span {
             color: var(--color-amarillo-cheddar);
-            text-shadow: 3px 3px 0px var(--color-rojo-fuego);
+            text-shadow: 2px 2px 0px var(--color-rojo-fuego);
         }
 
-        .logo-text:hover { 
-            transform: scale(1.08) rotate(-2deg); 
-            animation: none;
-            text-shadow: 0 0 20px var(--color-rojo-fuego), 0 0 30px var(--color-rojo-fuego);
-        }
-
-        /* Cart Icon in Header */
+        /* Cart Icon Mobile */
         .cart-icon-header {
             position: absolute;
             right: 5%;
@@ -158,36 +117,31 @@
             z-index: 1002;
             display: flex;
             align-items: center;
-            gap: 8px;
-            padding: 10px 20px;
+            gap: 6px;
+            padding: 8px 15px;
             border-radius: 50px;
             color: white;
             font-family: 'Poppins', sans-serif;
             font-weight: bold;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 5px 15px rgba(186, 105, 144, 0.4);
-        }
-
-        .cart-icon-header:hover {
-            transform: translateY(-50%) scale(1.05);
-            box-shadow: 0 8px 20px rgba(186, 105, 144, 0.6);
-            background: linear-gradient(135deg, #9d5b85 0%, var(--color-purpura-berry) 100%);
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            box-shadow: 0 3px 10px rgba(186, 105, 144, 0.3);
         }
 
         .cart-count {
             background-color: var(--color-rojo-fuego);
             color: white;
             border-radius: 50%;
-            width: 24px;
-            height: 24px;
+            width: 20px;
+            height: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             animation: pulse 1.5s infinite;
         }
 
-        /* Hamburger Button with Animation */
+        /* Hamburger Button Mobile */
         .hamburger-btn {
             position: absolute;
             left: 5%;
@@ -199,45 +153,39 @@
             z-index: 1002;
             display: flex;
             flex-direction: column;
-            gap: 6px;
-            padding: 10px;
+            gap: 4px;
+            padding: 8px;
             border-radius: 5px;
             transition: all 0.3s ease;
-        }
-
-        .hamburger-btn:hover {
-            background-color: rgba(219, 54, 6, 0.1);
+            width: 44px;
+            height: 44px;
+            justify-content: center;
         }
 
         .hamburger-btn span {
             display: block;
-            width: 35px;
-            height: 4px;
+            width: 24px;
+            height: 3px;
             background-color: var(--color-amarillo-cheddar);
-            border-radius: 4px;
+            border-radius: 3px;
             transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
         }
 
-        .hamburger-btn:hover span { 
-            background-color: var(--color-rojo-fuego); 
-            transform: scaleX(1.1);
-        }
-
-        /* --- SIDEBAR WITH ENHANCED ANIMATION --- */
+        /* --- SIDEBAR MOBILE --- */
         .sidebar {
             position: fixed; 
             top: 0; 
             left: 0; 
-            width: 320px; 
+            width: 280px; 
             height: 100vh;
             background-color: rgba(15, 15, 15, 0.98);
-            border-right: 4px solid var(--color-amarillo-cheddar);
-            padding-top: 120px; 
-            padding-left: 2.5rem; 
+            border-right: 3px solid var(--color-amarillo-cheddar);
+            padding-top: 90px; 
+            padding-left: 2rem; 
             z-index: 1001;
             transform: translateX(-100%); 
-            transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
-            box-shadow: 10px 0 40px rgba(219, 54, 6, 0.3);
+            transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+            box-shadow: 5px 0 30px rgba(219, 54, 6, 0.3);
             backdrop-filter: blur(10px);
         }
         
@@ -250,10 +198,10 @@
         }
         
         .sidebar li { 
-            margin-bottom: 2.5rem; 
+            margin-bottom: 1.8rem; 
             opacity: 0;
             transform: translateX(-20px);
-            transition: all 0.5s ease;
+            transition: all 0.4s ease;
         }
         
         .sidebar.active li {
@@ -261,92 +209,38 @@
             transform: translateX(0);
         }
         
-        .sidebar.active li:nth-child(1) { transition-delay: 0.1s; }
-        .sidebar.active li:nth-child(2) { transition-delay: 0.2s; }
-        .sidebar.active li:nth-child(3) { transition-delay: 0.3s; }
-        .sidebar.active li:nth-child(4) { transition-delay: 0.4s; }
-        .sidebar.active li:nth-child(5) { transition-delay: 0.5s; }
-        .sidebar.active li:nth-child(6) { transition-delay: 0.6s; }
-        
         .menu-link { 
             text-decoration: none; 
-            font-size: 2.2rem; 
+            font-size: 1.8rem; 
             color: var(--color-texto-claro); 
-            transition: all 0.4s ease; 
+            transition: all 0.3s ease; 
             display: inline-block;
             position: relative;
-            padding: 5px 0;
+            padding: 4px 0;
         }
         
         .menu-link:hover { 
             color: var(--color-rojo-fuego); 
-            transform: translateX(15px);
+            transform: translateX(10px);
         }
         
-        .menu-link:after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 3px;
-            background-color: var(--color-amarillo-cheddar);
-            transition: width 0.4s ease;
-        }
-        
-        .menu-link:hover:after {
-            width: 100%;
-        }
-
-        /* Estilo especial para Eventos en el menú */
         .event-link-special {
             background: linear-gradient(135deg, 
                 rgba(186, 105, 144, 0.2) 0%, 
                 rgba(219, 54, 6, 0.2) 100%);
-            padding: 15px 20px;
-            border-radius: 15px;
-            margin-right: 20px;
+            padding: 12px 16px;
+            border-radius: 12px;
+            margin-right: 15px;
             border: 2px solid var(--color-purpura-berry);
-            animation: partyGlow 2s infinite, borderGlow 3s infinite alternate;
+            animation: none;
             position: relative;
             overflow: hidden;
         }
 
-        .event-link-special:before {
-            content: '🎉';
-            position: absolute;
-            right: 15px;
-            animation: float 2s infinite ease-in-out;
-        }
-
         .event-link-special .menu-link {
             color: var(--color-amarillo-cheddar);
-            font-size: 2.5rem;
-            padding-right: 40px;
-        }
-
-        .event-link-special:hover {
-            transform: translateX(15px) scale(1.05);
-            box-shadow: 0 10px 25px rgba(186, 105, 144, 0.4);
-        }
-
-        .event-link-special:hover .menu-link {
-            color: var(--color-rojo-fuego);
-            text-shadow: 0 0 15px rgba(219, 54, 6, 0.7);
-        }
-
-        .event-link-special:after {
-            content: 'NEW!';
-            position: absolute;
-            top: -10px;
-            right: -10px;
-            background: linear-gradient(135deg, var(--color-rojo-fuego), var(--color-purpura-berry));
-            color: white;
-            font-size: 0.9rem;
-            padding: 3px 10px;
-            border-radius: 20px;
-            font-weight: bold;
-            animation: pulse 1.5s infinite;
+            font-size: 2rem;
+            padding-right: 35px;
         }
 
         .overlay {
@@ -355,8 +249,8 @@
             left: 0; 
             width: 100%; 
             height: 100%;
-            background: rgba(0, 0, 0, 0.8); 
-            backdrop-filter: blur(5px);
+            background: rgba(0, 0, 0, 0.85); 
+            backdrop-filter: blur(3px);
             z-index: 1000; 
             opacity: 0; 
             visibility: hidden; 
@@ -368,19 +262,17 @@
             visibility: visible; 
         }
 
-        /* --- EVENT CART MODAL (Similar to Berry Bowl) --- */
+        /* --- EVENT CART MODAL MOBILE --- */
         .event-cart-modal {
             position: fixed;
             top: 0;
             right: 0;
-            width: 450px;
+            width: 100%;
             height: 100vh;
             background: var(--color-fondo-oscuro);
             z-index: 2000;
             transform: translateX(100%);
-            transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
-            border-left: 4px solid var(--color-purpura-berry);
-            box-shadow: -10px 0 40px rgba(0, 0, 0, 0.5);
+            transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
             display: flex;
             flex-direction: column;
             overflow: hidden;
@@ -391,105 +283,100 @@
         }
 
         .cart-header {
-            padding: 2rem;
+            padding: 1.5rem;
             background: linear-gradient(135deg, rgba(186, 105, 144, 0.2) 0%, rgba(219, 54, 6, 0.1) 100%);
             border-bottom: 2px solid var(--color-purpura-berry);
             position: relative;
+            padding-top: 3rem;
         }
 
         .cart-header h2 {
             color: var(--color-amarillo-cheddar);
-            font-size: 2.5rem;
+            font-size: 2rem;
             text-align: center;
-            text-shadow: 2px 2px 0px var(--color-purpura-berry);
+            text-shadow: 1px 1px 0px var(--color-purpura-berry);
         }
 
         .close-cart {
             position: absolute;
-            top: 20px;
-            right: 20px;
+            top: 15px;
+            right: 15px;
             background: none;
             border: none;
             color: white;
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .close-cart:hover {
-            color: var(--color-rojo-fuego);
-            transform: rotate(90deg);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
         }
 
         .cart-items {
             flex: 1;
-            padding: 1.5rem;
+            padding: 1rem;
             overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
         }
 
         .cart-item {
             background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            padding: 1.2rem;
-            margin-bottom: 1rem;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 0.8rem;
             border: 1px solid rgba(255, 255, 255, 0.1);
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: all 0.3s ease;
-        }
-
-        .cart-item:hover {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: var(--color-purpura-berry);
+            flex-direction: column;
+            gap: 0.8rem;
         }
 
         .item-info h4 {
             color: white;
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
         }
 
         .item-price {
             color: var(--color-amarillo-cheddar);
             font-weight: bold;
-            font-size: 1.1rem;
+            font-size: 1rem;
         }
 
         .item-quantity {
             display: flex;
             align-items: center;
             gap: 10px;
+            justify-content: space-between;
         }
 
         .quantity-btn {
             background: var(--color-purpura-berry);
             border: none;
             color: white;
-            width: 30px;
-            height: 30px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: all 0.3s ease;
-        }
-
-        .quantity-btn:hover {
-            background: var(--color-rojo-fuego);
-            transform: scale(1.1);
+            font-size: 1.1rem;
         }
 
         .quantity-input {
-            width: 50px;
+            width: 60px;
             text-align: center;
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.2);
             color: white;
-            padding: 5px;
-            border-radius: 5px;
+            padding: 8px;
+            border-radius: 8px;
             font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
         }
 
         .remove-item {
@@ -497,41 +384,37 @@
             border: none;
             color: #ff6b6b;
             cursor: pointer;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             transition: all 0.3s ease;
-        }
-
-        .remove-item:hover {
-            color: var(--color-rojo-fuego);
-            transform: scale(1.2);
+            padding: 8px;
         }
 
         .cart-footer {
-            padding: 2rem;
+            padding: 1.5rem;
             background: linear-gradient(135deg, rgba(186, 105, 144, 0.2) 0%, rgba(219, 54, 6, 0.1) 100%);
             border-top: 2px solid var(--color-purpura-berry);
+            padding-bottom: 2rem;
         }
 
         .cart-total {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.2rem;
             padding-bottom: 1rem;
             border-bottom: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .total-label {
             color: var(--color-gris-claro);
-            font-size: 1.2rem;
+            font-size: 1.1rem;
         }
 
         .total-amount {
             color: var(--color-amarillo-cheddar);
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-weight: bold;
             font-family: 'Bangers', cursive;
-            text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.5);
         }
 
         .checkout-btn {
@@ -540,187 +423,63 @@
             background: linear-gradient(135deg, var(--color-purpura-berry) 0%, #9d5b85 100%);
             color: white;
             border: none;
-            border-radius: 10px;
-            font-size: 1.2rem;
+            border-radius: 12px;
+            font-size: 1.1rem;
             font-weight: bold;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
         }
 
-        .checkout-btn:hover {
-            background: linear-gradient(135deg, #9d5b85 0%, var(--color-purpura-berry) 100%);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(186, 105, 144, 0.4);
-        }
-
         .empty-cart {
             text-align: center;
-            padding: 3rem 2rem;
+            padding: 3rem 1rem;
             color: var(--color-gris-claro);
         }
 
         .empty-cart i {
-            font-size: 3rem;
+            font-size: 2.5rem;
             color: var(--color-purpura-berry);
             margin-bottom: 1rem;
             display: block;
         }
 
-        /* --- EVENT CART PAGE STYLES --- */
-        .event-cart-page {
-            padding: 6rem 10%;
-            background: linear-gradient(135deg, #1a0f0f 0%, #2a1a1a 100%);
-            min-height: 100vh;
-        }
-
-        .event-cart-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            padding: 3rem;
-            border: 3px solid var(--color-purpura-berry);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        .cart-page-title {
-            color: var(--color-amarillo-cheddar);
-            font-size: 3.5rem;
-            text-align: center;
-            margin-bottom: 3rem;
-            text-shadow: 2px 2px 0px var(--color-purpura-berry);
-        }
-
-        .cart-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 3rem;
-        }
-
-        .cart-items-section {
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 15px;
-            padding: 2rem;
-        }
-
-        .cart-summary {
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 15px;
-            padding: 2rem;
-            border: 2px solid var(--color-purpura-berry);
-            position: sticky;
-            top: 100px;
-        }
-
-        .summary-title {
-            color: var(--color-amarillo-cheddar);
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .summary-item {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 1rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .event-form {
-            margin-top: 2rem;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            color: var(--color-gris-claro);
-            margin-bottom: 0.5rem;
-            font-size: 1.1rem;
-        }
-
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            width: 100%;
-            padding: 0.8rem;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 8px;
-            color: white;
-            font-size: 1rem;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: var(--color-purpura-berry);
-            box-shadow: 0 0 10px rgba(186, 105, 144, 0.3);
-        }
-
-        .event-cart-item {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: all 0.3s ease;
-        }
-
-        .event-cart-item:hover {
-            background: rgba(255, 255, 255, 0.08);
-        }
-
-        /* --- HERO SECTION WITH PARALLAX EFFECT --- */
+        /* --- HERO SECTION MOBILE --- */
         .hero {
             height: 100vh;
+            min-height: 600px;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            align-items: flex-start;
-            padding: 0 10%;
+            align-items: center;
+            padding: 0 1.5rem;
             background: 
-                linear-gradient(135deg, rgba(15,15,15,0.85) 0%, rgba(219,54,6,0.4) 100%),
-                url('https://source.unsplash.com/1920x1080/?hotdog,streetfood,night');
+                linear-gradient(135deg, rgba(15,15,15,0.9) 0%, rgba(219,54,6,0.4) 100%),
+                url('https://source.unsplash.com/800x1200/?hotdog,streetfood');
             background-size: cover;
             background-position: center;
-            background-attachment: fixed;
+            background-attachment: scroll;
             position: relative;
             overflow: hidden;
-        }
-
-        .hero:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 20% 50%, rgba(219,54,6,0.2) 0%, rgba(15,15,15,0) 50%);
-            z-index: 1;
+            text-align: center;
+            margin-top: 70px;
         }
 
         .hero-content {
             position: relative;
             z-index: 2;
-            max-width: 700px;
+            max-width: 500px;
+            width: 100%;
         }
 
         .hero h1 {
-            font-size: 5rem;
+            font-size: 3.5rem;
             line-height: 1;
-            margin-bottom: 1.5rem;
-            text-shadow: 4px 4px 0px var(--color-rojo-fuego);
+            margin-bottom: 1.2rem;
+            text-shadow: 3px 3px 0px var(--color-rojo-fuego);
             animation: fadeIn 1.2s ease-out, fireGlow 3s infinite alternate;
         }
         
@@ -731,330 +490,70 @@
         }
         
         .hero p {
-            font-size: 1.4rem;
-            margin-bottom: 2.5rem;
-            max-width: 600px;
-            animation: fadeIn 1.5s ease-out 0.3s both;
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
             color: var(--color-gris-claro);
+            animation: fadeIn 1.5s ease-out 0.3s both;
+            padding: 0 1rem;
         }
 
-        /* --- BUTTONS WITH ENHANCED ANIMATIONS --- */
+        /* --- BUTTONS MOBILE --- */
         .btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            padding: 15px 35px;
+            gap: 8px;
+            padding: 14px 28px;
             background: linear-gradient(135deg, var(--color-rojo-fuego) 0%, #c42f04 100%);
             color: white;
             text-decoration: none;
             border-radius: 50px;
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             border: none;
             cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
             overflow: hidden;
             z-index: 1;
             animation: fadeIn 1.8s ease-out 0.6s both;
-            box-shadow: 0 5px 15px rgba(219, 54, 6, 0.4);
-        }
-
-        .btn:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, var(--color-purpura-berry) 0%, #a04c7a 100%);
-            transition: left 0.6s ease;
-            z-index: -1;
+            box-shadow: 0 4px 12px rgba(219, 54, 6, 0.3);
+            min-height: 48px;
+            min-width: 140px;
         }
 
         .btn:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 10px 25px rgba(219, 54, 6, 0.6);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 6px 16px rgba(219, 54, 6, 0.4);
         }
 
-        .btn:hover:before {
-            left: 0;
-        }
-
-        .btn i {
-            transition: transform 0.3s ease;
-        }
-
-        .btn:hover i {
-            transform: translateX(5px) rotate(90deg);
-        }
-
-        /* --- ABOUT SECTION WITH SLIDE ANIMATIONS --- */
-        .about-section {
-            padding: 6rem 10%;
-            background-color: #111;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .about-section:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: linear-gradient(90deg, var(--color-rojo-fuego), var(--color-amarillo-cheddar), var(--color-purpura-berry));
-            animation: borderGlow 4s infinite alternate;
-        }
-
-        .about-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-            max-width: 1300px;
-            margin: 0 auto;
-        }
-
-        .about-text h2 {
-            color: var(--color-amarillo-cheddar);
-            font-size: 3.5rem;
-            margin-bottom: 2rem;
-            text-shadow: 2px 2px 0px var(--color-rojo-fuego);
-            animation: slideInLeft 1s ease-out both;
-        }
-
-        .about-text p {
-            font-size: 1.2rem;
-            line-height: 1.8;
-            margin-bottom: 1.8rem;
-            color: #ddd;
-            animation: slideInLeft 1s ease-out 0.2s both;
-        }
-
-        .about-image {
-            border-radius: 20px;
-            overflow: hidden;
-            border: 4px solid transparent;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
-            height: 450px;
-            background-size: cover;
-            background-position: center;
-            animation: slideInRight 1s ease-out, borderGlow 4s infinite alternate, pulse 6s infinite;
-            position: relative;
-        }
-
-        .about-image:after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, rgba(219,54,6,0.1), rgba(248,168,20,0.1));
-        }
-
-        /* Instagram Button Animation */
-        .instagram-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            background: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D);
-            color: white;
-            padding: 14px 30px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1.2rem;
-            margin-top: 1.5rem;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            animation: slideInLeft 1s ease-out 0.5s both;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(225, 48, 108, 0.4);
-        }
-
-        .instagram-btn:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.2);
-            transition: left 0.6s ease;
-        }
-
-        .instagram-btn:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 10px 25px rgba(225, 48, 108, 0.6);
-        }
-
-        .instagram-btn:hover:before {
-            left: 100%;
-        }
-
-        /* --- EVENT PROMO BANNER (NEW - AFTER MENU) --- */
-        .event-promo-section {
-            padding: 6rem 10%;
-            background: linear-gradient(135deg, #1a0f0f 0%, #2a1a1a 100%);
-            position: relative;
-            overflow: hidden;
-            text-align: center;
-        }
-
-        .event-promo-section:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 20% 30%, rgba(219,54,6,0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 70%, rgba(186,105,144,0.1) 0%, transparent 50%);
-        }
-
-        .event-promo-container {
-            position: relative;
-            z-index: 2;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .promo-badge {
-            display: inline-block;
-            background: linear-gradient(135deg, var(--color-purpura-berry) 0%, #9d5b85 100%);
-            color: white;
-            padding: 10px 25px;
-            border-radius: 50px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            margin-bottom: 2rem;
-            animation: pulse 2s infinite, shake 0.5s infinite alternate;
-            box-shadow: 0 5px 15px rgba(186, 105, 144, 0.4);
-        }
-
-        .event-promo-title {
-            font-size: 3.5rem;
-            color: var(--color-amarillo-cheddar);
-            margin-bottom: 1.5rem;
-            text-shadow: 2px 2px 0px var(--color-rojo-fuego);
-            animation: fadeIn 1s ease-out;
-        }
-
-        .event-promo-subtitle {
-            font-size: 1.5rem;
-            color: #ddd;
-            margin-bottom: 2.5rem;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-            animation: fadeIn 1s ease-out 0.3s both;
-        }
-
-        .event-promo-card {
-            background: linear-gradient(145deg, #2a2a2a, #222);
-            border-radius: 20px;
-            padding: 3rem;
-            border: 3px solid transparent;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-            margin-bottom: 3rem;
-            animation: fadeIn 1s ease-out 0.5s both, borderGlow 3s infinite alternate;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .event-promo-card:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('https://source.unsplash.com/600x400/?party,celebration,balloons');
-            background-size: cover;
-            background-position: center;
-            opacity: 0.1;
-        }
-
-        .promo-features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
-            position: relative;
-            z-index: 2;
-        }
-
-        .promo-feature {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 1.5rem;
-            border-radius: 15px;
-            border-left: 4px solid var(--color-amarillo-cheddar);
-            transition: all 0.3s ease;
-        }
-
-        .promo-feature:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.1);
-            border-left-color: var(--color-purpura-berry);
-        }
-
-        .promo-feature i {
-            font-size: 2.5rem;
-            color: var(--color-amarillo-cheddar);
-            margin-bottom: 1rem;
-        }
-
-        .promo-feature h4 {
-            font-size: 1.5rem;
-            color: white;
-            margin-bottom: 0.5rem;
-        }
-
-        .promo-feature p {
-            color: #ccc;
-            font-size: 1rem;
-        }
-
-        .event-cta-btn {
-            background: linear-gradient(135deg, var(--color-purpura-berry) 0%, #9d5b85 100%);
-            padding: 18px 45px;
-            font-size: 1.5rem;
-            margin-top: 1rem;
-            animation: pulse 2s infinite;
-        }
-
-        .event-cta-btn:hover {
-            background: linear-gradient(135deg, #9d5b85 0%, var(--color-purpura-berry) 100%);
-            transform: translateY(-5px) scale(1.05);
-            animation: none;
-        }
-
-        /* --- MENU SECTION WITH ENHANCED CARDS --- */
+        /* --- MENU SECTION MOBILE --- */
         .menu-section { 
-            padding: 6rem 5%; 
+            padding: 4rem 1.5rem; 
             text-align: center; 
             background-color: var(--color-fondo-oscuro);
             position: relative;
         }
 
-        .menu-section:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 10px;
-            background: linear-gradient(90deg, transparent, var(--color-amarillo-cheddar), transparent);
+        .promo-banner {
+            background: linear-gradient(135deg, var(--color-rojo-fuego) 0%, #c42f04 100%);
+            color: white;
+            padding: 1rem;
+            margin-bottom: 3rem;
+            font-family: 'Bangers', cursive;
+            font-size: 1.4rem;
+            letter-spacing: 1px;
+            transform: rotate(-0.5deg);
+            box-shadow: 0 5px 15px rgba(219,54,6,0.4);
+            animation: pulse 2s infinite, fadeIn 1s ease-out;
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
         }
 
         .section-title { 
-            font-size: 3.5rem; 
+            font-size: 2.5rem; 
             color: var(--color-amarillo-cheddar); 
-            margin-bottom: 1.5rem; 
+            margin-bottom: 1.2rem; 
             display: inline-block;
             position: relative;
             animation: fadeIn 1s ease-out;
@@ -1063,71 +562,45 @@
         .section-title:after {
             content: '';
             position: absolute;
-            bottom: -10px;
+            bottom: -8px;
             left: 50%;
             transform: translateX(-50%);
-            width: 150px;
-            height: 4px;
+            width: 120px;
+            height: 3px;
             background-color: var(--color-rojo-fuego);
             border-radius: 2px;
         }
 
         .section-subtitle { 
-            font-size: 1.3rem; 
+            font-size: 1.1rem; 
             color: #ccc; 
-            margin-bottom: 4rem; 
+            margin-bottom: 3rem; 
             font-style: italic;
             animation: fadeIn 1s ease-out 0.3s both;
+            padding: 0 0.5rem;
         }
        
-        .promo-banner {
-            background: linear-gradient(135deg, var(--color-rojo-fuego) 0%, #c42f04 100%);
-            color: white;
-            padding: 1.2rem;
-            margin-bottom: 4rem;
-            font-family: 'Bangers', cursive;
-            font-size: 1.8rem;
-            letter-spacing: 2px;
-            transform: rotate(-1deg);
-            box-shadow: 0 8px 20px rgba(219,54,6,0.5);
-            animation: pulse 2s infinite, fadeIn 1s ease-out;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .promo-banner:before {
-            content: '🔥';
-            position: absolute;
-            left: 20px;
-            animation: float 2s infinite ease-in-out;
-        }
-
-        .promo-banner:after {
-            content: '🔥';
-            position: absolute;
-            right: 20px;
-            animation: float 2s infinite ease-in-out 0.5s;
-        }
-
         .menu-grid { 
             display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
-            gap: 2.5rem; 
+            grid-template-columns: 1fr; 
+            gap: 2rem; 
+            max-width: 400px;
+            margin: 0 auto;
         }
        
         .menu-card {
             background: linear-gradient(145deg, #2a2a2a, #222);
-            border-radius: 20px;
+            border-radius: 16px;
             overflow: hidden;
             border: 2px solid transparent;
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.4s ease;
             position: relative;
             display: flex;
             flex-direction: column;
             opacity: 0;
-            transform: translateY(30px);
+            transform: translateY(20px);
             animation: fadeIn 0.8s ease-out forwards;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
         }
         
         .menu-card.visible {
@@ -1135,56 +608,24 @@
             transform: translateY(0);
         }
         
-        .menu-card:nth-child(1) { animation-delay: 0.1s; }
-        .menu-card:nth-child(2) { animation-delay: 0.2s; }
-        .menu-card:nth-child(3) { animation-delay: 0.3s; }
-        .menu-card:nth-child(4) { animation-delay: 0.4s; }
-        .menu-card:nth-child(5) { animation-delay: 0.5s; }
-        .menu-card:nth-child(6) { animation-delay: 0.6s; }
-        .menu-card:nth-child(7) { animation-delay: 0.7s; }
-        .menu-card:nth-child(8) { animation-delay: 0.8s; }
-        
         .menu-card:hover { 
-            transform: translateY(-15px) scale(1.03); 
+            transform: translateY(-8px); 
             border-color: var(--color-amarillo-cheddar); 
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 30px rgba(248, 168, 20, 0.3);
-            animation: borderGlow 2s infinite alternate;
-        }
-
-        .menu-card:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(219,54,6,0) 0%, rgba(219,54,6,0.1) 100%);
-            z-index: 1;
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        }
-
-        .menu-card:hover:before {
-            opacity: 1;
+            box-shadow: 0 12px 24px rgba(0,0,0,0.3);
         }
 
         .card-image-placeholder {
-            height: 200px;
+            height: 180px;
             background-color: #444;
             background-size: cover;
             background-position: center;
             border-bottom: 1px solid #333;
             position: relative;
             overflow: hidden;
-            transition: all 0.5s ease;
-        }
-
-        .menu-card:hover .card-image-placeholder {
-            transform: scale(1.05);
         }
        
         .card-content { 
-            padding: 2rem; 
+            padding: 1.5rem; 
             text-align: left; 
             flex-grow: 1; 
             display: flex; 
@@ -1194,9 +635,9 @@
         }
         
         .card-content h3 { 
-            font-size: 1.8rem; 
+            font-size: 1.5rem; 
             color: white; 
-            margin-bottom: 0.8rem; 
+            margin-bottom: 0.6rem; 
             transition: color 0.3s ease;
         }
         
@@ -1206,10 +647,10 @@
         
         .card-content p { 
             color: #aaa; 
-            font-size: 1rem; 
-            margin-bottom: 1.5rem; 
+            font-size: 0.95rem; 
+            margin-bottom: 1.2rem; 
             flex-grow: 1; 
-            line-height: 1.6;
+            line-height: 1.5;
         }
        
         .price-row { 
@@ -1218,94 +659,201 @@
             align-items: center; 
             margin-top: auto; 
             border-top: 1px solid #444; 
-            padding-top: 1.5rem; 
+            padding-top: 1.2rem; 
+            gap: 1rem;
         }
         
         .price { 
             color: var(--color-amarillo-cheddar); 
             font-weight: bold; 
-            font-size: 1.6rem; 
+            font-size: 1.4rem; 
             font-family: 'Bangers', cursive;
             text-shadow: 1px 1px 0px rgba(0,0,0,0.5);
+            white-space: nowrap;
         }
 
         .add-to-cart-btn {
-            padding: 10px 20px;
-            font-size: 1rem;
+            padding: 10px 18px;
+            font-size: 0.95rem;
             animation: none;
             background: linear-gradient(135deg, var(--color-purpura-berry) 0%, #9d5b85 100%);
+            min-width: 120px;
         }
 
-        .add-to-cart-btn:hover {
-            background: linear-gradient(135deg, #9d5b85 0%, var(--color-purpura-berry) 100%);
-        }
-
-        /* Combo Badge */
         .combo-badge {
             background: linear-gradient(135deg, var(--color-purpura-berry) 0%, #9d5b85 100%);
             color: white;
-            font-size: 0.9rem;
-            padding: 5px 12px;
-            border-radius: 20px;
+            font-size: 0.8rem;
+            padding: 4px 10px;
+            border-radius: 15px;
             position: absolute;
-            top: 15px;
-            right: 15px;
+            top: 12px;
+            right: 12px;
             font-weight: bold;
             z-index: 3;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            box-shadow: 0 3px 8px rgba(0,0,0,0.3);
             animation: float 3s infinite ease-in-out;
         }
 
-        /* Sides & Extras Grid */
+        /* Sides & Extras Mobile */
         .sides-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 2rem;
-            margin-top: 5rem;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 1.2rem;
+            margin-top: 3rem;
         }
         
         .side-item {
             background: linear-gradient(145deg, #222, #1a1a1a);
-            padding: 1.5rem;
-            border-radius: 15px;
+            padding: 1.2rem;
+            border-radius: 12px;
             border: 1px solid #333;
             text-align: left;
-            transition: all 0.4s ease;
+            transition: all 0.3s ease;
             opacity: 0;
-            transform: translateY(20px);
+            transform: translateY(15px);
             animation: fadeIn 0.8s ease-out forwards;
         }
         
-        .side-item:nth-child(1) { animation-delay: 0.1s; }
-        .side-item:nth-child(2) { animation-delay: 0.2s; }
-        .side-item:nth-child(3) { animation-delay: 0.3s; }
-        .side-item:nth-child(4) { animation-delay: 0.4s; }
-        .side-item:nth-child(5) { animation-delay: 0.5s; }
-        .side-item:nth-child(6) { animation-delay: 0.6s; }
-        
         .side-item:hover {
-            transform: translateY(-10px);
+            transform: translateY(-5px);
             border-color: var(--color-mostaza-suave);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
         }
         
         .side-item h4 { 
             color: var(--color-mostaza-suave); 
-            margin-bottom: 0.5rem; 
-            font-size: 1.2rem;
+            margin-bottom: 0.4rem; 
+            font-size: 1.1rem;
         }
         
         .side-price { 
             float: right; 
             color: white; 
             font-weight: bold; 
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             font-family: 'Bangers', cursive;
         }
 
-        /* Location Box */
+        /* Pretzel Special */
+        .pretzel-special {
+            background: linear-gradient(145deg, #2a2a2a, #222);
+            border: 2px solid transparent;
+            padding: 2rem 1.5rem;
+            border-radius: 16px;
+            margin-bottom: 2.5rem;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: fadeIn 1s ease-out;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        /* --- EVENT PROMO MOBILE --- */
+        .event-promo-section {
+            padding: 4rem 1.5rem;
+            background: linear-gradient(135deg, #1a0f0f 0%, #2a1a1a 100%);
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .event-promo-container {
+            position: relative;
+            z-index: 2;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .promo-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--color-purpura-berry) 0%, #9d5b85 100%);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            animation: pulse 2s infinite;
+            box-shadow: 0 4px 12px rgba(186, 105, 144, 0.3);
+        }
+
+        .event-promo-title {
+            font-size: 2.2rem;
+            color: var(--color-amarillo-cheddar);
+            margin-bottom: 1.2rem;
+            text-shadow: 1px 1px 0px var(--color-rojo-fuego);
+            animation: fadeIn 1s ease-out;
+        }
+
+        .event-promo-subtitle {
+            font-size: 1.2rem;
+            color: #ddd;
+            margin-bottom: 2rem;
+            animation: fadeIn 1s ease-out 0.3s both;
+            padding: 0 0.5rem;
+        }
+
+        .event-promo-card {
+            background: linear-gradient(145deg, #2a2a2a, #222);
+            border-radius: 16px;
+            padding: 2rem 1.5rem;
+            border: 2px solid var(--color-purpura-berry);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.3);
+            margin-bottom: 2.5rem;
+            animation: fadeIn 1s ease-out 0.5s both;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .promo-features {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .promo-feature {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.2rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--color-amarillo-cheddar);
+            transition: all 0.3s ease;
+            text-align: left;
+        }
+
+        .promo-feature i {
+            font-size: 2rem;
+            color: var(--color-amarillo-cheddar);
+            margin-bottom: 0.8rem;
+        }
+
+        .promo-feature h4 {
+            font-size: 1.3rem;
+            color: white;
+            margin-bottom: 0.4rem;
+        }
+
+        .promo-feature p {
+            color: #ccc;
+            font-size: 0.95rem;
+        }
+
+        .event-cta-btn {
+            background: linear-gradient(135deg, var(--color-purpura-berry) 0%, #9d5b85 100%);
+            padding: 16px 32px;
+            font-size: 1.2rem;
+            margin-top: 1rem;
+            animation: pulse 2s infinite;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        /* --- LOCATION MOBILE --- */
         .location-section { 
-            padding: 6rem 10%; 
+            padding: 4rem 1.5rem; 
             background: linear-gradient(135deg, var(--color-mostaza-suave) 0%, #d1984a 100%);
             color: #1a1a1a; 
             text-align: center; 
@@ -1313,50 +861,33 @@
             overflow: hidden;
         }
         
-        .location-section:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('https://source.unsplash.com/1920x400/?map,texas,grapevine');
-            background-size: cover;
-            background-position: center;
-            opacity: 0.1;
-        }
-        
         .location-section h2 {
             color: var(--color-rojo-fuego); 
-            font-size: 3.5rem; 
-            margin-bottom: 3rem; 
-            text-shadow: 2px 2px 0px rgba(255,255,255,0.5);
+            font-size: 2.5rem; 
+            margin-bottom: 2.5rem; 
+            text-shadow: 1px 1px 0px rgba(255,255,255,0.5);
             position: relative;
             animation: fadeIn 1s ease-out;
         }
        
         .location-box { 
             background: rgba(255,255,255,0.95); 
-            padding: 3rem; 
-            border-radius: 25px; 
+            padding: 2rem 1.5rem; 
+            border-radius: 20px; 
             display: inline-block; 
-            max-width: 700px; 
+            max-width: 400px;
             width: 100%; 
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2); 
+            box-shadow: 0 12px 24px rgba(0,0,0,0.15); 
             position: relative;
             z-index: 2;
-            animation: fadeIn 1s ease-out 0.5s both, borderGlow 4s infinite alternate;
-            border: 3px solid transparent;
-            transition: all 0.4s ease;
-        }
-        
-        .location-box:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 30px 50px rgba(0,0,0,0.3);
+            animation: fadeIn 1s ease-out 0.5s both;
+            border: 2px solid var(--color-rojo-fuego);
+            transition: all 0.3s ease;
         }
 
+        /* --- CONTACT MOBILE --- */
         .contact-section {
-            padding: 5rem 10%;
+            padding: 4rem 1.5rem;
             text-align: center;
             background: linear-gradient(135deg, #111 0%, #222 100%);
             position: relative;
@@ -1364,13 +895,13 @@
 
         .contact-section h3 {
             color: var(--color-rojo-fuego); 
-            font-size: 2.5rem; 
-            margin-bottom: 1.5rem;
+            font-size: 2rem; 
+            margin-bottom: 1.2rem;
             animation: fadeIn 1s ease-out;
         }
         
         .contact-section p {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             margin-bottom: 0.5rem;
             animation: fadeIn 1s ease-out 0.3s both;
         }
@@ -1379,24 +910,19 @@
             color: var(--color-amarillo-cheddar);
             font-weight: bold;
             text-decoration: none;
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             display: inline-block;
             margin-top: 1rem;
-            padding: 10px 20px;
-            border-radius: 10px;
+            padding: 12px 24px;
+            border-radius: 12px;
             transition: all 0.3s ease;
             animation: pulse 2s infinite;
-        }
-        
-        .contact-phone:hover {
-            color: var(--color-rojo-fuego);
-            background-color: rgba(248, 168, 20, 0.1);
-            transform: scale(1.05);
+            background: rgba(248, 168, 20, 0.1);
         }
         
         footer { 
             background: #0a0a0a; 
-            padding: 3rem; 
+            padding: 2.5rem 1.5rem; 
             text-align: center; 
             color: #777; 
             position: relative;
@@ -1420,25 +946,25 @@
         .social-links a {
             color: var(--color-amarillo-cheddar);
             text-decoration: none;
-            margin: 0 15px;
+            margin: 0 10px;
             font-weight: bold;
-            font-size: 1.1rem;
+            font-size: 1rem;
             transition: all 0.3s ease;
             display: inline-block;
         }
         
         .social-links a:hover {
             color: var(--color-rojo-fuego);
-            transform: translateY(-3px);
+            transform: translateY(-2px);
         }
         
-        /* Scroll to Top Button */
+        /* Scroll to Top Button Mobile */
         .scroll-top {
             position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
+            bottom: 20px;
+            right: 20px;
+            width: 44px;
+            height: 44px;
             background: linear-gradient(135deg, var(--color-rojo-fuego) 0%, #c42f04 100%);
             color: white;
             border-radius: 50%;
@@ -1449,9 +975,9 @@
             z-index: 999;
             opacity: 0;
             visibility: hidden;
-            transition: all 0.4s ease;
-            box-shadow: 0 5px 15px rgba(219, 54, 6, 0.4);
-            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(219, 54, 6, 0.3);
+            font-size: 1.2rem;
         }
         
         .scroll-top.visible {
@@ -1460,135 +986,88 @@
         }
         
         .scroll-top:hover {
-            transform: translateY(-5px) scale(1.1);
-            box-shadow: 0 10px 20px rgba(219, 54, 6, 0.6);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 6px 16px rgba(219, 54, 6, 0.4);
         }
-        
-        /* Responsive Design */
-        @media (max-width: 1024px) {
-            .about-container {
-                grid-template-columns: 1fr;
-                gap: 3rem;
+
+        /* --- MEDIA QUERIES FOR TABLETS --- */
+        @media (min-width: 768px) {
+            html {
+                font-size: 17px;
             }
             
-            .about-image {
-                height: 350px;
-                order: -1;
-            }
-            
-            .cart-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .event-cart-modal {
-                width: 400px;
-            }
-        }
-        
-        @media (max-width: 768px) {
             .hero h1 {
-                font-size: 3.5rem;
+                font-size: 4rem;
             }
             
             .logo-text {
                 font-size: 2.5rem;
             }
             
-            .section-title {
-                font-size: 2.8rem;
-            }
-            
-            .event-promo-title {
-                font-size: 2.8rem;
-            }
-            
-            .about-text h2 {
-                font-size: 2.8rem;
-            }
-            
             .menu-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(2, 1fr);
+                max-width: 800px;
+                gap: 2.5rem;
             }
             
-            .hamburger-btn {
-                left: 3%;
-            }
-            
-            .cart-icon-header {
-                right: 3%;
-                padding: 8px 15px;
-                font-size: 0.9rem;
-            }
-            
-            .hero {
-                padding: 0 5%;
-                background-attachment: scroll;
-            }
-            
-            .location-box {
-                padding: 2rem;
+            .sides-grid {
+                grid-template-columns: repeat(3, 1fr);
+                max-width: 800px;
+                margin-left: auto;
+                margin-right: auto;
             }
             
             .promo-features {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(2, 1fr);
             }
             
-            .event-link-special {
-                margin-right: 10px;
-                padding: 10px 15px;
+            .event-promo-card {
+                padding: 2.5rem;
             }
             
-            .event-link-special .menu-link {
-                font-size: 2rem;
+            .location-box {
+                max-width: 500px;
+                padding: 2.5rem;
+            }
+        }
+
+        /* --- MEDIA QUERIES FOR DESKTOP --- */
+        @media (min-width: 1024px) {
+            .hero {
+                background-attachment: fixed;
+            }
+            
+            .menu-grid {
+                grid-template-columns: repeat(3, 1fr);
+                max-width: 1200px;
+            }
+            
+            .sides-grid {
+                grid-template-columns: repeat(4, 1fr);
+                max-width: 1000px;
+            }
+            
+            .promo-features {
+                grid-template-columns: repeat(4, 1fr);
             }
             
             .event-cart-modal {
-                width: 100%;
-            }
-            
-            .cart-page-title {
-                font-size: 2.8rem;
-            }
-            
-            .event-cart-container {
-                padding: 2rem;
+                width: 450px;
             }
         }
-        
-        @media (max-width: 480px) {
-            .hero h1 {
-                font-size: 2.8rem;
+
+        /* --- IOS SAFARI FIXES --- */
+        @supports (-webkit-touch-callout: none) {
+            .hero {
+                background-attachment: scroll;
             }
             
-            .btn, .instagram-btn {
-                padding: 12px 25px;
-                font-size: 1.1rem;
+            .btn, .add-to-cart-btn, .checkout-btn {
+                min-height: 44px;
             }
             
-            .sidebar {
-                width: 280px;
-            }
-            
-            .menu-link {
-                font-size: 1.8rem;
-            }
-            
-            .event-link-special:after {
-                font-size: 0.7rem;
-                padding: 2px 6px;
-                right: -5px;
-                top: -5px;
-            }
-            
-            .cart-icon-header {
-                padding: 6px 12px;
-                font-size: 0.8rem;
-            }
-            
-            .cart-count {
-                width: 20px;
-                height: 20px;
-                font-size: 0.8rem;
+            input, select, textarea, button {
+                font-size: 16px !important;
             }
         }
     </style>
@@ -1596,14 +1075,14 @@
 <body>
     <div class="overlay" id="overlay"></div>
     
-    <!-- Event Cart Modal (Similar to Berry Bowl) -->
+    <!-- Event Cart Modal -->
     <div class="event-cart-modal" id="eventCartModal">
         <div class="cart-header">
             <button class="close-cart" id="closeCartBtn">
                 <i class="fas fa-times"></i>
             </button>
             <h2>🛒 Event Cart</h2>
-            <p style="color: #ccc; text-align: center; margin-top: 10px;">For your special event booking</p>
+            <p style="color: #ccc; text-align: center; margin-top: 5px; font-size: 0.9rem;">For your special event booking</p>
         </div>
         
         <div class="cart-items" id="cartItemsContainer">
@@ -1635,7 +1114,6 @@
         </div>
         <button class="cart-icon-header" id="cartBtn">
             <i class="fas fa-calendar-alt"></i>
-            <span>Event Cart</span>
             <span class="cart-count" id="cartCount">0</span>
         </button>
     </header>
@@ -1643,12 +1121,11 @@
     <nav class="sidebar" id="sidebar" aria-label="Main navigation">
         <ul>
             <li><a href="#home" class="menu-link" onclick="toggleMenu()">HOME</a></li>
-            <li><a href="#about" class="menu-link" onclick="toggleMenu()">ABOUT US</a></li>
             <li><a href="#menu" class="menu-link" onclick="toggleMenu()">MENU</a></li>
             <li><a href="#sides" class="menu-link" onclick="toggleMenu()">SIDES</a></li>
             <li><a href="#location" class="menu-link" onclick="toggleMenu()">LOCATION</a></li>
             
-            <!-- NUEVA OPCIÓN ESPECIAL PARA EVENTOS -->
+            <!-- SPECIAL EVENT OPTION -->
             <li class="event-link-special" onclick="toggleMenu()">
                 <a href="event-cart.html" class="menu-link">
                     🎪 EVENT CART
@@ -1656,13 +1133,13 @@
             </li>
         </ul>
         
-        <div style="margin-top: 50px; padding-right: 20px;">
-            <p style="color: var(--color-mostaza-suave); font-size: 1.2rem;">Follow the fire!</p>
+        <div style="margin-top: 40px; padding-right: 20px;">
+            <p style="color: var(--color-mostaza-suave); font-size: 1.1rem; margin-bottom: 10px;">Follow the fire!</p>
             <p>
                 <a href="https://www.instagram.com/supdogdfw?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" 
                    target="_blank" 
-                   style="color: white; text-decoration: none; font-weight: bold; font-size: 1.3rem;">
-                    @supdogdfw <i class="fab fa-instagram" style="margin-left: 8px;"></i>
+                   style="color: white; text-decoration: none; font-weight: bold; font-size: 1.2rem; display: flex; align-items: center; gap: 8px;">
+                    @supdogdfw <i class="fab fa-instagram"></i>
                 </a>
             </p>
         </div>
@@ -1678,27 +1155,6 @@
         </div>
     </section>
 
-    <section id="about" class="about-section">
-        <div class="about-container">
-            <div class="about-text">
-                <h2>OUR STORY</h2>
-                <p>Born from a passion for bold flavors and street food culture, SupDog brings an attitude to classic American favorites. Located in the heart of Grapevine, TX, we're not just serving hot dogs - we're crafting flavor experiences that challenge the ordinary.</p>
-                <p>Every SupDog creation starts with premium ingredients, from our signature beef franks to house-made sauces and fresh toppings. Our nachos are loaded with personality, and our sides are anything but basic.</p>
-                <p>We believe great food should be fun, accessible, and memorable. That's why we've created a space where food lovers can gather, share, and enjoy bold flavors without pretense.</p>
-                <p>Follow our journey on Instagram to see behind-the-scenes, new menu drops, and meet the team that makes it all happen!</p>
-                
-                <a href="https://www.instagram.com/supdogdfw?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" 
-                   target="_blank" 
-                   class="instagram-btn">
-                    <i class="fab fa-instagram"></i> Follow @supdogdfw
-                </a>
-            </div>
-            <div class="about-image" 
-                 style="background-image: url('https://source.unsplash.com/600x600/?foodtruck,night,lights,hotdog');">
-            </div>
-        </div>
-    </section>
-
     <section id="menu" class="menu-section">
         <div class="promo-banner">
             ★ EVERY THURSDAY: BOGO (BUY ONE GET ONE) ★
@@ -1710,161 +1166,173 @@
         <div class="menu-grid">
             <div class="menu-card">
                 <span class="combo-badge">BEST SELLER</span>
-                <div class="card-image-placeholder" style="background-image: url('mexican-dog.png');"></div>
+                <div class="card-image-placeholder" style="background-color: #444;"></div>
                 <div class="card-content">
                     <h3>Mexican Dog</h3>
                     <p>Beef Frank, Pico De Gallo, Jalapeños, Ketchup & Mustard.</p>
                     <div class="price-row">
                         <span class="price">$12.50</span>
                         <button class="btn add-to-cart-btn" data-item="Mexican Dog" data-price="12.50">
-                            Add to Event Cart
+                            Add to Cart
                         </button>
                     </div>
                 </div>
             </div>
 
             <div class="menu-card">
-                <div class="card-image-placeholder" style="background-image: url('german-dog.png');"></div>
+                <div class="card-image-placeholder" style="background-color: #444;"></div>
                 <div class="card-content">
                     <h3>German Dog</h3>
                     <p>Bratwurst, Grilled Onions, Sauerkraut, Spicy German Mustard.</p>
                     <div class="price-row">
                         <span class="price">$12.50</span>
                         <button class="btn add-to-cart-btn" data-item="German Dog" data-price="12.50">
-                            Add to Event Cart
+                            Add to Cart
                         </button>
                     </div>
                 </div>
             </div>
 
             <div class="menu-card">
-                <div class="card-image-placeholder" style="background-image: url('hawaiian-dog.png');"></div>
+                <div class="card-image-placeholder" style="background-color: #444;"></div>
                 <div class="card-content">
                     <h3>Hawaiian Dog</h3>
                     <p>Jalapeño Sausage, Pineapple, Grilled Onions, Bacon Bites.</p>
                     <div class="price-row">
                         <span class="price">$12.50</span>
                         <button class="btn add-to-cart-btn" data-item="Hawaiian Dog" data-price="12.50">
-                            Add to Event Cart
+                            Add to Cart
                         </button>
                     </div>
                 </div>
             </div>
 
             <div class="menu-card">
-                <div class="card-image-placeholder" style="background-image: url('chicago-dog.png');"></div>
+                <span class="combo-badge">CHICAGO STYLE</span>
+                <div class="card-image-placeholder" style="background-color: #444;"></div>
                 <div class="card-content">
                     <h3>Chicago Dog</h3>
-                    <p>Beef Frank, Poppy Seeds Bun, Yellow Mustard, Neon Green Pickles, Onions, Tomato, Pickle Spear.</p>
+                    <p>Beef Frank, Poppy Seeds Bun, Yellow Mustard, Neon Green Pickles.</p>
                     <div class="price-row">
                         <span class="price">$12.50</span>
                         <button class="btn add-to-cart-btn" data-item="Chicago Dog" data-price="12.50">
-                            Add to Event Cart
+                            Add to Cart
                         </button>
                     </div>
                 </div>
             </div>
 
             <div class="menu-card">
-                <span class="combo-badge">LOADED</span>
-                <div class="card-image-placeholder" style="background-image: url('trainwrech.png');"></div>
+                <span class="combo-badge">MOST POPULAR</span>
+                <div class="card-image-placeholder" style="background-color: #444;"></div>
                 <div class="card-content">
                     <h3>Trainwreck</h3>
-                    <p>Beef Frank, Chipotle Sauce, Mayo, Mustard, Onions, Shoestring Fries, Parmesan, Bacon.</p>
+                    <p>Beef Frank, Chipotle Sauce, Mayo, Mustard, Onions, Fries, Parmesan, Bacon.</p>
                     <div class="price-row">
                         <span class="price">$12.50</span>
                         <button class="btn add-to-cart-btn" data-item="Trainwreck" data-price="12.50">
-                            Add to Event Cart
+                            Add to Cart
                         </button>
                     </div>
                 </div>
             </div>
 
             <div class="menu-card">
-                <div class="card-image-placeholder" style="background-image: url('tijuana-dog.png');"></div>
+                <div class="card-image-placeholder" style="background-color: #444;"></div>
                 <div class="card-content">
                     <h3>Tijuana Dog</h3>
-                    <p>Jalapeño Sausage, Corn, Chipotle Sauce, Parmesan Cheese, Cilantro, Lime Wedge.</p>
+                    <p>Jalapeño Sausage, Corn, Chipotle Sauce, Parmesan Cheese, Cilantro.</p>
                     <div class="price-row">
                         <span class="price">$12.50</span>
                         <button class="btn add-to-cart-btn" data-item="Tijuana Dog" data-price="12.50">
-                            Add to Event Cart
+                            Add to Cart
                         </button>
                     </div>
                 </div>
             </div>
            
             <div class="menu-card">
-                <div class="card-image-placeholder" style="background-image: url('kids-dog.png');"></div>
+                <span class="combo-badge">FOR KIDS</span>
+                <div class="card-image-placeholder" style="background-color: #444;"></div>
                 <div class="card-content">
                     <h3>Kids Dog</h3>
                     <p>Beef Frank, Ketchup, Jello, Kids Juice.</p>
                     <div class="price-row">
                         <span class="price">$10.50</span>
                         <button class="btn add-to-cart-btn" data-item="Kids Dog" data-price="10.50">
-                            Add to Event Cart
+                            Add to Cart
                         </button>
                     </div>
                 </div>
             </div>
            
             <div class="menu-card">
-                <div class="card-image-placeholder" style="background-image: url('all-naked.png');"></div>
+                <div class="card-image-placeholder" style="background-color: #444;"></div>
                 <div class="card-content">
                     <h3>All Naked</h3>
                     <p>Bunless. Bratwurst, Grilled Onions, Sauerkraut.</p>
                     <div class="price-row">
                         <span class="price">$12.50</span>
                         <button class="btn add-to-cart-btn" data-item="All Naked" data-price="12.50">
-                            Add to Event Cart
+                            Add to Cart
                         </button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div id="sides" style="margin-top: 6rem;">
+        <div id="sides" style="margin-top: 4rem;">
             <h2 class="section-title">Extras & Drinks</h2>
            
-            <div style="background: linear-gradient(145deg, #2a2a2a, #222); border: 3px solid transparent; padding: 2.5rem; border-radius: 20px; margin-bottom: 3rem; max-width: 650px; margin-left: auto; margin-right: auto; animation: borderGlow 4s infinite alternate;">
-                <h3 style="color: var(--color-amarillo-cheddar); font-size: 2.2rem; margin-bottom: 0.5rem;">SOFT PRETZELS</h3>
-                <p style="color: #ddd; font-size: 1.1rem;">Honey Mustard & Beer Cheese Sauce included.</p>
-                <div style="font-size: 3rem; color: white; font-weight: bold; margin-top: 1.5rem; text-shadow: 2px 2px 0px rgba(0,0,0,0.5);">$9.50</div>
-                <button class="btn add-to-cart-btn" data-item="Soft Pretzels" data-price="9.50" style="margin-top: 1rem;">
+            <div class="pretzel-special">
+                <h3 style="color: var(--color-amarillo-cheddar); font-size: 1.8rem; margin-bottom: 0.5rem;">SOFT PRETZELS</h3>
+                <p style="color: #ddd; font-size: 1rem; margin-bottom: 1rem;">Honey Mustard & Beer Cheese Sauce included.</p>
+                <div style="font-size: 2.2rem; color: white; font-weight: bold; margin: 1.2rem 0; text-shadow: 1px 1px 0px rgba(0,0,0,0.5);">$9.50</div>
+                <button class="btn add-to-cart-btn" data-item="Soft Pretzels" data-price="9.50" style="margin-top: 0.5rem; width: 100%; max-width: 200px;">
                     Add to Event Cart
                 </button>
             </div>
 
             <div class="sides-grid">
-                <div class="side-item"><h4>Creamy Slaw</h4> <span class="side-price">$4.00</span>
-                    <button class="btn add-to-cart-btn" data-item="Creamy Slaw" data-price="4.00" style="margin-top: 10px; padding: 8px 15px; font-size: 0.9rem;">
+                <div class="side-item">
+                    <h4>Creamy Slaw</h4> 
+                    <span class="side-price">$4.00</span>
+                    <button class="btn add-to-cart-btn" data-item="Creamy Slaw" data-price="4.00" style="margin-top: 10px; padding: 8px 12px; font-size: 0.9rem; width: 100%;">
                         Add to Cart
                     </button>
                 </div>
-                <div class="side-item"><h4>Chips Bag</h4> <span class="side-price">$3.00</span>
-                    <button class="btn add-to-cart-btn" data-item="Chips Bag" data-price="3.00" style="margin-top: 10px; padding: 8px 15px; font-size: 0.9rem;">
+                <div class="side-item">
+                    <h4>Chips Bag</h4> 
+                    <span class="side-price">$3.00</span>
+                    <button class="btn add-to-cart-btn" data-item="Chips Bag" data-price="3.00" style="margin-top: 10px; padding: 8px 12px; font-size: 0.9rem; width: 100%;">
                         Add to Cart
                     </button>
                 </div>
-                <div class="side-item"><h4>Corn Salad</h4> <span class="side-price">$4.00</span>
-                    <button class="btn add-to-cart-btn" data-item="Corn Salad" data-price="4.00" style="margin-top: 10px; padding: 8px 15px; font-size: 0.9rem;">
+                <div class="side-item">
+                    <h4>Corn Salad</h4> 
+                    <span class="side-price">$4.00</span>
+                    <button class="btn add-to-cart-btn" data-item="Corn Salad" data-price="4.00" style="margin-top: 10px; padding: 8px 12px; font-size: 0.9rem; width: 100%;">
                         Add to Cart
                     </button>
                 </div>
-                <div class="side-item"><h4>Potato Salad</h4> <span class="side-price">$4.00</span>
-                    <button class="btn add-to-cart-btn" data-item="Potato Salad" data-price="4.00" style="margin-top: 10px; padding: 8px 15px; font-size: 0.9rem;">
+                <div class="side-item">
+                    <h4>Potato Salad</h4> 
+                    <span class="side-price">$4.00</span>
+                    <button class="btn add-to-cart-btn" data-item="Potato Salad" data-price="4.00" style="margin-top: 10px; padding: 8px 12px; font-size: 0.9rem; width: 100%;">
                         Add to Cart
                     </button>
                 </div>
-                <div class="side-item"><h4>Baked Beans</h4> <span class="side-price">$6.00</span>
-                    <button class="btn add-to-cart-btn" data-item="Baked Beans" data-price="6.00" style="margin-top: 10px; padding: 8px 15px; font-size: 0.9rem;">
+                <div class="side-item">
+                    <h4>Baked Beans</h4> 
+                    <span class="side-price">$6.00</span>
+                    <button class="btn add-to-cart-btn" data-item="Baked Beans" data-price="6.00" style="margin-top: 10px; padding: 8px 12px; font-size: 0.9rem; width: 100%;">
                         Add to Cart
                     </button>
                 </div>
                 <div class="side-item" style="border-color: var(--color-rojo-fuego); background: linear-gradient(145deg, #2a1a1a, #221010);">
                     <h4 style="color: white;">DRINKS (Cans/Water)</h4>
                     <span class="side-price" style="color: var(--color-amarillo-cheddar);">$2.25</span>
-                    <button class="btn add-to-cart-btn" data-item="Drinks (Cans/Water)" data-price="2.25" style="margin-top: 10px; padding: 8px 15px; font-size: 0.9rem; background: var(--color-rojo-fuego);">
+                    <button class="btn add-to-cart-btn" data-item="Drinks (Cans/Water)" data-price="2.25" style="margin-top: 10px; padding: 8px 12px; font-size: 0.9rem; width: 100%; background: var(--color-rojo-fuego);">
                         Add to Cart
                     </button>
                 </div>
@@ -1872,49 +1340,49 @@
         </div>
     </section>
 
-    <!-- NEW EVENT PROMO BANNER (After Menu) -->
+    <!-- EVENT PROMO BANNER -->
     <section class="event-promo-section" id="eventPromo">
         <div class="event-promo-container">
             <div class="promo-badge">
-                🎉 NEW SERVICE AVAILABLE! 🎉
+                🎉 NEW SERVICE! 🎉
             </div>
             
             <h2 class="event-promo-title">THEMED EVENT CART</h2>
-            <p class="event-promo-subtitle">Bring SupDog to your next celebration! Our fully decorated mobile cart perfect for birthdays, parties, corporate events, and special occasions.</p>
+            <p class="event-promo-subtitle">Bring SupDog to your next celebration! Perfect for birthdays, parties, and special events.</p>
             
             <div class="event-promo-card">
                 <div class="promo-features">
                     <div class="promo-feature">
                         <i class="fas fa-birthday-cake"></i>
                         <h4>Custom Themes</h4>
-                        <p>We decorate according to your party theme - birthday, sports, holiday, or custom ideas!</p>
+                        <p>Decorated according to your party theme</p>
                     </div>
                     
                     <div class="promo-feature">
                         <i class="fas fa-calendar-alt"></i>
                         <h4>Book in Advance</h4>
-                        <p>Reserve minimum 2 weeks ahead for custom decorations and planning.</p>
+                        <p>Reserve 2 weeks ahead for planning</p>
                     </div>
                     
                     <div class="promo-feature">
                         <i class="fas fa-hotdog"></i>
-                        <h4>Full Menu Available</h4>
-                        <p>Serve all your favorite SupDog creations at your event.</p>
+                        <h4>Full Menu</h4>
+                        <p>All your favorite SupDog creations</p>
                     </div>
                     
                     <div class="promo-feature">
                         <i class="fas fa-map-marker-alt"></i>
                         <h4>We Come to You</h4>
-                        <p>Our mobile cart can be set up at your venue in Grapevine area.</p>
+                        <p>Set up at your venue in Grapevine area</p>
                     </div>
                 </div>
                 
                 <button class="btn event-cta-btn" id="bookEventBtn">
-                    🎪 BOOK YOUR THEMED EVENT NOW <i class="fas fa-arrow-right"></i>
+                    🎪 BOOK EVENT <i class="fas fa-arrow-right"></i>
                 </button>
                 
-                <p style="margin-top: 2rem; color: #ccc; font-size: 1rem;">
-                    <i class="fas fa-exclamation-circle"></i> Limited availability - Reserve early to secure your date!
+                <p style="margin-top: 1.5rem; color: #ccc; font-size: 0.9rem;">
+                    <i class="fas fa-exclamation-circle"></i> Limited availability - Book early!
                 </p>
             </div>
         </div>
@@ -1924,17 +1392,17 @@
         <h2>Where to Find Us?</h2>
        
         <div class="location-box">
-            <h3 style="font-size: 2.5rem; margin-bottom: 1.5rem; color: var(--color-rojo-fuego);">📍 Grapevine, TX</h3>
-            <p style="font-size: 1.4rem; margin-bottom: 0.5rem; font-weight: bold; color: #333;">815 S Main St, Grapevine, TX 76051</p>
-            <p style="color: #666; margin-bottom: 2rem; font-size: 1.1rem;">USA</p>
+            <h3 style="font-size: 2rem; margin-bottom: 1rem; color: var(--color-rojo-fuego);">📍 Grapevine, TX</h3>
+            <p style="font-size: 1.2rem; margin-bottom: 0.5rem; font-weight: bold; color: #333;">815 S Main St</p>
+            <p style="color: #666; margin-bottom: 1.5rem; font-size: 1rem;">Grapevine, TX 76051</p>
            
-            <div style="border-top: 2px dashed #ccc; margin: 2rem 0; padding-top: 1.5rem;">
-                <p style="font-weight: bold; color: #333; font-size: 1.2rem;">🕒 Open Hours:</p>
-                <p style="color: #555; font-size: 1.1rem; margin: 0.5rem 0;">Sun - Thu: 11:00 AM - 9:00 PM</p>
-                <p style="color: #555; font-size: 1.1rem;">Fri - Sat: 11:00 AM - 11:00 PM</p>
+            <div style="border-top: 2px dashed #ccc; margin: 1.5rem 0; padding-top: 1.2rem;">
+                <p style="font-weight: bold; color: #333; font-size: 1.1rem;">🕒 Open Hours:</p>
+                <p style="color: #555; font-size: 1rem; margin: 0.4rem 0;">Sun - Thu: 11:00 AM - 9:00 PM</p>
+                <p style="color: #555; font-size: 1rem;">Fri - Sat: 11:00 AM - 11:00 PM</p>
             </div>
 
-            <a href="https://www.google.com/maps/search/?api=1&query=Sup+Dog+Hot+Dogs+815+S+Main+St+Grapevine+TX+76051" target="_blank" class="btn" style="background: #1a1a1a; margin-top: 1rem;">
+            <a href="https://www.google.com/maps/search/?api=1&query=Sup+Dog+Hot+Dogs+815+S+Main+St+Grapevine+TX+76051" target="_blank" class="btn" style="background: #1a1a1a; margin-top: 1rem; width: 100%; max-width: 250px;">
                 Get Directions <i class="fas fa-map-marker-alt"></i>
             </a>
         </div>
@@ -1946,31 +1414,50 @@
         <a href="tel:+11234567890" class="contact-phone">
             <i class="fas fa-phone-alt"></i> (123) 456-7890
         </a>
-        <p style="margin-top: 2rem; font-size: 1.2rem; color: var(--color-mostaza-suave);">
-            <i class="fas fa-info-circle"></i> For event cart reservations, visit our <a href="event-cart.html" style="color: var(--color-purpura-berry); font-weight: bold;">Event Cart Page</a>
+        <p style="margin-top: 1.5rem; font-size: 1rem; color: var(--color-mostaza-suave); padding: 0 1rem;">
+            <i class="fas fa-info-circle"></i> For event cart reservations, visit our 
+            <a href="event-cart.html" style="color: var(--color-purpura-berry); font-weight: bold;">Event Cart Page</a>
         </p>
     </section>
 
     <footer>
-        <p style="font-size: 1.1rem; margin-bottom: 1rem;">© 2023 SupDog Hot Dogs. All rights reserved.</p>
+        <p style="font-size: 1rem; margin-bottom: 1rem; color: #aaa;">© 2023 SupDog Hot Dogs. All rights reserved.</p>
         <div class="social-links">
-            <p style="font-size: 1.1rem;">Follow the flame:
+            <p style="font-size: 1rem;">
+                Follow:
                 <a href="https://www.instagram.com/supdogdfw?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">
                     Instagram
                 </a> | 
-                <a href="event-cart.html" style="color: var(--color-purpura-berry); font-weight: bold;">🎪 Event Cart</a> | 
+                <a href="event-cart.html" style="color: var(--color-purpura-berry); font-weight: bold;">Event Cart</a> | 
                 <a href="#menu">Menu</a>
             </p>
         </div>
-        <p style="margin-top: 1rem; font-size: 0.9rem; color: #999;">Event cart reservations require 2 weeks advance notice for themed decorations.</p>
+        <p style="margin-top: 1rem; font-size: 0.8rem; color: #777; padding: 0 1rem;">
+            Event cart reservations require 2 weeks advance notice for themed decorations.
+        </p>
     </footer>
 
     <script>
-        // Cart functionality
+        // Optimized for mobile performance
         class EventCart {
             constructor() {
                 this.items = JSON.parse(localStorage.getItem('supdogEventCart')) || [];
                 this.updateCartDisplay();
+                this.setupTouchEvents();
+            }
+
+            setupTouchEvents() {
+                // Prevent double-tap zoom on buttons
+                document.querySelectorAll('.btn, .add-to-cart-btn, .checkout-btn').forEach(btn => {
+                    btn.addEventListener('touchstart', function(e) {
+                        if (!this.classList.contains('touched')) {
+                            this.classList.add('touched');
+                            setTimeout(() => {
+                                this.classList.remove('touched');
+                            }, 300);
+                        }
+                    }, {passive: true});
+                });
             }
 
             addItem(name, price) {
@@ -1998,7 +1485,8 @@
             }
 
             updateQuantity(index, quantity) {
-                if (quantity <= 0) {
+                quantity = parseInt(quantity);
+                if (isNaN(quantity) || quantity <= 0) {
                     this.removeItem(index);
                 } else {
                     this.items[index].quantity = quantity;
@@ -2054,7 +1542,8 @@
                             <div class="item-quantity">
                                 <button class="quantity-btn" onclick="eventCart.decreaseQuantity(${index})">-</button>
                                 <input type="number" class="quantity-input" value="${item.quantity}" min="1" 
-                                       onchange="eventCart.updateQuantity(${index}, this.value)">
+                                       onchange="eventCart.updateQuantity(${index}, this.value)"
+                                       oninput="eventCart.updateQuantity(${index}, this.value)">
                                 <button class="quantity-btn" onclick="eventCart.increaseQuantity(${index})">+</button>
                                 <button class="remove-item" onclick="eventCart.removeItem(${index})">
                                     <i class="fas fa-trash"></i>
@@ -2085,23 +1574,33 @@
             }
 
             showNotification(message) {
+                // Remove existing notification
+                const existingNotification = document.querySelector('.cart-notification');
+                if (existingNotification) {
+                    existingNotification.remove();
+                }
+
                 // Create notification element
                 const notification = document.createElement('div');
+                notification.className = 'cart-notification';
                 notification.style.cssText = `
                     position: fixed;
-                    top: 100px;
-                    right: 30px;
+                    top: 80px;
+                    right: 50%;
+                    transform: translateX(50%);
                     background: linear-gradient(135deg, var(--color-purpura-berry), var(--color-rojo-fuego));
                     color: white;
-                    padding: 15px 25px;
+                    padding: 12px 20px;
                     border-radius: 10px;
                     z-index: 9999;
                     font-weight: bold;
-                    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-                    animation: slideInRight 0.5s ease-out;
+                    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+                    animation: fadeIn 0.3s ease-out;
                     display: flex;
                     align-items: center;
                     gap: 10px;
+                    max-width: 90%;
+                    text-align: center;
                 `;
                 
                 notification.innerHTML = `
@@ -2113,20 +1612,20 @@
                 
                 // Remove notification after 3 seconds
                 setTimeout(() => {
-                    notification.style.animation = 'slideInRight 0.5s ease-out reverse';
+                    notification.style.animation = 'fadeIn 0.3s ease-out reverse';
                     setTimeout(() => {
                         if (notification.parentNode) {
                             notification.parentNode.removeChild(notification);
                         }
-                    }, 500);
-                }, 3000);
+                    }, 300);
+                }, 2000);
             }
         }
 
         // Initialize cart
         const eventCart = new EventCart();
 
-        // Toggle Menu Function
+        // DOM Elements
         const menuBtn = document.getElementById('menuBtn');
         const sidebar = document.getElementById('sidebar');
         const overlay = document.getElementById('overlay');
@@ -2138,15 +1637,16 @@
         const checkoutBtn = document.getElementById('checkoutBtn');
         const bookEventBtn = document.getElementById('bookEventBtn');
         
+        // Toggle Menu Function
         function toggleMenu() {
             sidebar.classList.toggle('active');
             overlay.classList.toggle('active');
             const spans = menuBtn.querySelectorAll('span');
             
             if (sidebar.classList.contains('active')) {
-                spans[0].style.transform = 'rotate(45deg) translate(6px, 7px)';
+                spans[0].style.transform = 'rotate(45deg) translate(5px, 6px)';
                 spans[1].style.opacity = '0';
-                spans[2].style.transform = 'rotate(-45deg) translate(6px, -7px)';
+                spans[2].style.transform = 'rotate(-45deg) translate(5px, -6px)';
                 document.body.style.overflow = 'hidden';
             } else {
                 spans[0].style.transform = 'none'; 
@@ -2156,24 +1656,24 @@
             }
         }
         
+        // Toggle Cart Function
         function toggleCart() {
             eventCartModal.classList.toggle('active');
             overlay.classList.toggle('active');
             document.body.style.overflow = eventCartModal.classList.contains('active') ? 'hidden' : 'auto';
         }
         
+        // Event Listeners
         menuBtn.addEventListener('click', toggleMenu);
-        overlay.addEventListener('click', () => {
-            if (sidebar.classList.contains('active')) {
-                toggleMenu();
-            }
-            if (eventCartModal.classList.contains('active')) {
-                toggleCart();
-            }
-        });
-        
         cartBtn.addEventListener('click', toggleCart);
         closeCartBtn.addEventListener('click', toggleCart);
+        bookEventBtn.addEventListener('click', toggleCart);
+        
+        // Close overlays on click
+        overlay.addEventListener('click', () => {
+            if (sidebar.classList.contains('active')) toggleMenu();
+            if (eventCartModal.classList.contains('active')) toggleCart();
+        });
         
         // Add event listeners to all "Add to Event Cart" buttons
         document.querySelectorAll('.add-to-cart-btn').forEach(button => {
@@ -2181,6 +1681,15 @@
                 const itemName = this.getAttribute('data-item');
                 const itemPrice = this.getAttribute('data-price');
                 eventCart.addItem(itemName, itemPrice);
+            });
+            
+            // Add touch feedback
+            button.addEventListener('touchstart', function() {
+                this.style.transform = 'scale(0.95)';
+            });
+            
+            button.addEventListener('touchend', function() {
+                this.style.transform = '';
             });
         });
         
@@ -2193,24 +1702,23 @@
             toggleCart();
             setTimeout(() => {
                 window.location.href = 'event-cart.html';
-            }, 500);
+            }, 400);
         });
         
-        // Book event button
-        bookEventBtn.addEventListener('click', function() {
-            toggleCart();
-        });
-        
-        // Header scroll effect
+        // Scroll effects
+        let lastScrollTop = 0;
         window.addEventListener('scroll', function() {
-            if (window.scrollY > 100) {
+            const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+            
+            // Header scroll effect
+            if (currentScroll > 50) {
                 header.classList.add('scrolled');
             } else {
                 header.classList.remove('scrolled');
             }
             
             // Scroll to top button visibility
-            if (window.scrollY > 500) {
+            if (currentScroll > 300) {
                 scrollTopBtn.classList.add('visible');
             } else {
                 scrollTopBtn.classList.remove('visible');
@@ -2220,10 +1728,10 @@
             const menuCards = document.querySelectorAll('.menu-card');
             const sidesItems = document.querySelectorAll('.side-item');
             
+            const screenPosition = window.innerHeight / 1.1;
+            
             menuCards.forEach(card => {
                 const cardPosition = card.getBoundingClientRect().top;
-                const screenPosition = window.innerHeight / 1.2;
-                
                 if (cardPosition < screenPosition) {
                     card.classList.add('visible');
                 }
@@ -2231,21 +1739,27 @@
             
             sidesItems.forEach(item => {
                 const itemPosition = item.getBoundingClientRect().top;
-                const screenPosition = window.innerHeight / 1.2;
-                
                 if (itemPosition < screenPosition) {
                     item.classList.add('visible');
                 }
             });
-        });
-        
-        // Initialize menu cards and sides items as visible if they're already in view
-        document.addEventListener('DOMContentLoaded', function() {
-            const menuCards = document.querySelectorAll('.menu-card');
-            const sidesItems = document.querySelectorAll('.side-item');
             
+            lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+        }, {passive: true});
+        
+        // Initialize visibility on load
+        document.addEventListener('DOMContentLoaded', function() {
             // Trigger scroll event to check initial visibility
-            window.dispatchEvent(new Event('scroll'));
+            setTimeout(() => {
+                window.dispatchEvent(new Event('scroll'));
+            }, 100);
+            
+            // Add loading animation
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.3s ease';
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
         });
         
         // Scroll to top functionality
@@ -2256,27 +1770,25 @@
             });
         });
         
-        // Parallax effect for hero section
-        window.addEventListener('scroll', function() {
-            const scrolled = window.pageYOffset;
-            const hero = document.querySelector('.hero');
-            if (hero) {
-                hero.style.backgroundPosition = `center ${scrolled * 0.5}px`;
+        // Prevent zoom on double tap for iOS
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function(event) {
+            const now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
             }
-        });
+            lastTouchEnd = now;
+        }, false);
         
-        // Add animation to logo on hover
-        const logoText = document.querySelector('.logo-text');
-        if (logoText) {
-            logoText.addEventListener('mouseenter', function() {
-                this.style.animation = 'fireGlow 0.5s infinite alternate';
-            });
-            
-            logoText.addEventListener('mouseleave', function() {
-                this.style.animation = 'fireGlow 2s infinite alternate';
-            });
+        // Fix for iOS viewport height
+        function setVH() {
+            let vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
         }
+        
+        setVH();
+        window.addEventListener('resize', setVH);
+        window.addEventListener('orientationchange', setVH);
     </script>
 </body>
 </html>
-
