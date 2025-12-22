@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SupDog - Booking Confirmation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --color-rojo-fuego: #DB3606;
+            --color-amarillo-cheddar: #F8A814;
+            --color-purpura-berry: #BA6990;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+        }
+        
+        .confirmation-container {
+            max-width: 600px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 20px;
+            border: 3px solid var(--color-purpura-berry);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            backdrop-filter: blur(10px);
+        }
+        
+        .success-icon {
+            font-size: 5rem;
+            color: #4CAF50;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        h1 {
+            color: var(--color-amarillo-cheddar);
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 0px rgba(0,0,0,0.5);
+        }
+        
+        .booking-id {
+            background: linear-gradient(135deg, var(--color-purpura-berry) 0%, #9d5b85 100%);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin: 20px 0;
+            display: inline-block;
+            box-shadow: 0 5px 15px rgba(186, 105, 144, 0.4);
+        }
+        
+        .whatsapp-btn {
+            background: #25D366;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin: 20px 10px 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+        }
+        
+        .whatsapp-btn:hover {
+            background: #128C7E;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
+        }
+        
+        .instructions {
+            margin-top: 30px;
+            color: #ccc;
+            line-height: 1.6;
+            text-align: left;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid var(--color-amarillo-cheddar);
+        }
+        
+        .instructions h3 {
+            color: var(--color-amarillo-cheddar);
+            margin-top: 0;
+        }
+        
+        .back-btn {
+            margin-top: 30px;
+            color: var(--color-amarillo-cheddar);
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            padding: 12px 25px;
+            border: 2px solid var(--color-amarillo-cheddar);
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            background: rgba(248, 168, 20, 0.1);
+        }
+        
+        .back-btn:hover {
+            background: var(--color-amarillo-cheddar);
+            color: #000;
+            transform: translateY(-2px);
+        }
+        
+        .steps {
+            display: flex;
+            justify-content: space-between;
+            margin: 30px 0;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .step {
+            flex: 1;
+            min-width: 150px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 10px;
+            border-top: 3px solid var(--color-purpura-berry);
+        }
+        
+        .step-number {
+            background: var(--color-purpura-berry);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+            font-weight: bold;
+        }
+        
+        @media (max-width: 600px) {
+            .confirmation-container {
+                padding: 25px;
+                margin: 20px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .booking-id {
+                font-size: 1.4rem;
+                padding: 12px 20px;
+            }
+            
+            .steps {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="confirmation-container">
+        <div class="success-icon">🎉</div>
+        <h1>¡Reserva Enviada Exitosamente!</h1>
+        
+        <p>Tu reserva ha sido procesada correctamente. Pronto nos pondremos en contacto contigo para confirmar todos los detalles.</p>
+        
+        <div class="booking-id" id="bookingIdDisplay">
+            Cargando código...
+        </div>
+        
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <p>Se abrió WhatsApp automáticamente</p>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <p>Envía el mensaje al dueño</p>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <p>Espera confirmación en 24h</p>
+            </div>
+        </div>
+        
+        <p>Si WhatsApp no se abrió automáticamente, haz clic aquí:</p>
+        
+        <a href="#" class="whatsapp-btn" id="whatsappBtn">
+            <i class="fab fa-whatsapp"></i> Enviar por WhatsApp
+        </a>
+        
+        <div class="instructions">
+            <h3><i class="fas fa-info-circle"></i> ¿Qué sigue?</h3>
+            <p>1. El dueño recibirá tu mensaje por WhatsApp con todos los detalles</p>
+            <p>2. Te contactará en las próximas 24 horas para confirmar disponibilidad</p>
+            <p>3. Coordinarán los detalles finales y el pago</p>
+            <p>4. ¡Disfruta de tu evento con SupDog!</p>
+        </div>
+        
+        <a href="index.html" class="back-btn">
+            <i class="fas fa-home"></i> Volver al Menú Principal
+        </a>
+    </div>
+    
+    <script>
+        // Obtener la última reserva del localStorage
+        const lastBooking = JSON.parse(localStorage.getItem('supdogLastBooking')) || null;
+        
+        if (lastBooking) {
+            // Mostrar ID de reserva
+            document.getElementById('bookingIdDisplay').textContent = `Código: ${lastBooking.id}`;
+            
+            // ===========================================
+            // 🚨🚨🚨 IMPORTANTE: REEMPLAZA ESTE NÚMERO 🚨🚨🚨
+            // Mismo número que en event-cart.html
+            // ===========================================
+            const ownerWhatsappNumber = "584245489939"; // ← REEMPLAZA ESTE NÚMERO
+            
+            // Crear mensaje corto para WhatsApp
+            const whatsappMessage = `Hola SupDog, tengo una reserva con código ${lastBooking.id}. Por favor confirmen los detalles.`;
+            
+            // Configurar botón de WhatsApp
+            document.getElementById('whatsappBtn').href = `https://wa.me/${ownerWhatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+            
+            // Guardar en historial de reservas
+            let bookingHistory = JSON.parse(localStorage.getItem('supdogBookingHistory')) || [];
+            bookingHistory.push({
+                id: lastBooking.id,
+                date: new Date().toLocaleString(),
+                status: 'pending'
+            });
+            localStorage.setItem('supdogBookingHistory', JSON.stringify(bookingHistory));
+        } else {
+            document.getElementById('bookingIdDisplay').textContent = "No se encontró la reserva";
+            document.getElementById('whatsappBtn').style.display = 'none';
+            
+            // Si no hay reserva, redirigir al carrito después de 3 segundos
+            setTimeout(() => {
+                window.location.href = 'event-cart.html';
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
