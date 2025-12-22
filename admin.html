@@ -443,12 +443,17 @@
         
         function contactCustomer(phone, bookingId, customerName) {
             // ===========================================
-            // 🚨🚨🚨 IMPORTANTE: REEMPLAZA ESTE NÚMERO 🚨🚨🚨
-            // Si quieres que el mensaje vaya desde TU WhatsApp
-            // Deja esto como está. Si quieres que vaya al cliente,
-            // cambia ownerNumber por `phone`
+            // TU NÚMERO DE VENEZUELA - PARA CONTACTAR AL CLIENTE
             // ===========================================
-            const ownerNumber = "584245489939"; // ← REEMPLAZA CON TU NÚMERO
+            const ownerNumber = "584245489939"; // ¡TU NÚMERO!
+            
+            // Formatear número del cliente (eliminar caracteres no numéricos)
+            let clientNumber = phone.replace(/\D/g, '');
+            
+            // Si el número no tiene código de país, asumir que es de Venezuela
+            if (clientNumber.length === 10) {
+                clientNumber = '58' + clientNumber;
+            }
             
             const message = `Hola ${customerName}, soy de SupDog. Hablamos respecto a tu reserva ${bookingId}. ¿Podemos coordinar los detalles?`;
             const whatsappUrl = `https://wa.me/${ownerNumber}?text=${encodeURIComponent(message)}`;
