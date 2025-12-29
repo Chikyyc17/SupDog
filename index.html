@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SupDog - Hot Dogs Store</title>
+    <title>SupDog - Hot Dogs & Nachos</title>
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -17,7 +17,6 @@
             --color-fondo-oscuro: #0f0f0f;
             --color-texto-claro: #ffffff;
             --color-gris-claro: #e0e0e0;
-            --color-producto-bg: #1a1a1a;
         }
 
         * { 
@@ -68,11 +67,6 @@
         @keyframes fireGlow {
             0%, 100% { text-shadow: 0 0 3px var(--color-rojo-fuego), 0 0 6px var(--color-rojo-fuego); }
             50% { text-shadow: 0 0 10px var(--color-rojo-fuego), 0 0 15px var(--color-rojo-fuego); }
-        }
-
-        @keyframes slideIn {
-            from { transform: translateX(-20px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
         }
 
         /* --- HEADER MOBILE OPTIMIZED --- */
@@ -268,386 +262,195 @@
             visibility: visible; 
         }
 
-        /* --- PRODUCT STORE STYLES (NEW) --- */
-        .product-store-title {
-            font-size: 3rem;
-            color: var(--color-amarillo-cheddar);
-            text-align: center;
-            margin: 4rem 0 1rem;
-            text-shadow: 2px 2px 0px var(--color-rojo-fuego);
-            animation: fadeIn 1s ease-out;
-        }
-
-        .product-store-subtitle {
-            text-align: center;
-            color: var(--color-gris-claro);
-            margin-bottom: 3rem;
-            font-size: 1.2rem;
-            padding: 0 1rem;
-            animation: fadeIn 1s ease-out 0.3s both;
-        }
-
-        .store-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2.5rem;
-            padding: 0 1.5rem 4rem;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .product-card {
-            background: var(--color-producto-bg);
-            border-radius: 16px;
-            overflow: hidden;
-            border: 2px solid transparent;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-            cursor: pointer;
-            animation: fadeIn 0.8s ease-out forwards;
-            opacity: 0;
-            transform: translateY(20px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-            height: 100%;
+        /* --- EVENT CART MODAL MOBILE --- */
+        .event-cart-modal {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100vh;
+            background: var(--color-fondo-oscuro);
+            z-index: 2000;
+            transform: translateX(100%);
+            transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
             display: flex;
             flex-direction: column;
-        }
-
-        .product-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--color-amarillo-cheddar);
-            box-shadow: 0 15px 30px rgba(248, 168, 20, 0.2);
-        }
-
-        .product-card:hover .product-image {
-            transform: scale(1.05);
-        }
-
-        .product-image-container {
-            width: 100%;
-            height: 250px;
             overflow: hidden;
+        }
+
+        .event-cart-modal.active {
+            transform: translateX(0);
+        }
+
+        .cart-header {
+            padding: 1.5rem;
+            background: linear-gradient(135deg, rgba(186, 105, 144, 0.2) 0%, rgba(219, 54, 6, 0.1) 100%);
+            border-bottom: 2px solid var(--color-purpura-berry);
             position: relative;
+            padding-top: 3rem;
         }
 
-        .product-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-            background: linear-gradient(45deg, #2a2a2a, #333);
+        .cart-header h2 {
+            color: var(--color-amarillo-cheddar);
+            font-size: 2rem;
+            text-align: center;
+            text-shadow: 1px 1px 0px var(--color-purpura-berry);
         }
 
-        .product-badge {
+        .close-cart {
             position: absolute;
             top: 15px;
             right: 15px;
-            background: linear-gradient(135deg, var(--color-rojo-fuego) 0%, #c42f04 100%);
+            background: none;
+            border: none;
             color: white;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            z-index: 2;
-            box-shadow: 0 3px 10px rgba(219, 54, 6, 0.3);
+            font-size: 1.3rem;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
         }
 
-        .product-info {
-            padding: 1.5rem;
-            flex-grow: 1;
+        .cart-items {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .cart-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 0.8rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
             display: flex;
             flex-direction: column;
+            gap: 0.8rem;
         }
 
-        .product-title {
-            font-size: 1.8rem;
+        .item-info h4 {
             color: white;
-            margin-bottom: 0.8rem;
-            font-family: 'Bangers', cursive;
-            line-height: 1.2;
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
         }
 
-        .product-description {
-            color: #aaa;
-            font-size: 0.95rem;
-            margin-bottom: 1.2rem;
-            flex-grow: 1;
-            line-height: 1.5;
+        .item-price {
+            color: var(--color-amarillo-cheddar);
+            font-weight: bold;
+            font-size: 1rem;
         }
 
-        .product-price-section {
+        .item-quantity {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            justify-content: space-between;
+        }
+
+        .quantity-btn {
+            background: var(--color-purpura-berry);
+            border: none;
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+        }
+
+        .quantity-input {
+            width: 60px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 8px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .remove-item {
+            background: none;
+            border: none;
+            color: #ff6b6b;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            padding: 8px;
+        }
+
+        .cart-footer {
+            padding: 1.5rem;
+            background: linear-gradient(135deg, rgba(186, 105, 144, 0.2) 0%, rgba(219, 54, 6, 0.1) 100%);
+            border-top: 2px solid var(--color-purpura-berry);
+            padding-bottom: 2rem;
+        }
+
+        .cart-total {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-top: auto;
-            border-top: 1px solid #333;
-            padding-top: 1.2rem;
+            margin-bottom: 1.2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        .product-price {
-            color: var(--color-amarillo-cheddar);
-            font-size: 1.8rem;
-            font-weight: bold;
-            font-family: 'Bangers', cursive;
-        }
-
-        .product-rating {
-            color: #FFD700;
-            font-size: 0.9rem;
-        }
-
-        .product-cta {
-            display: block;
-            width: 100%;
-            padding: 12px;
-            background: linear-gradient(135deg, var(--color-purpura-berry) 0%, #9d5b85 100%);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-align: center;
-            text-decoration: none;
-            margin-top: 1rem;
-        }
-
-        .product-cta:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(186, 105, 144, 0.4);
-        }
-
-        /* --- PRODUCT DETAILS MODAL --- */
-        .product-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background: rgba(0, 0, 0, 0.95);
-            z-index: 2000;
-            display: none;
-            justify-content: center;
-            align-items: center;
-            padding: 1rem;
-            overflow-y: auto;
-        }
-
-        .product-modal.active {
-            display: flex;
-            animation: fadeIn 0.3s ease-out;
-        }
-
-        .modal-content {
-            background: var(--color-producto-bg);
-            border-radius: 20px;
-            max-width: 900px;
-            width: 100%;
-            max-height: 90vh;
-            overflow-y: auto;
-            position: relative;
-            border: 3px solid var(--color-amarillo-cheddar);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-        }
-
-        .close-modal {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: var(--color-rojo-fuego);
-            color: white;
-            border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            z-index: 10;
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-        }
-
-        .close-modal:hover {
-            transform: rotate(90deg) scale(1.1);
-            background: var(--color-amarillo-cheddar);
-        }
-
-        .modal-body {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 2rem;
-            padding: 2rem;
-        }
-
-        @media (min-width: 768px) {
-            .modal-body {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
-        .modal-image-container {
-            border-radius: 12px;
-            overflow: hidden;
-            height: 300px;
-        }
-
-        .modal-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .modal-details {
-            padding: 1rem 0;
-        }
-
-        .modal-title {
-            font-size: 2.5rem;
-            color: var(--color-amarillo-cheddar);
-            margin-bottom: 1rem;
-            font-family: 'Bangers', cursive;
-        }
-
-        .modal-rating {
-            color: #FFD700;
-            margin-bottom: 1rem;
-            font-size: 1.1rem;
-        }
-
-        .modal-price {
-            font-size: 2.2rem;
-            color: white;
-            margin-bottom: 1.5rem;
-            font-family: 'Bangers', cursive;
-        }
-
-        .modal-description {
-            color: #ccc;
-            line-height: 1.6;
-            margin-bottom: 2rem;
-            font-size: 1.1rem;
-        }
-
-        .modal-ingredients {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 1.5rem;
-            border-radius: 12px;
-            margin-bottom: 2rem;
-        }
-
-        .modal-ingredients h4 {
-            color: var(--color-amarillo-cheddar);
-            margin-bottom: 1rem;
-            font-size: 1.3rem;
-        }
-
-        .ingredients-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            gap: 0.5rem;
-            list-style: none;
-        }
-
-        .ingredients-list li {
-            padding: 0.5rem;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 6px;
-            text-align: center;
-            font-size: 0.9rem;
-        }
-
-        .modal-actions {
-            display: flex;
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-
-        .btn-buy {
-            flex: 1;
-            padding: 1rem;
-            background: linear-gradient(135deg, var(--color-rojo-fuego) 0%, #c42f04 100%);
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        .btn-buy:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(219, 54, 6, 0.4);
-        }
-
-        .btn-cart {
-            flex: 1;
-            padding: 1rem;
-            background: linear-gradient(135deg, var(--color-purpura-berry) 0%, #9d5b85 100%);
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        .btn-cart:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(186, 105, 144, 0.4);
-        }
-
-        /* --- STORE FILTERS --- */
-        .store-filters {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin: 2rem auto;
-            padding: 0 1.5rem;
-            flex-wrap: wrap;
-            max-width: 1200px;
-        }
-
-        .filter-btn {
-            padding: 10px 20px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 2px solid transparent;
+        .total-label {
             color: var(--color-gris-claro);
-            border-radius: 50px;
+            font-size: 1.1rem;
+        }
+
+        .total-amount {
+            color: var(--color-amarillo-cheddar);
+            font-size: 1.5rem;
+            font-weight: bold;
+            font-family: 'Bangers', cursive;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--color-purpura-berry) 0%, #9d5b85 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: bold;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-family: 'Poppins', sans-serif;
-            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
 
-        .filter-btn.active {
-            background: var(--color-rojo-fuego);
-            color: white;
-            border-color: var(--color-amarillo-cheddar);
+        .empty-cart {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: var(--color-gris-claro);
         }
 
-        .filter-btn:hover {
-            transform: translateY(-2px);
-            border-color: var(--color-amarillo-cheddar);
+        .empty-cart i {
+            font-size: 2.5rem;
+            color: var(--color-purpura-berry);
+            margin-bottom: 1rem;
+            display: block;
         }
 
         /* --- HERO SECTION MOBILE --- */
         .hero {
-            height: 70vh;
-            min-height: 500px;
+            height: 100vh;
+            min-height: 600px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -655,9 +458,10 @@
             padding: 0 1.5rem;
             background: 
                 linear-gradient(135deg, rgba(15,15,15,0.9) 0%, rgba(219,54,6,0.4) 100%),
-                url('https://images.unsplash.com/photo-1550547660-d9450f859349?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80');
+                url('https://source.unsplash.com/800x1200/?hotdog,streetfood');
             background-size: cover;
             background-position: center;
+            background-attachment: scroll;
             position: relative;
             overflow: hidden;
             text-align: center;
@@ -667,12 +471,12 @@
         .hero-content {
             position: relative;
             z-index: 2;
-            max-width: 800px;
+            max-width: 500px;
             width: 100%;
         }
 
         .hero h1 {
-            font-size: 4rem;
+            font-size: 3.5rem;
             line-height: 1;
             margin-bottom: 1.2rem;
             text-shadow: 3px 3px 0px var(--color-rojo-fuego);
@@ -686,7 +490,7 @@
         }
         
         .hero p {
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             margin-bottom: 2rem;
             color: var(--color-gris-claro);
             animation: fadeIn 1.5s ease-out 0.3s both;
@@ -722,62 +526,331 @@
             box-shadow: 0 6px 16px rgba(219, 54, 6, 0.4);
         }
 
-        /* --- PRODUCT CATEGORIES --- */
-        .category-section {
-            padding: 4rem 1.5rem;
-            text-align: center;
-            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+        /* --- MENU SECTION MOBILE --- */
+        .menu-section { 
+            padding: 4rem 1.5rem; 
+            text-align: center; 
+            background-color: var(--color-fondo-oscuro);
+            position: relative;
         }
 
-        .category-title {
-            font-size: 2.5rem;
-            color: var(--color-amarillo-cheddar);
+        .promo-banner {
+            background: linear-gradient(135deg, var(--color-rojo-fuego) 0%, #c42f04 100%);
+            color: white;
+            padding: 1rem;
             margin-bottom: 3rem;
+            font-family: 'Bangers', cursive;
+            font-size: 1.4rem;
+            letter-spacing: 1px;
+            transform: rotate(-0.5deg);
+            box-shadow: 0 5px 15px rgba(219,54,6,0.4);
+            animation: pulse 2s infinite, fadeIn 1s ease-out;
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        .section-title { 
+            font-size: 2.5rem; 
+            color: var(--color-amarillo-cheddar); 
+            margin-bottom: 1.2rem; 
+            display: inline-block;
+            position: relative;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 3px;
+            background-color: var(--color-rojo-fuego);
+            border-radius: 2px;
+        }
+
+        .section-subtitle { 
+            font-size: 1.1rem; 
+            color: #ccc; 
+            margin-bottom: 3rem; 
+            font-style: italic;
+            animation: fadeIn 1s ease-out 0.3s both;
+            padding: 0 0.5rem;
+        }
+       
+        .menu-grid { 
+            display: grid; 
+            grid-template-columns: 1fr; 
+            gap: 2rem; 
+            max-width: 400px;
+            margin: 0 auto;
+        }
+       
+        .menu-card {
+            background: linear-gradient(145deg, #2a2a2a, #222);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 2px solid transparent;
+            transition: all 0.4s ease;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.8s ease-out forwards;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+        
+        .menu-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .menu-card:hover { 
+            transform: translateY(-8px); 
+            border-color: var(--color-amarillo-cheddar); 
+            box-shadow: 0 12px 24px rgba(0,0,0,0.3);
+        }
+
+        /* Reemplazo de card-image-placeholder */
+        .card-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-bottom: 1px solid #333;
+            background-color: #444; /* fallback si la imagen no carga */
+        }
+       
+        .card-content { 
+            padding: 1.5rem; 
+            text-align: left; 
+            flex-grow: 1; 
+            display: flex; 
+            flex-direction: column; 
+            position: relative;
+            z-index: 2;
+        }
+        
+        .card-content h3 { 
+            font-size: 1.5rem; 
+            color: white; 
+            margin-bottom: 0.6rem; 
+            transition: color 0.3s ease;
+        }
+        
+        .menu-card:hover .card-content h3 {
+            color: var(--color-amarillo-cheddar);
+        }
+        
+        .card-content p { 
+            color: #aaa; 
+            font-size: 0.95rem; 
+            margin-bottom: 1.2rem; 
+            flex-grow: 1; 
+            line-height: 1.5;
+        }
+       
+        .price-row { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            margin-top: auto; 
+            border-top: 1px solid #444; 
+            padding-top: 1.2rem; 
+            gap: 1rem;
+        }
+        
+        .price { 
+            color: var(--color-amarillo-cheddar); 
+            font-weight: bold; 
+            font-size: 1.4rem; 
+            font-family: 'Bangers', cursive;
+            text-shadow: 1px 1px 0px rgba(0,0,0,0.5);
+            white-space: nowrap;
+        }
+
+        .add-to-cart-btn {
+            padding: 10px 18px;
+            font-size: 0.95rem;
+            animation: none;
+            background: linear-gradient(135deg, var(--color-purpura-berry) 0%, #9d5b85 100%);
+            min-width: 120px;
+        }
+
+        .combo-badge {
+            background: linear-gradient(135deg, var(--color-purpura-berry) 0%, #9d5b85 100%);
+            color: white;
+            font-size: 0.8rem;
+            padding: 4px 10px;
+            border-radius: 15px;
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            font-weight: bold;
+            z-index: 3;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+            animation: float 3s infinite ease-in-out;
+        }
+
+        /* Sides & Extras Mobile */
+        .sides-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 1.2rem;
+            margin-top: 3rem;
+        }
+        
+        .side-item {
+            background: linear-gradient(145deg, #222, #1a1a1a);
+            padding: 1.2rem;
+            border-radius: 12px;
+            border: 1px solid #333;
+            text-align: left;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(15px);
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        
+        .side-item:hover {
+            transform: translateY(-5px);
+            border-color: var(--color-mostaza-suave);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+        
+        .side-item h4 { 
+            color: var(--color-mostaza-suave); 
+            margin-bottom: 0.4rem; 
+            font-size: 1.1rem;
+        }
+        
+        .side-price { 
+            float: right; 
+            color: white; 
+            font-weight: bold; 
+            font-size: 1.2rem;
             font-family: 'Bangers', cursive;
         }
 
-        .categories-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
+        /* Pretzel Special */
+        .pretzel-special {
+            background: linear-gradient(145deg, #2a2a2a, #222);
+            border: 2px solid transparent;
+            padding: 2rem 1.5rem;
+            border-radius: 16px;
+            margin-bottom: 2.5rem;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: fadeIn 1s ease-out;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        /* --- EVENT PROMO MOBILE --- */
+        .event-promo-section {
+            padding: 4rem 1.5rem;
+            background: linear-gradient(135deg, #1a0f0f 0%, #2a1a1a 100%);
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .event-promo-container {
+            position: relative;
+            z-index: 2;
+            max-width: 500px;
             margin: 0 auto;
         }
 
-        .category-card {
-            background: var(--color-producto-bg);
-            border-radius: 16px;
-            padding: 2rem;
-            text-align: center;
-            border: 2px solid transparent;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .category-card:hover {
-            border-color: var(--color-amarillo-cheddar);
-            transform: translateY(-5px);
-        }
-
-        .category-icon {
-            font-size: 3rem;
-            color: var(--color-amarillo-cheddar);
-            margin-bottom: 1rem;
-        }
-
-        .category-name {
-            font-size: 1.5rem;
+        .promo-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--color-purpura-berry) 0%, #9d5b85 100%);
             color: white;
-            margin-bottom: 0.5rem;
-            font-family: 'Bangers', cursive;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            animation: pulse 2s infinite;
+            box-shadow: 0 4px 12px rgba(186, 105, 144, 0.3);
         }
 
-        .category-count {
-            color: #aaa;
-            font-size: 0.9rem;
+        .event-promo-title {
+            font-size: 2.2rem;
+            color: var(--color-amarillo-cheddar);
+            margin-bottom: 1.2rem;
+            text-shadow: 1px 1px 0px var(--color-rojo-fuego);
+            animation: fadeIn 1s ease-out;
         }
 
-        /* --- LOCATION SECTION --- */
+        .event-promo-subtitle {
+            font-size: 1.2rem;
+            color: #ddd;
+            margin-bottom: 2rem;
+            animation: fadeIn 1s ease-out 0.3s both;
+            padding: 0 0.5rem;
+        }
+
+        .event-promo-card {
+            background: linear-gradient(145deg, #2a2a2a, #222);
+            border-radius: 16px;
+            padding: 2rem 1.5rem;
+            border: 2px solid var(--color-purpura-berry);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.3);
+            margin-bottom: 2.5rem;
+            animation: fadeIn 1s ease-out 0.5s both;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .promo-features {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .promo-feature {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.2rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--color-amarillo-cheddar);
+            transition: all 0.3s ease;
+            text-align: left;
+        }
+
+        .promo-feature i {
+            font-size: 2rem;
+            color: var(--color-amarillo-cheddar);
+            margin-bottom: 0.8rem;
+        }
+
+        .promo-feature h4 {
+            font-size: 1.3rem;
+            color: white;
+            margin-bottom: 0.4rem;
+        }
+
+        .promo-feature p {
+            color: #ccc;
+            font-size: 0.95rem;
+        }
+
+        .event-cta-btn {
+            background: linear-gradient(135deg, var(--color-purpura-berry) 0%, #9d5b85 100%);
+            padding: 16px 32px;
+            font-size: 1.2rem;
+            margin-top: 1rem;
+            animation: pulse 2s infinite;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        /* --- LOCATION MAP STYLES --- */
         .location-section { 
             padding: 4rem 1.5rem; 
             background: linear-gradient(135deg, var(--color-mostaza-suave) 0%, #d1984a 100%);
@@ -941,19 +1014,37 @@
             }
             
             .hero h1 {
-                font-size: 4.5rem;
+                font-size: 4rem;
             }
             
-            .product-store-title {
-                font-size: 3.5rem;
+            .logo-text {
+                font-size: 2.5rem;
             }
             
-            .store-grid {
+            .menu-grid {
+                grid-template-columns: repeat(2, 1fr);
+                max-width: 800px;
+                gap: 2.5rem;
+            }
+            
+            .sides-grid {
+                grid-template-columns: repeat(3, 1fr);
+                max-width: 800px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            
+            .promo-features {
                 grid-template-columns: repeat(2, 1fr);
             }
             
-            .modal-body {
-                padding: 3rem;
+            .event-promo-card {
+                padding: 2.5rem;
+            }
+            
+            .location-box {
+                max-width: 500px;
+                padding: 2.5rem;
             }
         }
 
@@ -963,16 +1054,22 @@
                 background-attachment: fixed;
             }
             
-            .store-grid {
+            .menu-grid {
                 grid-template-columns: repeat(3, 1fr);
+                max-width: 1200px;
             }
             
-            .product-modal {
-                padding: 2rem;
-            }
-            
-            .modal-content {
+            .sides-grid {
+                grid-template-columns: repeat(4, 1fr);
                 max-width: 1000px;
+            }
+            
+            .promo-features {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .event-cart-modal {
+                width: 450px;
             }
         }
 
@@ -982,7 +1079,7 @@
                 background-attachment: scroll;
             }
             
-            .btn, .btn-buy, .btn-cart {
+            .btn, .add-to-cart-btn, .checkout-btn {
                 min-height: 44px;
             }
             
@@ -995,19 +1092,6 @@
 <body>
     <div class="overlay" id="overlay"></div>
     
-    <!-- Product Details Modal -->
-    <div class="product-modal" id="productModal">
-        <div class="modal-content">
-            <button class="close-modal" id="closeProductModal">
-                <i class="fas fa-times"></i>
-            </button>
-            <div class="modal-body" id="modalBody">
-                <!-- Dynamic content will be inserted here -->
-            </div>
-        </div>
-    </div>
-
-    <!-- Event Cart Modal -->
     <div class="event-cart-modal" id="eventCartModal">
         <div class="cart-header">
             <button class="close-cart" id="closeCartBtn">
@@ -1018,7 +1102,7 @@
         </div>
         
         <div class="cart-items" id="cartItemsContainer">
-        </div>
+            </div>
         
         <div class="cart-footer">
             <div class="cart-total">
@@ -1051,8 +1135,8 @@
     <nav class="sidebar" id="sidebar" aria-label="Main navigation">
         <ul>
             <li><a href="#home" class="menu-link" onclick="toggleMenu()">HOME</a></li>
-            <li><a href="#products" class="menu-link" onclick="toggleMenu()">PRODUCTS</a></li>
-            <li><a href="#categories" class="menu-link" onclick="toggleMenu()">CATEGORIES</a></li>
+            <li><a href="#menu" class="menu-link" onclick="toggleMenu()">MENU</a></li>
+            <li><a href="#sides" class="menu-link" onclick="toggleMenu()">SIDES</a></li>
             <li><a href="#location" class="menu-link" onclick="toggleMenu()">LOCATION</a></li>
             
             <li class="event-link-special" onclick="toggleMenu()">
@@ -1076,53 +1160,242 @@
 
     <section id="home" class="hero">
         <div class="hero-content">
-            <h1 class="animate-load">HOT DOG <span>STORE</span></h1>
-            <p class="animate-load delay-1">Browse our collection like you're shopping for sneakers!<br>Each hot dog is a unique product with details.</p>
-            <a href="#products" class="btn animate-load delay-2">
-                SHOP NOW <i class="fas fa-shopping-bag"></i>
+            <h1 class="animate-load">SUP<span>DOG</span></h1>
+            <p class="animate-load delay-1">Wurst Behavior. Best Flavor. <br> Only in Grapevine, TX.</p>
+            <a href="#menu" class="btn animate-load delay-2">
+                VIEW MENU <i class="fas fa-fire"></i>
             </a>
         </div>
     </section>
 
-    <section id="products" class="menu-section">
-        <h2 class="product-store-title">HOT DOG COLLECTION</h2>
-        <p class="product-store-subtitle">Click on any product to view details, just like shopping for clothes or shoes!</p>
-
-        <div class="store-filters" id="storeFilters">
-            <button class="filter-btn active" data-filter="all">ALL PRODUCTS</button>
-            <button class="filter-btn" data-filter="bestseller">BEST SELLERS</button>
-            <button class="filter-btn" data-filter="spicy">SPICY</button>
-            <button class="filter-btn" data-filter="classic">CLASSIC</button>
-            <button class="filter-btn" data-filter="vegetarian">VEGETARIAN</button>
+    <section id="menu" class="menu-section">
+        <div class="promo-banner">
+            ★ EVERY THURSDAY: BOGO (BUY ONE GET ONE) ★
         </div>
+
+        <h2 class="section-title">The Dogs</h2>
+        <p class="section-subtitle">Make it a Combo: Chips & Drink Included for $14.50!</p>
        
-        <div class="store-grid" id="storeGrid">
-            <!-- Products will be dynamically inserted here -->
+        <div class="menu-grid">
+            <div class="menu-card">
+                <span class="combo-badge">BEST SELLER</span>
+                <img src="mexican-dog.png" alt="Mexican Dog" class="card-image">
+                <div class="card-content">
+                    <h3>Mexican Dog</h3>
+                    <p>Beef Frank, Pico De Gallo, Jalapeños, Ketchup & Mustard.</p>
+                    <div class="price-row">
+                        <span class="price">$12.50</span>
+                        <button class="btn add-to-cart-btn" data-item="Mexican Dog" data-price="12.50">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-card">
+                <img src="german-dog.png" alt="German Dog" class="card-image">
+                <div class="card-content">
+                    <h3>German Dog</h3>
+                    <p>Bratwurst, Grilled Onions, Sauerkraut, Spicy German Mustard.</p>
+                    <div class="price-row">
+                        <span class="price">$12.50</span>
+                        <button class="btn add-to-cart-btn" data-item="German Dog" data-price="12.50">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-card">
+                <img src="hawaiian-dog.png" alt="Hawaiian Dog" class="card-image">
+                <div class="card-content">
+                    <h3>Hawaiian Dog</h3>
+                    <p>Jalapeño Sausage, Pineapple, Grilled Onions, Bacon Bites.</p>
+                    <div class="price-row">
+                        <span class="price">$12.50</span>
+                        <button class="btn add-to-cart-btn" data-item="Hawaiian Dog" data-price="12.50">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-card">
+                <span class="combo-badge">CHICAGO STYLE</span>
+                <img src="chicago-dog.png" alt="Chicago Dog" class="card-image">
+                <div class="card-content">
+                    <h3>Chicago Dog</h3>
+                    <p>Beef Frank, Poppy Seeds Bun, Yellow Mustard, Neon Green Pickles.</p>
+                    <div class="price-row">
+                        <span class="price">$12.50</span>
+                        <button class="btn add-to-cart-btn" data-item="Chicago Dog" data-price="12.50">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-card">
+                <span class="combo-badge">MOST POPULAR</span>
+                <img src="trainwreck.png" alt="Trainwreck" class="card-image">
+                <div class="card-content">
+                    <h3>Trainwreck</h3>
+                    <p>Beef Frank, Chipotle Sauce, Mayo, Mustard, Onions, Fries, Parmesan, Bacon.</p>
+                    <div class="price-row">
+                        <span class="price">$12.50</span>
+                        <button class="btn add-to-cart-btn" data-item="Trainwreck" data-price="12.50">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-card">
+                <img src="tijuana-dog.png" alt="Tijuana Dog" class="card-image">
+                <div class="card-content">
+                    <h3>Tijuana Dog</h3>
+                    <p>Jalapeño Sausage, Corn, Chipotle Sauce, Parmesan Cheese, Cilantro.</p>
+                    <div class="price-row">
+                        <span class="price">$12.50</span>
+                        <button class="btn add-to-cart-btn" data-item="Tijuana Dog" data-price="12.50">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+           
+            <div class="menu-card">
+                <span class="combo-badge">FOR KIDS</span>
+                <img src="kids-dog.png" alt="Kids Dog" class="card-image">
+                <div class="card-content">
+                    <h3>Kids Dog</h3>
+                    <p>Beef Frank, Ketchup, Jello, Kids Juice.</p>
+                    <div class="price-row">
+                        <span class="price">$10.50</span>
+                        <button class="btn add-to-cart-btn" data-item="Kids Dog" data-price="10.50">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+           
+            <div class="menu-card">
+                <img src="all-naked.png" alt="All Naked" class="card-image">
+                <div class="card-content">
+                    <h3>All Naked</h3>
+                    <p>Bunless. Bratwurst, Grilled Onions, Sauerkraut.</p>
+                    <div class="price-row">
+                        <span class="price">$12.50</span>
+                        <button class="btn add-to-cart-btn" data-item="All Naked" data-price="12.50">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="sides" style="margin-top: 4rem;">
+            <h2 class="section-title">Extras & Drinks</h2>
+           
+            <div class="pretzel-special">
+                <h3 style="color: var(--color-amarillo-cheddar); font-size: 1.8rem; margin-bottom: 0.5rem;">SOFT PRETZELS</h3>
+                <p style="color: #ddd; font-size: 1rem; margin-bottom: 1rem;">Honey Mustard & Beer Cheese Sauce included.</p>
+                <div style="font-size: 2.2rem; color: white; font-weight: bold; margin: 1.2rem 0; text-shadow: 1px 1px 0px rgba(0,0,0,0.5);">$9.50</div>
+                <button class="btn add-to-cart-btn" data-item="Soft Pretzels" data-price="9.50" style="margin-top: 0.5rem; width: 100%; max-width: 200px;">
+                    Add to Event Cart
+                </button>
+            </div>
+
+            <div class="sides-grid">
+                <div class="side-item">
+                    <h4>Creamy Slaw</h4> 
+                    <span class="side-price">$4.00</span>
+                    <button class="btn add-to-cart-btn" data-item="Creamy Slaw" data-price="4.00" style="margin-top: 10px; padding: 8px 12px; font-size: 0.9rem; width: 100%;">
+                        Add to Cart
+                    </button>
+                </div>
+                <div class="side-item">
+                    <h4>Chips Bag</h4> 
+                    <span class="side-price">$3.00</span>
+                    <button class="btn add-to-cart-btn" data-item="Chips Bag" data-price="3.00" style="margin-top: 10px; padding: 8px 12px; font-size: 0.9rem; width: 100%;">
+                        Add to Cart
+                    </button>
+                </div>
+                <div class="side-item">
+                    <h4>Corn Salad</h4> 
+                    <span class="side-price">$4.00</span>
+                    <button class="btn add-to-cart-btn" data-item="Corn Salad" data-price="4.00" style="margin-top: 10px; padding: 8px 12px; font-size: 0.9rem; width: 100%;">
+                        Add to Cart
+                    </button>
+                </div>
+                <div class="side-item">
+                    <h4>Potato Salad</h4> 
+                    <span class="side-price">$4.00</span>
+                    <button class="btn add-to-cart-btn" data-item="Potato Salad" data-price="4.00" style="margin-top: 10px; padding: 8px 12px; font-size: 0.9rem; width: 100%;">
+                        Add to Cart
+                    </button>
+                </div>
+                <div class="side-item">
+                    <h4>Baked Beans</h4> 
+                    <span class="side-price">$6.00</span>
+                    <button class="btn add-to-cart-btn" data-item="Baked Beans" data-price="6.00" style="margin-top: 10px; padding: 8px 12px; font-size: 0.9rem; width: 100%;">
+                        Add to Cart
+                    </button>
+                </div>
+                <div class="side-item" style="border-color: var(--color-rojo-fuego); background: linear-gradient(145deg, #2a1a1a, #221010);">
+                    <h4 style="color: white;">DRINKS (Cans/Water)</h4>
+                    <span class="side-price" style="color: var(--color-amarillo-cheddar);">$2.25</span>
+                    <button class="btn add-to-cart-btn" data-item="Drinks (Cans/Water)" data-price="2.25" style="margin-top: 10px; padding: 8px 12px; font-size: 0.9rem; width: 100%; background: var(--color-rojo-fuego);">
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
         </div>
     </section>
 
-    <section id="categories" class="category-section">
-        <h2 class="category-title">SHOP BY CATEGORY</h2>
-        <div class="categories-grid">
-            <div class="category-card" data-category="bestseller">
-                <div class="category-icon">🏆</div>
-                <h3 class="category-name">Best Sellers</h3>
-                <p class="category-count">4 products</p>
+    <section class="event-promo-section" id="eventPromo">
+        <div class="event-promo-container">
+            <div class="promo-badge">
+                🎉 NEW SERVICE! 🎉
             </div>
-            <div class="category-card" data-category="spicy">
-                <div class="category-icon">🔥</div>
-                <h3 class="category-name">Spicy Dogs</h3>
-                <p class="category-count">3 products</p>
-            </div>
-            <div class="category-card" data-category="classic">
-                <div class="category-icon">👑</div>
-                <h3 class="category-name">Classics</h3>
-                <p class="category-count">5 products</p>
-            </div>
-            <div class="category-card" data-category="vegetarian">
-                <div class="category-icon">🌱</div>
-                <h3 class="category-name">Vegetarian Options</h3>
-                <p class="category-count">2 products</p>
+            
+            <h2 class="event-promo-title">THEMED EVENT CART</h2>
+            <p class="event-promo-subtitle">Bring SupDog to your next celebration! Perfect for birthdays, parties, and special events.</p>
+            
+            <div class="event-promo-card">
+                <div class="promo-features">
+                    <div class="promo-feature">
+                        <i class="fas fa-birthday-cake"></i>
+                        <h4>Custom Themes</h4>
+                        <p>Decorated according to your party theme</p>
+                    </div>
+                    
+                    <div class="promo-feature">
+                        <i class="fas fa-calendar-alt"></i>
+                        <h4>Book in Advance</h4>
+                        <p>Reserve 2 weeks ahead for planning</p>
+                    </div>
+                    
+                    <div class="promo-feature">
+                        <i class="fas fa-hotdog"></i>
+                        <h4>Full Menu</h4>
+                        <p>All your favorite SupDog creations</p>
+                    </div>
+                    
+                    <div class="promo-feature">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <h4>We Come to You</h4>
+                        <p>Set up at your venue in Grapevine area</p>
+                    </div>
+                </div>
+                
+                <button class="btn event-cta-btn" id="bookEventBtn">
+                    🎪 BOOK EVENT <i class="fas fa-arrow-right"></i>
+                </button>
+                
+                <p style="margin-top: 1.5rem; color: #ccc; font-size: 0.9rem;">
+                    <i class="fas fa-exclamation-circle"></i> Limited availability - Book early!
+                </p>
             </div>
         </div>
     </section>
@@ -1176,7 +1449,7 @@
                     Instagram
                 </a> | 
                 <a href="event-cart.html" style="color: var(--color-purpura-berry); font-weight: bold;">Event Cart</a> | 
-                <a href="#products">Products</a>
+                <a href="#menu">Menu</a>
             </p>
         </div>
         <p style="margin-top: 1rem; font-size: 0.8rem; color: #777; padding: 0 1rem;">
@@ -1185,111 +1458,26 @@
     </footer>
 
     <script>
-        // Product Data - Like a real e-commerce store
-        const products = [
-            {
-                id: 1,
-                name: "Mexican Dog",
-                price: "$12.50",
-                image: "https://images.unsplash.com/photo-1563903530908-afdd155d057a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-                description: "Our signature Mexican-style hot dog with bold flavors and fresh ingredients.",
-                longDescription: "The Mexican Dog is our most popular item! Featuring a premium beef frank topped with fresh Pico de Gallo, sliced jalapeños for a kick, and our special blend of ketchup and mustard. Perfect for those who love bold, authentic Mexican flavors.",
-                ingredients: ["Beef Frank", "Pico de Gallo", "Jalapeños", "Ketchup", "Mustard", "Fresh Cilantro"],
-                category: ["bestseller", "spicy"],
-                rating: "★★★★★",
-                badge: "BEST SELLER"
-            },
-            {
-                id: 2,
-                name: "German Dog",
-                price: "$12.50",
-                image: "https://images.unsplash.com/photo-1572801488387-97f5941e6692?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-                description: "Authentic German Bratwurst with traditional sauerkraut and mustard.",
-                longDescription: "Experience authentic German street food with our German Dog. Made with genuine Bratwurst sausage, topped with tangy sauerkraut, grilled onions, and imported spicy German mustard. A traditional favorite that never disappoints.",
-                ingredients: ["Bratwurst", "Sauerkraut", "Grilled Onions", "German Mustard", "Caraway Seeds"],
-                category: ["classic"],
-                rating: "★★★★☆",
-                badge: "CLASSIC"
-            },
-            {
-                id: 3,
-                name: "Hawaiian Dog",
-                price: "$12.50",
-                image: "https://images.unsplash.com/photo-1563241527-3002c59e4e54?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-                description: "Tropical twist with pineapple and bacon on a jalapeño sausage.",
-                longDescription: "Take a trip to the islands with our Hawaiian Dog! Featuring a spicy jalapeño sausage topped with sweet grilled pineapple, caramelized onions, and crispy bacon bites. The perfect balance of sweet, savory, and spicy.",
-                ingredients: ["Jalapeño Sausage", "Grilled Pineapple", "Bacon", "Caramelized Onions", "Teriyaki Glaze"],
-                category: ["spicy"],
-                rating: "★★★★★",
-                badge: "ISLAND STYLE"
-            },
-            {
-                id: 4,
-                name: "Chicago Dog",
-                price: "$12.50",
-                image: "https://images.unsplash.com/photo-1550547660-d9450f859349?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-                description: "Authentic Chicago-style with all the traditional toppings.",
-                longDescription: "True to its Chicago roots! This dog comes on a poppy seed bun with yellow mustard, neon green pickle relish, fresh tomatoes, pickled sport peppers, a dash of celery salt, and topped with a pickle spear. No ketchup allowed!",
-                ingredients: ["Beef Frank", "Poppy Seed Bun", "Yellow Mustard", "Pickle Relish", "Tomatoes", "Sport Peppers"],
-                category: ["classic", "bestseller"],
-                rating: "★★★★★",
-                badge: "CHICAGO STYLE"
-            },
-            {
-                id: 5,
-                name: "Trainwreck",
-                price: "$12.50",
-                image: "https://images.unsplash.com/photo-1550304943-4f24f54ddde9?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-                description: "Loaded with fries, bacon, cheese, and all the good stuff.",
-                longDescription: "The ultimate loaded hot dog! We start with a beef frank, add crispy fries, smoky bacon, melted parmesan cheese, chipotle mayo, mustard, and onions. It's messy, delicious, and worth every napkin.",
-                ingredients: ["Beef Frank", "French Fries", "Bacon", "Parmesan", "Chipotle Sauce", "Mayo", "Onions"],
-                category: ["bestseller"],
-                rating: "★★★★★",
-                badge: "MOST POPULAR"
-            },
-            {
-                id: 6,
-                name: "Tijuana Dog",
-                price: "$12.50",
-                image: "https://images.unsplash.com/photo-1580310444003-5da0e5d0d8b7?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-                description: "Mexican street-style with corn, chipotle, and cilantro.",
-                longDescription: "Inspired by the street carts of Tijuana! A jalapeño sausage loaded with sweet corn, creamy chipotle sauce, fresh cilantro, and grated parmesan cheese. Street food authenticity at its finest.",
-                ingredients: ["Jalapeño Sausage", "Corn", "Chipotle Sauce", "Parmesan", "Cilantro", "Lime"],
-                category: ["spicy", "vegetarian"],
-                rating: "★★★★☆",
-                badge: "STREET STYLE"
-            },
-            {
-                id: 7,
-                name: "Kids Dog",
-                price: "$10.50",
-                image: "https://images.unsplash.com/photo-1580310444025-574c5c4c7a08?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-                description: "Simple and kid-friendly with classic toppings.",
-                longDescription: "Perfect for our little customers! A smaller beef frank with just ketchup, served with a side of jello and kids juice. Simple, delicious, and designed with kids in mind.",
-                ingredients: ["Beef Frank", "Ketchup", "Soft Bun", "Jello", "Juice Box"],
-                category: ["classic"],
-                rating: "★★★★☆",
-                badge: "FOR KIDS"
-            },
-            {
-                id: 8,
-                name: "All Naked",
-                price: "$12.50",
-                image: "https://images.unsplash.com/photo-1548340748-5e48e8eaa4ec?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-                description: "Bunless option with bratwurst, onions, and sauerkraut.",
-                longDescription: "For those watching their carbs or preferring a bunless option. Our premium bratwurst served with grilled onions and sauerkraut, all without the bun. Just as delicious, just less bread!",
-                ingredients: ["Bratwurst", "Grilled Onions", "Sauerkraut", "Mustard"],
-                category: ["vegetarian"],
-                rating: "★★★★☆",
-                badge: "BUNLESS"
-            }
-        ];
-
-        // Initialize cart
+        // Optimized for mobile performance
         class EventCart {
             constructor() {
                 this.items = JSON.parse(localStorage.getItem('supdogEventCart')) || [];
                 this.updateCartDisplay();
+                this.setupTouchEvents();
+            }
+
+            setupTouchEvents() {
+                // Prevent double-tap zoom on buttons
+                document.querySelectorAll('.btn, .add-to-cart-btn, .checkout-btn').forEach(btn => {
+                    btn.addEventListener('touchstart', function(e) {
+                        if (!this.classList.contains('touched')) {
+                            this.classList.add('touched');
+                            setTimeout(() => {
+                                this.classList.remove('touched');
+                            }, 300);
+                        }
+                    }, {passive: true});
+                });
             }
 
             addItem(name, price) {
@@ -1300,7 +1488,7 @@
                 } else {
                     this.items.push({
                         name: name,
-                        price: parseFloat(price.replace('$', '')),
+                        price: parseFloat(price),
                         quantity: 1
                     });
                 }
@@ -1352,8 +1540,10 @@
                 const cartItemsContainer = document.getElementById('cartItemsContainer');
                 const cartTotal = document.getElementById('cartTotal');
                 
+                // Update cart count
                 cartCount.textContent = this.getItemCount();
                 
+                // Update cart items display
                 if (this.items.length === 0) {
                     cartItemsContainer.innerHTML = `
                         <div class="empty-cart">
@@ -1372,7 +1562,8 @@
                             <div class="item-quantity">
                                 <button class="quantity-btn" onclick="eventCart.decreaseQuantity(${index})">-</button>
                                 <input type="number" class="quantity-input" value="${item.quantity}" min="1" 
-                                       onchange="eventCart.updateQuantity(${index}, this.value)">
+                                       onchange="eventCart.updateQuantity(${index}, this.value)"
+                                       oninput="eventCart.updateQuantity(${index}, this.value)">
                                 <button class="quantity-btn" onclick="eventCart.increaseQuantity(${index})">+</button>
                                 <button class="remove-item" onclick="eventCart.removeItem(${index})">
                                     <i class="fas fa-trash"></i>
@@ -1382,6 +1573,7 @@
                     `).join('');
                 }
                 
+                // Update total
                 cartTotal.textContent = `$${this.getTotal().toFixed(2)}`;
             }
 
@@ -1402,8 +1594,35 @@
             }
 
             showNotification(message) {
+                // Remove existing notification
+                const existingNotification = document.querySelector('.cart-notification');
+                if (existingNotification) {
+                    existingNotification.remove();
+                }
+
+                // Create notification element
                 const notification = document.createElement('div');
                 notification.className = 'cart-notification';
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 80px;
+                    right: 50%;
+                    transform: translateX(50%);
+                    background: linear-gradient(135deg, var(--color-purpura-berry), var(--color-rojo-fuego));
+                    color: white;
+                    padding: 12px 20px;
+                    border-radius: 10px;
+                    z-index: 9999;
+                    font-weight: bold;
+                    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+                    animation: fadeIn 0.3s ease-out;
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    max-width: 90%;
+                    text-align: center;
+                `;
+                
                 notification.innerHTML = `
                     <i class="fas fa-check-circle"></i>
                     <span>${message}</span>
@@ -1411,12 +1630,19 @@
                 
                 document.body.appendChild(notification);
                 
+                // Remove notification after 3 seconds
                 setTimeout(() => {
-                    notification.remove();
+                    notification.style.animation = 'fadeIn 0.3s ease-out reverse';
+                    setTimeout(() => {
+                        if (notification.parentNode) {
+                            notification.parentNode.removeChild(notification);
+                        }
+                    }, 300);
                 }, 2000);
             }
         }
 
+        // Initialize cart
         const eventCart = new EventCart();
 
         // DOM Elements
@@ -1429,144 +1655,8 @@
         const closeCartBtn = document.getElementById('closeCartBtn');
         const eventCartModal = document.getElementById('eventCartModal');
         const checkoutBtn = document.getElementById('checkoutBtn');
-        const storeGrid = document.getElementById('storeGrid');
-        const productModal = document.getElementById('productModal');
-        const closeProductModal = document.getElementById('closeProductModal');
-        const modalBody = document.getElementById('modalBody');
-        const filterButtons = document.querySelectorAll('.filter-btn');
-        const categoryCards = document.querySelectorAll('.category-card');
-
-        // Initialize product display
-        function renderProducts(filter = 'all') {
-            storeGrid.innerHTML = '';
-            
-            const filteredProducts = filter === 'all' 
-                ? products 
-                : products.filter(product => product.category.includes(filter));
-            
-            filteredProducts.forEach((product, index) => {
-                const productCard = document.createElement('div');
-                productCard.className = 'product-card';
-                productCard.style.animationDelay = `${index * 0.1}s`;
-                productCard.innerHTML = `
-                    ${product.badge ? `<span class="product-badge">${product.badge}</span>` : ''}
-                    <div class="product-image-container">
-                        <img src="${product.image}" alt="${product.name}" class="product-image">
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-title">${product.name}</h3>
-                        <p class="product-description">${product.description}</p>
-                        <div class="product-price-section">
-                            <div>
-                                <div class="product-price">${product.price}</div>
-                                <div class="product-rating">${product.rating}</div>
-                            </div>
-                        </div>
-                        <button class="product-cta" data-id="${product.id}">
-                            <i class="fas fa-eye"></i> VIEW DETAILS
-                        </button>
-                    </div>
-                `;
-                
-                productCard.addEventListener('click', (e) => {
-                    if (!e.target.closest('.product-cta')) {
-                        openProductModal(product);
-                    }
-                });
-                
-                const viewBtn = productCard.querySelector('.product-cta');
-                viewBtn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    openProductModal(product);
-                });
-                
-                storeGrid.appendChild(productCard);
-            });
-            
-            // Animate cards
-            setTimeout(() => {
-                document.querySelectorAll('.product-card').forEach(card => {
-                    card.classList.add('visible');
-                });
-            }, 100);
-        }
-
-        // Open product modal
-        function openProductModal(product) {
-            modalBody.innerHTML = `
-                <div class="modal-image-container">
-                    <img src="${product.image}" alt="${product.name}" class="modal-image">
-                </div>
-                <div class="modal-details">
-                    <h2 class="modal-title">${product.name}</h2>
-                    <div class="modal-rating">${product.rating}</div>
-                    <div class="modal-price">${product.price}</div>
-                    <p class="modal-description">${product.longDescription}</p>
-                    
-                    <div class="modal-ingredients">
-                        <h4>Ingredients</h4>
-                        <ul class="ingredients-list">
-                            ${product.ingredients.map(ing => `<li>${ing}</li>`).join('')}
-                        </ul>
-                    </div>
-                    
-                    <div class="modal-actions">
-                        <button class="btn-buy" onclick="addToCartAndClose('${product.name}', '${product.price}')">
-                            <i class="fas fa-shopping-cart"></i> Add to Event Cart
-                        </button>
-                        <button class="btn-cart" onclick="addToCart('${product.name}', '${product.price}')">
-                            <i class="fas fa-plus"></i> Quick Add
-                        </button>
-                    </div>
-                </div>
-            `;
-            
-            productModal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        // Add to cart functions
-        function addToCart(name, price) {
-            eventCart.addItem(name, price);
-        }
-
-        function addToCartAndClose(name, price) {
-            eventCart.addItem(name, price);
-            closeProductModalFunc();
-        }
-
-        function closeProductModalFunc() {
-            productModal.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
-
-        // Filter products
-        filterButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                filterButtons.forEach(btn => btn.classList.remove('active'));
-                button.classList.add('active');
-                renderProducts(button.dataset.filter);
-            });
-        });
-
-        // Category cards
-        categoryCards.forEach(card => {
-            card.addEventListener('click', () => {
-                const category = card.dataset.category;
-                filterButtons.forEach(btn => btn.classList.remove('active'));
-                filterButtons.forEach(btn => {
-                    if (btn.dataset.filter === category) {
-                        btn.classList.add('active');
-                    }
-                });
-                renderProducts(category);
-                window.scrollTo({
-                    top: document.getElementById('products').offsetTop - 70,
-                    behavior: 'smooth'
-                });
-            });
-        });
-
+        const bookEventBtn = document.getElementById('bookEventBtn');
+        
         // Toggle Menu Function
         function toggleMenu() {
             sidebar.classList.toggle('active');
@@ -1597,7 +1687,7 @@
         menuBtn.addEventListener('click', toggleMenu);
         cartBtn.addEventListener('click', toggleCart);
         closeCartBtn.addEventListener('click', toggleCart);
-        closeProductModal.addEventListener('click', closeProductModalFunc);
+        bookEventBtn.addEventListener('click', toggleCart);
         
         // Close overlays on click
         overlay.addEventListener('click', () => {
@@ -1605,11 +1695,22 @@
             if (eventCartModal.classList.contains('active')) toggleCart();
         });
         
-        // Close product modal on overlay click
-        productModal.addEventListener('click', (e) => {
-            if (e.target === productModal) {
-                closeProductModalFunc();
-            }
+        // Add event listeners to all "Add to Event Cart" buttons
+        document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const itemName = this.getAttribute('data-item');
+                const itemPrice = this.getAttribute('data-price');
+                eventCart.addItem(itemName, itemPrice);
+            });
+            
+            // Add touch feedback
+            button.addEventListener('touchstart', function() {
+                this.style.transform = 'scale(0.95)';
+            });
+            
+            button.addEventListener('touchend', function() {
+                this.style.transform = '';
+            });
         });
         
         // Checkout button
@@ -1625,30 +1726,55 @@
         });
         
         // Scroll effects
+        let lastScrollTop = 0;
         window.addEventListener('scroll', function() {
             const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
             
+            // Header scroll effect
             if (currentScroll > 50) {
                 header.classList.add('scrolled');
             } else {
                 header.classList.remove('scrolled');
             }
             
+            // Scroll to top button visibility
             if (currentScroll > 300) {
                 scrollTopBtn.classList.add('visible');
             } else {
                 scrollTopBtn.classList.remove('visible');
             }
+            
+            // Animate menu cards on scroll
+            const menuCards = document.querySelectorAll('.menu-card');
+            const sidesItems = document.querySelectorAll('.side-item');
+            
+            const screenPosition = window.innerHeight / 1.1;
+            
+            menuCards.forEach(card => {
+                const cardPosition = card.getBoundingClientRect().top;
+                if (cardPosition < screenPosition) {
+                    card.classList.add('visible');
+                }
+            });
+            
+            sidesItems.forEach(item => {
+                const itemPosition = item.getBoundingClientRect().top;
+                if (itemPosition < screenPosition) {
+                    item.classList.add('visible');
+                }
+            });
+            
+            lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
         }, {passive: true});
         
-        // Initialize on load
+        // Initialize visibility on load
         document.addEventListener('DOMContentLoaded', function() {
-            renderProducts();
-            
+            // Trigger scroll event to check initial visibility
             setTimeout(() => {
                 window.dispatchEvent(new Event('scroll'));
             }, 100);
             
+            // Add loading animation
             document.body.style.opacity = '0';
             document.body.style.transition = 'opacity 0.3s ease';
             setTimeout(() => {
@@ -1663,40 +1789,26 @@
                 behavior: 'smooth'
             });
         });
-
-        // Close modal with Escape key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && productModal.classList.contains('active')) {
-                closeProductModalFunc();
+        
+        // Prevent zoom on double tap for iOS
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function(event) {
+            const now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
             }
-        });
-
-        // Add CSS for notification
-        const style = document.createElement('style');
-        style.textContent = `
-            .cart-notification {
-                position: fixed;
-                top: 80px;
-                right: 20px;
-                background: linear-gradient(135deg, var(--color-purpura-berry), var(--color-rojo-fuego));
-                color: white;
-                padding: 12px 20px;
-                border-radius: 10px;
-                z-index: 9999;
-                font-weight: bold;
-                box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-                animation: slideIn 0.3s ease-out;
-                display: flex;
-                align-items: center;
-                gap: 10px;
-            }
-            
-            .product-card.visible {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        `;
-        document.head.appendChild(style);
+            lastTouchEnd = now;
+        }, false);
+        
+        // Fix for iOS viewport height
+        function setVH() {
+            let vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+        }
+        
+        setVH();
+        window.addEventListener('resize', setVH);
+        window.addEventListener('orientationchange', setVH);
     </script>
 </body>
 </html>
