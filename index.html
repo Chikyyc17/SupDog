@@ -69,6 +69,67 @@
             50% { text-shadow: 0 0 10px var(--color-rojo-fuego), 0 0 15px var(--color-rojo-fuego); }
         }
 
+        /* --- VIDEO HERO SECTION --- */
+        .video-hero {
+            position: relative;
+            height: 100vh;
+            min-height: 600px;
+            overflow: hidden;
+            margin-top: 70px;
+        }
+
+        .video-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .video-background {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.7);
+        }
+
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, 
+                rgba(15, 15, 15, 0.8) 0%, 
+                rgba(219, 54, 6, 0.3) 100%);
+            z-index: 2;
+        }
+
+        .video-hero-content {
+            position: relative;
+            z-index: 3;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 1.5rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Para cuando el video no carga */
+        .no-video .video-container {
+            background: 
+                linear-gradient(135deg, rgba(15,15,15,0.9) 0%, rgba(219,54,6,0.4) 100%),
+                url('https://images.unsplash.com/photo-1550547660-d9450f859349?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+
         /* --- HEADER MOBILE OPTIMIZED --- */
         header {
             display: flex;
@@ -447,56 +508,6 @@
             display: block;
         }
 
-        /* --- HERO SECTION MOBILE --- */
-        .hero {
-            height: 100vh;
-            min-height: 600px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 0 1.5rem;
-            background: 
-                linear-gradient(135deg, rgba(15,15,15,0.9) 0%, rgba(219,54,6,0.4) 100%),
-                url('https://source.unsplash.com/800x1200/?hotdog,streetfood');
-            background-size: cover;
-            background-position: center;
-            background-attachment: scroll;
-            position: relative;
-            overflow: hidden;
-            text-align: center;
-            margin-top: 70px;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            max-width: 500px;
-            width: 100%;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            line-height: 1;
-            margin-bottom: 1.2rem;
-            text-shadow: 3px 3px 0px var(--color-rojo-fuego);
-            animation: fadeIn 1.2s ease-out, fireGlow 3s infinite alternate;
-        }
-        
-        .hero h1 span {
-            color: var(--color-amarillo-cheddar);
-            display: inline-block;
-            animation: float 3s ease-in-out infinite;
-        }
-        
-        .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            color: var(--color-gris-claro);
-            animation: fadeIn 1.5s ease-out 0.3s both;
-            padding: 0 1rem;
-        }
-
         /* --- BUTTONS MOBILE --- */
         .btn {
             display: inline-flex;
@@ -535,19 +546,131 @@
         }
 
         .promo-banner {
-            background: linear-gradient(135deg, var(--color-rojo-fuego) 0%, #c42f04 100%);
-            color: white;
-            padding: 1rem;
+            background: #000;
+            color: var(--color-amarillo-cheddar);
+            padding: 1.2rem 0;
             margin-bottom: 3rem;
             font-family: 'Bangers', cursive;
-            font-size: 1.4rem;
-            letter-spacing: 1px;
-            transform: rotate(-0.5deg);
-            box-shadow: 0 5px 15px rgba(219,54,6,0.4);
-            animation: pulse 2s infinite, fadeIn 1s ease-out;
+            font-size: 1.6rem;
+            letter-spacing: 2px;
             position: relative;
             overflow: hidden;
-            border-radius: 8px;
+            border-top: 3px solid var(--color-rojo-fuego);
+            border-bottom: 3px solid var(--color-rojo-fuego);
+            animation: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.8);
+        }
+
+        /* Contenedor del texto que se desplaza */
+        .scrolling-container {
+            display: flex;
+            white-space: nowrap;
+            animation: scrollText 20s linear infinite;
+            position: relative;
+            z-index: 2;
+            padding: 0.5rem 0;
+        }
+
+        /* Texto individual que se repite */
+        .scrolling-text {
+            display: inline-block;
+            padding: 0 40px;
+            position: relative;
+            text-shadow: 0 0 8px var(--color-amarillo-cheddar), 
+                         0 0 16px var(--color-rojo-fuego);
+        }
+
+        /* Estrellas separadoras */
+        .scrolling-text::before,
+        .scrolling-text::after {
+            content: '✦';
+            color: var(--color-rojo-fuego);
+            margin: 0 25px;
+            animation: twinkle 1.5s infinite alternate;
+        }
+
+        /* Efecto de brillo LED */
+        .promo-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                rgba(219, 54, 6, 0.2) 50%, 
+                transparent 100%);
+            animation: ledGlow 3s linear infinite;
+            z-index: 1;
+        }
+
+        /* Línea de puntos LED */
+        .promo-banner::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: repeating-linear-gradient(
+                90deg,
+                transparent,
+                transparent 12px,
+                rgba(219, 54, 6, 0.6) 12px,
+                rgba(219, 54, 6, 0.6) 15px
+            );
+            transform: translateY(-50%);
+            z-index: 1;
+            opacity: 0.7;
+        }
+
+        /* Animación de desplazamiento del texto */
+        @keyframes scrollText {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* Animación del brillo LED */
+        @keyframes ledGlow {
+            0% {
+                opacity: 0.2;
+                transform: translateX(-100%);
+            }
+            50% {
+                opacity: 0.8;
+            }
+            100% {
+                opacity: 0.2;
+                transform: translateX(100%);
+            }
+        }
+
+        /* Animación de las estrellas */
+        @keyframes twinkle {
+            0% {
+                opacity: 0.4;
+                transform: scale(0.8);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1.2);
+                text-shadow: 0 0 12px var(--color-amarillo-cheddar);
+            }
+        }
+
+        /* Efecto al pasar el cursor */
+        .promo-banner:hover .scrolling-container {
+            animation-play-state: paused;
+        }
+
+        .promo-banner:hover::before {
+            animation-duration: 1s;
+            opacity: 0.8;
         }
 
         .section-title { 
@@ -1013,7 +1136,7 @@
                 font-size: 17px;
             }
             
-            .hero h1 {
+            .video-hero h1 {
                 font-size: 4rem;
             }
             
@@ -1050,7 +1173,7 @@
 
         /* --- MEDIA QUERIES FOR DESKTOP --- */
         @media (min-width: 1024px) {
-            .hero {
+            .video-hero {
                 background-attachment: fixed;
             }
             
@@ -1073,9 +1196,30 @@
             }
         }
 
+        /* Media query para dispositivos móviles */
+        @media (max-width: 768px) {
+            .video-hero {
+                min-height: 500px;
+            }
+            
+            .promo-banner {
+                font-size: 1.4rem;
+                padding: 1rem 0;
+            }
+            
+            .scrolling-text {
+                padding: 0 25px;
+            }
+            
+            .scrolling-text::before,
+            .scrolling-text::after {
+                margin: 0 15px;
+            }
+        }
+
         /* --- IOS SAFARI FIXES --- */
         @supports (-webkit-touch-callout: none) {
-            .hero {
+            .video-hero {
                 background-attachment: scroll;
             }
             
@@ -1158,8 +1302,18 @@
         </div>
     </nav>
 
-    <section id="home" class="hero">
-        <div class="hero-content">
+    <section id="home" class="video-hero">
+        <div class="video-container">
+            <!-- Video de fondo - Hot Dogs en la parrilla -->
+            <video class="video-background" autoplay muted loop playsinline id="heroVideo">
+                <source src="https://assets.mixkit.co/videos/preview/mixkit-sizzling-hot-dogs-on-a-grill-40156-large.mp4" type="video/mp4">
+                <source src="https://assets.mixkit.co/videos/preview/mixkit-sizzling-hot-dogs-on-a-grill-40156-large.mp4" type="video/webm">
+                Tu navegador no soporta videos HTML5.
+            </video>
+            <div class="video-overlay"></div>
+        </div>
+        
+        <div class="video-hero-content">
             <h1 class="animate-load">SUP<span>DOG</span></h1>
             <p class="animate-load delay-1">Wurst Behavior. Best Flavor. <br> Only in Grapevine, TX.</p>
             <a href="#menu" class="btn animate-load delay-2">
@@ -1170,7 +1324,10 @@
 
     <section id="menu" class="menu-section">
         <div class="promo-banner">
-            ★ EVERY THURSDAY: BOGO (BUY ONE GET ONE) ★
+            <div class="scrolling-container">
+                <div class="scrolling-text">★ EVERY THURSDAY: BOGO (BUY ONE GET ONE) ★</div>
+                <div class="scrolling-text">★ EVERY THURSDAY: BOGO (BUY ONE GET ONE) ★</div>
+            </div>
         </div>
 
         <h2 class="section-title">The Dogs</h2>
@@ -1780,6 +1937,12 @@
             setTimeout(() => {
                 document.body.style.opacity = '1';
             }, 100);
+            
+            // Video se reproduce automáticamente en todos los dispositivos
+            const heroVideo = document.getElementById('heroVideo');
+            heroVideo.play().catch(e => {
+                console.log("Video autoplay fallback:", e);
+            });
         });
         
         // Scroll to top functionality
