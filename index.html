@@ -464,7 +464,7 @@
             text-shadow: 2px 2px 0px var(--color-rojo-fuego);
         }
 
-        /* Cart Icon Mobile - AHORA DIRECTO A EVENT BOOKING */
+        /* Cart Icon Mobile - SOLO ICONO EN MÓVIL */
         .cart-icon-header {
             position: absolute;
             right: 5%;
@@ -476,8 +476,9 @@
             z-index: 1002;
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 6px;
-            padding: 8px 15px;
+            padding: 10px 15px;
             border-radius: 50px;
             color: white;
             font-family: 'Poppins', sans-serif;
@@ -485,10 +486,34 @@
             transition: all 0.3s ease;
             font-size: 0.9rem;
             box-shadow: 0 3px 10px rgba(186, 105, 144, 0.3);
+            text-decoration: none; /* Elimina el subrayado */
         }
 
-        .cart-count {
-            display: none; /* Ocultamos el contador */
+        /* En móviles: solo icono, sin texto */
+        @media (max-width: 767px) {
+            .cart-icon-header span {
+                display: none;
+            }
+            .cart-icon-header {
+                padding: 12px;
+                width: 44px;
+                height: 44px;
+            }
+        }
+
+        /* En escritorio: icono + texto sin subrayado */
+        @media (min-width: 768px) {
+            .cart-icon-header {
+                padding: 10px 20px;
+            }
+            .cart-icon-header span {
+                display: inline;
+            }
+        }
+
+        .cart-icon-header:hover {
+            transform: translateY(-50%) scale(1.05);
+            box-shadow: 0 5px 15px rgba(186, 105, 144, 0.4);
         }
 
         /* Hamburger Button Mobile */
@@ -1343,7 +1368,7 @@
         </div>
         <a href="event-cart.html" class="cart-icon-header">
             <i class="fas fa-calendar-alt"></i>
-            Book Event
+            <span>Book Event</span>
         </a>
     </header>
 
