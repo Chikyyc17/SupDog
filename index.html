@@ -19,120 +19,9 @@
             --color-gris-claro: #e0e0e0;
         }
 
-        * { 
-            margin: 0; 
-            padding: 0; 
-            box-sizing: border-box; 
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        html {
-            scroll-behavior: smooth;
-            scroll-padding-top: 70px;
-            font-size: 16px;
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--color-fondo-oscuro);
-            color: var(--color-texto-claro);
-            overflow-x: hidden;
-            line-height: 1.5;
-            -webkit-text-size-adjust: 100%;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        h1, h2, h3, .menu-link, .btn, .price-badge, .logo-text { 
-            font-family: 'Bangers', cursive; 
-            letter-spacing: 0.5px; 
-        }
-
-        /* --- ANIMATIONS --- */
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.03); }
-            100% { transform: scale(1); }
-        }
-
-        @keyframes fireGlow {
-            0%, 100% { text-shadow: 0 0 3px var(--color-rojo-fuego), 0 0 6px var(--color-rojo-fuego); }
-            50% { text-shadow: 0 0 10px var(--color-rojo-fuego), 0 0 15px var(--color-rojo-fuego); }
-        }
-
-        /* --- VIDEO HERO SECTION --- */
-        .video-hero {
-            position: relative;
-            height: 100vh;
-            min-height: 600px;
-            overflow: hidden;
-            margin-top: 70px;
-        }
-
-        .video-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-            overflow: hidden;
-        }
-
-        .video-background {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: brightness(0.7);
-        }
-
-        .video-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, 
-                rgba(15, 15, 15, 0.8) 0%, 
-                rgba(219, 54, 6, 0.3) 100%);
-            z-index: 2;
-        }
-
-        .video-hero-content {
-            position: relative;
-            z-index: 3;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 0 1.5rem;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        /* Para cuando el video no carga */
-        .no-video .video-container {
-            background: 
-                linear-gradient(135deg, rgba(15,15,15,0.9) 0%, rgba(219,54,6,0.4) 100%),
-                url('https://images.unsplash.com/photo-1550547660-d9450f859349?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80');
-            background-size: cover;
-            background-position: center;
-        }
-
-        /* --- OUR STORY SECTION --- */
+        /* --- OUR STORY SECTION - REDISEÑADA --- */
         .our-story-section {
-            padding: 4rem 1.5rem;
+            padding: 5rem 1.5rem;
             background: linear-gradient(135deg, #111 0%, #1a1a1a 100%);
             position: relative;
             overflow: hidden;
@@ -150,7 +39,7 @@
         }
 
         .story-container {
-            max-width: 800px;
+            max-width: 1200px;
             margin: 0 auto;
             position: relative;
             z-index: 3;
@@ -190,120 +79,151 @@
             animation: fadeIn 1s ease-out 0.3s both;
         }
 
-        .story-content {
+        /* Contenido principal centrado */
+        .story-main-content {
+            max-width: 900px;
+            margin: 0 auto 4rem;
+            animation: fadeIn 1s ease-out 0.6s both;
+        }
+
+        .story-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 3rem 2.5rem;
+            border-radius: 20px;
+            border-left: 4px solid var(--color-amarillo-cheddar);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .story-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(219, 54, 6, 0.2);
+        }
+
+        .story-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, 
+                rgba(219, 54, 6, 0.1) 0%, 
+                rgba(248, 168, 20, 0.05) 100%);
+            z-index: 1;
+        }
+
+        .story-card-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .story-intro {
+            font-size: 1.3rem;
+            color: var(--color-amarillo-cheddar);
+            font-weight: bold;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            text-align: center;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(248, 168, 20, 0.3);
+        }
+
+        .founder-profiles {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 2.5rem;
-            margin-bottom: 3rem;
+            gap: 3rem;
+            margin-top: 3rem;
         }
 
-        .story-text {
-            background: rgba(255, 255, 255, 0.05);
+        .founder-card {
+            background: rgba(255, 255, 255, 0.03);
             padding: 2rem;
-            border-radius: 16px;
+            border-radius: 15px;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .founder-card:hover {
+            border-color: var(--color-purpura-berry);
+            background: rgba(186, 105, 144, 0.05);
+        }
+
+        .founder-card.creative {
             border-left: 4px solid var(--color-amarillo-cheddar);
-            animation: fadeIn 1s ease-out 0.6s both;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-            transition: transform 0.3s ease;
         }
 
-        .story-text:hover {
-            transform: translateY(-5px);
+        .founder-card.driving {
+            border-left: 4px solid var(--color-purpura-berry);
         }
 
-        .story-text h3 {
-            color: var(--color-amarillo-cheddar);
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
+        .founder-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--color-rojo-fuego), var(--color-amarillo-cheddar));
+            border-radius: 50%;
             display: flex;
             align-items: center;
-            gap: 10px;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            color: white;
+            font-size: 1.8rem;
+            box-shadow: 0 5px 15px rgba(219, 54, 6, 0.3);
         }
 
-        .story-text h3 i {
-            color: var(--color-rojo-fuego);
+        .founder-card.driving .founder-icon {
+            background: linear-gradient(135deg, var(--color-purpura-berry), #9d5b85);
         }
 
-        .story-text p {
+        .founder-name {
+            font-size: 1.6rem;
+            color: white;
+            margin-bottom: 0.5rem;
+            font-family: 'Bangers', cursive;
+            letter-spacing: 1px;
+        }
+
+        .founder-role {
+            color: var(--color-gris-claro);
+            font-size: 1rem;
+            margin-bottom: 1.2rem;
+            font-style: italic;
+        }
+
+        .founder-description {
             color: #ddd;
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+
+        .story-conclusion {
+            margin-top: 3rem;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 15px;
+            border-top: 2px solid var(--color-mostaza-suave);
+            text-align: center;
+        }
+
+        .story-conclusion p {
+            color: #ddd;
+            font-size: 1.2rem;
             line-height: 1.8;
-            font-size: 1.1rem;
             margin-bottom: 1.5rem;
         }
 
-        .story-text p:last-child {
-            margin-bottom: 0;
-        }
-
-        .highlight {
+        .conclusion-highlight {
             color: var(--color-amarillo-cheddar);
             font-weight: bold;
-        }
-
-        .story-features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        .story-feature {
-            background: linear-gradient(145deg, #222, #1a1a1a);
-            padding: 1.5rem;
-            border-radius: 12px;
-            text-align: center;
-            border: 1px solid transparent;
-            transition: all 0.3s ease;
-            animation: fadeIn 1s ease-out 0.9s both;
-        }
-
-        .story-feature:hover {
-            border-color: var(--color-purpura-berry);
-            transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(186, 105, 144, 0.2);
-        }
-
-        .story-feature i {
-            font-size: 2.5rem;
-            color: var(--color-purpura-berry);
-            margin-bottom: 1rem;
-        }
-
-        .story-feature h4 {
-            color: white;
             font-size: 1.3rem;
-            margin-bottom: 0.5rem;
+            display: block;
+            margin-top: 1.5rem;
         }
 
-        .story-feature p {
-            color: #ccc;
-            font-size: 0.95rem;
-        }
-
-        .story-cta {
-            text-align: center;
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            animation: fadeIn 1s ease-out 1.2s both;
-        }
-
-        .story-cta h3 {
-            color: var(--color-mostaza-suave);
-            font-size: 2rem;
-            margin-bottom: 1rem;
-        }
-
-        .story-cta p {
-            color: #ddd;
-            font-size: 1.1rem;
-            margin-bottom: 2rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        /* Timeline effect */
+        /* Timeline effect simplificado */
         .timeline-dot {
             width: 20px;
             height: 20px;
@@ -325,1229 +245,103 @@
             bottom: -10px;
         }
 
-        /* Media Queries para tablets y desktop */
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0% { transform: translateX(-50%) scale(1); }
+            50% { transform: translateX(-50%) scale(1.1); }
+            100% { transform: translateX(-50%) scale(1); }
+        }
+
+        /* --- MEDIA QUERIES --- */
+        /* Tablets (768px y superior) */
         @media (min-width: 768px) {
-            .story-content {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .story-features {
-                grid-template-columns: repeat(2, 1fr);
+            .our-story-section {
+                padding: 6rem 2rem;
             }
             
             .story-title {
                 font-size: 3.5rem;
             }
-        }
-
-        @media (min-width: 1024px) {
-            .story-content {
-                grid-template-columns: repeat(3, 1fr);
-            }
             
-            .story-features {
-                grid-template-columns: repeat(4, 1fr);
-            }
-            
-            .our-story-section {
-                padding: 5rem 1.5rem;
-            }
-        }
-
-        /* --- HEADER MOBILE OPTIMIZED --- */
-        header {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 0.8rem 5%;
-            background-color: rgba(15, 15, 15, 0.98);
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-            border-bottom: 2px solid transparent;
-            height: 70px;
-            animation: none;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-        }
-
-        .logo-text {
-            font-family: 'Bangers', cursive;
-            font-size: 2.2rem;
-            line-height: 1;
-            text-transform: uppercase;
-            cursor: pointer;
-            color: white;
-            text-shadow: 2px 2px 0px var(--color-rojo-fuego);
-            transition: all 0.3s ease;
-            animation: fireGlow 2s infinite alternate;
-            position: relative;
-        }
-       
-        .logo-text span {
-            color: var(--color-amarillo-cheddar);
-            text-shadow: 2px 2px 0px var(--color-rojo-fuego);
-        }
-
-        /* Cart Icon Mobile */
-        .cart-icon-header {
-            position: absolute;
-            right: 5%;
-            top: 50%;
-            transform: translateY(-50%);
-            background: linear-gradient(135deg, var(--color-purpura-berry) 0%, #9d5b85 100%);
-            border: none;
-            cursor: pointer;
-            z-index: 1002;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            padding: 8px 15px;
-            border-radius: 50px;
-            color: white;
-            font-family: 'Poppins', sans-serif;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            font-size: 0.9rem;
-            box-shadow: 0 3px 10px rgba(186, 105, 144, 0.3);
-        }
-
-        .cart-count {
-            background-color: var(--color-rojo-fuego);
-            color: white;
-            border-radius: 50%;
-            width: 20px;
-            height: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.8rem;
-            animation: pulse 1.5s infinite;
-        }
-
-        /* Hamburger Button Mobile */
-        .hamburger-btn {
-            position: absolute;
-            left: 5%;
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
-            border: none;
-            cursor: pointer;
-            z-index: 1002;
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-            padding: 8px;
-            border-radius: 5px;
-            transition: all 0.3s ease;
-            width: 44px;
-            height: 44px;
-            justify-content: center;
-        }
-
-        .hamburger-btn span {
-            display: block;
-            width: 24px;
-            height: 3px;
-            background-color: var(--color-amarillo-cheddar);
-            border-radius: 3px;
-            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-        }
-
-        /* --- SIDEBAR MOBILE --- */
-        .sidebar {
-            position: fixed; 
-            top: 0; 
-            left: 0; 
-            width: 280px; 
-            height: 100vh;
-            background-color: rgba(15, 15, 15, 0.98);
-            border-right: 3px solid var(--color-amarillo-cheddar);
-            padding-top: 90px; 
-            padding-left: 2rem; 
-            z-index: 1001;
-            transform: translateX(-100%); 
-            transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
-            box-shadow: 5px 0 30px rgba(219, 54, 6, 0.3);
-            backdrop-filter: blur(10px);
-        }
-        
-        .sidebar.active { 
-            transform: translateX(0); 
-        }
-        
-        .sidebar ul { 
-            list-style: none; 
-        }
-        
-        .sidebar li { 
-            margin-bottom: 1.8rem; 
-            opacity: 0;
-            transform: translateX(-20px);
-            transition: all 0.4s ease;
-        }
-        
-        .sidebar.active li {
-            opacity: 1;
-            transform: translateX(0);
-        }
-        
-        .menu-link { 
-            text-decoration: none; 
-            font-size: 1.8rem; 
-            color: var(--color-texto-claro); 
-            transition: all 0.3s ease; 
-            display: inline-block;
-            position: relative;
-            padding: 4px 0;
-        }
-        
-        .menu-link:hover { 
-            color: var(--color-rojo-fuego); 
-            transform: translateX(10px);
-        }
-        
-        .event-link-special {
-            background: linear-gradient(135deg, 
-                rgba(186, 105, 144, 0.2) 0%, 
-                rgba(219, 54, 6, 0.2) 100%);
-            padding: 12px 16px;
-            border-radius: 12px;
-            margin-right: 15px;
-            border: 2px solid var(--color-purpura-berry);
-            animation: none;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .event-link-special .menu-link {
-            color: var(--color-amarillo-cheddar);
-            font-size: 2rem;
-            padding-right: 35px;
-        }
-
-        .overlay {
-            position: fixed; 
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 100%;
-            background: rgba(0, 0, 0, 0.85); 
-            backdrop-filter: blur(3px);
-            z-index: 1000; 
-            opacity: 0; 
-            visibility: hidden; 
-            transition: all 0.4s ease;
-        }
-        
-        .overlay.active { 
-            opacity: 1; 
-            visibility: visible; 
-        }
-
-        /* --- EVENT CART MODAL MOBILE --- */
-        .event-cart-modal {
-            position: fixed;
-            top: 0;
-            right: 0;
-            width: 100%;
-            height: 100vh;
-            background: var(--color-fondo-oscuro);
-            z-index: 2000;
-            transform: translateX(100%);
-            transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-        }
-
-        .event-cart-modal.active {
-            transform: translateX(0);
-        }
-
-        .cart-header {
-            padding: 1.5rem;
-            background: linear-gradient(135deg, rgba(186, 105, 144, 0.2) 0%, rgba(219, 54, 6, 0.1) 100%);
-            border-bottom: 2px solid var(--color-purpura-berry);
-            position: relative;
-            padding-top: 3rem;
-        }
-
-        .cart-header h2 {
-            color: var(--color-amarillo-cheddar);
-            font-size: 2rem;
-            text-align: center;
-            text-shadow: 1px 1px 0px var(--color-purpura-berry);
-        }
-
-        .close-cart {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.3rem;
-            cursor: pointer;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.1);
-        }
-
-        .cart-items {
-            flex: 1;
-            padding: 1rem;
-            overflow-y: auto;
-            -webkit-overflow-scrolling: touch;
-        }
-
-        .cart-item {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 8px;
-            padding: 1rem;
-            margin-bottom: 0.8rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex;
-            flex-direction: column;
-            gap: 0.8rem;
-        }
-
-        .item-info h4 {
-            color: white;
-            font-size: 1.1rem;
-            margin-bottom: 0.3rem;
-        }
-
-        .item-price {
-            color: var(--color-amarillo-cheddar);
-            font-weight: bold;
-            font-size: 1rem;
-        }
-
-        .item-quantity {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            justify-content: space-between;
-        }
-
-        .quantity-btn {
-            background: var(--color-purpura-berry);
-            border: none;
-            color: white;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-            font-size: 1.1rem;
-        }
-
-        .quantity-input {
-            width: 60px;
-            text-align: center;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: white;
-            padding: 8px;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .remove-item {
-            background: none;
-            border: none;
-            color: #ff6b6b;
-            cursor: pointer;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            padding: 8px;
-        }
-
-        .cart-footer {
-            padding: 1.5rem;
-            background: linear-gradient(135deg, rgba(186, 105, 144, 0.2) 0%, rgba(219, 54, 6, 0.1) 100%);
-            border-top: 2px solid var(--color-purpura-berry);
-            padding-bottom: 2rem;
-        }
-
-        .cart-total {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.2rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .total-label {
-            color: var(--color-gris-claro);
-            font-size: 1.1rem;
-        }
-
-        .total-amount {
-            color: var(--color-amarillo-cheddar);
-            font-size: 1.5rem;
-            font-weight: bold;
-            font-family: 'Bangers', cursive;
-        }
-
-        .checkout-btn {
-            width: 100%;
-            padding: 1rem;
-            background: linear-gradient(135deg, var(--color-purpura-berry) 0%, #9d5b85 100%);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        .empty-cart {
-            text-align: center;
-            padding: 3rem 1rem;
-            color: var(--color-gris-claro);
-        }
-
-        .empty-cart i {
-            font-size: 2.5rem;
-            color: var(--color-purpura-berry);
-            margin-bottom: 1rem;
-            display: block;
-        }
-
-        /* --- BUTTONS MOBILE --- */
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            padding: 14px 28px;
-            background: linear-gradient(135deg, var(--color-rojo-fuego) 0%, #c42f04 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-            animation: fadeIn 1.8s ease-out 0.6s both;
-            box-shadow: 0 4px 12px rgba(219, 54, 6, 0.3);
-            min-height: 48px;
-            min-width: 140px;
-        }
-
-        .btn:hover {
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 6px 16px rgba(219, 54, 6, 0.4);
-        }
-
-        /* --- MENU SECTION MOBILE --- */
-        .menu-section { 
-            padding: 4rem 1.5rem; 
-            text-align: center; 
-            background-color: var(--color-fondo-oscuro);
-            position: relative;
-        }
-
-        .promo-banner {
-            background: #000;
-            color: var(--color-amarillo-cheddar);
-            padding: 1.2rem 0;
-            margin-bottom: 3rem;
-            font-family: 'Bangers', cursive;
-            font-size: 1.6rem;
-            letter-spacing: 2px;
-            position: relative;
-            overflow: hidden;
-            border-top: 3px solid var(--color-rojo-fuego);
-            border-bottom: 3px solid var(--color-rojo-fuego);
-            animation: none;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.8);
-        }
-
-        /* Contenedor del texto que se desplaza */
-        .scrolling-container {
-            display: flex;
-            white-space: nowrap;
-            animation: scrollText 20s linear infinite;
-            position: relative;
-            z-index: 2;
-            padding: 0.5rem 0;
-        }
-
-        /* Texto individual que se repite */
-        .scrolling-text {
-            display: inline-block;
-            padding: 0 40px;
-            position: relative;
-            text-shadow: 0 0 8px var(--color-amarillo-cheddar), 
-                         0 0 16px var(--color-rojo-fuego);
-        }
-
-        /* Estrellas separadoras */
-        .scrolling-text::before,
-        .scrolling-text::after {
-            content: '✦';
-            color: var(--color-rojo-fuego);
-            margin: 0 25px;
-            animation: twinkle 1.5s infinite alternate;
-        }
-
-        /* Efecto de brillo LED */
-        .promo-banner::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, 
-                transparent 0%, 
-                rgba(219, 54, 6, 0.2) 50%, 
-                transparent 100%);
-            animation: ledGlow 3s linear infinite;
-            z-index: 1;
-        }
-
-        /* Línea de puntos LED */
-        .promo-banner::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: repeating-linear-gradient(
-                90deg,
-                transparent,
-                transparent 12px,
-                rgba(219, 54, 6, 0.6) 12px,
-                rgba(219, 54, 6, 0.6) 15px
-            );
-            transform: translateY(-50%);
-            z-index: 1;
-            opacity: 0.7;
-        }
-
-        /* Animación de desplazamiento del texto */
-        @keyframes scrollText {
-            0% {
-                transform: translateX(0);
-            }
-            100% {
-                transform: translateX(-50%);
-            }
-        }
-
-        /* Animación del brillo LED */
-        @keyframes ledGlow {
-            0% {
-                opacity: 0.2;
-                transform: translateX(-100%);
-            }
-            50% {
-                opacity: 0.8;
-            }
-            100% {
-                opacity: 0.2;
-                transform: translateX(100%);
-            }
-        }
-
-        /* Animación de las estrellas */
-        @keyframes twinkle {
-            0% {
-                opacity: 0.4;
-                transform: scale(0.8);
-            }
-            100% {
-                opacity: 1;
-                transform: scale(1.2);
-                text-shadow: 0 0 12px var(--color-amarillo-cheddar);
-            }
-        }
-
-        /* Efecto al pasar el cursor */
-        .promo-banner:hover .scrolling-container {
-            animation-play-state: paused;
-        }
-
-        .promo-banner:hover::before {
-            animation-duration: 1s;
-            opacity: 0.8;
-        }
-
-        .section-title { 
-            font-size: 2.5rem; 
-            color: var(--color-amarillo-cheddar); 
-            margin-bottom: 1.2rem; 
-            display: inline-block;
-            position: relative;
-            animation: fadeIn 1s ease-out;
-        }
-
-        .section-title:after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 120px;
-            height: 3px;
-            background-color: var(--color-rojo-fuego);
-            border-radius: 2px;
-        }
-
-        .section-subtitle { 
-            font-size: 1.1rem; 
-            color: #ccc; 
-            margin-bottom: 3rem; 
-            font-style: italic;
-            animation: fadeIn 1s ease-out 0.3s both;
-            padding: 0 0.5rem;
-        }
-       
-        .menu-grid { 
-            display: grid; 
-            grid-template-columns: 1fr; 
-            gap: 2rem; 
-            max-width: 400px;
-            margin: 0 auto;
-        }
-       
-        .menu-card {
-            background: linear-gradient(145deg, #2a2a2a, #222);
-            border-radius: 16px;
-            overflow: hidden;
-            border: 2px solid transparent;
-            transition: all 0.4s ease;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeIn 0.8s ease-out forwards;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-        }
-        
-        .menu-card.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        .menu-card:hover { 
-            transform: translateY(-8px); 
-            border-color: var(--color-amarillo-cheddar); 
-            box-shadow: 0 12px 24px rgba(0,0,0,0.3);
-        }
-
-        /* Reemplazo de card-image-placeholder */
-        .card-image {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-            border-bottom: 1px solid #333;
-            background-color: #444; /* fallback si la imagen no carga */
-        }
-       
-        .card-content { 
-            padding: 1.5rem; 
-            text-align: left; 
-            flex-grow: 1; 
-            display: flex; 
-            flex-direction: column; 
-            position: relative;
-            z-index: 2;
-        }
-        
-        .card-content h3 { 
-            font-size: 1.5rem; 
-            color: white; 
-            margin-bottom: 0.6rem; 
-            transition: color 0.3s ease;
-        }
-        
-        .menu-card:hover .card-content h3 {
-            color: var(--color-amarillo-cheddar);
-        }
-        
-        .card-content p { 
-            color: #aaa; 
-            font-size: 0.95rem; 
-            margin-bottom: 1.2rem; 
-            flex-grow: 1; 
-            line-height: 1.5;
-        }
-       
-        .price-row { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            margin-top: auto; 
-            border-top: 1px solid #444; 
-            padding-top: 1.2rem; 
-            gap: 1rem;
-        }
-        
-        .price { 
-            color: var(--color-amarillo-cheddar); 
-            font-weight: bold; 
-            font-size: 1.4rem; 
-            font-family: 'Bangers', cursive;
-            text-shadow: 1px 1px 0px rgba(0,0,0,0.5);
-            white-space: nowrap;
-        }
-
-        .add-to-cart-btn {
-            padding: 10px 18px;
-            font-size: 0.95rem;
-            animation: none;
-            background: linear-gradient(135deg, var(--color-purpura-berry) 0%, #9d5b85 100%);
-            min-width: 120px;
-        }
-
-        .combo-badge {
-            background: linear-gradient(135deg, var(--color-purpura-berry) 0%, #9d5b85 100%);
-            color: white;
-            font-size: 0.8rem;
-            padding: 4px 10px;
-            border-radius: 15px;
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            font-weight: bold;
-            z-index: 3;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.3);
-            animation: float 3s infinite ease-in-out;
-        }
-
-        /* Sides & Extras Mobile */
-        .sides-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-            gap: 1.2rem;
-            margin-top: 3rem;
-        }
-        
-        .side-item {
-            background: linear-gradient(145deg, #222, #1a1a1a);
-            padding: 1.2rem;
-            border-radius: 12px;
-            border: 1px solid #333;
-            text-align: left;
-            transition: all 0.3s ease;
-            opacity: 0;
-            transform: translateY(15px);
-            animation: fadeIn 0.8s ease-out forwards;
-        }
-        
-        .side-item:hover {
-            transform: translateY(-5px);
-            border-color: var(--color-mostaza-suave);
-            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-        }
-        
-        .side-item h4 { 
-            color: var(--color-mostaza-suave); 
-            margin-bottom: 0.4rem; 
-            font-size: 1.1rem;
-        }
-        
-        .side-price { 
-            float: right; 
-            color: white; 
-            font-weight: bold; 
-            font-size: 1.2rem;
-            font-family: 'Bangers', cursive;
-        }
-
-        /* Pretzel Special */
-        .pretzel-special {
-            background: linear-gradient(145deg, #2a2a2a, #222);
-            border: 2px solid transparent;
-            padding: 2rem 1.5rem;
-            border-radius: 16px;
-            margin-bottom: 2.5rem;
-            max-width: 400px;
-            margin-left: auto;
-            margin-right: auto;
-            animation: fadeIn 1s ease-out;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-        }
-
-        /* --- EVENT PROMO MOBILE --- */
-        .event-promo-section {
-            padding: 4rem 1.5rem;
-            background: linear-gradient(135deg, #1a0f0f 0%, #2a1a1a 100%);
-            position: relative;
-            overflow: hidden;
-            text-align: center;
-        }
-
-        .event-promo-container {
-            position: relative;
-            z-index: 2;
-            max-width: 500px;
-            margin: 0 auto;
-        }
-
-        .promo-badge {
-            display: inline-block;
-            background: linear-gradient(135deg, var(--color-purpura-berry) 0%, #9d5b85 100%);
-            color: white;
-            padding: 8px 20px;
-            border-radius: 50px;
-            font-size: 1rem;
-            font-weight: bold;
-            margin-bottom: 1.5rem;
-            animation: pulse 2s infinite;
-            box-shadow: 0 4px 12px rgba(186, 105, 144, 0.3);
-        }
-
-        .event-promo-title {
-            font-size: 2.2rem;
-            color: var(--color-amarillo-cheddar);
-            margin-bottom: 1.2rem;
-            text-shadow: 1px 1px 0px var(--color-rojo-fuego);
-            animation: fadeIn 1s ease-out;
-        }
-
-        .event-promo-subtitle {
-            font-size: 1.2rem;
-            color: #ddd;
-            margin-bottom: 2rem;
-            animation: fadeIn 1s ease-out 0.3s both;
-            padding: 0 0.5rem;
-        }
-
-        .event-promo-card {
-            background: linear-gradient(145deg, #2a2a2a, #222);
-            border-radius: 16px;
-            padding: 2rem 1.5rem;
-            border: 2px solid var(--color-purpura-berry);
-            box-shadow: 0 12px 24px rgba(0,0,0,0.3);
-            margin-bottom: 2.5rem;
-            animation: fadeIn 1s ease-out 0.5s both;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .promo-features {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-            position: relative;
-            z-index: 2;
-        }
-
-        .promo-feature {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 1.2rem;
-            border-radius: 12px;
-            border-left: 4px solid var(--color-amarillo-cheddar);
-            transition: all 0.3s ease;
-            text-align: left;
-        }
-
-        .promo-feature i {
-            font-size: 2rem;
-            color: var(--color-amarillo-cheddar);
-            margin-bottom: 0.8rem;
-        }
-
-        .promo-feature h4 {
-            font-size: 1.3rem;
-            color: white;
-            margin-bottom: 0.4rem;
-        }
-
-        .promo-feature p {
-            color: #ccc;
-            font-size: 0.95rem;
-        }
-
-        .event-cta-btn {
-            background: linear-gradient(135deg, var(--color-purpura-berry) 0%, #9d5b85 100%);
-            padding: 16px 32px;
-            font-size: 1.2rem;
-            margin-top: 1rem;
-            animation: pulse 2s infinite;
-            width: 100%;
-            max-width: 300px;
-        }
-
-        /* --- LOCATION MAP STYLES --- */
-        .location-section { 
-            padding: 4rem 1.5rem; 
-            background: linear-gradient(135deg, var(--color-mostaza-suave) 0%, #d1984a 100%);
-            color: #1a1a1a; 
-            text-align: center; 
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .location-section h2 {
-            color: var(--color-rojo-fuego); 
-            font-size: 2.5rem; 
-            margin-bottom: 2.5rem; 
-            text-shadow: 1px 1px 0px rgba(255,255,255,0.5);
-            position: relative;
-            animation: fadeIn 1s ease-out;
-        }
-       
-        .location-box { 
-            background: rgba(255,255,255,0.95); 
-            padding: 2rem 1.5rem; 
-            border-radius: 20px; 
-            display: inline-block; 
-            max-width: 500px;
-            width: 100%; 
-            box-shadow: 0 12px 24px rgba(0,0,0,0.15); 
-            position: relative;
-            z-index: 2;
-            animation: fadeIn 1s ease-out 0.5s both;
-            border: 2px solid var(--color-rojo-fuego);
-            transition: all 0.3s ease;
-        }
-
-        .map-container {
-            width: 100%;
-            height: 300px;
-            border-radius: 16px;
-            overflow: hidden;
-            margin: 1.5rem 0;
-            border: 2px solid #ccc;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-            position: relative;
-            background: #eee;
-        }
-        
-        .map-container iframe {
-            width: 100%;
-            height: 100%;
-            border: 0;
-        }
-
-        /* --- CONTACT MOBILE --- */
-        .contact-section {
-            padding: 4rem 1.5rem;
-            text-align: center;
-            background: linear-gradient(135deg, #111 0%, #222 100%);
-            position: relative;
-        }
-
-        .contact-section h3 {
-            color: var(--color-rojo-fuego); 
-            font-size: 2rem; 
-            margin-bottom: 1.2rem;
-            animation: fadeIn 1s ease-out;
-        }
-        
-        .contact-section p {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-            animation: fadeIn 1s ease-out 0.3s both;
-        }
-        
-        .contact-phone {
-            color: var(--color-amarillo-cheddar);
-            font-weight: bold;
-            text-decoration: none;
-            font-size: 1.5rem;
-            display: inline-block;
-            margin-top: 1rem;
-            padding: 12px 24px;
-            border-radius: 12px;
-            transition: all 0.3s ease;
-            animation: pulse 2s infinite;
-            background: rgba(248, 168, 20, 0.1);
-        }
-        
-        footer { 
-            background: #0a0a0a; 
-            padding: 2.5rem 1.5rem; 
-            text-align: center; 
-            color: #777; 
-            position: relative;
-            overflow: hidden;
-        }
-        
-        footer:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, var(--color-rojo-fuego), var(--color-amarillo-cheddar), var(--color-purpura-berry));
-        }
-        
-        .social-links {
-            margin-top: 1.5rem;
-        }
-        
-        .social-links a {
-            color: var(--color-amarillo-cheddar);
-            text-decoration: none;
-            margin: 0 10px;
-            font-weight: bold;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            display: inline-block;
-        }
-        
-        .social-links a:hover {
-            color: var(--color-rojo-fuego);
-            transform: translateY(-2px);
-        }
-        
-        /* Scroll to Top Button Mobile */
-        .scroll-top {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 44px;
-            height: 44px;
-            background: linear-gradient(135deg, var(--color-rojo-fuego) 0%, #c42f04 100%);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            z-index: 999;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(219, 54, 6, 0.3);
-            font-size: 1.2rem;
-        }
-        
-        .scroll-top.visible {
-            opacity: 1;
-            visibility: visible;
-        }
-        
-        .scroll-top:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 6px 16px rgba(219, 54, 6, 0.4);
-        }
-
-        /* --- MEDIA QUERIES FOR TABLETS --- */
-        @media (min-width: 768px) {
-            html {
-                font-size: 17px;
-            }
-            
-            .video-hero h1 {
-                font-size: 4rem;
-            }
-            
-            .logo-text {
-                font-size: 2.5rem;
-            }
-            
-            .menu-grid {
+            .founder-profiles {
                 grid-template-columns: repeat(2, 1fr);
-                max-width: 800px;
                 gap: 2.5rem;
             }
             
-            .sides-grid {
-                grid-template-columns: repeat(3, 1fr);
-                max-width: 800px;
-                margin-left: auto;
-                margin-right: auto;
+            .story-card {
+                padding: 3.5rem;
             }
             
-            .promo-features {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .event-promo-card {
-                padding: 2.5rem;
-            }
-            
-            .location-box {
-                max-width: 500px;
-                padding: 2.5rem;
+            .story-intro {
+                font-size: 1.4rem;
             }
         }
 
-        /* --- MEDIA QUERIES FOR DESKTOP --- */
+        /* Desktop (1024px y superior) */
         @media (min-width: 1024px) {
-            .video-hero {
-                background-attachment: fixed;
+            .our-story-section {
+                padding: 7rem 2rem;
             }
             
-            .menu-grid {
-                grid-template-columns: repeat(3, 1fr);
-                max-width: 1200px;
+            .story-title {
+                font-size: 4rem;
             }
             
-            .sides-grid {
-                grid-template-columns: repeat(4, 1fr);
+            .founder-profiles {
+                gap: 3rem;
+            }
+            
+            .story-card {
+                padding: 4rem;
+            }
+            
+            .story-intro {
+                font-size: 1.5rem;
+                padding: 0 2rem 2rem;
+            }
+            
+            .founder-description {
+                font-size: 1.1rem;
+            }
+        }
+
+        /* Pantallas grandes (1200px y superior) */
+        @media (min-width: 1200px) {
+            .story-main-content {
                 max-width: 1000px;
             }
-            
-            .promo-features {
-                grid-template-columns: repeat(4, 1fr);
-            }
-            
-            .event-cart-modal {
-                width: 450px;
-            }
         }
 
-        /* Media query para dispositivos móviles */
-        @media (max-width: 768px) {
-            .video-hero {
-                min-height: 500px;
+        /* Ajustes para móviles pequeños */
+        @media (max-width: 480px) {
+            .our-story-section {
+                padding: 3rem 1rem;
             }
             
-            .promo-banner {
-                font-size: 1.4rem;
-                padding: 1rem 0;
+            .story-title {
+                font-size: 2.5rem;
             }
             
-            .scrolling-text {
-                padding: 0 25px;
+            .story-card {
+                padding: 2rem 1.5rem;
             }
             
-            .scrolling-text::before,
-            .scrolling-text::after {
-                margin: 0 15px;
-            }
-        }
-
-        /* --- IOS SAFARI FIXES --- */
-        @supports (-webkit-touch-callout: none) {
-            .video-hero {
-                background-attachment: scroll;
+            .story-intro {
+                font-size: 1.2rem;
             }
             
-            .btn, .add-to-cart-btn, .checkout-btn {
-                min-height: 44px;
-            }
-            
-            input, select, textarea, button {
-                font-size: 16px !important;
+            .founder-card {
+                padding: 1.5rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="overlay" id="overlay"></div>
-    
-    <div class="event-cart-modal" id="eventCartModal">
-        <div class="cart-header">
-            <button class="close-cart" id="closeCartBtn">
-                <i class="fas fa-times"></i>
-            </button>
-            <h2>🛒 Event Cart</h2>
-            <p style="color: #ccc; text-align: center; margin-top: 5px; font-size: 0.9rem;">For your special event booking</p>
-        </div>
-        
-        <div class="cart-items" id="cartItemsContainer">
-            </div>
-        
-        <div class="cart-footer">
-            <div class="cart-total">
-                <span class="total-label">Total Estimate:</span>
-                <span class="total-amount" id="cartTotal">$0.00</span>
-            </div>
-            <button class="checkout-btn" id="checkoutBtn">
-                <i class="fas fa-calendar-check"></i> Proceed to Event Booking
-            </button>
-        </div>
-    </div>
-    
-    <div class="scroll-top" id="scrollTop">
-        <i class="fas fa-chevron-up"></i>
-    </div>
-
-    <header id="mainHeader">
-        <button class="hamburger-btn" id="menuBtn" aria-label="Toggle navigation menu">
-            <span></span><span></span><span></span>
-        </button>
-        <div class="logo-text" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">
-            SUP<span>DOG</span>
-        </div>
-        <button class="cart-icon-header" id="cartBtn">
-            <i class="fas fa-calendar-alt"></i>
-            <span class="cart-count" id="cartCount">0</span>
-        </button>
-    </header>
-
-    <nav class="sidebar" id="sidebar" aria-label="Main navigation">
-        <ul>
-            <li><a href="#home" class="menu-link" onclick="toggleMenu()">HOME</a></li>
-            <li><a href="#our-story" class="menu-link" onclick="toggleMenu()">OUR STORY</a></li>
-            <li><a href="#menu" class="menu-link" onclick="toggleMenu()">MENU</a></li>
-            <li><a href="#sides" class="menu-link" onclick="toggleMenu()">SIDES</a></li>
-            <li><a href="#location" class="menu-link" onclick="toggleMenu()">LOCATION</a></li>
-            
-            <li class="event-link-special" onclick="toggleMenu()">
-                <a href="event-cart.html" class="menu-link">
-                    🎪 EVENT CART
-                </a>
-            </li>
-        </ul>
-        
-        <div style="margin-top: 40px; padding-right: 20px;">
-            <p style="color: var(--color-mostaza-suave); font-size: 1.1rem; margin-bottom: 10px;">Follow the fire!</p>
-            <p>
-                <a href="https://www.instagram.com/supdogdfw?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" 
-                   target="_blank" 
-                   style="color: white; text-decoration: none; font-weight: bold; font-size: 1.2rem; display: flex; align-items: center; gap: 8px;">
-                    @supdogdfw <i class="fab fa-instagram"></i>
-                </a>
-            </p>
-        </div>
-    </nav>
-
-    <section id="home" class="video-hero">
-        <div class="video-container">
-            <!-- Video de fondo - Hot Dogs en la parrilla -->
-            <video class="video-background" autoplay muted loop playsinline id="heroVideo">
-                <source src="hotdog-portada.mp4" type="video/mp4">
-                <!-- Respaldo si el video local no carga -->
-                <source src="https://assets.mixkit.co/videos/preview/mixkit-sizzling-hot-dogs-on-a-grill-40156-large.mp4" type="video/mp4">
-                Tu navegador no soporta videos HTML5.
-            </video>
-            <div class="video-overlay"></div>
-        </div>
-        
-        <div class="video-hero-content">
-            <h1 class="animate-load">SUP<span>DOG</span></h1>
-            <p class="animate-load delay-1">Wurst Behavior. Best Flavor. <br> Only in Grapevine, TX.</p>
-            <a href="#menu" class="btn animate-load delay-2">
-                VIEW MENU <i class="fas fa-fire"></i>
-            </a>
-        </div>
-    </section>
-
     <section id="our-story" class="our-story-section">
         <div class="timeline-dot top"></div>
         
@@ -1557,716 +351,72 @@
                 <p class="story-subtitle">Born from a need to express who we truly are</p>
             </div>
             
-            <div class="story-content">
-                <div class="story-text">
-                    <h3><i class="fas fa-fire"></i> The Beginning</h3>
-                    <p>Sup Dog was born as much more than just an idea; it was born from a need to express who we truly are.</p>
-                    <p>Behind every dish stands Jonathan Sotelo, our creative soul. With over 18 years in the industry, Jonathan has explored diverse culinary cultures, gathering experiences that he now pours into every recipe. For him, Sup Dog is just the beginning—a future built on tireless effort, absolute dedication, and above all, walking hand-in-hand with God.</p>
-                    <p>But every great vision needs a driving force, and that is where María Colmenarez comes in. She is the perfect match—a tireless woman who always strives for more. She was the key to propelling this dream forward, turning the Chef's experience and technique into a tangible reality.</p>
-                    <p>For us, Sup Dog is our way of communicating. It represents an informal, genuine, and authentic connection. Because at the end of the day, Sup Dog isn't just a greeting; it is an invitation to be yourself.</p>
+            <div class="story-main-content">
+                <div class="story-card">
+                    <div class="story-card-content">
+                        <p class="story-intro">
+                            Sup Dog was born as much more than just an idea; it was born from a need to express who we truly are.
+                        </p>
+                        
+                        <div class="founder-profiles">
+                            <div class="founder-card creative">
+                                <div class="founder-icon">
+                                    <i class="fas fa-chef-hat"></i>
+                                </div>
+                                <h3 class="founder-name">Jonathan Sotelo</h3>
+                                <p class="founder-role">Creative Soul & Head Chef</p>
+                                <p class="founder-description">
+                                    With over 18 years in the industry, Jonathan has explored diverse culinary cultures, gathering experiences that he now pours into every recipe. For him, Sup Dog is just the beginning—a future built on tireless effort, absolute dedication, and above all, walking hand-in-hand with God.
+                                </p>
+                            </div>
+                            
+                            <div class="founder-card driving">
+                                <div class="founder-icon">
+                                    <i class="fas fa-rocket"></i>
+                                </div>
+                                <h3 class="founder-name">María Colmenarez</h3>
+                                <p class="founder-role">Driving Force & Visionary</p>
+                                <p class="founder-description">
+                                    Every great vision needs a driving force, and that is where María comes in. She is the perfect match—a tireless woman who always strives for more. She was the key to propelling this dream forward, turning the Chef's experience and technique into a tangible reality.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="story-conclusion">
+                            <p>
+                                For us, Sup Dog is our way of communicating. It represents an informal, genuine, and authentic connection. Because at the end of the day, Sup Dog isn't just a greeting; it is an invitation to be yourself.
+                            </p>
+                            <span class="conclusion-highlight">Wurst Behavior. Best Flavor.</span>
+                        </div>
+                    </div>
                 </div>
-                
-                <div class="story-text">
-                    <h3><i class="fas fa-heart"></i> Our Philosophy</h3>
-                    <p>At <span class="highlight">SupDog</span>, we believe that great food brings people together. Every dog is crafted with premium ingredients, from our custom-blended sausages to our freshly baked buns.</p>
-                    <p>We source locally whenever possible, supporting Texas farmers and producers. Our secret? <span class="highlight">"Wurst Behavior, Best Flavor"</span> – pushing boundaries while respecting tradition.</p>
-                </div>
-                
-                <div class="story-text">
-                    <h3><i class="fas fa-award"></i> The SupDog Difference</h3>
-                    <p>What sets us apart is our commitment to <span class="highlight">authenticity and creativity</span>. Each menu item tells a story, inspired by global street food traditions but with a distinct Texas personality.</p>
-                    <p>From our signature Trainwreck to the Chicago-style classic, every bite is an experience. We're not just serving hot dogs – we're creating memories, one delicious dog at a time.</p>
-                </div>
-            </div>
-            
-            <div class="story-features">
-                <div class="story-feature">
-                    <i class="fas fa-pepper-hot"></i>
-                    <h4>Bold Flavors</h4>
-                    <p>Unique combinations that excite your taste buds</p>
-                </div>
-                
-                <div class="story-feature">
-                    <i class="fas fa-leaf"></i>
-                    <h4>Fresh Ingredients</h4>
-                    <p>Locally sourced, never frozen</p>
-                </div>
-                
-                <div class="story-feature">
-                    <i class="fas fa-users"></i>
-                    <h4>Community Focus</h4>
-                    <p>Proudly serving Grapevine since 2018</p>
-                </div>
-                
-                <div class="story-feature">
-                    <i class="fas fa-star"></i>
-                    <h4>Award Winning</h4>
-                    <p>Voted "Best Hot Dogs in DFW" 2023</p>
-                </div>
-            </div>
-            
-            <div class="story-cta">
-                <h3>Join Our Story</h3>
-                <p>Whether you're a local regular or visiting Grapevine for the first time, we invite you to be part of our story. Come taste why SupDog has become more than just a restaurant – it's a community tradition.</p>
-                <a href="#location" class="btn" style="background: linear-gradient(135deg, var(--color-purpura-berry) 0%, #9d5b85 100%);">
-                    <i class="fas fa-map-marker-alt"></i> Visit Us Today
-                </a>
             </div>
         </div>
         
         <div class="timeline-dot bottom"></div>
     </section>
 
-    <section id="menu" class="menu-section">
-        <div class="promo-banner">
-            <div class="scrolling-container">
-                <div class="scrolling-text">★ EVERY THURSDAY: BOGO (BUY ONE GET ONE) ★</div>
-                <div class="scrolling-text">★ EVERY THURSDAY: BOGO (BUY ONE GET ONE) ★</div>
-            </div>
-        </div>
-
-        <h2 class="section-title">The Dogs</h2>
-        <p class="section-subtitle">Make it a Combo: Chips & Drink Included for $14.50!</p>
-       
-        <div class="menu-grid">
-            <div class="menu-card">
-                <span class="combo-badge">BEST SELLER</span>
-                <img src="mexican-dog.png" alt="Mexican Dog" class="card-image">
-                <div class="card-content">
-                    <h3>Mexican Dog</h3>
-                    <p>Beef Frank, Pico De Gallo, Jalapeños, Ketchup & Mustard.</p>
-                    <div class="price-row">
-                        <span class="price">$12.50</span>
-                        <button class="btn add-to-cart-btn" data-item="Mexican Dog" data-price="12.50">
-                            Add to Cart
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="menu-card">
-                <img src="german-dog.png" alt="German Dog" class="card-image">
-                <div class="card-content">
-                    <h3>German Dog</h3>
-                    <p>Bratwurst, Grilled Onions, Sauerkraut, Spicy German Mustard.</p>
-                    <div class="price-row">
-                        <span class="price">$12.50</span>
-                        <button class="btn add-to-cart-btn" data-item="German Dog" data-price="12.50">
-                            Add to Cart
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="menu-card">
-                <img src="hawaiian-dog.png" alt="Hawaiian Dog" class="card-image">
-                <div class="card-content">
-                    <h3>Hawaiian Dog</h3>
-                    <p>Jalapeño Sausage, Pineapple, Grilled Onions, Bacon Bites.</p>
-                    <div class="price-row">
-                        <span class="price">$12.50</span>
-                        <button class="btn add-to-cart-btn" data-item="Hawaiian Dog" data-price="12.50">
-                            Add to Cart
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="menu-card">
-                <span class="combo-badge">CHICAGO STYLE</span>
-                <img src="chicago-dog.png" alt="Chicago Dog" class="card-image">
-                <div class="card-content">
-                    <h3>Chicago Dog</h3>
-                    <p>Beef Frank, Poppy Seeds Bun, Yellow Mustard, Neon Green Pickles.</p>
-                    <div class="price-row">
-                        <span class="price">$12.50</span>
-                        <button class="btn add-to-cart-btn" data-item="Chicago Dog" data-price="12.50">
-                            Add to Cart
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="menu-card">
-                <span class="combo-badge">MOST POPULAR</span>
-                <img src="trainwreck.png" alt="Trainwreck" class="card-image">
-                <div class="card-content">
-                    <h3>Trainwreck</h3>
-                    <p>Beef Frank, Chipotle Sauce, Mayo, Mustard, Onions, Fries, Parmesan, Bacon.</p>
-                    <div class="price-row">
-                        <span class="price">$12.50</span>
-                        <button class="btn add-to-cart-btn" data-item="Trainwreck" data-price="12.50">
-                            Add to Cart
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="menu-card">
-                <img src="tijuana-dog.png" alt="Tijuana Dog" class="card-image">
-                <div class="card-content">
-                    <h3>Tijuana Dog</h3>
-                    <p>Jalapeño Sausage, Corn, Chipotle Sauce, Parmesan Cheese, Cilantro.</p>
-                    <div class="price-row">
-                        <span class="price">$12.50</span>
-                        <button class="btn add-to-cart-btn" data-item="Tijuana Dog" data-price="12.50">
-                            Add to Cart
-                        </button>
-                    </div>
-                </div>
-            </div>
-           
-            <div class="menu-card">
-                <span class="combo-badge">FOR KIDS</span>
-                <img src="kids-dog.png" alt="Kids Dog" class="card-image">
-                <div class="card-content">
-                    <h3>Kids Dog</h3>
-                    <p>Beef Frank, Ketchup, Jello, Kids Juice.</p>
-                    <div class="price-row">
-                        <span class="price">$10.50</span>
-                        <button class="btn add-to-cart-btn" data-item="Kids Dog" data-price="10.50">
-                            Add to Cart
-                        </button>
-                    </div>
-                </div>
-            </div>
-           
-            <div class="menu-card">
-                <img src="all-naked.png" alt="All Naked" class="card-image">
-                <div class="card-content">
-                    <h3>All Naked</h3>
-                    <p>Bunless. Bratwurst, Grilled Onions, Sauerkraut.</p>
-                    <div class="price-row">
-                        <span class="price">$12.50</span>
-                        <button class="btn add-to-cart-btn" data-item="All Naked" data-price="12.50">
-                            Add to Cart
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="sides" style="margin-top: 4rem;">
-            <h2 class="section-title">Extras & Drinks</h2>
-           
-            <div class="pretzel-special">
-                <h3 style="color: var(--color-amarillo-cheddar); font-size: 1.8rem; margin-bottom: 0.5rem;">SOFT PRETZELS</h3>
-                <p style="color: #ddd; font-size: 1rem; margin-bottom: 1rem;">Honey Mustard & Beer Cheese Sauce included.</p>
-                <div style="font-size: 2.2rem; color: white; font-weight: bold; margin: 1.2rem 0; text-shadow: 1px 1px 0px rgba(0,0,0,0.5);">$9.50</div>
-                <button class="btn add-to-cart-btn" data-item="Soft Pretzels" data-price="9.50" style="margin-top: 0.5rem; width: 100%; max-width: 200px;">
-                    Add to Event Cart
-                </button>
-            </div>
-
-            <div class="sides-grid">
-                <div class="side-item">
-                    <h4>Creamy Slaw</h4> 
-                    <span class="side-price">$4.00</span>
-                    <button class="btn add-to-cart-btn" data-item="Creamy Slaw" data-price="4.00" style="margin-top: 10px; padding: 8px 12px; font-size: 0.9rem; width: 100%;">
-                        Add to Cart
-                    </button>
-                </div>
-                <div class="side-item">
-                    <h4>Chips Bag</h4> 
-                    <span class="side-price">$3.00</span>
-                    <button class="btn add-to-cart-btn" data-item="Chips Bag" data-price="3.00" style="margin-top: 10px; padding: 8px 12px; font-size: 0.9rem; width: 100%;">
-                        Add to Cart
-                    </button>
-                </div>
-                <div class="side-item">
-                    <h4>Corn Salad</h4> 
-                    <span class="side-price">$4.00</span>
-                    <button class="btn add-to-cart-btn" data-item="Corn Salad" data-price="4.00" style="margin-top: 10px; padding: 8px 12px; font-size: 0.9rem; width: 100%;">
-                        Add to Cart
-                    </button>
-                </div>
-                <div class="side-item">
-                    <h4>Potato Salad</h4> 
-                    <span class="side-price">$4.00</span>
-                    <button class="btn add-to-cart-btn" data-item="Potato Salad" data-price="4.00" style="margin-top: 10px; padding: 8px 12px; font-size: 0.9rem; width: 100%;">
-                        Add to Cart
-                    </button>
-                </div>
-                <div class="side-item">
-                    <h4>Baked Beans</h4> 
-                    <span class="side-price">$6.00</span>
-                    <button class="btn add-to-cart-btn" data-item="Baked Beans" data-price="6.00" style="margin-top: 10px; padding: 8px 12px; font-size: 0.9rem; width: 100%;">
-                        Add to Cart
-                    </button>
-                </div>
-                <div class="side-item" style="border-color: var(--color-rojo-fuego); background: linear-gradient(145deg, #2a1a1a, #221010);">
-                    <h4 style="color: white;">DRINKS (Cans/Water)</h4>
-                    <span class="side-price" style="color: var(--color-amarillo-cheddar);">$2.25</span>
-                    <button class="btn add-to-cart-btn" data-item="Drinks (Cans/Water)" data-price="2.25" style="margin-top: 10px; padding: 8px 12px; font-size: 0.9rem; width: 100%; background: var(--color-rojo-fuego);">
-                        Add to Cart
-                    </button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="event-promo-section" id="eventPromo">
-        <div class="event-promo-container">
-            <div class="promo-badge">
-                🎉 NEW SERVICE! 🎉
-            </div>
-            
-            <h2 class="event-promo-title">THEMED EVENT CART</h2>
-            <p class="event-promo-subtitle">Bring SupDog to your next celebration! Perfect for birthdays, parties, and special events.</p>
-            
-            <div class="event-promo-card">
-                <div class="promo-features">
-                    <div class="promo-feature">
-                        <i class="fas fa-birthday-cake"></i>
-                        <h4>Custom Themes</h4>
-                        <p>Decorated according to your party theme</p>
-                    </div>
-                    
-                    <div class="promo-feature">
-                        <i class="fas fa-calendar-alt"></i>
-                        <h4>Book in Advance</h4>
-                        <p>Reserve 2 weeks ahead for planning</p>
-                    </div>
-                    
-                    <div class="promo-feature">
-                        <i class="fas fa-hotdog"></i>
-                        <h4>Full Menu</h4>
-                        <p>All your favorite SupDog creations</p>
-                    </div>
-                    
-                    <div class="promo-feature">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <h4>We Come to You</h4>
-                        <p>Set up at your venue in Grapevine area</p>
-                    </div>
-                </div>
-                
-                <button class="btn event-cta-btn" id="bookEventBtn">
-                    🎪 BOOK EVENT <i class="fas fa-arrow-right"></i>
-                </button>
-                
-                <p style="margin-top: 1.5rem; color: #ccc; font-size: 0.9rem;">
-                    <i class="fas fa-exclamation-circle"></i> Limited availability - Book early!
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <section id="location" class="location-section">
-        <h2>Where to Find Us?</h2>
-       
-        <div class="location-box">
-            <h3 style="font-size: 2rem; margin-bottom: 0.5rem; color: var(--color-rojo-fuego);">📍 Grapevine, TX</h3>
-            <p style="font-size: 1.1rem; font-weight: bold; color: #333;">815 S Main St, Grapevine, TX 76051</p>
-            
-            <div class="map-container">
-                <iframe 
-                    src="https://maps.google.com/maps?q=815+S+Main+St,+Grapevine,+TX+76051&t=&z=15&ie=UTF8&iwloc=&output=embed" 
-                    allowfullscreen="" 
-                    loading="lazy" 
-                    referrerpolicy="no-referrer-when-downgrade">
-                </iframe>
-            </div>
-
-            <div style="border-top: 2px dashed #ccc; padding-top: 1rem;">
-                <p style="font-weight: bold; color: #333; font-size: 1.1rem;">🕒 Open Hours:</p>
-                <p style="color: #555; font-size: 1rem; margin: 0.4rem 0;">Sun - Thu: 11:00 AM - 9:00 PM</p>
-                <p style="color: #555; font-size: 1rem;">Fri - Sat: 11:00 AM - 11:00 PM</p>
-            </div>
-
-            <a href="https://www.google.com/maps/dir//815+S+Main+St,+Grapevine,+TX+76051" target="_blank" class="btn" style="background: #1a1a1a; margin-top: 1.5rem; width: 100%; max-width: 250px;">
-                Open in Maps App <i class="fas fa-location-arrow"></i>
-            </a>
-        </div>
-    </section>
-
-    <section id="contact" class="contact-section">
-        <h3>Catering or Big Orders?</h3>
-        <p>Call or text us directly!</p>
-        <a href="tel:+11234567890" class="contact-phone">
-            <i class="fas fa-phone-alt"></i> (123) 456-7890
-        </a>
-        <p style="margin-top: 1.5rem; font-size: 1rem; color: var(--color-mostaza-suave); padding: 0 1rem;">
-            <i class="fas fa-info-circle"></i> For event cart reservations, visit our 
-            <a href="event-cart.html" style="color: var(--color-purpura-berry); font-weight: bold;">Event Cart Page</a>
-        </p>
-    </section>
-
-    <footer>
-        <p style="font-size: 1rem; margin-bottom: 1rem; color: #aaa;">© 2025 SupDog Hot Dogs. All rights reserved.</p>
-        <div class="social-links">
-            <p style="font-size: 1rem;">
-                Follow:
-                <a href="https://www.instagram.com/supdogdfw?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">
-                    Instagram
-                </a> | 
-                <a href="event-cart.html" style="color: var(--color-purpura-berry); font-weight: bold;">Event Cart</a> | 
-                <a href="#menu">Menu</a>
-            </p>
-        </div>
-        <p style="margin-top: 1rem; font-size: 0.8rem; color: #777; padding: 0 1rem;">
-            Event cart reservations require 2 weeks advance notice for themed decorations.
-        </p>
-    </footer>
-
     <script>
-        // Optimized for mobile performance
-        class EventCart {
-            constructor() {
-                this.items = JSON.parse(localStorage.getItem('supdogEventCart')) || [];
-                this.updateCartDisplay();
-                this.setupTouchEvents();
-            }
-
-            setupTouchEvents() {
-                // Prevent double-tap zoom on buttons
-                document.querySelectorAll('.btn, .add-to-cart-btn, .checkout-btn').forEach(btn => {
-                    btn.addEventListener('touchstart', function(e) {
-                        if (!this.classList.contains('touched')) {
-                            this.classList.add('touched');
-                            setTimeout(() => {
-                                this.classList.remove('touched');
-                            }, 300);
-                        }
-                    }, {passive: true});
-                });
-            }
-
-            addItem(name, price) {
-                const existingItem = this.items.find(item => item.name === name);
-                
-                if (existingItem) {
-                    existingItem.quantity += 1;
-                } else {
-                    this.items.push({
-                        name: name,
-                        price: parseFloat(price),
-                        quantity: 1
-                    });
-                }
-                
-                this.saveCart();
-                this.updateCartDisplay();
-                this.showNotification(`${name} added to event cart!`);
-            }
-
-            removeItem(index) {
-                this.items.splice(index, 1);
-                this.saveCart();
-                this.updateCartDisplay();
-            }
-
-            updateQuantity(index, quantity) {
-                quantity = parseInt(quantity);
-                if (isNaN(quantity) || quantity <= 0) {
-                    this.removeItem(index);
-                } else {
-                    this.items[index].quantity = quantity;
-                    this.saveCart();
-                    this.updateCartDisplay();
-                }
-            }
-
-            getTotal() {
-                return this.items.reduce((total, item) => {
-                    return total + (item.price * item.quantity);
-                }, 0);
-            }
-
-            getItemCount() {
-                return this.items.reduce((count, item) => count + item.quantity, 0);
-            }
-
-            saveCart() {
-                localStorage.setItem('supdogEventCart', JSON.stringify(this.items));
-            }
-
-            clearCart() {
-                this.items = [];
-                this.saveCart();
-                this.updateCartDisplay();
-            }
-
-            updateCartDisplay() {
-                const cartCount = document.getElementById('cartCount');
-                const cartItemsContainer = document.getElementById('cartItemsContainer');
-                const cartTotal = document.getElementById('cartTotal');
-                
-                // Update cart count
-                cartCount.textContent = this.getItemCount();
-                
-                // Update cart items display
-                if (this.items.length === 0) {
-                    cartItemsContainer.innerHTML = `
-                        <div class="empty-cart">
-                            <i class="fas fa-calendar-times"></i>
-                            <h3>Your event cart is empty</h3>
-                            <p>Add items from our menu to start planning your event!</p>
-                        </div>
-                    `;
-                } else {
-                    cartItemsContainer.innerHTML = this.items.map((item, index) => `
-                        <div class="cart-item">
-                            <div class="item-info">
-                                <h4>${item.name}</h4>
-                                <div class="item-price">$${(item.price * item.quantity).toFixed(2)}</div>
-                            </div>
-                            <div class="item-quantity">
-                                <button class="quantity-btn" onclick="eventCart.decreaseQuantity(${index})">-</button>
-                                <input type="number" class="quantity-input" value="${item.quantity}" min="1" 
-                                       onchange="eventCart.updateQuantity(${index}, this.value)"
-                                       oninput="eventCart.updateQuantity(${index}, this.value)">
-                                <button class="quantity-btn" onclick="eventCart.increaseQuantity(${index})">+</button>
-                                <button class="remove-item" onclick="eventCart.removeItem(${index})">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </div>
-                        </div>
-                    `).join('');
-                }
-                
-                // Update total
-                cartTotal.textContent = `$${this.getTotal().toFixed(2)}`;
-            }
-
-            increaseQuantity(index) {
-                this.items[index].quantity += 1;
-                this.saveCart();
-                this.updateCartDisplay();
-            }
-
-            decreaseQuantity(index) {
-                if (this.items[index].quantity > 1) {
-                    this.items[index].quantity -= 1;
-                    this.saveCart();
-                    this.updateCartDisplay();
-                } else {
-                    this.removeItem(index);
-                }
-            }
-
-            showNotification(message) {
-                // Remove existing notification
-                const existingNotification = document.querySelector('.cart-notification');
-                if (existingNotification) {
-                    existingNotification.remove();
-                }
-
-                // Create notification element
-                const notification = document.createElement('div');
-                notification.className = 'cart-notification';
-                notification.style.cssText = `
-                    position: fixed;
-                    top: 80px;
-                    right: 50%;
-                    transform: translateX(50%);
-                    background: linear-gradient(135deg, var(--color-purpura-berry), var(--color-rojo-fuego));
-                    color: white;
-                    padding: 12px 20px;
-                    border-radius: 10px;
-                    z-index: 9999;
-                    font-weight: bold;
-                    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-                    animation: fadeIn 0.3s ease-out;
-                    display: flex;
-                    align-items: center;
-                    gap: 10px;
-                    max-width: 90%;
-                    text-align: center;
-                `;
-                
-                notification.innerHTML = `
-                    <i class="fas fa-check-circle"></i>
-                    <span>${message}</span>
-                `;
-                
-                document.body.appendChild(notification);
-                
-                // Remove notification after 3 seconds
-                setTimeout(() => {
-                    notification.style.animation = 'fadeIn 0.3s ease-out reverse';
-                    setTimeout(() => {
-                        if (notification.parentNode) {
-                            notification.parentNode.removeChild(notification);
-                        }
-                    }, 300);
-                }, 2000);
-            }
-        }
-
-        // Initialize cart
-        const eventCart = new EventCart();
-
-        // DOM Elements
-        const menuBtn = document.getElementById('menuBtn');
-        const sidebar = document.getElementById('sidebar');
-        const overlay = document.getElementById('overlay');
-        const header = document.getElementById('mainHeader');
-        const scrollTopBtn = document.getElementById('scrollTop');
-        const cartBtn = document.getElementById('cartBtn');
-        const closeCartBtn = document.getElementById('closeCartBtn');
-        const eventCartModal = document.getElementById('eventCartModal');
-        const checkoutBtn = document.getElementById('checkoutBtn');
-        const bookEventBtn = document.getElementById('bookEventBtn');
-        
-        // Toggle Menu Function
-        function toggleMenu() {
-            sidebar.classList.toggle('active');
-            overlay.classList.toggle('active');
-            const spans = menuBtn.querySelectorAll('span');
-            
-            if (sidebar.classList.contains('active')) {
-                spans[0].style.transform = 'rotate(45deg) translate(5px, 6px)';
-                spans[1].style.opacity = '0';
-                spans[2].style.transform = 'rotate(-45deg) translate(5px, -6px)';
-                document.body.style.overflow = 'hidden';
-            } else {
-                spans[0].style.transform = 'none'; 
-                spans[1].style.opacity = '1'; 
-                spans[2].style.transform = 'none';
-                document.body.style.overflow = 'auto';
-            }
-        }
-        
-        // Toggle Cart Function
-        function toggleCart() {
-            eventCartModal.classList.toggle('active');
-            overlay.classList.toggle('active');
-            document.body.style.overflow = eventCartModal.classList.contains('active') ? 'hidden' : 'auto';
-        }
-        
-        // Event Listeners
-        menuBtn.addEventListener('click', toggleMenu);
-        cartBtn.addEventListener('click', toggleCart);
-        closeCartBtn.addEventListener('click', toggleCart);
-        bookEventBtn.addEventListener('click', toggleCart);
-        
-        // Close overlays on click
-        overlay.addEventListener('click', () => {
-            if (sidebar.classList.contains('active')) toggleMenu();
-            if (eventCartModal.classList.contains('active')) toggleCart();
-        });
-        
-        // Add event listeners to all "Add to Event Cart" buttons
-        document.querySelectorAll('.add-to-cart-btn').forEach(button => {
-            button.addEventListener('click', function() {
-                const itemName = this.getAttribute('data-item');
-                const itemPrice = this.getAttribute('data-price');
-                eventCart.addItem(itemName, itemPrice);
-            });
-            
-            // Add touch feedback
-            button.addEventListener('touchstart', function() {
-                this.style.transform = 'scale(0.95)';
-            });
-            
-            button.addEventListener('touchend', function() {
-                this.style.transform = '';
-            });
-        });
-        
-        // Checkout button
-        checkoutBtn.addEventListener('click', function() {
-            if (eventCart.getItemCount() === 0) {
-                eventCart.showNotification('Please add items to your cart first!');
-                return;
-            }
-            toggleCart();
-            setTimeout(() => {
-                window.location.href = 'event-cart.html';
-            }, 400);
-        });
-        
-        // Scroll effects
-        let lastScrollTop = 0;
-        window.addEventListener('scroll', function() {
-            const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-            
-            // Header scroll effect
-            if (currentScroll > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-            
-            // Scroll to top button visibility
-            if (currentScroll > 300) {
-                scrollTopBtn.classList.add('visible');
-            } else {
-                scrollTopBtn.classList.remove('visible');
-            }
-            
-            // Animate menu cards on scroll
-            const menuCards = document.querySelectorAll('.menu-card');
-            const sidesItems = document.querySelectorAll('.side-item');
-            
-            const screenPosition = window.innerHeight / 1.1;
-            
-            menuCards.forEach(card => {
-                const cardPosition = card.getBoundingClientRect().top;
-                if (cardPosition < screenPosition) {
-                    card.classList.add('visible');
-                }
-            });
-            
-            sidesItems.forEach(item => {
-                const itemPosition = item.getBoundingClientRect().top;
-                if (itemPosition < screenPosition) {
-                    item.classList.add('visible');
-                }
-            });
-            
-            lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
-        }, {passive: true});
-        
-        // Initialize visibility on load
+        // Animación de entrada para los elementos
         document.addEventListener('DOMContentLoaded', function() {
-            // Trigger scroll event to check initial visibility
-            setTimeout(() => {
-                window.dispatchEvent(new Event('scroll'));
-            }, 100);
+            const storyElements = document.querySelectorAll('.story-card, .founder-card, .story-conclusion');
             
-            // Add loading animation
-            document.body.style.opacity = '0';
-            document.body.style.transition = 'opacity 0.3s ease';
-            setTimeout(() => {
-                document.body.style.opacity = '1';
-            }, 100);
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
             
-            // Video se reproduce automáticamente en todos los dispositivos
-            const heroVideo = document.getElementById('heroVideo');
-            heroVideo.play().catch(e => {
-                console.log("Video autoplay fallback:", e);
+            storyElements.forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(el);
             });
         });
-        
-        // Scroll to top functionality
-        scrollTopBtn.addEventListener('click', function() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-        
-        // Prevent zoom on double tap for iOS
-        let lastTouchEnd = 0;
-        document.addEventListener('touchend', function(event) {
-            const now = (new Date()).getTime();
-            if (now - lastTouchEnd <= 300) {
-                event.preventDefault();
-            }
-            lastTouchEnd = now;
-        }, false);
-        
-        // Fix for iOS viewport height
-        function setVH() {
-            let vh = window.innerHeight * 0.01;
-            document.documentElement.style.setProperty('--vh', `${vh}px`);
-        }
-        
-        setVH();
-        window.addEventListener('resize', setVH);
-        window.addEventListener('orientationchange', setVH);
     </script>
 </body>
 </html>
