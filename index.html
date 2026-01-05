@@ -69,365 +69,6 @@
             50% { text-shadow: 0 0 10px var(--color-rojo-fuego), 0 0 15px var(--color-rojo-fuego); }
         }
 
-        /* --- VIDEO HERO SECTION --- */
-        .video-hero {
-            position: relative;
-            height: 100vh;
-            min-height: 600px;
-            overflow: hidden;
-            margin-top: 70px;
-        }
-
-        .video-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-            overflow: hidden;
-        }
-
-        .video-background {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: brightness(0.7);
-        }
-
-        .video-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, 
-                rgba(15, 15, 15, 0.8) 0%, 
-                rgba(219, 54, 6, 0.3) 100%);
-            z-index: 2;
-        }
-
-        .video-hero-content {
-            position: relative;
-            z-index: 3;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 0 1.5rem;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        /* Para cuando el video no carga */
-        .no-video .video-container {
-            background: 
-                linear-gradient(135deg, rgba(15,15,15,0.9) 0%, rgba(219,54,6,0.4) 100%),
-                url('https://images.unsplash.com/photo-1550547660-d9450f859349?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80');
-            background-size: cover;
-            background-position: center;
-        }
-
-        /* --- OUR STORY SECTION ACTUALIZADA --- */
-        .our-story-section {
-            padding: 5rem 1.5rem;
-            background: linear-gradient(135deg, #111 0%, #1a1a1a 100%);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .our-story-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, var(--color-rojo-fuego), var(--color-amarillo-cheddar));
-            z-index: 2;
-        }
-
-        .story-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 3;
-        }
-
-        .story-header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .story-title {
-            font-size: 3rem;
-            color: var(--color-amarillo-cheddar);
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 0px var(--color-rojo-fuego);
-            animation: fadeIn 1s ease-out;
-            position: relative;
-            display: inline-block;
-        }
-
-        .story-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 3px;
-            background: var(--color-rojo-fuego);
-            border-radius: 2px;
-        }
-
-        .story-subtitle {
-            font-size: 1.2rem;
-            color: var(--color-gris-claro);
-            font-style: italic;
-            animation: fadeIn 1s ease-out 0.3s both;
-        }
-
-        /* Contenido principal centrado */
-        .story-main-content {
-            max-width: 900px;
-            margin: 0 auto 4rem;
-            animation: fadeIn 1s ease-out 0.6s both;
-        }
-
-        .story-card {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 3rem 2.5rem;
-            border-radius: 20px;
-            border-left: 4px solid var(--color-amarillo-cheddar);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .story-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(219, 54, 6, 0.2);
-        }
-
-        .story-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, 
-                rgba(219, 54, 6, 0.1) 0%, 
-                rgba(248, 168, 20, 0.05) 100%);
-            z-index: 1;
-        }
-
-        .story-card-content {
-            position: relative;
-            z-index: 2;
-        }
-
-        .story-intro {
-            font-size: 1.3rem;
-            color: var(--color-amarillo-cheddar);
-            font-weight: bold;
-            margin-bottom: 2rem;
-            line-height: 1.6;
-            text-align: center;
-            padding-bottom: 1.5rem;
-            border-bottom: 1px solid rgba(248, 168, 20, 0.3);
-        }
-
-        .founder-profiles {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 3rem;
-            margin-top: 3rem;
-        }
-
-        .founder-card {
-            background: rgba(255, 255, 255, 0.03);
-            padding: 2rem;
-            border-radius: 15px;
-            border: 1px solid transparent;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .founder-card:hover {
-            border-color: var(--color-purpura-berry);
-            background: rgba(186, 105, 144, 0.05);
-        }
-
-        .founder-card.creative {
-            border-left: 4px solid var(--color-amarillo-cheddar);
-        }
-
-        .founder-card.driving {
-            border-left: 4px solid var(--color-purpura-berry);
-        }
-
-        .founder-icon {
-            width: 70px;
-            height: 70px;
-            background: linear-gradient(135deg, var(--color-rojo-fuego), var(--color-amarillo-cheddar));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1.5rem;
-            color: white;
-            font-size: 1.8rem;
-            box-shadow: 0 5px 15px rgba(219, 54, 6, 0.3);
-        }
-
-        .founder-card.driving .founder-icon {
-            background: linear-gradient(135deg, var(--color-purpura-berry), #9d5b85);
-        }
-
-        .founder-name {
-            font-size: 1.6rem;
-            color: white;
-            margin-bottom: 0.5rem;
-            font-family: 'Bangers', cursive;
-            letter-spacing: 1px;
-        }
-
-        .founder-role {
-            color: var(--color-gris-claro);
-            font-size: 1rem;
-            margin-bottom: 1.2rem;
-            font-style: italic;
-        }
-
-        .founder-description {
-            color: #ddd;
-            line-height: 1.7;
-            font-size: 1.05rem;
-        }
-
-        .story-conclusion {
-            margin-top: 3rem;
-            padding: 2rem;
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 15px;
-            border-top: 2px solid var(--color-mostaza-suave);
-            text-align: center;
-        }
-
-        .story-conclusion p {
-            color: #ddd;
-            font-size: 1.2rem;
-            line-height: 1.8;
-            margin-bottom: 1.5rem;
-        }
-
-        .conclusion-highlight {
-            color: var(--color-amarillo-cheddar);
-            font-weight: bold;
-            font-size: 1.3rem;
-            display: block;
-            margin-top: 1.5rem;
-            font-family: 'Bangers', cursive;
-            letter-spacing: 1px;
-        }
-
-        /* Timeline effect */
-        .timeline-dot {
-            width: 20px;
-            height: 20px;
-            background: var(--color-rojo-fuego);
-            border-radius: 50%;
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 1;
-            box-shadow: 0 0 15px var(--color-rojo-fuego);
-            animation: pulse 2s infinite;
-        }
-
-        .timeline-dot.top {
-            top: -10px;
-        }
-
-        .timeline-dot.bottom {
-            bottom: -10px;
-        }
-
-        /* Media Queries para tablets y desktop */
-        @media (min-width: 768px) {
-            .story-title {
-                font-size: 3.5rem;
-            }
-            
-            .founder-profiles {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 2.5rem;
-            }
-            
-            .story-card {
-                padding: 3.5rem;
-            }
-            
-            .story-intro {
-                font-size: 1.4rem;
-            }
-        }
-
-        @media (min-width: 1024px) {
-            .our-story-section {
-                padding: 6rem 1.5rem;
-            }
-            
-            .story-title {
-                font-size: 4rem;
-            }
-            
-            .founder-profiles {
-                gap: 3rem;
-            }
-            
-            .story-card {
-                padding: 4rem;
-            }
-            
-            .story-intro {
-                font-size: 1.5rem;
-                padding: 0 2rem 2rem;
-            }
-            
-            .founder-description {
-                font-size: 1.1rem;
-            }
-        }
-
-        /* Ajustes para móviles pequeños */
-        @media (max-width: 480px) {
-            .our-story-section {
-                padding: 3rem 1rem;
-            }
-            
-            .story-title {
-                font-size: 2.5rem;
-            }
-            
-            .story-card {
-                padding: 2rem 1.5rem;
-            }
-            
-            .story-intro {
-                font-size: 1.2rem;
-            }
-            
-            .founder-card {
-                padding: 1.5rem;
-            }
-        }
-
         /* --- HEADER MOBILE OPTIMIZED --- */
         header {
             display: flex;
@@ -464,7 +105,7 @@
             text-shadow: 2px 2px 0px var(--color-rojo-fuego);
         }
 
-        /* Cart Icon Mobile */
+        /* Cart Icon Mobile - MODIFICADO PARA EVENTOS */
         .cart-icon-header {
             position: absolute;
             right: 5%;
@@ -485,19 +126,6 @@
             transition: all 0.3s ease;
             font-size: 0.9rem;
             box-shadow: 0 3px 10px rgba(186, 105, 144, 0.3);
-        }
-
-        .cart-count {
-            background-color: var(--color-rojo-fuego);
-            color: white;
-            border-radius: 50%;
-            width: 20px;
-            height: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.8rem;
-            animation: pulse 1.5s infinite;
         }
 
         /* Hamburger Button Mobile */
@@ -621,189 +249,54 @@
             visibility: visible; 
         }
 
-        /* --- EVENT CART MODAL MOBILE --- */
-        .event-cart-modal {
-            position: fixed;
-            top: 0;
-            right: 0;
-            width: 100%;
+        /* --- HERO SECTION MOBILE --- */
+        .hero {
             height: 100vh;
-            background: var(--color-fondo-oscuro);
-            z-index: 2000;
-            transform: translateX(100%);
-            transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+            min-height: 600px;
             display: flex;
             flex-direction: column;
-            overflow: hidden;
-        }
-
-        .event-cart-modal.active {
-            transform: translateX(0);
-        }
-
-        .cart-header {
-            padding: 1.5rem;
-            background: linear-gradient(135deg, rgba(186, 105, 144, 0.2) 0%, rgba(219, 54, 6, 0.1) 100%);
-            border-bottom: 2px solid var(--color-purpura-berry);
+            justify-content: center;
+            align-items: center;
+            padding: 0 1.5rem;
+            background: 
+                linear-gradient(135deg, rgba(15,15,15,0.9) 0%, rgba(219,54,6,0.4) 100%),
+                url('https://source.unsplash.com/800x1200/?hotdog,streetfood');
+            background-size: cover;
+            background-position: center;
+            background-attachment: scroll;
             position: relative;
-            padding-top: 3rem;
-        }
-
-        .cart-header h2 {
-            color: var(--color-amarillo-cheddar);
-            font-size: 2rem;
+            overflow: hidden;
             text-align: center;
-            text-shadow: 1px 1px 0px var(--color-purpura-berry);
+            margin-top: 70px;
         }
 
-        .close-cart {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.3rem;
-            cursor: pointer;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.1);
-        }
-
-        .cart-items {
-            flex: 1;
-            padding: 1rem;
-            overflow-y: auto;
-            -webkit-overflow-scrolling: touch;
-        }
-
-        .cart-item {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 8px;
-            padding: 1rem;
-            margin-bottom: 0.8rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex;
-            flex-direction: column;
-            gap: 0.8rem;
-        }
-
-        .item-info h4 {
-            color: white;
-            font-size: 1.1rem;
-            margin-bottom: 0.3rem;
-        }
-
-        .item-price {
-            color: var(--color-amarillo-cheddar);
-            font-weight: bold;
-            font-size: 1rem;
-        }
-
-        .item-quantity {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            justify-content: space-between;
-        }
-
-        .quantity-btn {
-            background: var(--color-purpura-berry);
-            border: none;
-            color: white;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-            font-size: 1.1rem;
-        }
-
-        .quantity-input {
-            width: 60px;
-            text-align: center;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: white;
-            padding: 8px;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .remove-item {
-            background: none;
-            border: none;
-            color: #ff6b6b;
-            cursor: pointer;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            padding: 8px;
-        }
-
-        .cart-footer {
-            padding: 1.5rem;
-            background: linear-gradient(135deg, rgba(186, 105, 144, 0.2) 0%, rgba(219, 54, 6, 0.1) 100%);
-            border-top: 2px solid var(--color-purpura-berry);
-            padding-bottom: 2rem;
-        }
-
-        .cart-total {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.2rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .total-label {
-            color: var(--color-gris-claro);
-            font-size: 1.1rem;
-        }
-
-        .total-amount {
-            color: var(--color-amarillo-cheddar);
-            font-size: 1.5rem;
-            font-weight: bold;
-            font-family: 'Bangers', cursive;
-        }
-
-        .checkout-btn {
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 500px;
             width: 100%;
-            padding: 1rem;
-            background: linear-gradient(135deg, var(--color-purpura-berry) 0%, #9d5b85 100%);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
         }
 
-        .empty-cart {
-            text-align: center;
-            padding: 3rem 1rem;
+        .hero h1 {
+            font-size: 3.5rem;
+            line-height: 1;
+            margin-bottom: 1.2rem;
+            text-shadow: 3px 3px 0px var(--color-rojo-fuego);
+            animation: fadeIn 1.2s ease-out, fireGlow 3s infinite alternate;
+        }
+        
+        .hero h1 span {
+            color: var(--color-amarillo-cheddar);
+            display: inline-block;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
             color: var(--color-gris-claro);
-        }
-
-        .empty-cart i {
-            font-size: 2.5rem;
-            color: var(--color-purpura-berry);
-            margin-bottom: 1rem;
-            display: block;
+            animation: fadeIn 1.5s ease-out 0.3s both;
+            padding: 0 1rem;
         }
 
         /* --- BUTTONS MOBILE --- */
@@ -844,131 +337,19 @@
         }
 
         .promo-banner {
-            background: #000;
-            color: var(--color-amarillo-cheddar);
-            padding: 1.2rem 0;
+            background: linear-gradient(135deg, var(--color-rojo-fuego) 0%, #c42f04 100%);
+            color: white;
+            padding: 1rem;
             margin-bottom: 3rem;
             font-family: 'Bangers', cursive;
-            font-size: 1.6rem;
-            letter-spacing: 2px;
+            font-size: 1.4rem;
+            letter-spacing: 1px;
+            transform: rotate(-0.5deg);
+            box-shadow: 0 5px 15px rgba(219,54,6,0.4);
+            animation: pulse 2s infinite, fadeIn 1s ease-out;
             position: relative;
             overflow: hidden;
-            border-top: 3px solid var(--color-rojo-fuego);
-            border-bottom: 3px solid var(--color-rojo-fuego);
-            animation: none;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.8);
-        }
-
-        /* Contenedor del texto que se desplaza */
-        .scrolling-container {
-            display: flex;
-            white-space: nowrap;
-            animation: scrollText 20s linear infinite;
-            position: relative;
-            z-index: 2;
-            padding: 0.5rem 0;
-        }
-
-        /* Texto individual que se repite */
-        .scrolling-text {
-            display: inline-block;
-            padding: 0 40px;
-            position: relative;
-            text-shadow: 0 0 8px var(--color-amarillo-cheddar), 
-                         0 0 16px var(--color-rojo-fuego);
-        }
-
-        /* Estrellas separadoras */
-        .scrolling-text::before,
-        .scrolling-text::after {
-            content: '✦';
-            color: var(--color-rojo-fuego);
-            margin: 0 25px;
-            animation: twinkle 1.5s infinite alternate;
-        }
-
-        /* Efecto de brillo LED */
-        .promo-banner::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, 
-                transparent 0%, 
-                rgba(219, 54, 6, 0.2) 50%, 
-                transparent 100%);
-            animation: ledGlow 3s linear infinite;
-            z-index: 1;
-        }
-
-        /* Línea de puntos LED */
-        .promo-banner::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: repeating-linear-gradient(
-                90deg,
-                transparent,
-                transparent 12px,
-                rgba(219, 54, 6, 0.6) 12px,
-                rgba(219, 54, 6, 0.6) 15px
-            );
-            transform: translateY(-50%);
-            z-index: 1;
-            opacity: 0.7;
-        }
-
-        /* Animación de desplazamiento del texto */
-        @keyframes scrollText {
-            0% {
-                transform: translateX(0);
-            }
-            100% {
-                transform: translateX(-50%);
-            }
-        }
-
-        /* Animación del brillo LED */
-        @keyframes ledGlow {
-            0% {
-                opacity: 0.2;
-                transform: translateX(-100%);
-            }
-            50% {
-                opacity: 0.8;
-            }
-            100% {
-                opacity: 0.2;
-                transform: translateX(100%);
-            }
-        }
-
-        /* Animación de las estrellas */
-        @keyframes twinkle {
-            0% {
-                opacity: 0.4;
-                transform: scale(0.8);
-            }
-            100% {
-                opacity: 1;
-                transform: scale(1.2);
-                text-shadow: 0 0 12px var(--color-amarillo-cheddar);
-            }
-        }
-
-        /* Efecto al pasar el cursor */
-        .promo-banner:hover .scrolling-container {
-            animation-play-state: paused;
-        }
-
-        .promo-banner:hover::before {
-            animation-duration: 1s;
-            opacity: 0.8;
+            border-radius: 8px;
         }
 
         .section-title { 
@@ -1090,14 +471,6 @@
             font-family: 'Bangers', cursive;
             text-shadow: 1px 1px 0px rgba(0,0,0,0.5);
             white-space: nowrap;
-        }
-
-        .add-to-cart-btn {
-            padding: 10px 18px;
-            font-size: 0.95rem;
-            animation: none;
-            background: linear-gradient(135deg, var(--color-purpura-berry) 0%, #9d5b85 100%);
-            min-width: 120px;
         }
 
         .combo-badge {
@@ -1434,7 +807,7 @@
                 font-size: 17px;
             }
             
-            .video-hero h1 {
+            .hero h1 {
                 font-size: 4rem;
             }
             
@@ -1471,7 +844,7 @@
 
         /* --- MEDIA QUERIES FOR DESKTOP --- */
         @media (min-width: 1024px) {
-            .video-hero {
+            .hero {
                 background-attachment: fixed;
             }
             
@@ -1488,40 +861,15 @@
             .promo-features {
                 grid-template-columns: repeat(4, 1fr);
             }
-            
-            .event-cart-modal {
-                width: 450px;
-            }
-        }
-
-        /* Media query para dispositivos móviles */
-        @media (max-width: 768px) {
-            .video-hero {
-                min-height: 500px;
-            }
-            
-            .promo-banner {
-                font-size: 1.4rem;
-                padding: 1rem 0;
-            }
-            
-            .scrolling-text {
-                padding: 0 25px;
-            }
-            
-            .scrolling-text::before,
-            .scrolling-text::after {
-                margin: 0 15px;
-            }
         }
 
         /* --- IOS SAFARI FIXES --- */
         @supports (-webkit-touch-callout: none) {
-            .video-hero {
+            .hero {
                 background-attachment: scroll;
             }
             
-            .btn, .add-to-cart-btn, .checkout-btn {
+            .btn, .event-cta-btn {
                 min-height: 44px;
             }
             
@@ -1534,29 +882,6 @@
 <body>
     <div class="overlay" id="overlay"></div>
     
-    <div class="event-cart-modal" id="eventCartModal">
-        <div class="cart-header">
-            <button class="close-cart" id="closeCartBtn">
-                <i class="fas fa-times"></i>
-            </button>
-            <h2>🛒 Event Cart</h2>
-            <p style="color: #ccc; text-align: center; margin-top: 5px; font-size: 0.9rem;">For your special event booking</p>
-        </div>
-        
-        <div class="cart-items" id="cartItemsContainer">
-            </div>
-        
-        <div class="cart-footer">
-            <div class="cart-total">
-                <span class="total-label">Total Estimate:</span>
-                <span class="total-amount" id="cartTotal">$0.00</span>
-            </div>
-            <button class="checkout-btn" id="checkoutBtn">
-                <i class="fas fa-calendar-check"></i> Proceed to Event Booking
-            </button>
-        </div>
-    </div>
-    
     <div class="scroll-top" id="scrollTop">
         <i class="fas fa-chevron-up"></i>
     </div>
@@ -1568,16 +893,15 @@
         <div class="logo-text" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">
             SUP<span>DOG</span>
         </div>
-        <button class="cart-icon-header" id="cartBtn">
-            <i class="fas fa-calendar-alt"></i>
-            <span class="cart-count" id="cartCount">0</span>
+        <!-- Botón modificado para ir directamente a eventos -->
+        <button class="cart-icon-header" id="eventBtn" onclick="window.location.href='event-cart.html'">
+            <i class="fas fa-calendar-alt"></i> Eventos
         </button>
     </header>
 
     <nav class="sidebar" id="sidebar" aria-label="Main navigation">
         <ul>
             <li><a href="#home" class="menu-link" onclick="toggleMenu()">HOME</a></li>
-            <li><a href="#our-story" class="menu-link" onclick="toggleMenu()">OUR STORY</a></li>
             <li><a href="#menu" class="menu-link" onclick="toggleMenu()">MENU</a></li>
             <li><a href="#sides" class="menu-link" onclick="toggleMenu()">SIDES</a></li>
             <li><a href="#location" class="menu-link" onclick="toggleMenu()">LOCATION</a></li>
@@ -1601,19 +925,8 @@
         </div>
     </nav>
 
-    <section id="home" class="video-hero">
-        <div class="video-container">
-            <!-- Video de fondo - Hot Dogs en la parrilla -->
-            <video class="video-background" autoplay muted loop playsinline id="heroVideo">
-                <source src="hotdog-portada.mp4" type="video/mp4">
-                <!-- Respaldo si el video local no carga -->
-                <source src="https://assets.mixkit.co/videos/preview/mixkit-sizzling-hot-dogs-on-a-grill-40156-large.mp4" type="video/mp4">
-                Tu navegador no soporta videos HTML5.
-            </video>
-            <div class="video-overlay"></div>
-        </div>
-        
-        <div class="video-hero-content">
+    <section id="home" class="hero">
+        <div class="hero-content">
             <h1 class="animate-load">SUP<span>DOG</span></h1>
             <p class="animate-load delay-1">Wurst Behavior. Best Flavor. <br> Only in Grapevine, TX.</p>
             <a href="#menu" class="btn animate-load delay-2">
@@ -1622,67 +935,9 @@
         </div>
     </section>
 
-    <!-- SECCIÓN OUR STORY ACTUALIZADA -->
-    <section id="our-story" class="our-story-section">
-        <div class="timeline-dot top"></div>
-        
-        <div class="story-container">
-            <div class="story-header">
-                <h2 class="story-title">OUR STORY</h2>
-                <p class="story-subtitle">Born from a need to express who we truly are</p>
-            </div>
-            
-            <div class="story-main-content">
-                <div class="story-card">
-                    <div class="story-card-content">
-                        <p class="story-intro">
-                            Sup Dog was born as much more than just an idea; it was born from a need to express who we truly are.
-                        </p>
-                        
-                        <div class="founder-profiles">
-                            <div class="founder-card creative">
-                                <div class="founder-icon">
-                                    <i class="fas fa-chef-hat"></i>
-                                </div>
-                                <h3 class="founder-name">Jonathan Sotelo</h3>
-                                <p class="founder-role">Creative Soul & Head Chef</p>
-                                <p class="founder-description">
-                                    With over 18 years in the industry, Jonathan has explored diverse culinary cultures, gathering experiences that he now pours into every recipe. For him, Sup Dog is just the beginning—a future built on tireless effort, absolute dedication, and above all, walking hand-in-hand with God.
-                                </p>
-                            </div>
-                            
-                            <div class="founder-card driving">
-                                <div class="founder-icon">
-                                    <i class="fas fa-rocket"></i>
-                                </div>
-                                <h3 class="founder-name">María Colmenarez</h3>
-                                <p class="founder-role">Driving Force & Visionary</p>
-                                <p class="founder-description">
-                                    Every great vision needs a driving force, and that is where María comes in. She is the perfect match—a tireless woman who always strives for more. She was the key to propelling this dream forward, turning the Chef's experience and technique into a tangible reality.
-                                </p>
-                            </div>
-                        </div>
-                        
-                        <div class="story-conclusion">
-                            <p>
-                                For us, Sup Dog is our way of communicating. It represents an informal, genuine, and authentic connection. Because at the end of the day, Sup Dog isn't just a greeting; it is an invitation to be yourself.
-                            </p>
-                            <span class="conclusion-highlight">Wurst Behavior. Best Flavor.</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="timeline-dot bottom"></div>
-    </section>
-
     <section id="menu" class="menu-section">
         <div class="promo-banner">
-            <div class="scrolling-container">
-                <div class="scrolling-text">★ EVERY THURSDAY: BOGO (BUY ONE GET ONE) ★</div>
-                <div class="scrolling-text">★ EVERY THURSDAY: BOGO (BUY ONE GET ONE) ★</div>
-            </div>
+            ★ EVERY THURSDAY: BOGO (BUY ONE GET ONE) ★
         </div>
 
         <h2 class="section-title">The Dogs</h2>
@@ -1697,9 +952,7 @@
                     <p>Beef Frank, Pico De Gallo, Jalapeños, Ketchup & Mustard.</p>
                     <div class="price-row">
                         <span class="price">$12.50</span>
-                        <button class="btn add-to-cart-btn" data-item="Mexican Dog" data-price="12.50">
-                            Add to Cart
-                        </button>
+                        <!-- Botón de Add to Cart eliminado -->
                     </div>
                 </div>
             </div>
@@ -1711,9 +964,7 @@
                     <p>Bratwurst, Grilled Onions, Sauerkraut, Spicy German Mustard.</p>
                     <div class="price-row">
                         <span class="price">$12.50</span>
-                        <button class="btn add-to-cart-btn" data-item="German Dog" data-price="12.50">
-                            Add to Cart
-                        </button>
+                        <!-- Botón de Add to Cart eliminado -->
                     </div>
                 </div>
             </div>
@@ -1725,9 +976,7 @@
                     <p>Jalapeño Sausage, Pineapple, Grilled Onions, Bacon Bites.</p>
                     <div class="price-row">
                         <span class="price">$12.50</span>
-                        <button class="btn add-to-cart-btn" data-item="Hawaiian Dog" data-price="12.50">
-                            Add to Cart
-                        </button>
+                        <!-- Botón de Add to Cart eliminado -->
                     </div>
                 </div>
             </div>
@@ -1740,9 +989,7 @@
                     <p>Beef Frank, Poppy Seeds Bun, Yellow Mustard, Neon Green Pickles.</p>
                     <div class="price-row">
                         <span class="price">$12.50</span>
-                        <button class="btn add-to-cart-btn" data-item="Chicago Dog" data-price="12.50">
-                            Add to Cart
-                        </button>
+                        <!-- Botón de Add to Cart eliminado -->
                     </div>
                 </div>
             </div>
@@ -1755,9 +1002,7 @@
                     <p>Beef Frank, Chipotle Sauce, Mayo, Mustard, Onions, Fries, Parmesan, Bacon.</p>
                     <div class="price-row">
                         <span class="price">$12.50</span>
-                        <button class="btn add-to-cart-btn" data-item="Trainwreck" data-price="12.50">
-                            Add to Cart
-                        </button>
+                        <!-- Botón de Add to Cart eliminado -->
                     </div>
                 </div>
             </div>
@@ -1769,9 +1014,7 @@
                     <p>Jalapeño Sausage, Corn, Chipotle Sauce, Parmesan Cheese, Cilantro.</p>
                     <div class="price-row">
                         <span class="price">$12.50</span>
-                        <button class="btn add-to-cart-btn" data-item="Tijuana Dog" data-price="12.50">
-                            Add to Cart
-                        </button>
+                        <!-- Botón de Add to Cart eliminado -->
                     </div>
                 </div>
             </div>
@@ -1784,9 +1027,7 @@
                     <p>Beef Frank, Ketchup, Jello, Kids Juice.</p>
                     <div class="price-row">
                         <span class="price">$10.50</span>
-                        <button class="btn add-to-cart-btn" data-item="Kids Dog" data-price="10.50">
-                            Add to Cart
-                        </button>
+                        <!-- Botón de Add to Cart eliminado -->
                     </div>
                 </div>
             </div>
@@ -1798,9 +1039,7 @@
                     <p>Bunless. Bratwurst, Grilled Onions, Sauerkraut.</p>
                     <div class="price-row">
                         <span class="price">$12.50</span>
-                        <button class="btn add-to-cart-btn" data-item="All Naked" data-price="12.50">
-                            Add to Cart
-                        </button>
+                        <!-- Botón de Add to Cart eliminado -->
                     </div>
                 </div>
             </div>
@@ -1813,53 +1052,39 @@
                 <h3 style="color: var(--color-amarillo-cheddar); font-size: 1.8rem; margin-bottom: 0.5rem;">SOFT PRETZELS</h3>
                 <p style="color: #ddd; font-size: 1rem; margin-bottom: 1rem;">Honey Mustard & Beer Cheese Sauce included.</p>
                 <div style="font-size: 2.2rem; color: white; font-weight: bold; margin: 1.2rem 0; text-shadow: 1px 1px 0px rgba(0,0,0,0.5);">$9.50</div>
-                <button class="btn add-to-cart-btn" data-item="Soft Pretzels" data-price="9.50" style="margin-top: 0.5rem; width: 100%; max-width: 200px;">
-                    Add to Event Cart
-                </button>
+                <!-- Botón de Add to Event Cart eliminado -->
             </div>
 
             <div class="sides-grid">
                 <div class="side-item">
                     <h4>Creamy Slaw</h4> 
                     <span class="side-price">$4.00</span>
-                    <button class="btn add-to-cart-btn" data-item="Creamy Slaw" data-price="4.00" style="margin-top: 10px; padding: 8px 12px; font-size: 0.9rem; width: 100%;">
-                        Add to Cart
-                    </button>
+                    <!-- Botón de Add to Cart eliminado -->
                 </div>
                 <div class="side-item">
                     <h4>Chips Bag</h4> 
                     <span class="side-price">$3.00</span>
-                    <button class="btn add-to-cart-btn" data-item="Chips Bag" data-price="3.00" style="margin-top: 10px; padding: 8px 12px; font-size: 0.9rem; width: 100%;">
-                        Add to Cart
-                    </button>
+                    <!-- Botón de Add to Cart eliminado -->
                 </div>
                 <div class="side-item">
                     <h4>Corn Salad</h4> 
                     <span class="side-price">$4.00</span>
-                    <button class="btn add-to-cart-btn" data-item="Corn Salad" data-price="4.00" style="margin-top: 10px; padding: 8px 12px; font-size: 0.9rem; width: 100%;">
-                        Add to Cart
-                    </button>
+                    <!-- Botón de Add to Cart eliminado -->
                 </div>
                 <div class="side-item">
                     <h4>Potato Salad</h4> 
                     <span class="side-price">$4.00</span>
-                    <button class="btn add-to-cart-btn" data-item="Potato Salad" data-price="4.00" style="margin-top: 10px; padding: 8px 12px; font-size: 0.9rem; width: 100%;">
-                        Add to Cart
-                    </button>
+                    <!-- Botón de Add to Cart eliminado -->
                 </div>
                 <div class="side-item">
                     <h4>Baked Beans</h4> 
                     <span class="side-price">$6.00</span>
-                    <button class="btn add-to-cart-btn" data-item="Baked Beans" data-price="6.00" style="margin-top: 10px; padding: 8px 12px; font-size: 0.9rem; width: 100%;">
-                        Add to Cart
-                    </button>
+                    <!-- Botón de Add to Cart eliminado -->
                 </div>
                 <div class="side-item" style="border-color: var(--color-rojo-fuego); background: linear-gradient(145deg, #2a1a1a, #221010);">
                     <h4 style="color: white;">DRINKS (Cans/Water)</h4>
                     <span class="side-price" style="color: var(--color-amarillo-cheddar);">$2.25</span>
-                    <button class="btn add-to-cart-btn" data-item="Drinks (Cans/Water)" data-price="2.25" style="margin-top: 10px; padding: 8px 12px; font-size: 0.9rem; width: 100%; background: var(--color-rojo-fuego);">
-                        Add to Cart
-                    </button>
+                    <!-- Botón de Add to Cart eliminado -->
                 </div>
             </div>
         </div>
@@ -1901,8 +1126,8 @@
                     </div>
                 </div>
                 
-                <button class="btn event-cta-btn" id="bookEventBtn">
-                    🎪 BOOK EVENT <i class="fas fa-arrow-right"></i>
+                <button class="btn event-cta-btn" id="bookEventBtn" onclick="window.location.href='event-cart.html'">
+                    🎪 BOOK EVENT NOW <i class="fas fa-arrow-right"></i>
                 </button>
                 
                 <p style="margin-top: 1.5rem; color: #ccc; font-size: 0.9rem;">
@@ -1970,203 +1195,12 @@
     </footer>
 
     <script>
-        // Optimized for mobile performance
-        class EventCart {
-            constructor() {
-                this.items = JSON.parse(localStorage.getItem('supdogEventCart')) || [];
-                this.updateCartDisplay();
-                this.setupTouchEvents();
-            }
-
-            setupTouchEvents() {
-                // Prevent double-tap zoom on buttons
-                document.querySelectorAll('.btn, .add-to-cart-btn, .checkout-btn').forEach(btn => {
-                    btn.addEventListener('touchstart', function(e) {
-                        if (!this.classList.contains('touched')) {
-                            this.classList.add('touched');
-                            setTimeout(() => {
-                                this.classList.remove('touched');
-                            }, 300);
-                        }
-                    }, {passive: true});
-                });
-            }
-
-            addItem(name, price) {
-                const existingItem = this.items.find(item => item.name === name);
-                
-                if (existingItem) {
-                    existingItem.quantity += 1;
-                } else {
-                    this.items.push({
-                        name: name,
-                        price: parseFloat(price),
-                        quantity: 1
-                    });
-                }
-                
-                this.saveCart();
-                this.updateCartDisplay();
-                this.showNotification(`${name} added to event cart!`);
-            }
-
-            removeItem(index) {
-                this.items.splice(index, 1);
-                this.saveCart();
-                this.updateCartDisplay();
-            }
-
-            updateQuantity(index, quantity) {
-                quantity = parseInt(quantity);
-                if (isNaN(quantity) || quantity <= 0) {
-                    this.removeItem(index);
-                } else {
-                    this.items[index].quantity = quantity;
-                    this.saveCart();
-                    this.updateCartDisplay();
-                }
-            }
-
-            getTotal() {
-                return this.items.reduce((total, item) => {
-                    return total + (item.price * item.quantity);
-                }, 0);
-            }
-
-            getItemCount() {
-                return this.items.reduce((count, item) => count + item.quantity, 0);
-            }
-
-            saveCart() {
-                localStorage.setItem('supdogEventCart', JSON.stringify(this.items));
-            }
-
-            clearCart() {
-                this.items = [];
-                this.saveCart();
-                this.updateCartDisplay();
-            }
-
-            updateCartDisplay() {
-                const cartCount = document.getElementById('cartCount');
-                const cartItemsContainer = document.getElementById('cartItemsContainer');
-                const cartTotal = document.getElementById('cartTotal');
-                
-                // Update cart count
-                cartCount.textContent = this.getItemCount();
-                
-                // Update cart items display
-                if (this.items.length === 0) {
-                    cartItemsContainer.innerHTML = `
-                        <div class="empty-cart">
-                            <i class="fas fa-calendar-times"></i>
-                            <h3>Your event cart is empty</h3>
-                            <p>Add items from our menu to start planning your event!</p>
-                        </div>
-                    `;
-                } else {
-                    cartItemsContainer.innerHTML = this.items.map((item, index) => `
-                        <div class="cart-item">
-                            <div class="item-info">
-                                <h4>${item.name}</h4>
-                                <div class="item-price">$${(item.price * item.quantity).toFixed(2)}</div>
-                            </div>
-                            <div class="item-quantity">
-                                <button class="quantity-btn" onclick="eventCart.decreaseQuantity(${index})">-</button>
-                                <input type="number" class="quantity-input" value="${item.quantity}" min="1" 
-                                       onchange="eventCart.updateQuantity(${index}, this.value)"
-                                       oninput="eventCart.updateQuantity(${index}, this.value)">
-                                <button class="quantity-btn" onclick="eventCart.increaseQuantity(${index})">+</button>
-                                <button class="remove-item" onclick="eventCart.removeItem(${index})">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </div>
-                        </div>
-                    `).join('');
-                }
-                
-                // Update total
-                cartTotal.textContent = `$${this.getTotal().toFixed(2)}`;
-            }
-
-            increaseQuantity(index) {
-                this.items[index].quantity += 1;
-                this.saveCart();
-                this.updateCartDisplay();
-            }
-
-            decreaseQuantity(index) {
-                if (this.items[index].quantity > 1) {
-                    this.items[index].quantity -= 1;
-                    this.saveCart();
-                    this.updateCartDisplay();
-                } else {
-                    this.removeItem(index);
-                }
-            }
-
-            showNotification(message) {
-                // Remove existing notification
-                const existingNotification = document.querySelector('.cart-notification');
-                if (existingNotification) {
-                    existingNotification.remove();
-                }
-
-                // Create notification element
-                const notification = document.createElement('div');
-                notification.className = 'cart-notification';
-                notification.style.cssText = `
-                    position: fixed;
-                    top: 80px;
-                    right: 50%;
-                    transform: translateX(50%);
-                    background: linear-gradient(135deg, var(--color-purpura-berry), var(--color-rojo-fuego));
-                    color: white;
-                    padding: 12px 20px;
-                    border-radius: 10px;
-                    z-index: 9999;
-                    font-weight: bold;
-                    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-                    animation: fadeIn 0.3s ease-out;
-                    display: flex;
-                    align-items: center;
-                    gap: 10px;
-                    max-width: 90%;
-                    text-align: center;
-                `;
-                
-                notification.innerHTML = `
-                    <i class="fas fa-check-circle"></i>
-                    <span>${message}</span>
-                `;
-                
-                document.body.appendChild(notification);
-                
-                // Remove notification after 3 seconds
-                setTimeout(() => {
-                    notification.style.animation = 'fadeIn 0.3s ease-out reverse';
-                    setTimeout(() => {
-                        if (notification.parentNode) {
-                            notification.parentNode.removeChild(notification);
-                        }
-                    }, 300);
-                }, 2000);
-            }
-        }
-
-        // Initialize cart
-        const eventCart = new EventCart();
-
         // DOM Elements
         const menuBtn = document.getElementById('menuBtn');
         const sidebar = document.getElementById('sidebar');
         const overlay = document.getElementById('overlay');
         const header = document.getElementById('mainHeader');
         const scrollTopBtn = document.getElementById('scrollTop');
-        const cartBtn = document.getElementById('cartBtn');
-        const closeCartBtn = document.getElementById('closeCartBtn');
-        const eventCartModal = document.getElementById('eventCartModal');
-        const checkoutBtn = document.getElementById('checkoutBtn');
         const bookEventBtn = document.getElementById('bookEventBtn');
         
         // Toggle Menu Function
@@ -2188,54 +1222,16 @@
             }
         }
         
-        // Toggle Cart Function
-        function toggleCart() {
-            eventCartModal.classList.toggle('active');
-            overlay.classList.toggle('active');
-            document.body.style.overflow = eventCartModal.classList.contains('active') ? 'hidden' : 'auto';
-        }
-        
         // Event Listeners
         menuBtn.addEventListener('click', toggleMenu);
-        cartBtn.addEventListener('click', toggleCart);
-        closeCartBtn.addEventListener('click', toggleCart);
-        bookEventBtn.addEventListener('click', toggleCart);
         
-        // Close overlays on click
-        overlay.addEventListener('click', () => {
-            if (sidebar.classList.contains('active')) toggleMenu();
-            if (eventCartModal.classList.contains('active')) toggleCart();
+        // Book Event button - Redirige directamente a event-cart.html
+        bookEventBtn.addEventListener('click', function() {
+            window.location.href = 'event-cart.html';
         });
         
-        // Add event listeners to all "Add to Event Cart" buttons
-        document.querySelectorAll('.add-to-cart-btn').forEach(button => {
-            button.addEventListener('click', function() {
-                const itemName = this.getAttribute('data-item');
-                const itemPrice = this.getAttribute('data-price');
-                eventCart.addItem(itemName, itemPrice);
-            });
-            
-            // Add touch feedback
-            button.addEventListener('touchstart', function() {
-                this.style.transform = 'scale(0.95)';
-            });
-            
-            button.addEventListener('touchend', function() {
-                this.style.transform = '';
-            });
-        });
-        
-        // Checkout button
-        checkoutBtn.addEventListener('click', function() {
-            if (eventCart.getItemCount() === 0) {
-                eventCart.showNotification('Please add items to your cart first!');
-                return;
-            }
-            toggleCart();
-            setTimeout(() => {
-                window.location.href = 'event-cart.html';
-            }, 400);
-        });
+        // Close menu when clicking on overlay
+        overlay.addEventListener('click', toggleMenu);
         
         // Scroll effects
         let lastScrollTop = 0;
@@ -2292,31 +1288,6 @@
             setTimeout(() => {
                 document.body.style.opacity = '1';
             }, 100);
-            
-            // Video se reproduce automáticamente en todos los dispositivos
-            const heroVideo = document.getElementById('heroVideo');
-            heroVideo.play().catch(e => {
-                console.log("Video autoplay fallback:", e);
-            });
-            
-            // Animación de entrada para la sección Our Story
-            const storyElements = document.querySelectorAll('.story-card, .founder-card, .story-conclusion');
-            
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                    }
-                });
-            }, { threshold: 0.1 });
-            
-            storyElements.forEach(el => {
-                el.style.opacity = '0';
-                el.style.transform = 'translateY(20px)';
-                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-                observer.observe(el);
-            });
         });
         
         // Scroll to top functionality
