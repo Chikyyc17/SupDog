@@ -1,0 +1,46 @@
+# robots.txt para SupDog Hot Dogs
+# Generado: Enero 2025
+
+User-agent: *
+Allow: /
+Disallow: /admin.html
+Disallow: /admin/
+Disallow: /*.php$
+Disallow: /*.json$
+Disallow: /*.sql$
+
+# Sitemap
+Sitemap: https://supdog.com/sitemap.xml
+
+# Crawl delay
+Crawl-delay: 2
+
+# Patrones específicos
+Allow: /*.html$
+Allow: /*.css$
+Allow: /*.js$
+
+# User-agents específicos
+User-agent: Googlebot
+Allow: /
+Disallow: /admin.html
+
+User-agent: Bingbot
+Allow: /
+Disallow: /admin.html
+
+User-agent: Slurp
+Allow: /
+Disallow: /admin.html
+
+User-agent: DuckDuckBot
+Allow: /
+Disallow: /admin.html
+
+User-agent: Baiduspider
+Allow: /
+Disallow: /admin.html
+
+User-agent: YandexBot
+Allow: /
+Disallow: /admin.html

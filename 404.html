@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página no encontrada - SupDog</title>
+    <style>
+        :root {
+            --color-rojo-fuego: #DB3606;
+            --color-amarillo-cheddar: #F8A814;
+            --color-purpura-berry: #BA6990;
+            --color-fondo-oscuro: #0f0f0f;
+            --color-texto-claro: #ffffff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+            color: var(--color-texto-claro);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .error-container {
+            max-width: 600px;
+            padding: 3rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            border: 2px solid var(--color-purpura-berry);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .brand-logo {
+            font-family: 'Bangers', cursive;
+            font-size: 3rem;
+            color: white;
+            text-shadow: 2px 2px 0px var(--color-rojo-fuego);
+            margin-bottom: 2rem;
+        }
+        
+        .brand-logo span {
+            color: var(--color-amarillo-cheddar);
+        }
+        
+        h1 {
+            color: var(--color-amarillo-cheddar);
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.5);
+        }
+        
+        h2 {
+            color: white;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        p {
+            color: #ccc;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+        
+        .hotdog-icon {
+            font-size: 5rem;
+            margin-bottom: 2rem;
+            animation: float 3s infinite ease-in-out;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .back-button {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--color-purpura-berry) 0%, #9d5b85 100%);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+        
+        .back-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(186, 105, 144, 0.4);
+        }
+        
+        .links {
+            margin-top: 2rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .links a {
+            color: var(--color-amarillo-cheddar);
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .links a:hover {
+            background: rgba(248, 168, 20, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        @media (max-width: 768px) {
+            .error-container {
+                padding: 2rem;
+            }
+            
+            .brand-logo {
+                font-size: 2.5rem;
+            }
+            
+            h1 {
+                font-size: 3rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="error-container">
+        <div class="brand-logo">SUP<span>DOG</span></div>
+        
+        <div class="hotdog-icon">
+            <i class="fas fa-hotdog"></i>
+        </div>
+        
+        <h1>404</h1>
+        <h2>¡Este hot dog se fue de picnic!</h2>
+        
+        <p>La página que buscas no existe o ha sido movida. Pero no te preocupes, tenemos muchos otros hot dogs deliciosos esperándote en nuestra página principal.</p>
+        
+        <button class="back-button" onclick="window.location.href='index.html'">
+            <i class="fas fa-home"></i> Volver al Inicio
+        </button>
+        
+        <div class="links">
+            <a href="index.html#menu">Ver Menú</a>
+            <a href="event-cart.html">Reservar Evento</a>
+            <a href="index.html#location">Ubicación</a>
+            <a href="index.html#contact">Contacto</a>
+        </div>
+    </div>
+</body>
+</html>
