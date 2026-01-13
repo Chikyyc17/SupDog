@@ -1137,6 +1137,141 @@
             box-shadow: 0 6px 16px rgba(219, 54, 6, 0.4);
         }
 
+        /* --- LEGAL CONSENT BANNER --- */
+        .legal-consent-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a1a1a 100%);
+            color: white;
+            padding: 1.5rem;
+            z-index: 9999;
+            box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.8);
+            border-top: 3px solid var(--color-purpura-berry);
+            transform: translateY(100%);
+            transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+
+        .legal-consent-banner.active {
+            transform: translateY(0);
+        }
+
+        .legal-consent-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .legal-consent-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .legal-consent-text h3 {
+            color: var(--color-amarillo-cheddar);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            font-family: 'Bangers', cursive;
+        }
+
+        .legal-consent-text p {
+            color: #ddd;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .legal-consent-text a {
+            color: var(--color-mostaza-suave);
+            text-decoration: underline;
+            transition: color 0.3s ease;
+        }
+
+        .legal-consent-text a:hover {
+            color: var(--color-amarillo-cheddar);
+        }
+
+        .legal-consent-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .legal-consent-btn {
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-size: 1rem;
+            min-width: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .legal-consent-reject {
+            background: transparent;
+            color: white;
+            border: 2px solid #666;
+        }
+
+        .legal-consent-accept {
+            background: linear-gradient(135deg, var(--color-purpura-berry) 0%, #9d5b85 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(186, 105, 144, 0.3);
+        }
+
+        .legal-consent-reject:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--color-rojo-fuego);
+        }
+
+        .legal-consent-accept:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(186, 105, 144, 0.4);
+        }
+
+        .legal-consent-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: transparent;
+            border: none;
+            color: #aaa;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+        }
+
+        .legal-consent-close:hover {
+            color: var(--color-rojo-fuego);
+        }
+
+        /* Para dispositivos móviles */
+        @media (max-width: 768px) {
+            .legal-consent-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .legal-consent-buttons {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .legal-consent-btn {
+                flex: 1;
+                min-width: 140px;
+            }
+        }
+
         /* --- MEDIA QUERIES FOR TABLETS --- */
         @media (min-width: 768px) {
             html {
@@ -1241,6 +1376,36 @@
     </style>
 </head>
 <body>
+    <!-- BANNER DE CONSENTIMIENTO LEGAL -->
+    <div class="legal-consent-banner" id="legalConsentBanner">
+        <button class="legal-consent-close" id="legalConsentClose">
+            <i class="fas fa-times"></i>
+        </button>
+        
+        <div class="legal-consent-content">
+            <div class="legal-consent-text">
+                <h3><i class="fas fa-balance-scale"></i> Consentimiento Legal</h3>
+                <p>
+                    Utilizamos cookies y tecnologías similares para mejorar tu experiencia en nuestro sitio. 
+                    Al continuar navegando, aceptas nuestra 
+                    <a href="politica-privacidad.html">Política de Privacidad</a>, 
+                    <a href="terminos-condiciones.html">Términos y Condiciones</a>, y 
+                    <a href="aviso-legal.html">Aviso Legal</a>. 
+                    Tu privacidad es importante para nosotros.
+                </p>
+            </div>
+            
+            <div class="legal-consent-buttons">
+                <button class="legal-consent-btn legal-consent-reject" id="rejectConsent">
+                    <i class="fas fa-times-circle"></i> Rechazar
+                </button>
+                <button class="legal-consent-btn legal-consent-accept" id="acceptConsent">
+                    <i class="fas fa-check-circle"></i> Aceptar
+                </button>
+            </div>
+        </div>
+    </div>
+
     <div class="overlay" id="overlay"></div>
     
     <div class="event-cart-modal" id="eventCartModal">
@@ -1968,6 +2133,17 @@
             heroVideo.play().catch(e => {
                 console.log("Video autoplay fallback:", e);
             });
+            
+            // Mostrar banner de consentimiento legal si no hay preferencia guardada
+            const legalConsent = localStorage.getItem('supdogLegalConsent');
+            const legalConsentBanner = document.getElementById('legalConsentBanner');
+            
+            if (!legalConsent) {
+                // Mostrar el banner después de 2 segundos
+                setTimeout(() => {
+                    legalConsentBanner.classList.add('active');
+                }, 2000);
+            }
         });
         
         // Scroll to top functionality
@@ -1997,6 +2173,130 @@
         setVH();
         window.addEventListener('resize', setVH);
         window.addEventListener('orientationchange', setVH);
+
+        // ============================================
+        // BANNER DE CONSENTIMIENTO LEGAL
+        // ============================================
+        
+        const legalConsentBanner = document.getElementById('legalConsentBanner');
+        const acceptConsentBtn = document.getElementById('acceptConsent');
+        const rejectConsentBtn = document.getElementById('rejectConsent');
+        const legalConsentCloseBtn = document.getElementById('legalConsentClose');
+
+        // Función para cerrar el banner
+        function closeLegalConsentBanner() {
+            legalConsentBanner.classList.remove('active');
+            // Asegurarse de que el banner no vuelva a aparecer
+            setTimeout(() => {
+                legalConsentBanner.style.display = 'none';
+            }, 400);
+        }
+
+        // Aceptar consentimiento
+        acceptConsentBtn.addEventListener('click', function() {
+            localStorage.setItem('supdogLegalConsent', 'accepted');
+            localStorage.setItem('supdogLegalConsentDate', new Date().toISOString());
+            
+            // Mostrar mensaje de confirmación
+            eventCart.showNotification('¡Gracias por aceptar nuestros términos!');
+            
+            closeLegalConsentBanner();
+        });
+
+        // Rechazar consentimiento
+        rejectConsentBtn.addEventListener('click', function() {
+            localStorage.setItem('supdogLegalConsent', 'rejected');
+            localStorage.setItem('supdogLegalConsentDate', new Date().toISOString());
+            
+            // Mostrar mensaje informativo
+            const notification = document.createElement('div');
+            notification.className = 'cart-notification';
+            notification.style.cssText = `
+                position: fixed;
+                top: 80px;
+                right: 50%;
+                transform: translateX(50%);
+                background: linear-gradient(135deg, #333, #555);
+                color: white;
+                padding: 12px 20px;
+                border-radius: 10px;
+                z-index: 9999;
+                font-weight: bold;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+                animation: fadeIn 0.3s ease-out;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                max-width: 90%;
+                text-align: center;
+            `;
+            
+            notification.innerHTML = `
+                <i class="fas fa-info-circle"></i>
+                <span>Algunas funciones pueden estar limitadas</span>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Remover notificación después de 3 segundos
+            setTimeout(() => {
+                notification.style.animation = 'fadeIn 0.3s ease-out reverse';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
+            }, 3000);
+            
+            closeLegalConsentBanner();
+        });
+
+        // Cerrar banner (X)
+        legalConsentCloseBtn.addEventListener('click', function() {
+            // Al cerrar sin decidir, no guardamos preferencia
+            // El banner seguirá apareciendo en la próxima visita
+            closeLegalConsentBanner();
+            
+            // Mostrar mensaje informativo
+            const notification = document.createElement('div');
+            notification.className = 'cart-notification';
+            notification.style.cssText = `
+                position: fixed;
+                top: 80px;
+                right: 50%;
+                transform: translateX(50%);
+                background: linear-gradient(135deg, #555, #777);
+                color: white;
+                padding: 12px 20px;
+                border-radius: 10px;
+                z-index: 9999;
+                font-weight: bold;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+                animation: fadeIn 0.3s ease-out;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                max-width: 90%;
+                text-align: center;
+            `;
+            
+            notification.innerHTML = `
+                <i class="fas fa-exclamation-triangle"></i>
+                <span>Por favor, acepta nuestros términos para una mejor experiencia</span>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Remover notificación después de 3 segundos
+            setTimeout(() => {
+                notification.style.animation = 'fadeIn 0.3s ease-out reverse';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
+            }, 3000);
+        });
     </script>
 </body>
 </html>
