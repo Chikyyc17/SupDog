@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SupDog - Event Booking</title>
+    <title>SupDog - Event Cart Booking</title>
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -15,6 +15,8 @@
             --color-fondo-oscuro: #0f0f0f;
             --color-texto-claro: #ffffff;
             --color-gris-claro: #e0e0e0;
+            --color-success: #4CAF50;
+            --color-info: #2196F3;
         }
 
         * { 
@@ -150,6 +152,50 @@
             font-size: 1rem;
             font-family: 'Poppins', sans-serif;
             transition: all 0.3s ease;
+        }
+
+        /* ESTILOS ESPECÍFICOS PARA SELECT (DROPDOWN) */
+        .form-group select {
+            background-color: #1a1a1a;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+            background-size: 20px;
+            padding-right: 45px;
+            cursor: pointer;
+        }
+
+        /* ESTILOS PARA LAS OPCIONES DEL DROPDOWN */
+        .form-group select option {
+            background-color: #1a1a1a;
+            color: white;
+            padding: 12px;
+            font-size: 1rem;
+        }
+
+        /* Para navegadores WebKit (Chrome, Safari, Edge) */
+        .form-group select::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .form-group select::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+        
+        .form-group select::-webkit-scrollbar-thumb {
+            background: var(--color-purpura-berry);
+            border-radius: 4px;
+        }
+
+        /* Para Firefox */
+        .form-group select {
+            scrollbar-width: thin;
+            scrollbar-color: var(--color-purpura-berry) rgba(255, 255, 255, 0.1);
         }
 
         .form-group input:focus,
@@ -373,143 +419,169 @@
             backdrop-filter: blur(5px);
             z-index: 1999;
         }
+
+        /* Guest count validation */
+        .validation-message {
+            color: var(--color-rojo-fuego);
+            font-size: 0.9rem;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .guest-count-ok {
+            color: var(--color-success);
+        }
+
+        .guest-count-warning {
+            color: var(--color-amarillo-cheddar);
+        }
     </style>
 </head>
 <body>
     <a href="index.html" class="back-btn">
-        <i class="fas fa-arrow-left"></i> Volver al Menú
+        <i class="fas fa-arrow-left"></i> Back to Menu
     </a>
 
     <div class="overlay" id="overlay"></div>
     
     <div class="success-message" id="successMessage">
         <i class="fab fa-whatsapp"></i>
-        <h3>¡Reserva Enviada!</h3>
+        <h3>Booking Sent!</h3>
         <p id="bookingDetails"></p>
         <p style="margin-top: 1rem; color: #25D366; font-weight: bold;">
-            WhatsApp se abrirá automáticamente en 3 segundos...
+            WhatsApp will open automatically in 3 seconds...
         </p>
-        <button class="success-btn" onclick="closeSuccess()">Cerrar</button>
+        <button class="success-btn" onclick="closeSuccess()">Close</button>
     </div>
 
     <div class="event-cart-page">
-        <h1 class="cart-page-title">🎪 RESERVA DE EVENTO SUPDOG</h1>
+        <h1 class="cart-page-title">🎪 SUPDOG EVENT CART BOOKING</h1>
         
         <div class="booking-container">
             <div class="booking-section">
                 <div class="whatsapp-notice">
                     <i class="fab fa-whatsapp"></i>
-                    <h3>Coordinación Directa por WhatsApp</h3>
-                    <p>Reserva ahora y coordina los detalles de menú directamente con nuestro equipo por WhatsApp</p>
+                    <h3>Direct Coordination via WhatsApp</h3>
+                    <p>Book now and coordinate menu details directly with our team via WhatsApp</p>
                 </div>
                 
                 <div class="price-estimate">
-                    <h3>🎯 ¿Cómo funciona?</h3>
-                    <p>1. Completa el formulario de reserva</p>
-                    <p>2. Te contactaremos por WhatsApp para coordinar menú y detalles</p>
-                    <p>3. Confirmamos fecha y presupuesto final</p>
+                    <h3>🎯 How It Works</h3>
+                    <p>1. Complete the booking form</p>
+                    <p>2. We'll contact you via WhatsApp to coordinate menu and details</p>
+                    <p>3. We confirm date and final budget</p>
                 </div>
                 
                 <div class="event-features">
                     <div class="feature-item">
                         <i class="fas fa-calendar-check"></i>
-                        <span>Reserva rápida sin menú</span>
+                        <span>Quick booking without menu</span>
                     </div>
                     <div class="feature-item">
                         <i class="fas fa-comments"></i>
-                        <span>Coordinación por WhatsApp</span>
+                        <span>Coordination via WhatsApp</span>
                     </div>
                     <div class="feature-item">
                         <i class="fas fa-theater-masks"></i>
-                        <span>Temática personalizada</span>
+                        <span>Custom themes</span>
                     </div>
                     <div class="feature-item">
                         <i class="fas fa-truck"></i>
-                        <span>Llegamos a tu ubicación</span>
+                        <span>We come to your location</span>
                     </div>
                 </div>
             </div>
             
             <div class="booking-section">
-                <h2 class="section-title">Información del Evento</h2>
+                <h2 class="section-title">Event Information</h2>
                 
                 <div class="event-form">
                     <div class="form-group">
-                        <label for="eventDate">Fecha del Evento <span class="required">*</span></label>
+                        <label for="eventDate">Event Date <span class="required">*</span></label>
                         <input type="date" id="eventDate" required>
                     </div>
                     
                     <div class="form-group">
-                        <label for="eventType">Tipo de Evento <span class="required">*</span></label>
+                        <label for="eventType">Event Type <span class="required">*</span></label>
                         <select id="eventType" required>
-                            <option value="">Selecciona tipo de evento</option>
-                            <option value="birthday">🎂 Cumpleaños</option>
-                            <option value="corporate">💼 Evento Corporativo</option>
-                            <option value="wedding">💍 Boda</option>
-                            <option value="graduation">🎓 Graduación</option>
-                            <option value="sports">⚽ Evento Deportivo</option>
-                            <option value="family">👨‍👩‍👧‍👦 Reunión Familiar</option>
-                            <option value="other">🎉 Otro</option>
+                            <option value="">Select event type</option>
+                            <option value="birthday">🎂 Birthday Party</option>
+                            <option value="corporate">💼 Corporate Event</option>
+                            <option value="wedding">💍 Wedding</option>
+                            <option value="graduation">🎓 Graduation</option>
+                            <option value="sports">⚽ Sports Event</option>
+                            <option value="family">👨‍👩‍👧‍👦 Family Reunion</option>
+                            <option value="other">🎉 Other Celebration</option>
                         </select>
                     </div>
                     
                     <div class="form-group">
-                        <label for="guestCount">Número Aproximado de Personas <span class="required">*</span></label>
-                        <input type="number" id="guestCount" min="20" max="500" required placeholder="Mínimo 20 personas">
+                        <label for="guestCount">Approximate Number of Guests <span class="required">*</span></label>
+                        <input type="number" id="guestCount" min="10" max="500" required 
+                               placeholder="Minimum 10 guests" 
+                               oninput="validateGuestCount(this.value)">
+                        <div class="validation-message" id="guestCountValidation">
+                            Minimum 10 guests required for themed cart events
+                        </div>
                     </div>
                     
                     <div class="form-group">
-                        <label for="eventAddress">Dirección del Evento <span class="required">*</span></label>
-                        <textarea id="eventAddress" rows="3" required placeholder="Dirección completa con ciudad y código postal"></textarea>
+                        <label for="eventAddress">Event Address <span class="required">*</span></label>
+                        <textarea id="eventAddress" rows="3" required 
+                                  placeholder="Full address with city and zip code"></textarea>
                     </div>
                     
                     <div class="form-group">
-                        <label for="contactName">Nombre Completo <span class="required">*</span></label>
-                        <input type="text" id="contactName" required placeholder="Tu nombre completo">
+                        <label for="contactName">Full Name <span class="required">*</span></label>
+                        <input type="text" id="contactName" required 
+                               placeholder="Your full name">
                     </div>
                     
                     <div class="form-group">
-                        <label for="contactPhone">Teléfono <span class="required">*</span></label>
-                        <input type="tel" id="contactPhone" required placeholder="Para contactarte por WhatsApp">
+                        <label for="contactPhone">Phone Number <span class="required">*</span></label>
+                        <input type="tel" id="contactPhone" required 
+                               placeholder="For WhatsApp contact">
                     </div>
                     
                     <div class="optional-section">
-                        <h3>Información Adicional (Opcional)</h3>
+                        <h3>Additional Information (Optional)</h3>
                         
                         <div class="form-group">
-                            <label for="contactEmail">Correo Electrónico</label>
-                            <input type="email" id="contactEmail" placeholder="Para confirmación por email">
+                            <label for="contactEmail">Email Address</label>
+                            <input type="email" id="contactEmail" 
+                                   placeholder="For email confirmation">
                         </div>
                         
                         <div class="form-group">
-                            <label for="eventTime">Hora Aproximada del Evento</label>
+                            <label for="eventTime">Approximate Event Time</label>
                             <input type="time" id="eventTime">
                         </div>
                         
                         <div class="form-group">
-                            <label for="budgetRange">Presupuesto Aproximado</label>
+                            <label for="budgetRange">Approximate Budget Range</label>
                             <select id="budgetRange">
-                                <option value="">Selecciona rango</option>
+                                <option value="">Select range</option>
                                 <option value="500-1000">$500 - $1,000</option>
                                 <option value="1000-2000">$1,000 - $2,000</option>
                                 <option value="2000-3000">$2,000 - $3,000</option>
-                                <option value="3000+">Más de $3,000</option>
-                                <option value="not-sure">No estoy seguro</option>
+                                <option value="3000+">More than $3,000</option>
+                                <option value="not-sure">Not sure yet</option>
                             </select>
                         </div>
                         
                         <div class="form-group">
-                            <label for="specialRequests">Ideas de Temática o Pedidos Especiales</label>
-                            <textarea id="specialRequests" rows="3" placeholder="Cuéntanos sobre tu temática, colores, decoraciones o necesidades especiales..."></textarea>
+                            <label for="specialRequests">Theme Ideas or Special Requests</label>
+                            <textarea id="specialRequests" rows="3" 
+                                      placeholder="Tell us about your theme, colors, decorations, or special needs..."></textarea>
                         </div>
                     </div>
                     
                     <button class="submit-btn" onclick="submitEventBooking()">
-                        <i class="fab fa-whatsapp"></i> ENVIAR RESERVA POR WHATSAPP
+                        <i class="fab fa-whatsapp"></i> SUBMIT BOOKING VIA WHATSAPP
                     </button>
                     
                     <p style="margin-top: 1rem; color: #ccc; font-size: 0.9rem; text-align: center;">
-                        <i class="fas fa-shield-alt"></i> Tus datos están seguros. Solo los usaremos para coordinar tu evento.
+                        <i class="fas fa-shield-alt"></i> Your data is secure. We'll only use it to coordinate your event.
                     </p>
                 </div>
             </div>
@@ -530,6 +602,60 @@
         // Set default time to 18:00 (6 PM)
         document.getElementById('eventTime').value = "18:00";
         
+        // Guest count validation
+        function validateGuestCount(value) {
+            const validationMsg = document.getElementById('guestCountValidation');
+            const guestCountInput = document.getElementById('guestCount');
+            
+            if (value === '' || parseInt(value) < 10) {
+                validationMsg.style.display = 'block';
+                validationMsg.className = 'validation-message guest-count-warning';
+                guestCountInput.style.borderColor = 'var(--color-rojo-fuego)';
+                return false;
+            } else if (parseInt(value) >= 10 && parseInt(value) < 20) {
+                validationMsg.style.display = 'block';
+                validationMsg.textContent = 'Great! Minimum 10 guests for themed cart events';
+                validationMsg.className = 'validation-message guest-count-ok';
+                guestCountInput.style.borderColor = 'var(--color-success)';
+                return true;
+            } else {
+                validationMsg.style.display = 'none';
+                guestCountInput.style.borderColor = 'rgba(255, 255, 255, 0.2)';
+                return true;
+            }
+        }
+        
+        // FIX para iOS: asegurar que las opciones del select se vean correctamente
+        function fixIOSSelects() {
+            // Este fix es principalmente para iOS que tiene problemas con estilos de select
+            if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
+                // Forzar el fondo oscuro en los selects para iOS
+                const selects = document.querySelectorAll('select');
+                selects.forEach(select => {
+                    select.style.backgroundColor = '#1a1a1a';
+                    select.style.color = 'white';
+                    
+                    // Agregar event listener para cambios
+                    select.addEventListener('change', function() {
+                        this.style.backgroundColor = '#1a1a1a';
+                        this.style.color = 'white';
+                    });
+                    
+                    // Agregar event listener para focus
+                    select.addEventListener('focus', function() {
+                        this.style.backgroundColor = '#2a2a2a';
+                    });
+                    
+                    // Agregar event listener para blur
+                    select.addEventListener('blur', function() {
+                        this.style.backgroundColor = '#1a1a1a';
+                    });
+                });
+                
+                console.log('iOS select fix applied');
+            }
+        }
+        
         function submitEventBooking() {
             // Get form values
             const eventDate = document.getElementById('eventDate').value;
@@ -543,19 +669,21 @@
             const budgetRange = document.getElementById('budgetRange').value;
             const specialRequests = document.getElementById('specialRequests').value;
             
-            // Simple validation
+            // Validate required fields
             if (!eventDate || !eventType || !guestCount || !eventAddress || !contactName || !contactPhone) {
-                alert('Por favor completa todos los campos obligatorios marcados con *');
+                alert('Please complete all required fields marked with *');
                 return;
             }
             
-            if (guestCount < 10) {
-                alert('El número mínimo de personas es 10 para eventos con carrito temático');
+            // Validate guest count
+            if (!validateGuestCount(guestCount)) {
+                alert('Minimum 10 guests required for themed cart events');
+                document.getElementById('guestCount').focus();
                 return;
             }
             
             // Format date nicely
-            const formattedDate = new Date(eventDate).toLocaleDateString('es-ES', {
+            const formattedDate = new Date(eventDate).toLocaleDateString('en-US', {
                 weekday: 'long',
                 year: 'numeric',
                 month: 'long',
@@ -571,17 +699,17 @@
                 eventDetails: {
                     date: eventDate,
                     formattedDate: formattedDate,
-                    time: eventTime || "Por definir",
+                    time: eventTime || "To be defined",
                     type: eventType,
                     guests: guestCount,
                     address: eventAddress,
                     contact: {
                         name: contactName,
                         phone: contactPhone,
-                        email: contactEmail || "No proporcionado"
+                        email: contactEmail || "Not provided"
                     },
-                    budget: budgetRange || "Por definir",
-                    requests: specialRequests || "Ninguno"
+                    budget: budgetRange || "To be defined",
+                    requests: specialRequests || "None"
                 },
                 timestamp: new Date().toISOString(),
                 status: 'pending'
@@ -591,68 +719,70 @@
             localStorage.setItem('supdogLastBooking', JSON.stringify(bookingSummary));
             
             // ===========================================
-            // TU NÚMERO DE WHATSAPP (REEMPLAZA CON TU NÚMERO)
-            // Formato: código de país + número sin signos
-            // Ejemplo Venezuela: 584245489939
+            // YOUR WHATSAPP NUMBER (REPLACE WITH YOUR NUMBER)
+            // Format: country code + number without symbols
+            // Example USA: 14698474297
             // ===========================================
-            const ownerWhatsappNumber = "14698474297"; // ¡REEMPLAZA CON TU NÚMERO!
+            const ownerWhatsappNumber = "14698474297"; // ← REPLACE WITH YOUR NUMBER!
             
             // Get event type text for WhatsApp
-            const eventTypeText = {
-                'birthday': '🎂 Cumpleaños',
-                'corporate': '💼 Evento Corporativo',
-                'wedding': '💍 Boda',
-                'graduation': '🎓 Graduación',
-                'sports': '⚽ Evento Deportivo',
-                'family': '👨‍👩‍👧‍👦 Reunión Familiar',
-                'other': '🎉 Otro'
-            }[eventType] || eventType;
+            const eventTypeMap = {
+                'birthday': '🎂 Birthday Party',
+                'corporate': '💼 Corporate Event',
+                'wedding': '💍 Wedding',
+                'graduation': '🎓 Graduation',
+                'sports': '⚽ Sports Event',
+                'family': '👨‍👩‍👧‍👦 Family Reunion',
+                'other': '🎉 Other Celebration'
+            };
+            const eventTypeText = eventTypeMap[eventType] || eventType;
             
             // Get budget text
-            const budgetText = {
+            const budgetMap = {
                 '500-1000': '$500 - $1,000',
                 '1000-2000': '$1,000 - $2,000',
                 '2000-3000': '$2,000 - $3,000',
-                '3000+': 'Más de $3,000',
-                'not-sure': 'Por definir'
-            }[budgetRange] || budgetRange || 'Por definir';
+                '3000+': 'More than $3,000',
+                'not-sure': 'To be defined'
+            };
+            const budgetText = budgetMap[budgetRange] || budgetRange || 'To be defined';
             
             // Create WhatsApp message
-            let whatsappMessage = `*📋 NUEVA SOLICITUD DE EVENTO SUPDOG*%0A%0A`;
-            whatsappMessage += `*Código:* ${bookingId}%0A`;
-            whatsappMessage += `*Fecha:* ${formattedDate}%0A`;
-            whatsappMessage += `*Hora:* ${eventTime || "Por definir"}%0A`;
-            whatsappMessage += `*Evento:* ${eventTypeText}%0A`;
-            whatsappMessage += `*Personas:* ${guestCount}%0A`;
-            whatsappMessage += `*Presupuesto aproximado:* ${budgetText}%0A%0A`;
+            let whatsappMessage = `*📋 NEW SUPDOG EVENT BOOKING REQUEST*%0A%0A`;
+            whatsappMessage += `*Booking Code:* ${bookingId}%0A`;
+            whatsappMessage += `*Date:* ${formattedDate}%0A`;
+            whatsappMessage += `*Time:* ${eventTime || "To be defined"}%0A`;
+            whatsappMessage += `*Event Type:* ${eventTypeText}%0A`;
+            whatsappMessage += `*Guests:* ${guestCount}%0A`;
+            whatsappMessage += `*Approximate Budget:* ${budgetText}%0A%0A`;
             
-            whatsappMessage += `*👤 INFORMACIÓN DEL CLIENTE*%0A`;
-            whatsappMessage += `• Nombre: ${contactName}%0A`;
-            whatsappMessage += `• Teléfono: ${contactPhone}%0A`;
+            whatsappMessage += `*👤 CLIENT INFORMATION*%0A`;
+            whatsappMessage += `• Name: ${contactName}%0A`;
+            whatsappMessage += `• Phone: ${contactPhone}%0A`;
             if (contactEmail) {
                 whatsappMessage += `• Email: ${contactEmail}%0A`;
             }
             whatsappMessage += `%0A`;
             
-            whatsappMessage += `*📍 DIRECCIÓN*%0A`;
+            whatsappMessage += `*📍 EVENT ADDRESS*%0A`;
             whatsappMessage += `${eventAddress}%0A%0A`;
             
             if (specialRequests) {
-                whatsappMessage += `*🎨 PEDIDOS ESPECIALES / TEMÁTICA*%0A`;
+                whatsappMessage += `*🎨 SPECIAL REQUESTS / THEME IDEAS*%0A`;
                 whatsappMessage += `${specialRequests}%0A%0A`;
             }
             
-            whatsappMessage += `*📝 NOTA:* El cliente coordinará el menú específico directamente por WhatsApp.%0A%0A`;
-            whatsappMessage += `*⏰ Solicitado:* ${new Date().toLocaleString('es-ES')}%0A`;
-            whatsappMessage += `*🔗 Viene de:* Página de Reservas Web`;
+            whatsappMessage += `*📝 NOTE:* Client will coordinate specific menu directly via WhatsApp.%0A%0A`;
+            whatsappMessage += `*⏰ Requested:* ${new Date().toLocaleString('en-US')}%0A`;
+            whatsappMessage += `*🔗 From:* Website Booking Page`;
             
             // Create WhatsApp URL
             const whatsappUrl = `https://wa.me/${ownerWhatsappNumber}?text=${whatsappMessage}`;
             
             // Show success message with booking ID
             document.getElementById('bookingDetails').innerHTML = `
-                Código de reserva: <strong style="color: var(--color-amarillo-cheddar);">${bookingId}</strong><br><br>
-                Pronto te contactaremos por WhatsApp para coordinar los detalles del menú.
+                Booking code: <strong style="color: var(--color-amarillo-cheddar);">${bookingId}</strong><br><br>
+                We'll contact you soon via WhatsApp to coordinate menu details.
             `;
             
             // Show overlay and success message
@@ -679,6 +809,10 @@
                     document.getElementById('eventTime').value = '18:00';
                     document.getElementById('budgetRange').value = '';
                     document.getElementById('specialRequests').value = '';
+                    
+                    // Reset validation message
+                    document.getElementById('guestCountValidation').style.display = 'none';
+                    document.getElementById('guestCount').style.borderColor = 'rgba(255, 255, 255, 0.2)';
                 }, 3000);
             }, 3000);
         }
@@ -704,13 +838,22 @@
             if (this.value) {
                 const [hours, minutes] = this.value.split(':').map(Number);
                 if (hours < 8 || hours > 22) {
-                    alert('Los horarios de evento deben ser entre 8:00 AM y 10:00 PM');
+                    alert('Event times must be between 8:00 AM and 10:00 PM');
                     this.value = '18:00';
                 }
             }
         });
+        
+        // Initialize guest count validation on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const guestCount = document.getElementById('guestCount').value;
+            if (guestCount) {
+                validateGuestCount(guestCount);
+            }
+            
+            // Aplicar fix para selects de iOS
+            fixIOSSelects();
+        });
     </script>
 </body>
 </html>
-
-
