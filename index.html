@@ -76,6 +76,16 @@
             50% { text-shadow: 0 0 10px var(--color-rojo-fuego), 0 0 15px var(--color-rojo-fuego); }
         }
 
+        @keyframes slideInFromRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes slideInFromLeft {
+            from { transform: translateX(-100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
         /* --- VIDEO HERO SECTION --- */
         .video-hero {
             position: relative;
@@ -135,6 +145,287 @@
                 url('https://images.unsplash.com/photo-1550547660-d9450f859349?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80');
             background-size: cover;
             background-position: center;
+        }
+
+        /* ==================== PHOTO GALLERY CAROUSEL SECTION ==================== */
+        .photo-gallery-section {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, #2a1a1a 0%, #1a0f0f 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 0 1.5rem;
+        }
+
+        .gallery-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--color-amarillo-cheddar) 0%, #e69500 100%);
+            color: #1a1a1a;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            animation: pulse 2s infinite;
+            box-shadow: 0 4px 12px rgba(248, 168, 20, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .gallery-title {
+            font-size: 3rem;
+            color: white;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 0px var(--color-rojo-fuego);
+            position: relative;
+            display: inline-block;
+        }
+
+        .gallery-title span {
+            color: var(--color-amarillo-cheddar);
+            text-shadow: 2px 2px 0px var(--color-rojo-fuego);
+        }
+
+        .gallery-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--color-rojo-fuego), var(--color-amarillo-cheddar));
+            border-radius: 2px;
+        }
+
+        .gallery-subtitle {
+            font-size: 1.2rem;
+            color: #ddd;
+            max-width: 600px;
+            margin: 0 auto;
+            font-style: italic;
+        }
+
+        /* Carrusel Container */
+        .carousel-container {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+            height: 500px;
+        }
+
+        @media (max-width: 768px) {
+            .carousel-track {
+                height: 350px;
+            }
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slide-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.9);
+            transition: transform 10s ease;
+        }
+
+        .carousel-slide.active .slide-image {
+            transform: scale(1.05);
+        }
+
+        .slide-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 2rem;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+            color: white;
+            transform: translateY(100%);
+            transition: transform 0.5s ease;
+        }
+
+        .carousel-slide.active .slide-overlay {
+            transform: translateY(0);
+        }
+
+        .slide-title {
+            font-size: 2rem;
+            color: var(--color-amarillo-cheddar);
+            margin-bottom: 0.5rem;
+            font-family: 'Bangers', cursive;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+        }
+
+        .slide-description {
+            font-size: 1rem;
+            color: #eee;
+            max-width: 600px;
+        }
+
+        /* Carousel Navigation */
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 1rem;
+            z-index: 10;
+        }
+
+        .carousel-btn {
+            background: rgba(15, 15, 15, 0.7);
+            border: none;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        .carousel-btn:hover {
+            background: var(--color-rojo-fuego);
+            transform: scale(1.1);
+        }
+
+        /* Carousel Dots */
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 2rem;
+        }
+
+        .carousel-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .carousel-dot.active {
+            background: var(--color-amarillo-cheddar);
+            transform: scale(1.3);
+            box-shadow: 0 0 10px var(--color-amarillo-cheddar);
+        }
+
+        /* Mini Gallery Preview */
+        .mini-gallery {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 3rem;
+            padding: 0 1rem;
+            flex-wrap: wrap;
+        }
+
+        .mini-thumb {
+            width: 100px;
+            height: 80px;
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+            opacity: 0.6;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .mini-thumb:hover, .mini-thumb.active {
+            opacity: 1;
+            border-color: var(--color-amarillo-cheddar);
+            transform: translateY(-5px);
+        }
+
+        .mini-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Gallery Stats */
+        .gallery-stats {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 3rem;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            color: var(--color-amarillo-cheddar);
+            font-family: 'Bangers', cursive;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #ccc;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 768px) {
+            .gallery-title {
+                font-size: 2.2rem;
+            }
+            
+            .gallery-stats {
+                flex-wrap: wrap;
+                gap: 1.5rem;
+            }
+            
+            .stat-number {
+                font-size: 2rem;
+            }
+            
+            .slide-title {
+                font-size: 1.5rem;
+            }
+            
+            .slide-overlay {
+                padding: 1.5rem;
+            }
         }
 
         /* --- OUR STORY SECTION --- */
@@ -1751,6 +2042,7 @@
         <ul>
             <li><a href="#home" class="menu-link" onclick="toggleMenu()">HOME</a></li>
             <li><a href="#story" class="menu-link" onclick="toggleMenu()">OUR STORY</a></li>
+            <li><a href="#gallery" class="menu-link" onclick="toggleMenu()">PHOTO GALLERY</a></li>
             <li><a href="#menu" class="menu-link" onclick="toggleMenu()">MENU</a></li>
             <li><a href="#sides" class="menu-link" onclick="toggleMenu()">SIDES</a></li>
             <li><a href="#location" class="menu-link" onclick="toggleMenu()">LOCATION</a></li>
@@ -1842,6 +2134,116 @@
             <div class="story-quote">
                 <p class="quote-text">"At the end of the day, Sup Dog isn't just a greeting; it is an invitation to be yourself."</p>
                 <p class="quote-author">— Jonathan & María, SupDog Founders</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== PHOTO GALLERY CAROUSEL SECTION ==================== -->
+    <section id="gallery" class="photo-gallery-section">
+        <div class="section-header">
+            <div class="gallery-badge">
+                <i class="fas fa-camera"></i> BEHIND THE SCENES
+            </div>
+            <h2 class="gallery-title">THE <span>SUP DOG</span> EXPERIENCE</h2>
+            <p class="gallery-subtitle">Take a look at our delicious hot dogs, vibrant cart setup, and the amazing atmosphere we bring to every event!</p>
+        </div>
+        
+        <div class="carousel-container">
+            <div class="carousel-track" id="carouselTrack">
+                <!-- Slide 1 -->
+                <div class="carousel-slide active">
+                    <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80" alt="SupDog Hot Dog Cart Setup" class="slide-image">
+                    <div class="slide-overlay">
+                        <h3 class="slide-title">OUR MOBILE CART</h3>
+                        <p class="slide-description">Fully equipped and ready to serve at any event. Our custom-designed cart brings the authentic SupDog experience to you!</p>
+                    </div>
+                </div>
+                
+                <!-- Slide 2 -->
+                <div class="carousel-slide">
+                    <img src="https://images.unsplash.com/photo-1615870216519-2f9fa575fa5c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80" alt="Gourmet Hot Dogs" class="slide-image">
+                    <div class="slide-overlay">
+                        <h3 class="slide-title">GOURMET CREATIONS</h3>
+                        <p class="slide-description">Each hot dog is crafted with premium ingredients and creative toppings that explode with flavor.</p>
+                    </div>
+                </div>
+                
+                <!-- Slide 3 -->
+                <div class="carousel-slide">
+                    <img src="https://images.unsplash.com/photo-1544787219-7f47ccb76574?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80" alt="Event Service" class="slide-image">
+                    <div class="slide-overlay">
+                        <h3 class="slide-title">EVENT SERVICE</h3>
+                        <p class="slide-description">We bring the party to you! Perfect for birthdays, corporate events, festivals, and celebrations of all kinds.</p>
+                    </div>
+                </div>
+                
+                <!-- Slide 4 -->
+                <div class="carousel-slide">
+                    <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80" alt="Delicious Toppings" class="slide-image">
+                    <div class="slide-overlay">
+                        <h3 class="slide-title">FRESH TOPPINGS</h3>
+                        <p class="slide-description">From classic ketchup and mustard to gourmet toppings like pineapple, bacon, and chipotle sauce.</p>
+                    </div>
+                </div>
+                
+                <!-- Slide 5 -->
+                <div class="carousel-slide">
+                    <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80" alt="Happy Customers" class="slide-image">
+                    <div class="slide-overlay">
+                        <h3 class="slide-title">HAPPY CUSTOMERS</h3>
+                        <p class="slide-description">The smiles say it all! Our customers love the unique flavors and fun experience of SupDog.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="carousel-nav">
+                <button class="carousel-btn" id="prevBtn">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="carousel-btn" id="nextBtn">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+        
+        <div class="carousel-dots" id="carouselDots">
+            <!-- Dots will be generated by JavaScript -->
+        </div>
+        
+        <div class="mini-gallery">
+            <div class="mini-thumb active" data-index="0">
+                <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Cart Setup">
+            </div>
+            <div class="mini-thumb" data-index="1">
+                <img src="https://images.unsplash.com/photo-1615870216519-2f9fa575fa5c?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Gourmet Hot Dogs">
+            </div>
+            <div class="mini-thumb" data-index="2">
+                <img src="https://images.unsplash.com/photo-1544787219-7f47ccb76574?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Event Service">
+            </div>
+            <div class="mini-thumb" data-index="3">
+                <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Fresh Toppings">
+            </div>
+            <div class="mini-thumb" data-index="4">
+                <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Happy Customers">
+            </div>
+        </div>
+        
+        <div class="gallery-stats">
+            <div class="stat-item">
+                <span class="stat-number">500+</span>
+                <span class="stat-label">Events Served</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">10K+</span>
+                <span class="stat-label">Hot Dogs Sold</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">50+</span>
+                <span class="stat-label">5-Star Reviews</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">100%</span>
+                <span class="stat-label">Customer Satisfaction</span>
             </div>
         </div>
     </section>
@@ -2309,6 +2711,157 @@
         const eventCartModal = document.getElementById('eventCartModal');
         const checkoutBtn = document.getElementById('checkoutBtn');
         
+        // ============================================
+        // PHOTO GALLERY CAROUSEL FUNCTIONALITY
+        // ============================================
+        class PhotoCarousel {
+            constructor() {
+                this.track = document.getElementById('carouselTrack');
+                this.slides = Array.from(this.track.querySelectorAll('.carousel-slide'));
+                this.nextBtn = document.getElementById('nextBtn');
+                this.prevBtn = document.getElementById('prevBtn');
+                this.dotsContainer = document.getElementById('carouselDots');
+                this.miniThumbs = document.querySelectorAll('.mini-thumb');
+                
+                this.currentIndex = 0;
+                this.slideCount = this.slides.length;
+                this.autoSlideInterval = null;
+                
+                this.init();
+            }
+            
+            init() {
+                // Create dots
+                this.createDots();
+                
+                // Event listeners
+                this.nextBtn.addEventListener('click', () => this.nextSlide());
+                this.prevBtn.addEventListener('click', () => this.prevSlide());
+                
+                // Mini thumbnails
+                this.miniThumbs.forEach(thumb => {
+                    thumb.addEventListener('click', (e) => {
+                        const index = parseInt(e.currentTarget.getAttribute('data-index'));
+                        this.goToSlide(index);
+                    });
+                });
+                
+                // Touch events for mobile swipe
+                this.setupTouchEvents();
+                
+                // Auto slide
+                this.startAutoSlide();
+                
+                // Pause auto slide on hover
+                this.track.addEventListener('mouseenter', () => this.stopAutoSlide());
+                this.track.addEventListener('mouseleave', () => this.startAutoSlide());
+                
+                // Update active states
+                this.updateActiveStates();
+            }
+            
+            createDots() {
+                for (let i = 0; i < this.slideCount; i++) {
+                    const dot = document.createElement('button');
+                    dot.classList.add('carousel-dot');
+                    if (i === 0) dot.classList.add('active');
+                    dot.setAttribute('data-index', i);
+                    dot.addEventListener('click', () => this.goToSlide(i));
+                    this.dotsContainer.appendChild(dot);
+                }
+                this.dots = Array.from(this.dotsContainer.querySelectorAll('.carousel-dot'));
+            }
+            
+            setupTouchEvents() {
+                let startX = 0;
+                let endX = 0;
+                
+                this.track.addEventListener('touchstart', (e) => {
+                    startX = e.touches[0].clientX;
+                    this.stopAutoSlide();
+                }, {passive: true});
+                
+                this.track.addEventListener('touchmove', (e) => {
+                    endX = e.touches[0].clientX;
+                }, {passive: true});
+                
+                this.track.addEventListener('touchend', () => {
+                    const threshold = 50;
+                    const diff = startX - endX;
+                    
+                    if (Math.abs(diff) > threshold) {
+                        if (diff > 0) {
+                            this.nextSlide();
+                        } else {
+                            this.prevSlide();
+                        }
+                    }
+                    
+                    this.startAutoSlide();
+                });
+            }
+            
+            nextSlide() {
+                this.currentIndex = (this.currentIndex + 1) % this.slideCount;
+                this.updateSlidePosition();
+                this.updateActiveStates();
+            }
+            
+            prevSlide() {
+                this.currentIndex = (this.currentIndex - 1 + this.slideCount) % this.slideCount;
+                this.updateSlidePosition();
+                this.updateActiveStates();
+            }
+            
+            goToSlide(index) {
+                this.currentIndex = index;
+                this.updateSlidePosition();
+                this.updateActiveStates();
+            }
+            
+            updateSlidePosition() {
+                const slideWidth = 100; // percentage
+                this.track.style.transform = `translateX(-${this.currentIndex * slideWidth}%)`;
+            }
+            
+            updateActiveStates() {
+                // Update slides
+                this.slides.forEach((slide, index) => {
+                    slide.classList.toggle('active', index === this.currentIndex);
+                });
+                
+                // Update dots
+                this.dots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === this.currentIndex);
+                });
+                
+                // Update mini thumbs
+                this.miniThumbs.forEach((thumb, index) => {
+                    thumb.classList.toggle('active', index === this.currentIndex);
+                });
+            }
+            
+            startAutoSlide() {
+                this.stopAutoSlide();
+                this.autoSlideInterval = setInterval(() => {
+                    this.nextSlide();
+                }, 5000);
+            }
+            
+            stopAutoSlide() {
+                if (this.autoSlideInterval) {
+                    clearInterval(this.autoSlideInterval);
+                    this.autoSlideInterval = null;
+                }
+            }
+        }
+        
+        // Initialize carousel when DOM is loaded
+        let photoCarousel;
+        document.addEventListener('DOMContentLoaded', function() {
+            photoCarousel = new PhotoCarousel();
+        });
+        
         // Toggle Menu Function
         function toggleMenu() {
             sidebar.classList.toggle('active');
@@ -2589,5 +3142,3 @@
     </script>
 </body>
 </html>
-
-
