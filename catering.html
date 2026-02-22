@@ -491,7 +491,29 @@
         .catering-card.featured {
             background: linear-gradient(145deg, #331f1f, #2a1a1a);
             border: 2px solid var(--color-purpura-berry);
-            grid-column: span 2;
+        }
+
+        /* --- NUEVO: Estilos corregidos para Hot Dogs --- */
+        .hotdogs-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        @media (min-width: 768px) {
+            .hotdogs-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 1rem;
+            }
+        }
+
+        .hotdogs-list {
+            list-style: none;
+        }
+
+        .hotdogs-list .catering-item {
+            padding: 0.6rem 0;
         }
 
         /* --- CONTACT SECTION --- */
@@ -837,11 +859,14 @@
                     </ul>
                 </div>
 
-                <!-- Hot Dogs (Big & Mini) -->
+                <!-- Hot Dogs (Big & Mini) - CORREGIDO -->
                 <div class="catering-card featured">
                     <h3><i class="fas fa-hotdog"></i> HOT DOGS - BIG & MINI VERSIONS</h3>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-                        <ul class="catering-items">
+                    
+                    <!-- En móvil: 1 columna, en desktop: 2 columnas -->
+                    <div class="hotdogs-grid">
+                        <!-- Primera columna/list group -->
+                        <ul class="hotdogs-list">
                             <li class="catering-item">
                                 <span class="item-name">Tijuana Dog</span>
                                 <span class="item-price">Ask for pricing</span>
@@ -859,7 +884,9 @@
                                 <span class="item-price">Ask for pricing</span>
                             </li>
                         </ul>
-                        <ul class="catering-items">
+                        
+                        <!-- Segunda columna/list group -->
+                        <ul class="hotdogs-list">
                             <li class="catering-item">
                                 <span class="item-name">German Dog</span>
                                 <span class="item-price">Ask for pricing</span>
@@ -878,7 +905,8 @@
                             </li>
                         </ul>
                     </div>
-                    <p style="color: var(--color-mostaza-suave); margin-top: 1rem; text-align: center; font-style: italic;">
+                    
+                    <p style="color: var(--color-mostaza-suave); margin-top: 1.5rem; text-align: center; font-style: italic; border-top: 1px dashed #444; padding-top: 1rem;">
                         <i class="fas fa-info-circle"></i> Both big and mini versions available for all hot dogs
                     </p>
                 </div>
