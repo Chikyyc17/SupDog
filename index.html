@@ -339,13 +339,6 @@
             box-shadow: 0 0 10px var(--color-amarillo-cheddar);
         }
 
-        /* Mini Gallery Preview - ESTILOS ELIMINADOS */
-        /* .mini-gallery ha sido eliminado */
-        /* .mini-thumb ha sido eliminado */
-
-        /* Gallery Stats - ELIMINADO */
-        /* .gallery-stats ha sido eliminado */
-
         @media (max-width: 768px) {
             .gallery-title {
                 font-size: 2.2rem;
@@ -607,6 +600,14 @@
             transition: all 0.3s ease;
         }
 
+        /* NUEVO: Estilo para el header cuando se hace scroll */
+        header.scrolled {
+            background-color: rgba(10, 10, 10, 0.95);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            border-bottom: 2px solid var(--color-amarillo-cheddar);
+            backdrop-filter: blur(15px);
+        }
+
         .logo-text {
             font-family: 'Bangers', cursive;
             font-size: 2.2rem;
@@ -625,16 +626,18 @@
             text-shadow: 2px 2px 0px var(--color-rojo-fuego);
         }
 
-        /* Cart Icon Mobile - MODIFICADO: Ahora se llama Event Cart */
-        .cart-icon-header {
+        /* --- NUEVO: BOTONES DEL HEADER (CATER Y EVENT CART) --- */
+        .header-buttons {
             position: absolute;
             right: 5%;
             top: 50%;
             transform: translateY(-50%);
-            background: linear-gradient(135deg, var(--color-purpura-berry) 0%, #9d5b85 100%);
-            border: none;
-            cursor: pointer;
+            display: flex;
+            gap: 10px;
             z-index: 1002;
+        }
+
+        .header-btn {
             display: flex;
             align-items: center;
             gap: 6px;
@@ -645,16 +648,30 @@
             font-weight: bold;
             transition: all 0.3s ease;
             font-size: 0.9rem;
-            box-shadow: 0 3px 10px rgba(186, 105, 144, 0.3);
             text-decoration: none;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.3);
         }
 
-        /* Texto "Event Cart" que se muestra en desktop */
-        .cart-text {
+        /* Botón Cater With Us - ROJO */
+        .cater-btn {
+            background: linear-gradient(135deg, var(--color-rojo-fuego) 0%, #c42f04 100%);
+            animation: pulse 2s infinite;
+        }
+
+        .cater-btn i {
+            color: var(--color-amarillo-cheddar);
+        }
+
+        /* Botón Event Cart - MORADO */
+        .cart-btn {
+            background: linear-gradient(135deg, var(--color-purpura-berry) 0%, #9d5b85 100%);
+        }
+
+        .btn-text {
             display: none; /* Oculto por defecto para móviles */
         }
 
-        .cart-count {
+        .btn-count {
             background-color: var(--color-rojo-fuego);
             color: white;
             border-radius: 50%;
@@ -667,19 +684,15 @@
             animation: pulse 1.5s infinite;
         }
 
-        /* Mostrar "Event Cart" en desktop */
+        /* Mostrar texto en desktop */
         @media (min-width: 768px) {
-            .cart-text {
+            .btn-text {
                 display: inline;
                 margin-left: 5px;
             }
             
-            .cart-icon-header {
+            .header-btn {
                 padding: 8px 20px;
-            }
-            
-            .cart-count {
-                margin-left: 5px;
             }
         }
 
@@ -764,6 +777,26 @@
         .menu-link:hover { 
             color: var(--color-rojo-fuego); 
             transform: translateX(10px);
+        }
+        
+        /* NUEVO: Estilo especial para Cater en sidebar */
+        .cater-link-special {
+            background: linear-gradient(135deg, 
+                rgba(219, 54, 6, 0.2) 0%, 
+                rgba(248, 168, 20, 0.2) 100%);
+            padding: 12px 16px;
+            border-radius: 12px;
+            margin-right: 15px;
+            border: 2px solid var(--color-rojo-fuego);
+            animation: pulse 2s infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cater-link-special .menu-link {
+            color: var(--color-rojo-fuego);
+            font-size: 2rem;
+            padding-right: 35px;
         }
         
         .event-link-special {
@@ -1016,6 +1049,13 @@
         .btn:hover {
             transform: translateY(-3px) scale(1.02);
             box-shadow: 0 6px 16px rgba(219, 54, 6, 0.4);
+        }
+
+        /* NUEVO: Botón Cater especial en hero */
+        .btn-cater {
+            background: linear-gradient(135deg, var(--color-purpura-berry) 0%, #9d5b85 100%);
+            box-shadow: 0 4px 12px rgba(186, 105, 144, 0.3);
+            animation: pulse 2s infinite;
         }
 
         /* --- MENU SECTION MOBILE --- */
@@ -1838,7 +1878,7 @@
                 width: 450px;
             }
             
-            .cart-text {
+            .btn-text {
                 display: inline !important;
             }
             
@@ -1875,7 +1915,7 @@
                 margin: 0 15px;
             }
             
-            .cart-text {
+            .btn-text {
                 display: none !important;
             }
         }
@@ -1939,7 +1979,8 @@
         </div>
         
         <div class="cart-items" id="cartItemsContainer">
-            </div>
+            <!-- Los items se generan dinámicamente con JavaScript -->
+        </div>
         
         <div class="cart-footer">
             <div class="cart-total">
@@ -1960,14 +2001,23 @@
         <button class="hamburger-btn" id="menuBtn" aria-label="Toggle navigation menu">
             <span></span><span></span><span></span>
         </button>
+        
         <div class="logo-text" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">
             SUP<span>DOG</span>
         </div>
-        <a href="event-cart.html" class="cart-icon-header" id="cartBtn">
-            <i class="fas fa-calendar-alt"></i>
-            <span class="cart-text">Event Cart</span>
-            <span class="cart-count" id="cartCount">0</span>
-        </a>
+        
+        <!-- HEADER BUTTONS: Cater With Us y Event Cart -->
+        <div class="header-buttons">
+            <a href="catering.html" class="header-btn cater-btn">
+                <i class="fas fa-utensils"></i>
+                <span class="btn-text">Cater With Us</span>
+            </a>
+            <a href="event-cart.html" class="header-btn cart-btn">
+                <i class="fas fa-calendar-alt"></i>
+                <span class="btn-text">Event Cart</span>
+                <span class="btn-count" id="cartCountHeader">0</span>
+            </a>
+        </div>
     </header>
 
     <nav class="sidebar" id="sidebar" aria-label="Main navigation">
@@ -1978,6 +2028,13 @@
             <li><a href="#menu" class="menu-link" onclick="toggleMenu()">MENU</a></li>
             <li><a href="#sides" class="menu-link" onclick="toggleMenu()">SIDES</a></li>
             <li><a href="#location" class="menu-link" onclick="toggleMenu()">LOCATION</a></li>
+            
+            <!-- NUEVO: Enlace especial para Catering -->
+            <li class="cater-link-special" onclick="toggleMenu()">
+                <a href="catering.html" class="menu-link">
+                    🍽️ CATER WITH US
+                </a>
+            </li>
             
             <li class="event-link-special" onclick="toggleMenu()">
                 <a href="event-cart.html" class="menu-link">
@@ -2013,9 +2070,16 @@
         <div class="video-hero-content">
             <h1 class="animate-load">SUP<span>DOG</span></h1>
             <p class="animate-load delay-1">Wurst Behavior. Best Flavor. <br> Only in Grapevine, TX.</p>
-            <a href="#story" class="btn animate-load delay-2">
-                OUR STORY <i class="fas fa-fire"></i>
-            </a>
+            
+            <!-- NUEVO: Botones en Hero Section -->
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;">
+                <a href="#story" class="btn animate-load delay-2">
+                    OUR STORY <i class="fas fa-fire"></i>
+                </a>
+                <a href="catering.html" class="btn btn-cater animate-load delay-2">
+                    CATER WITH US <i class="fas fa-utensils"></i>
+                </a>
+            </div>
         </div>
     </section>
 
@@ -2141,9 +2205,6 @@
         <div class="carousel-dots" id="carouselDots">
             <!-- Dots will be generated by JavaScript -->
         </div>
-        
-        <!-- LAS MINIATURAS HAN SIDO ELIMINADAS -->
-        <!-- LAS ESTADÍSTICAS HAN SIDO ELIMINADAS -->
     </section>
 
     <section id="menu" class="menu-section">
@@ -2385,11 +2446,12 @@
                     Instagram
                 </a> | 
                 <a href="event-cart.html" style="color: var(--color-purpura-berry); font-weight: bold;">Event Cart</a> | 
+                <a href="catering.html" style="color: var(--color-rojo-fuego); font-weight: bold;">Cater With Us</a> |
                 <a href="#menu">Menu</a>
             </p>
         </div>
         
-        <!-- 🆕 ENLACES LEGALES CON MEJOR ESTILO -->
+        <!-- ENLACES LEGALES -->
         <div style="margin-top: 1.5rem; margin-bottom: 1rem; padding: 15px; background: rgba(255,255,255,0.05); border-radius: 8px;">
             <p style="font-size: 0.9rem; color: var(--color-mostaza-suave); margin-bottom: 8px;">Legal Information:</p>
             <div style="font-size: 0.85rem;">
@@ -2489,45 +2551,50 @@
             }
 
             updateCartDisplay() {
-                const cartCount = document.getElementById('cartCount');
+                const cartCount = document.getElementById('cartCountHeader');
                 const cartItemsContainer = document.getElementById('cartItemsContainer');
                 const cartTotal = document.getElementById('cartTotal');
                 
                 // Update cart count
-                cartCount.textContent = this.getItemCount();
+                if (cartCount) {
+                    cartCount.textContent = this.getItemCount();
+                }
                 
                 // Update cart items display
-                if (this.items.length === 0) {
-                    cartItemsContainer.innerHTML = `
-                        <div class="empty-cart">
-                            <i class="fas fa-calendar-times"></i>
-                            <h3>Your event cart is empty</h3>
-                            <p>Add items from our menu to start planning your event!</p>
-                        </div>
-                    `;
-                } else {
-                    cartItemsContainer.innerHTML = this.items.map((item, index) => `
-                        <div class="cart-item">
-                            <div class="item-info">
-                                <h4>${item.name}</h4>
-                                <div class="item-price">$${(item.price * item.quantity).toFixed(2)}</div>
+                if (cartItemsContainer) {
+                    if (this.items.length === 0) {
+                        cartItemsContainer.innerHTML = `
+                            <div class="empty-cart">
+                                <i class="fas fa-calendar-times"></i>
+                                <h3>Your event cart is empty</h3>
+                                <p>Add items from our menu to start planning your event!</p>
                             </div>
-                            <div class="item-quantity">
-                                <button class="quantity-btn" onclick="eventCart.decreaseQuantity(${index})">-</button>
-                                <input type="number" class="quantity-input" value="${item.quantity}" min="1" 
-                                       onchange="eventCart.updateQuantity(${index}, this.value)"
-                                       oninput="eventCart.updateQuantity(${index}, this.value)">
-                                <button class="quantity-btn" onclick="eventCart.increaseQuantity(${index})">+</button>
-                                <button class="remove-item" onclick="eventCart.removeItem(${index})">
-                                    <i class="fas fa-trash"></i>
-                                </button>
+                        `;
+                    } else {
+                        cartItemsContainer.innerHTML = this.items.map((item, index) => `
+                            <div class="cart-item">
+                                <div class="item-info">
+                                    <h4>${item.name}</h4>
+                                    <div class="item-price">$${(item.price * item.quantity).toFixed(2)}</div>
+                                </div>
+                                <div class="item-quantity">
+                                    <button class="quantity-btn" onclick="eventCart.decreaseQuantity(${index})">-</button>
+                                    <input type="number" class="quantity-input" value="${item.quantity}" min="1" 
+                                           onchange="eventCart.updateQuantity(${index}, this.value)">
+                                    <button class="quantity-btn" onclick="eventCart.increaseQuantity(${index})">+</button>
+                                    <button class="remove-item" onclick="eventCart.removeItem(${index})">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                    `).join('');
+                        `).join('');
+                    }
                 }
                 
                 // Update total
-                cartTotal.textContent = `$${this.getTotal().toFixed(2)}`;
+                if (cartTotal) {
+                    cartTotal.textContent = `$${this.getTotal().toFixed(2)}`;
+                }
             }
 
             increaseQuantity(index) {
@@ -2604,7 +2671,6 @@
         const overlay = document.getElementById('overlay');
         const header = document.getElementById('mainHeader');
         const scrollTopBtn = document.getElementById('scrollTop');
-        const cartBtn = document.getElementById('cartBtn');
         const closeCartBtn = document.getElementById('closeCartBtn');
         const eventCartModal = document.getElementById('eventCartModal');
         const checkoutBtn = document.getElementById('checkoutBtn');
@@ -2615,11 +2681,12 @@
         class PhotoCarousel {
             constructor() {
                 this.track = document.getElementById('carouselTrack');
+                if (!this.track) return;
+                
                 this.slides = Array.from(this.track.querySelectorAll('.carousel-slide'));
                 this.nextBtn = document.getElementById('nextBtn');
                 this.prevBtn = document.getElementById('prevBtn');
                 this.dotsContainer = document.getElementById('carouselDots');
-                // Mini thumbnails han sido eliminados
                 
                 this.currentIndex = 0;
                 this.slideCount = this.slides.length;
@@ -2633,10 +2700,12 @@
                 this.createDots();
                 
                 // Event listeners
-                this.nextBtn.addEventListener('click', () => this.nextSlide());
-                this.prevBtn.addEventListener('click', () => this.prevSlide());
-                
-                // Mini thumbnails han sido eliminados - NO HAY CÓDIGO PARA ELLOS
+                if (this.nextBtn) {
+                    this.nextBtn.addEventListener('click', () => this.nextSlide());
+                }
+                if (this.prevBtn) {
+                    this.prevBtn.addEventListener('click', () => this.prevSlide());
+                }
                 
                 // Touch events for mobile swipe
                 this.setupTouchEvents();
@@ -2645,14 +2714,18 @@
                 this.startAutoSlide();
                 
                 // Pause auto slide on hover
-                this.track.addEventListener('mouseenter', () => this.stopAutoSlide());
-                this.track.addEventListener('mouseleave', () => this.startAutoSlide());
+                if (this.track) {
+                    this.track.addEventListener('mouseenter', () => this.stopAutoSlide());
+                    this.track.addEventListener('mouseleave', () => this.startAutoSlide());
+                }
                 
                 // Update active states
                 this.updateActiveStates();
             }
             
             createDots() {
+                if (!this.dotsContainer) return;
+                
                 for (let i = 0; i < this.slideCount; i++) {
                     const dot = document.createElement('button');
                     dot.classList.add('carousel-dot');
@@ -2665,6 +2738,8 @@
             }
             
             setupTouchEvents() {
+                if (!this.track) return;
+                
                 let startX = 0;
                 let endX = 0;
                 
@@ -2712,6 +2787,7 @@
             }
             
             updateSlidePosition() {
+                if (!this.track) return;
                 const slideWidth = 100; // percentage
                 this.track.style.transform = `translateX(-${this.currentIndex * slideWidth}%)`;
             }
@@ -2723,11 +2799,11 @@
                 });
                 
                 // Update dots
-                this.dots.forEach((dot, index) => {
-                    dot.classList.toggle('active', index === this.currentIndex);
-                });
-                
-                // Mini thumbs han sido eliminados - NO HAY CÓDIGO PARA ELLOS
+                if (this.dots) {
+                    this.dots.forEach((dot, index) => {
+                        dot.classList.toggle('active', index === this.currentIndex);
+                    });
+                }
             }
             
             startAutoSlide() {
@@ -2748,7 +2824,9 @@
         // Initialize carousel when DOM is loaded
         let photoCarousel;
         document.addEventListener('DOMContentLoaded', function() {
-            photoCarousel = new PhotoCarousel();
+            if (document.getElementById('carouselTrack')) {
+                photoCarousel = new PhotoCarousel();
+            }
         });
         
         // Toggle Menu Function
@@ -2770,7 +2848,7 @@
             }
         }
         
-        // Toggle Cart Function (para el modal, pero ahora el botón redirige directamente)
+        // Toggle Cart Function
         function toggleCart() {
             eventCartModal.classList.toggle('active');
             overlay.classList.toggle('active');
@@ -2778,12 +2856,13 @@
         }
         
         // Event Listeners
-        menuBtn.addEventListener('click', toggleMenu);
+        if (menuBtn) {
+            menuBtn.addEventListener('click', toggleMenu);
+        }
         
-        // El botón del carrito ahora redirige directamente a event-cart.html
-        // No necesita el modal porque es solo para eventos
-        
-        closeCartBtn.addEventListener('click', toggleCart);
+        if (closeCartBtn) {
+            closeCartBtn.addEventListener('click', toggleCart);
+        }
         
         // Close overlays on click
         overlay.addEventListener('click', () => {
@@ -2792,16 +2871,18 @@
         });
         
         // Checkout button
-        checkoutBtn.addEventListener('click', function() {
-            if (eventCart.getItemCount() === 0) {
-                eventCart.showNotification('Please add items to your cart first!');
-                return;
-            }
-            toggleCart();
-            setTimeout(() => {
-                window.location.href = 'event-cart.html';
-            }, 400);
-        });
+        if (checkoutBtn) {
+            checkoutBtn.addEventListener('click', function() {
+                if (eventCart.getItemCount() === 0) {
+                    eventCart.showNotification('Please add items to your cart first!');
+                    return;
+                }
+                toggleCart();
+                setTimeout(() => {
+                    window.location.href = 'event-cart.html';
+                }, 400);
+            });
+        }
         
         // Scroll effects
         let lastScrollTop = 0;
@@ -2809,17 +2890,21 @@
             const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
             
             // Header scroll effect
-            if (currentScroll > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
+            if (header) {
+                if (currentScroll > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
             }
             
             // Scroll to top button visibility
-            if (currentScroll > 300) {
-                scrollTopBtn.classList.add('visible');
-            } else {
-                scrollTopBtn.classList.remove('visible');
+            if (scrollTopBtn) {
+                if (currentScroll > 300) {
+                    scrollTopBtn.classList.add('visible');
+                } else {
+                    scrollTopBtn.classList.remove('visible');
+                }
             }
             
             // Animate menu cards on scroll
@@ -2861,15 +2946,17 @@
             
             // Video se reproduce automáticamente en todos los dispositivos
             const heroVideo = document.getElementById('heroVideo');
-            heroVideo.play().catch(e => {
-                console.log("Video autoplay fallback:", e);
-            });
+            if (heroVideo) {
+                heroVideo.play().catch(e => {
+                    console.log("Video autoplay fallback:", e);
+                });
+            }
             
             // Mostrar banner de consentimiento legal si no hay preferencia guardada
             const legalConsent = localStorage.getItem('supdogLegalConsent');
             const legalConsentBanner = document.getElementById('legalConsentBanner');
             
-            if (!legalConsent) {
+            if (!legalConsent && legalConsentBanner) {
                 // Mostrar el banner después de 2 segundos
                 setTimeout(() => {
                     legalConsentBanner.classList.add('active');
@@ -2878,12 +2965,14 @@
         });
         
         // Scroll to top functionality
-        scrollTopBtn.addEventListener('click', function() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
+        if (scrollTopBtn) {
+            scrollTopBtn.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
             });
-        });
+        }
         
         // Prevent zoom on double tap for iOS
         let lastTouchEnd = 0;
@@ -2916,118 +3005,126 @@
 
         // Función para cerrar el banner
         function closeLegalConsentBanner() {
-            legalConsentBanner.classList.remove('active');
-            // Asegurarse de que el banner no vuelva a aparecer
-            setTimeout(() => {
-                legalConsentBanner.style.display = 'none';
-            }, 400);
+            if (legalConsentBanner) {
+                legalConsentBanner.classList.remove('active');
+                // Asegurarse de que el banner no vuelva a aparecer
+                setTimeout(() => {
+                    legalConsentBanner.style.display = 'none';
+                }, 400);
+            }
         }
 
         // Aceptar consentimiento
-        acceptConsentBtn.addEventListener('click', function() {
-            localStorage.setItem('supdogLegalConsent', 'accepted');
-            localStorage.setItem('supdogLegalConsentDate', new Date().toISOString());
-            
-            // Mostrar mensaje de confirmación
-            eventCart.showNotification('¡Gracias por aceptar nuestros términos!');
-            
-            closeLegalConsentBanner();
-        });
+        if (acceptConsentBtn) {
+            acceptConsentBtn.addEventListener('click', function() {
+                localStorage.setItem('supdogLegalConsent', 'accepted');
+                localStorage.setItem('supdogLegalConsentDate', new Date().toISOString());
+                
+                // Mostrar mensaje de confirmación
+                eventCart.showNotification('¡Gracias por aceptar nuestros términos!');
+                
+                closeLegalConsentBanner();
+            });
+        }
 
         // Rechazar consentimiento
-        rejectConsentBtn.addEventListener('click', function() {
-            localStorage.setItem('supdogLegalConsent', 'rejected');
-            localStorage.setItem('supdogLegalConsentDate', new Date().toISOString());
-            
-            // Mostrar mensaje informativo
-            const notification = document.createElement('div');
-            notification.className = 'cart-notification';
-            notification.style.cssText = `
-                position: fixed;
-                top: 80px;
-                right: 50%;
-                transform: translateX(50%);
-                background: linear-gradient(135deg, #333, #555);
-                color: white;
-                padding: 12px 20px;
-                border-radius: 10px;
-                z-index: 9999;
-                font-weight: bold;
-                box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-                animation: fadeIn 0.3s ease-out;
-                display: flex;
-                align-items: center;
-                gap: 10px;
-                max-width: 90%;
-                text-align: center;
-            `;
-            
-            notification.innerHTML = `
-                <i class="fas fa-info-circle"></i>
-                <span>Algunas funciones pueden estar limitadas</span>
-            `;
-            
-            document.body.appendChild(notification);
-            
-            // Remover notificación después de 3 segundos
-            setTimeout(() => {
-                notification.style.animation = 'fadeIn 0.3s ease-out reverse';
+        if (rejectConsentBtn) {
+            rejectConsentBtn.addEventListener('click', function() {
+                localStorage.setItem('supdogLegalConsent', 'rejected');
+                localStorage.setItem('supdogLegalConsentDate', new Date().toISOString());
+                
+                // Mostrar mensaje informativo
+                const notification = document.createElement('div');
+                notification.className = 'cart-notification';
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 80px;
+                    right: 50%;
+                    transform: translateX(50%);
+                    background: linear-gradient(135deg, #333, #555);
+                    color: white;
+                    padding: 12px 20px;
+                    border-radius: 10px;
+                    z-index: 9999;
+                    font-weight: bold;
+                    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+                    animation: fadeIn 0.3s ease-out;
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    max-width: 90%;
+                    text-align: center;
+                `;
+                
+                notification.innerHTML = `
+                    <i class="fas fa-info-circle"></i>
+                    <span>Algunas funciones pueden estar limitadas</span>
+                `;
+                
+                document.body.appendChild(notification);
+                
+                // Remover notificación después de 3 segundos
                 setTimeout(() => {
-                    if (notification.parentNode) {
-                        notification.parentNode.removeChild(notification);
-                    }
-                }, 300);
-            }, 3000);
-            
-            closeLegalConsentBanner();
-        });
+                    notification.style.animation = 'fadeIn 0.3s ease-out reverse';
+                    setTimeout(() => {
+                        if (notification.parentNode) {
+                            notification.parentNode.removeChild(notification);
+                        }
+                    }, 300);
+                }, 3000);
+                
+                closeLegalConsentBanner();
+            });
+        }
 
         // Cerrar banner (X)
-        legalConsentCloseBtn.addEventListener('click', function() {
-            // Al cerrar sin decidir, no guardamos preferencia
-            // El banner seguirá apareciendo en la próxima visita
-            closeLegalConsentBanner();
-            
-            // Mostrar mensaje informativo
-            const notification = document.createElement('div');
-            notification.className = 'cart-notification';
-            notification.style.cssText = `
-                position: fixed;
-                top: 80px;
-                right: 50%;
-                transform: translateX(50%);
-                background: linear-gradient(135deg, #555, #777);
-                color: white;
-                padding: 12px 20px;
-                border-radius: 10px;
-                z-index: 9999;
-                font-weight: bold;
-                box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-                animation: fadeIn 0.3s ease-out;
-                display: flex;
-                align-items: center;
-                gap: 10px;
-                max-width: 90%;
-                text-align: center;
-            `;
-            
-            notification.innerHTML = `
-                <i class="fas fa-exclamation-triangle"></i>
-                <span>Por favor, acepta nuestros términos para una mejor experiencia</span>
-            `;
-            
-            document.body.appendChild(notification);
-            
-            // Remover notificación después de 3 segundos
-            setTimeout(() => {
-                notification.style.animation = 'fadeIn 0.3s ease-out reverse';
+        if (legalConsentCloseBtn) {
+            legalConsentCloseBtn.addEventListener('click', function() {
+                // Al cerrar sin decidir, no guardamos preferencia
+                // El banner seguirá apareciendo en la próxima visita
+                closeLegalConsentBanner();
+                
+                // Mostrar mensaje informativo
+                const notification = document.createElement('div');
+                notification.className = 'cart-notification';
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 80px;
+                    right: 50%;
+                    transform: translateX(50%);
+                    background: linear-gradient(135deg, #555, #777);
+                    color: white;
+                    padding: 12px 20px;
+                    border-radius: 10px;
+                    z-index: 9999;
+                    font-weight: bold;
+                    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+                    animation: fadeIn 0.3s ease-out;
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    max-width: 90%;
+                    text-align: center;
+                `;
+                
+                notification.innerHTML = `
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <span>Por favor, acepta nuestros términos para una mejor experiencia</span>
+                `;
+                
+                document.body.appendChild(notification);
+                
+                // Remover notificación después de 3 segundos
                 setTimeout(() => {
-                    if (notification.parentNode) {
-                        notification.parentNode.removeChild(notification);
-                    }
-                }, 300);
-            }, 3000);
-        });
+                    notification.style.animation = 'fadeIn 0.3s ease-out reverse';
+                    setTimeout(() => {
+                        if (notification.parentNode) {
+                            notification.parentNode.removeChild(notification);
+                        }
+                    }, 300);
+                }, 3000);
+            });
+        }
     </script>
 </body>
 </html>
