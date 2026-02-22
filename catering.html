@@ -1,1 +1,1020 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>SupDog - Catering Menu</title>
+    
+    <!-- FAVICON -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- Mismos estilos que la página principal --- */
+        :root {
+            --color-rojo-fuego: #DB3606;
+            --color-amarillo-cheddar: #F8A814;
+            --color-mostaza-suave: #E0A851;
+            --color-purpura-berry: #BA6990;
+            --color-fondo-oscuro: #0f0f0f;
+            --color-texto-claro: #ffffff;
+            --color-gris-claro: #e0e0e0;
+        }
 
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 70px;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--color-fondo-oscuro);
+            color: var(--color-texto-claro);
+            overflow-x: hidden;
+            line-height: 1.5;
+            -webkit-text-size-adjust: 100%;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, .menu-link, .btn, .price-badge, .logo-text { 
+            font-family: 'Bangers', cursive; 
+            letter-spacing: 0.5px; 
+        }
+
+        /* --- ANIMATIONS --- */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes fireGlow {
+            0%, 100% { text-shadow: 0 0 3px var(--color-rojo-fuego), 0 0 6px var(--color-rojo-fuego); }
+            50% { text-shadow: 0 0 10px var(--color-rojo-fuego), 0 0 15px var(--color-rojo-fuego); }
+        }
+
+        /* --- HEADER --- */
+        header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0.8rem 5%;
+            background-color: rgba(15, 15, 15, 0.98);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 2px solid var(--color-amarillo-cheddar);
+            height: 70px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            background-color: rgba(10, 10, 10, 0.95);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(15px);
+        }
+
+        .logo-text {
+            font-family: 'Bangers', cursive;
+            font-size: 2.2rem;
+            line-height: 1;
+            text-transform: uppercase;
+            cursor: pointer;
+            color: white;
+            text-shadow: 2px 2px 0px var(--color-rojo-fuego);
+            transition: all 0.3s ease;
+            animation: fireGlow 2s infinite alternate;
+            position: relative;
+            text-decoration: none;
+        }
+       
+        .logo-text span {
+            color: var(--color-amarillo-cheddar);
+            text-shadow: 2px 2px 0px var(--color-rojo-fuego);
+        }
+
+        /* --- BOTONES DEL HEADER --- */
+        .header-buttons {
+            position: absolute;
+            right: 5%;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 1002;
+        }
+
+        .header-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 15px;
+            border-radius: 50px;
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            text-decoration: none;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+        }
+
+        .home-btn {
+            background: linear-gradient(135deg, var(--color-amarillo-cheddar) 0%, #e69500 100%);
+            color: #1a1a1a;
+        }
+
+        .cart-btn {
+            background: linear-gradient(135deg, var(--color-purpura-berry) 0%, #9d5b85 100%);
+        }
+
+        .btn-text {
+            display: none;
+        }
+
+        @media (min-width: 768px) {
+            .btn-text {
+                display: inline;
+                margin-left: 5px;
+            }
+            
+            .header-btn {
+                padding: 8px 20px;
+            }
+        }
+
+        /* Hamburger Button Mobile */
+        .hamburger-btn {
+            position: absolute;
+            left: 5%;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            z-index: 1002;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            padding: 8px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            width: 44px;
+            height: 44px;
+            justify-content: center;
+        }
+
+        .hamburger-btn span {
+            display: block;
+            width: 24px;
+            height: 3px;
+            background-color: var(--color-amarillo-cheddar);
+            border-radius: 3px;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        /* --- SIDEBAR MOBILE --- */
+        .sidebar {
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 280px; 
+            height: 100vh;
+            background-color: rgba(15, 15, 15, 0.98);
+            border-right: 3px solid var(--color-amarillo-cheddar);
+            padding-top: 90px; 
+            padding-left: 2rem; 
+            z-index: 1001;
+            transform: translateX(-100%); 
+            transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+            box-shadow: 5px 0 30px rgba(219, 54, 6, 0.3);
+            backdrop-filter: blur(10px);
+        }
+        
+        .sidebar.active { 
+            transform: translateX(0); 
+        }
+        
+        .sidebar ul { 
+            list-style: none; 
+        }
+        
+        .sidebar li { 
+            margin-bottom: 1.8rem; 
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: all 0.4s ease;
+        }
+        
+        .sidebar.active li {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .menu-link { 
+            text-decoration: none; 
+            font-size: 1.8rem; 
+            color: var(--color-texto-claro); 
+            transition: all 0.3s ease; 
+            display: inline-block;
+            position: relative;
+            padding: 4px 0;
+        }
+        
+        .menu-link:hover { 
+            color: var(--color-rojo-fuego); 
+            transform: translateX(10px);
+        }
+
+        .overlay {
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85); 
+            backdrop-filter: blur(3px);
+            z-index: 1000; 
+            opacity: 0; 
+            visibility: hidden; 
+            transition: all 0.4s ease;
+        }
+        
+        .overlay.active { 
+            opacity: 1; 
+            visibility: visible; 
+        }
+
+        /* --- BUTTONS --- */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 14px 28px;
+            background: linear-gradient(135deg, var(--color-rojo-fuego) 0%, #c42f04 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 4px 12px rgba(219, 54, 6, 0.3);
+            min-height: 48px;
+            min-width: 140px;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 6px 16px rgba(219, 54, 6, 0.4);
+        }
+
+        /* --- CATERING HERO SECTION --- */
+        .catering-hero {
+            position: relative;
+            height: 40vh;
+            min-height: 300px;
+            overflow: hidden;
+            margin-top: 70px;
+            background: linear-gradient(135deg, #1a0f0f 0%, #2a1a1a 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .catering-hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 0 1.5rem;
+            max-width: 800px;
+        }
+
+        .catering-hero h1 {
+            font-size: 3.5rem;
+            color: var(--color-amarillo-cheddar);
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 0px var(--color-rojo-fuego);
+            animation: fadeIn 1s ease-out;
+        }
+
+        .catering-hero p {
+            font-size: 1.3rem;
+            color: #ddd;
+            margin-bottom: 2rem;
+            animation: fadeIn 1s ease-out 0.3s both;
+        }
+
+        /* --- CATERING MENU SECTION --- */
+        .catering-section {
+            padding: 5rem 1.5rem;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .catering-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .catering-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .catering-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--color-rojo-fuego) 0%, #c42f04 100%);
+            color: white;
+            padding: 15px 35px;
+            border-radius: 50px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 2rem;
+            animation: pulse 2s infinite;
+            box-shadow: 0 4px 12px rgba(219, 54, 6, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .catering-title {
+            font-size: 3.5rem;
+            color: var(--color-amarillo-cheddar);
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 0px var(--color-rojo-fuego);
+        }
+
+        .catering-subtitle {
+            font-size: 1.3rem;
+            color: #ddd;
+            max-width: 700px;
+            margin: 0 auto;
+            font-style: italic;
+        }
+
+        .catering-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .catering-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .catering-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .catering-card {
+            background: linear-gradient(145deg, #2a2a2a, #1f1f1f);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 2px solid transparent;
+            transition: all 0.4s ease;
+            position: relative;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .catering-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--color-amarillo-cheddar);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+        }
+
+        .catering-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--color-rojo-fuego), var(--color-amarillo-cheddar), var(--color-purpura-berry));
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .catering-card:hover::before {
+            transform: translateX(0);
+        }
+
+        .catering-card h3 {
+            color: var(--color-rojo-fuego);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 2px solid var(--color-purpura-berry);
+            font-family: 'Bangers', cursive;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .catering-card h3 i {
+            color: var(--color-amarillo-cheddar);
+            font-size: 1.8rem;
+        }
+
+        .catering-items {
+            list-style: none;
+        }
+
+        .catering-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 0;
+            border-bottom: 1px dashed #444;
+            color: #fff;
+            transition: all 0.3s ease;
+        }
+
+        .catering-item:hover {
+            padding-left: 10px;
+            background: rgba(255,255,255,0.02);
+        }
+
+        .catering-item:last-child {
+            border-bottom: none;
+        }
+
+        .item-name {
+            font-size: 1rem;
+            flex: 1;
+            padding-right: 10px;
+        }
+
+        .item-price {
+            color: var(--color-amarillo-cheddar);
+            font-weight: bold;
+            font-size: 1.2rem;
+            font-family: 'Bangers', cursive;
+            white-space: nowrap;
+            background: rgba(0,0,0,0.3);
+            padding: 4px 10px;
+            border-radius: 20px;
+        }
+
+        /* Cards especiales para secciones destacadas */
+        .catering-card.featured {
+            background: linear-gradient(145deg, #331f1f, #2a1a1a);
+            border: 2px solid var(--color-purpura-berry);
+            grid-column: span 2;
+        }
+
+        /* --- CONTACT SECTION --- */
+        .catering-contact-section {
+            padding: 4rem 1.5rem;
+            background: linear-gradient(135deg, #1a0f0f 0%, #2a1a1a 100%);
+            text-align: center;
+            border-top: 3px solid var(--color-amarillo-cheddar);
+            border-bottom: 3px solid var(--color-rojo-fuego);
+        }
+
+        .contact-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .contact-title {
+            font-size: 2.5rem;
+            color: var(--color-amarillo-cheddar);
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 0px var(--color-rojo-fuego);
+        }
+
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .contact-card {
+            background: rgba(255,255,255,0.05);
+            padding: 2rem;
+            border-radius: 15px;
+            min-width: 250px;
+            border: 2px solid var(--color-purpura-berry);
+            transition: all 0.3s ease;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--color-amarillo-cheddar);
+        }
+
+        .contact-card i {
+            font-size: 2.5rem;
+            color: var(--color-amarillo-cheddar);
+            margin-bottom: 1rem;
+        }
+
+        .contact-card h3 {
+            color: white;
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-card a {
+            color: var(--color-rojo-fuego);
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .contact-card a:hover {
+            color: var(--color-amarillo-cheddar);
+        }
+
+        .contact-note {
+            margin-top: 3rem;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, rgba(219, 54, 6, 0.1) 0%, rgba(186, 105, 144, 0.1) 100%);
+            border-radius: 10px;
+            color: #ddd;
+            font-size: 1.1rem;
+            border: 2px dashed var(--color-purpura-berry);
+        }
+
+        /* --- FOOTER --- */
+        footer { 
+            background: #0a0a0a; 
+            padding: 2.5rem 1.5rem; 
+            text-align: center; 
+            color: #777; 
+            position: relative;
+            overflow: hidden;
+        }
+        
+        footer:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--color-rojo-fuego), var(--color-amarillo-cheddar), var(--color-purpura-berry));
+        }
+        
+        .social-links {
+            margin-top: 1.5rem;
+        }
+        
+        .social-links a {
+            color: var(--color-amarillo-cheddar);
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .social-links a:hover {
+            color: var(--color-rojo-fuego);
+            transform: translateY(-2px);
+        }
+
+        /* Scroll to Top Button */
+        .scroll-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--color-rojo-fuego) 0%, #c42f04 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(219, 54, 6, 0.3);
+            font-size: 1.2rem;
+        }
+        
+        .scroll-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .scroll-top:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 6px 16px rgba(219, 54, 6, 0.4);
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .catering-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .catering-title {
+                font-size: 2.5rem;
+            }
+            
+            .catering-card.featured {
+                grid-column: span 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay" id="overlay"></div>
+    
+    <div class="scroll-top" id="scrollTop">
+        <i class="fas fa-chevron-up"></i>
+    </div>
+
+    <header id="mainHeader">
+        <button class="hamburger-btn" id="menuBtn" aria-label="Toggle navigation menu">
+            <span></span><span></span><span></span>
+        </button>
+        
+        <a href="index.html" class="logo-text">
+            SUP<span>DOG</span>
+        </a>
+        
+        <div class="header-buttons">
+            <a href="index.html" class="header-btn home-btn">
+                <i class="fas fa-home"></i>
+                <span class="btn-text">Home</span>
+            </a>
+            <a href="event-cart.html" class="header-btn cart-btn">
+                <i class="fas fa-calendar-alt"></i>
+                <span class="btn-text">Event Cart</span>
+            </a>
+        </div>
+    </header>
+
+    <nav class="sidebar" id="sidebar" aria-label="Main navigation">
+        <ul>
+            <li><a href="index.html" class="menu-link" onclick="toggleMenu()">HOME</a></li>
+            <li><a href="index.html#story" class="menu-link" onclick="toggleMenu()">OUR STORY</a></li>
+            <li><a href="index.html#gallery" class="menu-link" onclick="toggleMenu()">PHOTO GALLERY</a></li>
+            <li><a href="index.html#menu" class="menu-link" onclick="toggleMenu()">MENU</a></li>
+            <li><a href="index.html#sides" class="menu-link" onclick="toggleMenu()">SIDES</a></li>
+            <li><a href="index.html#location" class="menu-link" onclick="toggleMenu()">LOCATION</a></li>
+            <li><a href="catering.html" class="menu-link" onclick="toggleMenu()" style="color: var(--color-amarillo-cheddar);">CATERING</a></li>
+        </ul>
+        
+        <div style="margin-top: 40px; padding-right: 20px;">
+            <p style="color: var(--color-mostaza-suave); font-size: 1.1rem; margin-bottom: 10px;">Follow the fire!</p>
+            <p>
+                <a href="https://www.instagram.com/supdogdfw?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" 
+                   target="_blank" 
+                   style="color: white; text-decoration: none; font-weight: bold; font-size: 1.2rem; display: flex; align-items: center; gap: 8px;">
+                    @supdogdfw <i class="fab fa-instagram"></i>
+                </a>
+            </p>
+        </div>
+    </nav>
+
+    <!-- Catering Hero Section -->
+    <section class="catering-hero">
+        <div class="catering-hero-content">
+            <h1>CATER WITH US</h1>
+            <p>Only available for catering menu - Perfect for your next event!</p>
+            <a href="#catering-menu" class="btn">
+                VIEW MENU <i class="fas fa-arrow-down"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Catering Menu Section -->
+    <section id="catering-menu" class="catering-section">
+        <div class="catering-container">
+            <div class="catering-header">
+                <div class="catering-badge">
+                    <i class="fas fa-utensils"></i> CATERING MENU
+                </div>
+                <h2 class="catering-title">SUP DOG CATERING</h2>
+                <p class="catering-subtitle">All items are prepared fresh for your event. Minimum order may apply.</p>
+            </div>
+
+            <div class="catering-grid">
+                <!-- Main Dishes -->
+                <div class="catering-card">
+                    <h3><i class="fas fa-fire"></i> MAIN DISHES</h3>
+                    <ul class="catering-items">
+                        <li class="catering-item">
+                            <span class="item-name">Smoked Smash sliders</span>
+                            <span class="item-price">2 for $12</span>
+                        </li>
+                        <li class="catering-item">
+                            <span class="item-name">Cajun Ramen noodles</span>
+                            <span class="item-price">$14 bowl</span>
+                        </li>
+                        <li class="catering-item">
+                            <span class="item-name">Cajun Ramen noodles (½ pan)</span>
+                            <span class="item-price">$75</span>
+                        </li>
+                        <li class="catering-item">
+                            <span class="item-name">Grilled chipotle chicken sandwich</span>
+                            <span class="item-price">$12</span>
+                        </li>
+                        <li class="catering-item">
+                            <span class="item-name">Club sandwich/wrap</span>
+                            <span class="item-price">$10</span>
+                        </li>
+                        <li class="catering-item">
+                            <span class="item-name">Smoked bbq wings</span>
+                            <span class="item-price">25pc $20</span>
+                        </li>
+                        <li class="catering-item">
+                            <span class="item-name">Smoked buffalo wings</span>
+                            <span class="item-price">25pc $20</span>
+                        </li>
+                        <li class="catering-item">
+                            <span class="item-name">Smoked Cajun wings</span>
+                            <span class="item-price">25pc $20</span>
+                        </li>
+                        <li class="catering-item">
+                            <span class="item-name">Surf&Turf smashed avocado bites</span>
+                            <span class="item-price">$35 tray (25pc)</span>
+                        </li>
+                        <li class="catering-item">
+                            <span class="item-name">Pretzel tray w/ honey mustard & beer cheese</span>
+                            <span class="item-price">$35</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Mexican Side -->
+                <div class="catering-card">
+                    <h3><i class="fas fa-taco"></i> MEXICAN SIDE</h3>
+                    <ul class="catering-items">
+                        <li class="catering-item">
+                            <span class="item-name">Red Enchiladas (cheese/chicken)</span>
+                            <span class="item-price">$80 tray (24pc)</span>
+                        </li>
+                        <li class="catering-item">
+                            <span class="item-name">Green Enchiladas (cheese/chicken)</span>
+                            <span class="item-price">$80 tray (24pc)</span>
+                        </li>
+                        <li class="catering-item">
+                            <span class="item-name">Ground beef hard shell tacos</span>
+                            <span class="item-price">2 for $10</span>
+                        </li>
+                        <li class="catering-item">
+                            <span class="item-name">Chicken tostadas</span>
+                            <span class="item-price">2 for $10</span>
+                        </li>
+                        <li class="catering-item">
+                            <span class="item-name">Ground beef tostadas</span>
+                            <span class="item-price">2 for $10</span>
+                        </li>
+                        <li class="catering-item">
+                            <span class="item-name">Al pastor tacos</span>
+                            <span class="item-price">2 for $8</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Sides & Desserts -->
+                <div class="catering-card">
+                    <h3><i class="fas fa-cake"></i> SIDES & DESSERTS</h3>
+                    <ul class="catering-items">
+                        <li class="catering-item">
+                            <span class="item-name">Fresh fruit tray</span>
+                            <span class="item-price">$45</span>
+                        </li>
+                        <li class="catering-item">
+                            <span class="item-name">Mini cheesecakes</span>
+                            <span class="item-price">$6</span>
+                        </li>
+                        <li class="catering-item">
+                            <span class="item-name">Mini crème brûlée</span>
+                            <span class="item-price">$6</span>
+                        </li>
+                        <li class="catering-item">
+                            <span class="item-name">Cold veggie platter</span>
+                            <span class="item-price">$45</span>
+                        </li>
+                        <li class="catering-item">
+                            <span class="item-name">Chopped green salad</span>
+                            <span class="item-price">$45</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Hot Dogs (Big & Mini) -->
+                <div class="catering-card featured">
+                    <h3><i class="fas fa-hotdog"></i> HOT DOGS - BIG & MINI VERSIONS</h3>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <ul class="catering-items">
+                            <li class="catering-item">
+                                <span class="item-name">Tijuana Dog</span>
+                                <span class="item-price">Ask for pricing</span>
+                            </li>
+                            <li class="catering-item">
+                                <span class="item-name">Chicago Dog</span>
+                                <span class="item-price">Ask for pricing</span>
+                            </li>
+                            <li class="catering-item">
+                                <span class="item-name">Train Wreck Dog</span>
+                                <span class="item-price">Ask for pricing</span>
+                            </li>
+                            <li class="catering-item">
+                                <span class="item-name">The Hedgehog</span>
+                                <span class="item-price">Ask for pricing</span>
+                            </li>
+                        </ul>
+                        <ul class="catering-items">
+                            <li class="catering-item">
+                                <span class="item-name">German Dog</span>
+                                <span class="item-price">Ask for pricing</span>
+                            </li>
+                            <li class="catering-item">
+                                <span class="item-name">Mexican Dog</span>
+                                <span class="item-price">Ask for pricing</span>
+                            </li>
+                            <li class="catering-item">
+                                <span class="item-name">Corn Dogs</span>
+                                <span class="item-price">Ask for pricing</span>
+                            </li>
+                            <li class="catering-item">
+                                <span class="item-name">Mini Corn Dogs</span>
+                                <span class="item-price">Ask for pricing</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <p style="color: var(--color-mostaza-suave); margin-top: 1rem; text-align: center; font-style: italic;">
+                        <i class="fas fa-info-circle"></i> Both big and mini versions available for all hot dogs
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="catering-contact-section">
+        <div class="contact-container">
+            <h2 class="contact-title">📞 PLACE YOUR CATERING ORDER</h2>
+            
+            <div class="contact-info">
+                <div class="contact-card">
+                    <i class="fas fa-phone-alt"></i>
+                    <h3>Call Us</h3>
+                    <a href="tel:+11234567890">(123) 456-7890</a>
+                </div>
+                
+                <div class="contact-card">
+                    <i class="fas fa-envelope"></i>
+                    <h3>Email Us</h3>
+                    <a href="mailto:catering@supdog.com">catering@supdog.com</a>
+                </div>
+                
+                <div class="contact-card">
+                    <i class="fas fa-clock"></i>
+                    <h3>Notice Required</h3>
+                    <p style="color: var(--color-amarillo-cheddar); font-weight: bold;">48 hours minimum</p>
+                </div>
+            </div>
+            
+            <div class="contact-note">
+                <i class="fas fa-star" style="color: var(--color-amarillo-cheddar);"></i>
+                For large events (50+ people), please contact us at least 1 week in advance
+                <i class="fas fa-star" style="color: var(--color-amarillo-cheddar);"></i>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p style="font-size: 1rem; margin-bottom: 1rem; color: #aaa;">© 2025 SupDog Hot Dogs. All rights reserved.</p>
+        <div class="social-links">
+            <p style="font-size: 1rem;">
+                Follow:
+                <a href="https://www.instagram.com/supdogdfw?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">
+                    Instagram
+                </a> | 
+                <a href="event-cart.html" style="color: var(--color-purpura-berry); font-weight: bold;">Event Cart</a> | 
+                <a href="index.html">Home</a>
+            </p>
+        </div>
+        
+        <p style="margin-top: 1rem; font-size: 0.8rem; color: #777; padding: 0 1rem;">
+            Catering orders require 48 hours advance notice. Prices subject to change based on event size.
+        </p>
+    </footer>
+
+    <script>
+        // DOM Elements
+        const menuBtn = document.getElementById('menuBtn');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+        const header = document.getElementById('mainHeader');
+        const scrollTopBtn = document.getElementById('scrollTop');
+
+        // Toggle Menu Function
+        function toggleMenu() {
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+            const spans = menuBtn.querySelectorAll('span');
+            
+            if (sidebar.classList.contains('active')) {
+                spans[0].style.transform = 'rotate(45deg) translate(5px, 6px)';
+                spans[1].style.opacity = '0';
+                spans[2].style.transform = 'rotate(-45deg) translate(5px, -6px)';
+                document.body.style.overflow = 'hidden';
+            } else {
+                spans[0].style.transform = 'none'; 
+                spans[1].style.opacity = '1'; 
+                spans[2].style.transform = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // Event Listeners
+        menuBtn.addEventListener('click', toggleMenu);
+
+        overlay.addEventListener('click', () => {
+            if (sidebar.classList.contains('active')) toggleMenu();
+        });
+
+        // Scroll effects
+        window.addEventListener('scroll', function() {
+            const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+            
+            // Header scroll effect
+            if (currentScroll > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+            
+            // Scroll to top button visibility
+            if (currentScroll > 300) {
+                scrollTopBtn.classList.add('visible');
+            } else {
+                scrollTopBtn.classList.remove('visible');
+            }
+        }, {passive: true});
+
+        // Scroll to top functionality
+        scrollTopBtn.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Trigger scroll event
+            setTimeout(() => {
+                window.dispatchEvent(new Event('scroll'));
+            }, 100);
+        });
+
+        // iOS fixes
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function(event) {
+            const now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
+    </script>
+</body>
+</html>
