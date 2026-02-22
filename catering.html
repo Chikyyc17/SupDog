@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* --- Mismos estilos que la página principal --- */
+        /* --- BRAND COLORS --- */
         :root {
             --color-rojo-fuego: #DB3606;
             --color-amarillo-cheddar: #F8A814;
@@ -385,15 +385,20 @@
             gap: 2.5rem;
         }
 
+        /* Ajustes para tablet/desktop */
         @media (min-width: 768px) {
             .catering-grid {
                 grid-template-columns: repeat(2, 1fr);
+                max-width: 900px;
+                margin: 0 auto;
             }
         }
 
         @media (min-width: 1200px) {
             .catering-grid {
                 grid-template-columns: repeat(3, 1fr);
+                max-width: 1200px;
+                margin: 0 auto;
             }
         }
 
@@ -476,15 +481,23 @@
             padding-right: 10px;
         }
 
+        /* --- CORREGIDO: Estilos para precios más legibles --- */
         .item-price {
             color: var(--color-amarillo-cheddar);
             font-weight: bold;
             font-size: 1.2rem;
-            font-family: 'Bangers', cursive;
+            font-family: 'Poppins', sans-serif; /* Cambiado de Bangers a Poppins */
             white-space: nowrap;
             background: rgba(0,0,0,0.3);
             padding: 4px 10px;
             border-radius: 20px;
+            letter-spacing: 0.5px; /* Mejor espaciado */
+        }
+
+        /* Precios especiales para números que pueden confundirse */
+        .item-price .number {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
         }
 
         /* Cards especiales para secciones destacadas */
@@ -493,7 +506,7 @@
             border: 2px solid var(--color-purpura-berry);
         }
 
-        /* --- NUEVO: Estilos corregidos para Hot Dogs --- */
+        /* --- CORREGIDO: Estilos para Hot Dogs (centrado en desktop) --- */
         .hotdogs-grid {
             display: flex;
             flex-direction: column;
@@ -504,7 +517,7 @@
             .hotdogs-grid {
                 display: grid;
                 grid-template-columns: 1fr 1fr;
-                gap: 1rem;
+                gap: 1.5rem;
             }
         }
 
@@ -514,6 +527,37 @@
 
         .hotdogs-list .catering-item {
             padding: 0.6rem 0;
+        }
+
+        /* --- CORREGIDO: Hacer que el cuadro de Hot Dogs ocupe todo el ancho y esté centrado --- */
+        @media (min-width: 1200px) {
+            .catering-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            /* El cuarto elemento (Hot Dogs) ocupará toda la fila y estará centrado */
+            .catering-card.featured {
+                grid-column: 1 / -1; /* Ocupa todas las columnas */
+                max-width: 900px; /* Ancho máximo para que no sea demasiado grande */
+                margin: 0 auto; /* Centrado automático */
+                width: 100%;
+            }
+            
+            /* Ajustar el contenido interno del cuadro destacado */
+            .catering-card.featured .hotdogs-grid {
+                max-width: 800px;
+                margin: 0 auto;
+            }
+        }
+
+        /* Para tablets */
+        @media (min-width: 768px) and (max-width: 1199px) {
+            .catering-card.featured {
+                grid-column: 1 / -1; /* Ocupa todas las columnas */
+                max-width: 700px;
+                margin: 0 auto;
+                width: 100%;
+            }
         }
 
         /* --- CONTACT SECTION --- */
@@ -577,6 +621,7 @@
             font-size: 1.2rem;
             font-weight: bold;
             transition: color 0.3s ease;
+            font-family: 'Poppins', sans-serif;
         }
 
         .contact-card a:hover {
@@ -672,10 +717,6 @@
             
             .catering-title {
                 font-size: 2.5rem;
-            }
-            
-            .catering-card.featured {
-                grid-column: span 1;
             }
         }
     </style>
@@ -859,13 +900,12 @@
                     </ul>
                 </div>
 
-                <!-- Hot Dogs (Big & Mini) - CORREGIDO -->
+                <!-- Hot Dogs (Big & Mini) - CORREGIDO Y CENTRADO -->
                 <div class="catering-card featured">
                     <h3><i class="fas fa-hotdog"></i> HOT DOGS - BIG & MINI VERSIONS</h3>
                     
-                    <!-- En móvil: 1 columna, en desktop: 2 columnas -->
                     <div class="hotdogs-grid">
-                        <!-- Primera columna/list group -->
+                        <!-- Primera columna -->
                         <ul class="hotdogs-list">
                             <li class="catering-item">
                                 <span class="item-name">Tijuana Dog</span>
@@ -885,7 +925,7 @@
                             </li>
                         </ul>
                         
-                        <!-- Segunda columna/list group -->
+                        <!-- Segunda columna -->
                         <ul class="hotdogs-list">
                             <li class="catering-item">
                                 <span class="item-name">German Dog</span>
