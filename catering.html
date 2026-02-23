@@ -45,8 +45,6 @@
             color: var(--color-texto-claro);
             overflow-x: hidden;
             line-height: 1.5;
-            -webkit-text-size-adjust: 100%;
-            -webkit-font-smoothing: antialiased;
         }
 
         h1, h2, h3, .menu-link, .btn, .price-badge, .logo-text { 
@@ -118,7 +116,6 @@
             text-shadow: 2px 2px 0px var(--color-rojo-fuego);
         }
 
-        /* --- BOTONES DEL HEADER --- */
         .header-buttons {
             position: absolute;
             right: 5%;
@@ -168,7 +165,6 @@
             }
         }
 
-        /* Hamburger Button Mobile */
         .hamburger-btn {
             position: absolute;
             left: 5%;
@@ -198,7 +194,6 @@
             transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
         }
 
-        /* --- SIDEBAR MOBILE --- */
         .sidebar {
             position: fixed; 
             top: 0; 
@@ -270,7 +265,6 @@
             visibility: visible; 
         }
 
-        /* --- BUTTONS --- */
         .btn {
             display: inline-flex;
             align-items: center;
@@ -295,7 +289,7 @@
             box-shadow: 0 6px 16px rgba(219, 54, 6, 0.4);
         }
 
-        /* --- CATERING HERO SECTION --- */
+        /* --- CATERING HERO --- */
         .catering-hero {
             position: relative;
             height: 40vh;
@@ -331,12 +325,10 @@
             animation: fadeIn 1s ease-out 0.3s both;
         }
 
-        /* --- CATERING MENU SECTION --- */
+        /* --- CATERING MENU SECTION (Tus cards existentes) --- */
         .catering-section {
             padding: 5rem 1.5rem;
             background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
-            position: relative;
-            overflow: hidden;
         }
 
         .catering-container {
@@ -385,7 +377,6 @@
             gap: 2.5rem;
         }
 
-        /* Ajustes para tablet/desktop */
         @media (min-width: 768px) {
             .catering-grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -456,16 +447,15 @@
             list-style: none;
         }
 
-        /* --- CORREGIDO: Estilos para que los precios no se salgan del cuadro --- */
         .catering-item {
             display: flex;
             justify-content: space-between;
-            align-items: flex-start; /* Cambiado de center a flex-start para mejor alineación */
+            align-items: flex-start;
             padding: 0.8rem 0;
             border-bottom: 1px dashed #444;
             color: #fff;
             transition: all 0.3s ease;
-            gap: 10px; /* Espacio entre nombre y precio */
+            gap: 10px;
         }
 
         .catering-item:hover {
@@ -480,42 +470,38 @@
         .item-name {
             font-size: 1rem;
             flex: 1;
-            line-height: 1.4; /* Mejor espaciado para textos largos */
-            word-break: break-word; /* Permite que las palabras largas se rompan */
+            line-height: 1.4;
+            word-break: break-word;
             padding-right: 5px;
         }
 
-        /* --- CORREGIDO: Precios más legibles y que no se desborden --- */
         .item-price {
             color: var(--color-amarillo-cheddar);
             font-weight: bold;
-            font-size: 1rem; /* Reducido de 1.2rem a 1rem */
+            font-size: 1rem;
             font-family: 'Poppins', sans-serif;
-            white-space: normal; /* Cambiado de nowrap a normal */
-            text-align: right; /* Alineación a la derecha */
+            white-space: normal;
+            text-align: right;
             background: rgba(0,0,0,0.3);
             padding: 4px 8px;
             border-radius: 15px;
             letter-spacing: 0.3px;
-            max-width: 140px; /* Ancho máximo para precios largos */
-            min-width: 80px; /* Ancho mínimo para precios cortos */
+            max-width: 140px;
+            min-width: 80px;
             line-height: 1.3;
-            flex-shrink: 0; /* Evita que se encoja */
+            flex-shrink: 0;
         }
 
-        /* Estilo especial para precios muy largos */
         .item-price.large {
             font-size: 0.9rem;
             max-width: 160px;
         }
 
-        /* Cards especiales para secciones destacadas */
         .catering-card.featured {
             background: linear-gradient(145deg, #331f1f, #2a1a1a);
             border: 2px solid var(--color-purpura-berry);
         }
 
-        /* --- Estilos para Hot Dogs --- */
         .hotdogs-grid {
             display: flex;
             flex-direction: column;
@@ -538,7 +524,6 @@
             padding: 0.6rem 0;
         }
 
-        /* --- Hacer que el cuadro de Hot Dogs ocupe todo el ancho y esté centrado --- */
         @media (min-width: 1200px) {
             .catering-grid {
                 grid-template-columns: repeat(3, 1fr);
@@ -566,10 +551,9 @@
             }
         }
 
-        /* Ajustes específicos para móvil */
         @media (max-width: 480px) {
             .item-price {
-                font-size: 0.9rem; /* Aún más pequeño en móviles muy pequeños */
+                font-size: 0.9rem;
                 max-width: 120px;
                 padding: 3px 6px;
             }
@@ -579,13 +563,339 @@
             }
         }
 
+        /* ===== NUEVO: SHOWCASE HÍBRIDO (TikTok móvil + 2 columnas desktop) ===== */
+        .showcase-section {
+            padding: 5rem 1.5rem;
+            background: linear-gradient(135deg, #1a0f0f 0%, #2a1a1a 100%);
+            position: relative;
+            overflow: hidden;
+            border-top: 3px solid var(--color-amarillo-cheddar);
+            border-bottom: 3px solid var(--color-rojo-fuego);
+        }
+
+        .showcase-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .showcase-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .showcase-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--color-purpura-berry) 0%, #9d5b85 100%);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            animation: pulse 2s infinite;
+        }
+
+        .showcase-title {
+            font-size: 2.5rem;
+            color: var(--color-amarillo-cheddar);
+            text-shadow: 2px 2px 0px var(--color-rojo-fuego);
+            font-family: 'Bangers', cursive;
+        }
+
+        /* --- ESTILOS MÓVIL (TikTok vertical) --- */
+        .mobile-carousel {
+            display: block;
+        }
+
+        .desktop-grid {
+            display: none;
+        }
+
+        .carousel-vertical {
+            position: relative;
+            max-width: 400px;
+            margin: 0 auto;
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            background: #000;
+            aspect-ratio: 9/16;
+        }
+
+        .carousel-track-container {
+            height: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .carousel-track {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+
+        .carousel-slide {
+            min-height: 100%;
+            width: 100%;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .carousel-slide img,
+        .carousel-slide video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .slide-overlay-mobile {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem 1.5rem;
+            background: linear-gradient(transparent, rgba(0,0,0,0.95) 50%);
+            color: white;
+        }
+
+        .slide-title-mobile {
+            font-size: 1.8rem;
+            color: var(--color-amarillo-cheddar);
+            font-family: 'Bangers', cursive;
+            margin-bottom: 0.3rem;
+        }
+
+        .slide-desc-mobile {
+            font-size: 0.95rem;
+            color: #eee;
+            margin-bottom: 0.8rem;
+            line-height: 1.4;
+        }
+
+        .slide-meta-mobile {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            background: rgba(0,0,0,0.6);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--color-mostaza-suave);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .meta-item i {
+            color: var(--color-rojo-fuego);
+        }
+
+        .video-play-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: rgba(219, 54, 6, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 5;
+            border: 3px solid var(--color-amarillo-cheddar);
+            transition: all 0.3s ease;
+        }
+
+        .video-play-btn:hover {
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        .mobile-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .control-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            border: 2px solid var(--color-purpura-berry);
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .control-btn:hover {
+            background: var(--color-rojo-fuego);
+            border-color: var(--color-amarillo-cheddar);
+            transform: scale(1.1);
+        }
+
+        .play-pause {
+            background: var(--color-purpura-berry);
+        }
+
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 1.5rem;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            background: var(--color-amarillo-cheddar);
+            transform: scale(1.3);
+            box-shadow: 0 0 10px var(--color-amarillo-cheddar);
+        }
+
+        /* --- ESTILOS DESKTOP (2 columnas) --- */
+        @media (min-width: 1024px) {
+            .mobile-carousel {
+                display: none;
+            }
+
+            .desktop-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 2rem;
+                align-items: center;
+                max-width: 1000px;
+                margin: 0 auto;
+            }
+
+            .desktop-media {
+                border-radius: 30px;
+                overflow: hidden;
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+                background: #000;
+                aspect-ratio: 9/16;
+                max-height: 600px;
+                position: relative;
+            }
+
+            .desktop-media img,
+            .desktop-media video {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            .desktop-info {
+                background: linear-gradient(145deg, #2a2a2a, #1f1f1f);
+                border-radius: 30px;
+                padding: 3rem;
+                border: 2px solid var(--color-purpura-berry);
+                min-height: 400px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+
+            .desktop-title {
+                font-size: 2.5rem;
+                color: var(--color-amarillo-cheddar);
+                font-family: 'Bangers', cursive;
+                margin-bottom: 1rem;
+            }
+
+            .desktop-desc {
+                font-size: 1.2rem;
+                color: #ddd;
+                margin-bottom: 2rem;
+                line-height: 1.6;
+            }
+
+            .desktop-meta {
+                display: flex;
+                gap: 2rem;
+                margin-bottom: 2rem;
+                flex-wrap: wrap;
+            }
+
+            .desktop-meta-item {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                font-size: 1.1rem;
+                color: var(--color-mostaza-suave);
+            }
+
+            .desktop-meta-item i {
+                color: var(--color-rojo-fuego);
+                font-size: 1.3rem;
+            }
+
+            .desktop-cta {
+                margin-top: 2rem;
+            }
+
+            .desktop-btn {
+                background: linear-gradient(135deg, var(--color-rojo-fuego) 0%, #c42f04 100%);
+                color: white;
+                border: none;
+                padding: 12px 30px;
+                border-radius: 50px;
+                font-size: 1.1rem;
+                font-weight: bold;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+            }
+
+            .desktop-btn:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 6px 16px rgba(219, 54, 6, 0.4);
+            }
+
+            .desktop-controls {
+                display: flex;
+                justify-content: center;
+                gap: 1rem;
+                margin-top: 2rem;
+                grid-column: span 2;
+            }
+
+            .desktop-dots {
+                display: flex;
+                justify-content: center;
+                gap: 12px;
+                margin-top: 1rem;
+                grid-column: span 2;
+            }
+        }
+
         /* --- CONTACT SECTION --- */
         .catering-contact-section {
             padding: 4rem 1.5rem;
             background: linear-gradient(135deg, #1a0f0f 0%, #2a1a1a 100%);
             text-align: center;
-            border-top: 3px solid var(--color-amarillo-cheddar);
-            border-bottom: 3px solid var(--color-rojo-fuego);
         }
 
         .contact-container {
@@ -657,7 +967,6 @@
             border: 2px dashed var(--color-purpura-berry);
         }
 
-        /* --- FOOTER --- */
         footer { 
             background: #0a0a0a; 
             padding: 2.5rem 1.5rem; 
@@ -676,7 +985,7 @@
             height: 3px;
             background: linear-gradient(90deg, var(--color-rojo-fuego), var(--color-amarillo-cheddar), var(--color-purpura-berry));
         }
-        
+
         .social-links {
             margin-top: 1.5rem;
         }
@@ -688,15 +997,8 @@
             font-weight: bold;
             font-size: 1rem;
             transition: all 0.3s ease;
-            display: inline-block;
-        }
-        
-        .social-links a:hover {
-            color: var(--color-rojo-fuego);
-            transform: translateY(-2px);
         }
 
-        /* Scroll to Top Button */
         .scroll-top {
             position: fixed;
             bottom: 20px;
@@ -722,13 +1024,7 @@
             opacity: 1;
             visibility: visible;
         }
-        
-        .scroll-top:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 6px 16px rgba(219, 54, 6, 0.4);
-        }
 
-        /* Media Queries */
         @media (max-width: 768px) {
             .catering-hero h1 {
                 font-size: 2.5rem;
@@ -742,33 +1038,20 @@
 </head>
 <body>
     <div class="overlay" id="overlay"></div>
-    
-    <div class="scroll-top" id="scrollTop">
-        <i class="fas fa-chevron-up"></i>
-    </div>
+    <div class="scroll-top" id="scrollTop"><i class="fas fa-chevron-up"></i></div>
 
     <header id="mainHeader">
-        <button class="hamburger-btn" id="menuBtn" aria-label="Toggle navigation menu">
+        <button class="hamburger-btn" id="menuBtn">
             <span></span><span></span><span></span>
         </button>
-        
-        <a href="index.html" class="logo-text">
-            SUP<span>DOG</span>
-        </a>
-        
+        <a href="index.html" class="logo-text">SUP<span>DOG</span></a>
         <div class="header-buttons">
-            <a href="index.html" class="header-btn home-btn">
-                <i class="fas fa-home"></i>
-                <span class="btn-text">Home</span>
-            </a>
-            <a href="event-cart.html" class="header-btn cart-btn">
-                <i class="fas fa-calendar-alt"></i>
-                <span class="btn-text">Event Cart</span>
-            </a>
+            <a href="index.html" class="header-btn home-btn"><i class="fas fa-home"></i><span class="btn-text">Home</span></a>
+            <a href="event-cart.html" class="header-btn cart-btn"><i class="fas fa-calendar-alt"></i><span class="btn-text">Event Cart</span></a>
         </div>
     </header>
 
-    <nav class="sidebar" id="sidebar" aria-label="Main navigation">
+    <nav class="sidebar" id="sidebar">
         <ul>
             <li><a href="index.html" class="menu-link" onclick="toggleMenu()">HOME</a></li>
             <li><a href="index.html#story" class="menu-link" onclick="toggleMenu()">OUR STORY</a></li>
@@ -778,37 +1061,26 @@
             <li><a href="index.html#location" class="menu-link" onclick="toggleMenu()">LOCATION</a></li>
             <li><a href="catering.html" class="menu-link" onclick="toggleMenu()" style="color: var(--color-amarillo-cheddar);">CATERING</a></li>
         </ul>
-        
         <div style="margin-top: 40px; padding-right: 20px;">
-            <p style="color: var(--color-mostaza-suave); font-size: 1.1rem; margin-bottom: 10px;">Follow the fire!</p>
-            <p>
-                <a href="https://www.instagram.com/supdogdfw?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" 
-                   target="_blank" 
-                   style="color: white; text-decoration: none; font-weight: bold; font-size: 1.2rem; display: flex; align-items: center; gap: 8px;">
-                    @supdogdfw <i class="fab fa-instagram"></i>
-                </a>
-            </p>
+            <p style="color: var(--color-mostaza-suave);">Follow the fire!</p>
+            <a href="https://www.instagram.com/supdogdfw" target="_blank" style="color: white;">@supdogdfw <i class="fab fa-instagram"></i></a>
         </div>
     </nav>
 
-    <!-- Catering Hero Section -->
+    <!-- Catering Hero -->
     <section class="catering-hero">
         <div class="catering-hero-content">
             <h1>CATER WITH US</h1>
             <p>Only available for catering menu - Perfect for your next event!</p>
-            <a href="#catering-menu" class="btn">
-                VIEW MENU <i class="fas fa-arrow-down"></i>
-            </a>
+            <a href="#catering-menu" class="btn">VIEW MENU <i class="fas fa-arrow-down"></i></a>
         </div>
     </section>
 
-    <!-- Catering Menu Section -->
+    <!-- CATERING MENU (Tus cards) -->
     <section id="catering-menu" class="catering-section">
         <div class="catering-container">
             <div class="catering-header">
-                <div class="catering-badge">
-                    <i class="fas fa-utensils"></i> CATERING MENU
-                </div>
+                <div class="catering-badge"><i class="fas fa-utensils"></i> CATERING MENU</div>
                 <h2 class="catering-title">SUP DOG CATERING</h2>
                 <p class="catering-subtitle">All items are prepared fresh for your event. Minimum order may apply.</p>
             </div>
@@ -818,46 +1090,16 @@
                 <div class="catering-card">
                     <h3><i class="fas fa-fire"></i> MAIN DISHES</h3>
                     <ul class="catering-items">
-                        <li class="catering-item">
-                            <span class="item-name">Smoked Smash sliders</span>
-                            <span class="item-price">2 for $12</span>
-                        </li>
-                        <li class="catering-item">
-                            <span class="item-name">Cajun Ramen noodles</span>
-                            <span class="item-price">$14 bowl</span>
-                        </li>
-                        <li class="catering-item">
-                            <span class="item-name">Cajun Ramen noodles (½ pan)</span>
-                            <span class="item-price">$75</span>
-                        </li>
-                        <li class="catering-item">
-                            <span class="item-name">Grilled chipotle chicken sandwich</span>
-                            <span class="item-price">$12</span>
-                        </li>
-                        <li class="catering-item">
-                            <span class="item-name">Club sandwich/wrap</span>
-                            <span class="item-price">$10</span>
-                        </li>
-                        <li class="catering-item">
-                            <span class="item-name">Smoked bbq wings</span>
-                            <span class="item-price">25pc $20</span>
-                        </li>
-                        <li class="catering-item">
-                            <span class="item-name">Smoked buffalo wings</span>
-                            <span class="item-price">25pc $20</span>
-                        </li>
-                        <li class="catering-item">
-                            <span class="item-name">Smoked Cajun wings</span>
-                            <span class="item-price">25pc $20</span>
-                        </li>
-                        <li class="catering-item">
-                            <span class="item-name">Surf&Turf smashed avocado bites</span>
-                            <span class="item-price">$35 tray (25pc)</span>
-                        </li>
-                        <li class="catering-item">
-                            <span class="item-name">Pretzel tray w/ honey mustard & beer cheese</span>
-                            <span class="item-price">$35</span>
-                        </li>
+                        <li class="catering-item"><span class="item-name">Smoked Smash sliders</span><span class="item-price">2 for $12</span></li>
+                        <li class="catering-item"><span class="item-name">Cajun Ramen noodles</span><span class="item-price">$14 bowl</span></li>
+                        <li class="catering-item"><span class="item-name">Cajun Ramen noodles (½ pan)</span><span class="item-price">$75</span></li>
+                        <li class="catering-item"><span class="item-name">Grilled chipotle chicken sandwich</span><span class="item-price">$12</span></li>
+                        <li class="catering-item"><span class="item-name">Club sandwich/wrap</span><span class="item-price">$10</span></li>
+                        <li class="catering-item"><span class="item-name">Smoked bbq wings</span><span class="item-price">25pc $20</span></li>
+                        <li class="catering-item"><span class="item-name">Smoked buffalo wings</span><span class="item-price">25pc $20</span></li>
+                        <li class="catering-item"><span class="item-name">Smoked Cajun wings</span><span class="item-price">25pc $20</span></li>
+                        <li class="catering-item"><span class="item-name">Surf&Turf smashed avocado bites</span><span class="item-price">$35 tray (25pc)</span></li>
+                        <li class="catering-item"><span class="item-name">Pretzel tray w/ honey mustard & beer cheese</span><span class="item-price">$35</span></li>
                     </ul>
                 </div>
 
@@ -865,30 +1107,12 @@
                 <div class="catering-card">
                     <h3><i class="fas fa-taco"></i> MEXICAN SIDE</h3>
                     <ul class="catering-items">
-                        <li class="catering-item">
-                            <span class="item-name">Red Enchiladas (cheese/chicken)</span>
-                            <span class="item-price large">$80 tray (24pc)</span>
-                        </li>
-                        <li class="catering-item">
-                            <span class="item-name">Green Enchiladas (cheese/chicken)</span>
-                            <span class="item-price large">$80 tray (24pc)</span>
-                        </li>
-                        <li class="catering-item">
-                            <span class="item-name">Ground beef hard shell tacos</span>
-                            <span class="item-price">2 for $10</span>
-                        </li>
-                        <li class="catering-item">
-                            <span class="item-name">Chicken tostadas</span>
-                            <span class="item-price">2 for $10</span>
-                        </li>
-                        <li class="catering-item">
-                            <span class="item-name">Ground beef tostadas</span>
-                            <span class="item-price">2 for $10</span>
-                        </li>
-                        <li class="catering-item">
-                            <span class="item-name">Al pastor tacos</span>
-                            <span class="item-price">2 for $8</span>
-                        </li>
+                        <li class="catering-item"><span class="item-name">Red Enchiladas (cheese/chicken)</span><span class="item-price large">$80 tray (24pc)</span></li>
+                        <li class="catering-item"><span class="item-name">Green Enchiladas (cheese/chicken)</span><span class="item-price large">$80 tray (24pc)</span></li>
+                        <li class="catering-item"><span class="item-name">Ground beef hard shell tacos</span><span class="item-price">2 for $10</span></li>
+                        <li class="catering-item"><span class="item-name">Chicken tostadas</span><span class="item-price">2 for $10</span></li>
+                        <li class="catering-item"><span class="item-name">Ground beef tostadas</span><span class="item-price">2 for $10</span></li>
+                        <li class="catering-item"><span class="item-name">Al pastor tacos</span><span class="item-price">2 for $8</span></li>
                     </ul>
                 </div>
 
@@ -896,78 +1120,191 @@
                 <div class="catering-card">
                     <h3><i class="fas fa-cake"></i> SIDES & DESSERTS</h3>
                     <ul class="catering-items">
-                        <li class="catering-item">
-                            <span class="item-name">Fresh fruit tray</span>
-                            <span class="item-price">$45</span>
-                        </li>
-                        <li class="catering-item">
-                            <span class="item-name">Mini cheesecakes</span>
-                            <span class="item-price">$6</span>
-                        </li>
-                        <li class="catering-item">
-                            <span class="item-name">Mini crème brûlée</span>
-                            <span class="item-price">$6</span>
-                        </li>
-                        <li class="catering-item">
-                            <span class="item-name">Cold veggie platter</span>
-                            <span class="item-price">$45</span>
-                        </li>
-                        <li class="catering-item">
-                            <span class="item-name">Chopped green salad</span>
-                            <span class="item-price">$45</span>
-                        </li>
+                        <li class="catering-item"><span class="item-name">Fresh fruit tray</span><span class="item-price">$45</span></li>
+                        <li class="catering-item"><span class="item-name">Mini cheesecakes</span><span class="item-price">$6</span></li>
+                        <li class="catering-item"><span class="item-name">Mini crème brûlée</span><span class="item-price">$6</span></li>
+                        <li class="catering-item"><span class="item-name">Cold veggie platter</span><span class="item-price">$45</span></li>
+                        <li class="catering-item"><span class="item-name">Chopped green salad</span><span class="item-price">$45</span></li>
                     </ul>
                 </div>
 
-                <!-- Hot Dogs (Big & Mini) - CORREGIDO Y CENTRADO -->
+                <!-- Hot Dogs (Big & Mini) -->
                 <div class="catering-card featured">
                     <h3><i class="fas fa-hotdog"></i> HOT DOGS - BIG & MINI VERSIONS</h3>
-                    
                     <div class="hotdogs-grid">
-                        <!-- Primera columna -->
                         <ul class="hotdogs-list">
-                            <li class="catering-item">
-                                <span class="item-name">Tijuana Dog</span>
-                                <span class="item-price">Ask for pricing</span>
-                            </li>
-                            <li class="catering-item">
-                                <span class="item-name">Chicago Dog</span>
-                                <span class="item-price">Ask for pricing</span>
-                            </li>
-                            <li class="catering-item">
-                                <span class="item-name">Train Wreck Dog</span>
-                                <span class="item-price">Ask for pricing</span>
-                            </li>
-                            <li class="catering-item">
-                                <span class="item-name">The Hedgehog</span>
-                                <span class="item-price">Ask for pricing</span>
-                            </li>
+                            <li class="catering-item"><span class="item-name">Tijuana Dog</span><span class="item-price">Ask for pricing</span></li>
+                            <li class="catering-item"><span class="item-name">Chicago Dog</span><span class="item-price">Ask for pricing</span></li>
+                            <li class="catering-item"><span class="item-name">Train Wreck Dog</span><span class="item-price">Ask for pricing</span></li>
+                            <li class="catering-item"><span class="item-name">The Hedgehog</span><span class="item-price">Ask for pricing</span></li>
                         </ul>
-                        
-                        <!-- Segunda columna -->
                         <ul class="hotdogs-list">
-                            <li class="catering-item">
-                                <span class="item-name">German Dog</span>
-                                <span class="item-price">Ask for pricing</span>
-                            </li>
-                            <li class="catering-item">
-                                <span class="item-name">Mexican Dog</span>
-                                <span class="item-price">Ask for pricing</span>
-                            </li>
-                            <li class="catering-item">
-                                <span class="item-name">Corn Dogs</span>
-                                <span class="item-price">Ask for pricing</span>
-                            </li>
-                            <li class="catering-item">
-                                <span class="item-name">Mini Corn Dogs</span>
-                                <span class="item-price">Ask for pricing</span>
-                            </li>
+                            <li class="catering-item"><span class="item-name">German Dog</span><span class="item-price">Ask for pricing</span></li>
+                            <li class="catering-item"><span class="item-name">Mexican Dog</span><span class="item-price">Ask for pricing</span></li>
+                            <li class="catering-item"><span class="item-name">Corn Dogs</span><span class="item-price">Ask for pricing</span></li>
+                            <li class="catering-item"><span class="item-name">Mini Corn Dogs</span><span class="item-price">Ask for pricing</span></li>
                         </ul>
                     </div>
-                    
                     <p style="color: var(--color-mostaza-suave); margin-top: 1.5rem; text-align: center; font-style: italic; border-top: 1px dashed #444; padding-top: 1rem;">
-                        <i class="fas fa-info-circle"></i> Both big and mini versions available for all hot dogs
+                        <i class="fas fa-info-circle"></i> Both big and mini versions available
                     </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== NUEVO SHOWCASE HÍBRIDO (después del menú) ===== -->
+    <section class="showcase-section">
+        <div class="showcase-container">
+            <div class="showcase-header">
+                <div class="showcase-badge"><i class="fas fa-camera"></i> IN ACTION</div>
+                <h2 class="showcase-title">CATERING GALLERY</h2>
+            </div>
+
+            <!-- VERSIÓN MÓVIL (TikTok vertical) -->
+            <div class="mobile-carousel">
+                <div class="carousel-vertical">
+                    <div class="carousel-track-container">
+                        <div class="carousel-track" id="mobileTrack">
+                            <!-- Slide 1 -->
+                            <div class="carousel-slide active">
+                                <img src="images/surf-turf.jpg" alt="Surf & Turf">
+                                <div class="slide-overlay-mobile">
+                                    <h3 class="slide-title-mobile">Surf & Turf Bites</h3>
+                                    <p class="slide-desc-mobile">Delicious smashed avocado bites with shrimp and beef</p>
+                                    <div class="slide-meta-mobile">
+                                        <span class="meta-item"><i class="fas fa-tag"></i> $35 tray</span>
+                                        <span class="meta-item"><i class="fas fa-star"></i> Best seller</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Slide 2 (Video) -->
+                            <div class="carousel-slide">
+                                <video id="video1" muted loop playsinline poster="images/pretzel-poster.jpg">
+                                    <source src="videos/pretzel-catering.mp4" type="video/mp4">
+                                </video>
+                                <div class="video-play-btn" onclick="playVideo(this)">
+                                    <i class="fas fa-play"></i>
+                                </div>
+                                <div class="slide-overlay-mobile">
+                                    <h3 class="slide-title-mobile">Pretzel Tray</h3>
+                                    <p class="slide-desc-mobile">With honey mustard and beer cheese sauce</p>
+                                    <div class="slide-meta-mobile">
+                                        <span class="meta-item"><i class="fas fa-tag"></i> $35</span>
+                                        <span class="meta-item"><i class="fas fa-video"></i> Video</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Slide 3 -->
+                            <div class="carousel-slide">
+                                <img src="images/chicken-tostadas.jpg" alt="Chicken Tostadas">
+                                <div class="slide-overlay-mobile">
+                                    <h3 class="slide-title-mobile">Chicken Tostadas</h3>
+                                    <p class="slide-desc-mobile">Crispy tostadas with seasoned chicken</p>
+                                    <div class="slide-meta-mobile">
+                                        <span class="meta-item"><i class="fas fa-tag"></i> 2 for $10</span>
+                                        <span class="meta-item"><i class="fas fa-fire"></i> Popular</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Slide 4 -->
+                            <div class="carousel-slide">
+                                <img src="images/grilled-sandwich.jpg" alt="Chipotle Sandwich">
+                                <div class="slide-overlay-mobile">
+                                    <h3 class="slide-title-mobile">Chipotle Chicken</h3>
+                                    <p class="slide-desc-mobile">Grilled chicken with chipotle sauce</p>
+                                    <div class="slide-meta-mobile">
+                                        <span class="meta-item"><i class="fas fa-tag"></i> $12</span>
+                                        <span class="meta-item"><i class="fas fa-fire"></i> Favorite</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Slide 5 (Video) -->
+                            <div class="carousel-slide">
+                                <video id="video2" muted loop playsinline poster="images/event-poster.jpg">
+                                    <source src="videos/catering-event.mp4" type="video/mp4">
+                                </video>
+                                <div class="video-play-btn" onclick="playVideo(this)">
+                                    <i class="fas fa-play"></i>
+                                </div>
+                                <div class="slide-overlay-mobile">
+                                    <h3 class="slide-title-mobile">Event Setup</h3>
+                                    <p class="slide-desc-mobile">Behind the scenes of our catering</p>
+                                    <div class="slide-meta-mobile">
+                                        <span class="meta-item"><i class="fas fa-users"></i> 150 guests</span>
+                                        <span class="meta-item"><i class="fas fa-video"></i> Time-lapse</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Slide 6 -->
+                            <div class="carousel-slide">
+                                <img src="images/wings.jpg" alt="Smoked Wings">
+                                <div class="slide-overlay-mobile">
+                                    <h3 class="slide-title-mobile">Smoked Wings</h3>
+                                    <p class="slide-desc-mobile">BBQ, Buffalo, or Cajun</p>
+                                    <div class="slide-meta-mobile">
+                                        <span class="meta-item"><i class="fas fa-tag"></i> 25pc $20</span>
+                                        <span class="meta-item"><i class="fas fa-star"></i> Party favorite</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mobile-controls">
+                    <button class="control-btn" id="mobilePrev"><i class="fas fa-chevron-up"></i></button>
+                    <button class="control-btn play-pause" id="mobilePlayPause"><i class="fas fa-pause"></i></button>
+                    <button class="control-btn" id="mobileNext"><i class="fas fa-chevron-down"></i></button>
+                </div>
+
+                <div class="carousel-dots" id="mobileDots">
+                    <button class="dot active"></button>
+                    <button class="dot"></button>
+                    <button class="dot"></button>
+                    <button class="dot"></button>
+                    <button class="dot"></button>
+                    <button class="dot"></button>
+                </div>
+            </div>
+
+            <!-- VERSIÓN DESKTOP (2 columnas) -->
+            <div class="desktop-grid" id="desktopGrid">
+                <div class="desktop-media" id="desktopMedia">
+                    <img src="images/surf-turf.jpg" alt="Surf & Turf" id="desktopImage">
+                </div>
+                <div class="desktop-info" id="desktopInfo">
+                    <h3 class="desktop-title" id="desktopTitle">Surf & Turf Bites</h3>
+                    <p class="desktop-desc" id="desktopDesc">Delicious smashed avocado bites with shrimp and beef</p>
+                    <div class="desktop-meta" id="desktopMeta">
+                        <span class="desktop-meta-item"><i class="fas fa-tag"></i> $35 tray</span>
+                        <span class="desktop-meta-item"><i class="fas fa-star"></i> Best seller</span>
+                    </div>
+                    <div class="desktop-cta">
+                        <button class="desktop-btn" onclick="inquireAboutItem('Surf & Turf Bites')">
+                            <i class="fas fa-envelope"></i> Inquire about this item
+                        </button>
+                    </div>
+                </div>
+
+                <div class="desktop-controls">
+                    <button class="control-btn" id="desktopPrev"><i class="fas fa-chevron-left"></i></button>
+                    <button class="control-btn play-pause" id="desktopPlayPause"><i class="fas fa-pause"></i></button>
+                    <button class="control-btn" id="desktopNext"><i class="fas fa-chevron-right"></i></button>
+                </div>
+
+                <div class="desktop-dots" id="desktopDots">
+                    <button class="dot active"></button>
+                    <button class="dot"></button>
+                    <button class="dot"></button>
+                    <button class="dot"></button>
+                    <button class="dot"></button>
+                    <button class="dot"></button>
                 </div>
             </div>
         </div>
@@ -977,27 +1314,23 @@
     <section class="catering-contact-section">
         <div class="contact-container">
             <h2 class="contact-title">📞 PLACE YOUR CATERING ORDER</h2>
-            
             <div class="contact-info">
                 <div class="contact-card">
                     <i class="fas fa-phone-alt"></i>
                     <h3>Call Us</h3>
                     <a href="tel:+11234567890">(123) 456-7890</a>
                 </div>
-                
                 <div class="contact-card">
                     <i class="fas fa-envelope"></i>
                     <h3>Email Us</h3>
                     <a href="mailto:catering@supdog.com">catering@supdog.com</a>
                 </div>
-                
                 <div class="contact-card">
                     <i class="fas fa-clock"></i>
                     <h3>Notice Required</h3>
                     <p style="color: var(--color-amarillo-cheddar); font-weight: bold;">48 hours minimum</p>
                 </div>
             </div>
-            
             <div class="contact-note">
                 <i class="fas fa-star" style="color: var(--color-amarillo-cheddar);"></i>
                 For large events (50+ people), please contact us at least 1 week in advance
@@ -1010,96 +1343,274 @@
         <p style="font-size: 1rem; margin-bottom: 1rem; color: #aaa;">© 2025 SupDog Hot Dogs. All rights reserved.</p>
         <div class="social-links">
             <p style="font-size: 1rem;">
-                Follow:
-                <a href="https://www.instagram.com/supdogdfw?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">
-                    Instagram
-                </a> | 
-                <a href="event-cart.html" style="color: var(--color-purpura-berry); font-weight: bold;">Event Cart</a> | 
+                Follow: <a href="https://www.instagram.com/supdogdfw" target="_blank">Instagram</a> | 
+                <a href="event-cart.html" style="color: var(--color-purpura-berry);">Event Cart</a> | 
                 <a href="index.html">Home</a>
             </p>
         </div>
-        
-        <p style="margin-top: 1rem; font-size: 0.8rem; color: #777; padding: 0 1rem;">
-            Catering orders require 48 hours advance notice. Prices subject to change based on event size.
-        </p>
+        <p style="margin-top: 1rem; font-size: 0.8rem; color: #777;">Catering orders require 48 hours advance notice.</p>
     </footer>
 
     <script>
-        // DOM Elements
+        // Menu toggle
         const menuBtn = document.getElementById('menuBtn');
         const sidebar = document.getElementById('sidebar');
         const overlay = document.getElementById('overlay');
         const header = document.getElementById('mainHeader');
         const scrollTopBtn = document.getElementById('scrollTop');
 
-        // Toggle Menu Function
         function toggleMenu() {
             sidebar.classList.toggle('active');
             overlay.classList.toggle('active');
             const spans = menuBtn.querySelectorAll('span');
-            
             if (sidebar.classList.contains('active')) {
                 spans[0].style.transform = 'rotate(45deg) translate(5px, 6px)';
                 spans[1].style.opacity = '0';
                 spans[2].style.transform = 'rotate(-45deg) translate(5px, -6px)';
                 document.body.style.overflow = 'hidden';
             } else {
-                spans[0].style.transform = 'none'; 
-                spans[1].style.opacity = '1'; 
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
                 spans[2].style.transform = 'none';
                 document.body.style.overflow = 'auto';
             }
         }
-
-        // Event Listeners
         menuBtn.addEventListener('click', toggleMenu);
-
-        overlay.addEventListener('click', () => {
-            if (sidebar.classList.contains('active')) toggleMenu();
-        });
+        overlay.addEventListener('click', toggleMenu);
 
         // Scroll effects
-        window.addEventListener('scroll', function() {
-            const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-            
-            // Header scroll effect
-            if (currentScroll > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-            
-            // Scroll to top button visibility
-            if (currentScroll > 300) {
-                scrollTopBtn.classList.add('visible');
-            } else {
-                scrollTopBtn.classList.remove('visible');
-            }
-        }, {passive: true});
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            header.classList.toggle('scrolled', currentScroll > 50);
+            scrollTopBtn.classList.toggle('visible', currentScroll > 300);
+        });
+        scrollTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-        // Scroll to top functionality
-        scrollTopBtn.addEventListener('click', function() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
+        // ===== CARRUSEL HÍBRIDO =====
+        const slides = [
+            {
+                type: 'image',
+                src: 'images/surf-turf.jpg',
+                title: 'Surf & Turf Bites',
+                desc: 'Delicious smashed avocado bites with shrimp and beef',
+                meta: ['$35 tray', 'Best seller'],
+                icons: ['fa-tag', 'fa-star']
+            },
+            {
+                type: 'video',
+                src: 'videos/pretzel-catering.mp4',
+                poster: 'images/pretzel-poster.jpg',
+                title: 'Pretzel Tray',
+                desc: 'With honey mustard and beer cheese sauce',
+                meta: ['$35', 'Video'],
+                icons: ['fa-tag', 'fa-video']
+            },
+            {
+                type: 'image',
+                src: 'images/chicken-tostadas.jpg',
+                title: 'Chicken Tostadas',
+                desc: 'Crispy tostadas with seasoned chicken',
+                meta: ['2 for $10', 'Popular'],
+                icons: ['fa-tag', 'fa-fire']
+            },
+            {
+                type: 'image',
+                src: 'images/grilled-sandwich.jpg',
+                title: 'Chipotle Chicken',
+                desc: 'Grilled chicken with chipotle sauce',
+                meta: ['$12', 'Favorite'],
+                icons: ['fa-tag', 'fa-fire']
+            },
+            {
+                type: 'video',
+                src: 'videos/catering-event.mp4',
+                poster: 'images/event-poster.jpg',
+                title: 'Event Setup',
+                desc: 'Behind the scenes of our catering',
+                meta: ['150 guests', 'Time-lapse'],
+                icons: ['fa-users', 'fa-video']
+            },
+            {
+                type: 'image',
+                src: 'images/wings.jpg',
+                title: 'Smoked Wings',
+                desc: 'BBQ, Buffalo, or Cajun',
+                meta: ['25pc $20', 'Party favorite'],
+                icons: ['fa-tag', 'fa-star']
+            }
+        ];
+
+        let currentIndex = 0;
+        let isPlaying = true;
+        let autoPlayInterval;
+
+        // Elementos móvil
+        const mobileTrack = document.getElementById('mobileTrack');
+        const mobilePrev = document.getElementById('mobilePrev');
+        const mobileNext = document.getElementById('mobileNext');
+        const mobilePlayPause = document.getElementById('mobilePlayPause');
+        const mobileDots = document.querySelectorAll('#mobileDots .dot');
+
+        // Elementos desktop
+        const desktopMedia = document.getElementById('desktopMedia');
+        const desktopTitle = document.getElementById('desktopTitle');
+        const desktopDesc = document.getElementById('desktopDesc');
+        const desktopMeta = document.getElementById('desktopMeta');
+        const desktopPrev = document.getElementById('desktopPrev');
+        const desktopNext = document.getElementById('desktopNext');
+        const desktopPlayPause = document.getElementById('desktopPlayPause');
+        const desktopDots = document.querySelectorAll('#desktopDots .dot');
+
+        function updateCarousel() {
+            // Actualizar móvil
+            if (mobileTrack) {
+                mobileTrack.style.transform = `translateY(-${currentIndex * 100}%)`;
+                document.querySelectorAll('.carousel-slide').forEach((slide, i) => {
+                    slide.classList.toggle('active', i === currentIndex);
+                });
+            }
+
+            // Actualizar desktop
+            const slide = slides[currentIndex];
+            if (slide.type === 'image') {
+                desktopMedia.innerHTML = `<img src="${slide.src}" alt="${slide.title}" style="width:100%; height:100%; object-fit:cover;">`;
+            } else {
+                desktopMedia.innerHTML = `
+                    <video id="desktopVideo" muted loop playsinline poster="${slide.poster}" style="width:100%; height:100%; object-fit:cover;">
+                        <source src="${slide.src}" type="video/mp4">
+                    </video>
+                    <div class="video-play-btn" onclick="playDesktopVideo()">
+                        <i class="fas fa-play"></i>
+                    </div>
+                `;
+            }
+
+            desktopTitle.textContent = slide.title;
+            desktopDesc.textContent = slide.desc;
+            
+            let metaHtml = '';
+            slide.meta.forEach((item, i) => {
+                metaHtml += `<span class="desktop-meta-item"><i class="fas ${slide.icons[i]}"></i> ${item}</span>`;
+            });
+            desktopMeta.innerHTML = metaHtml;
+
+            // Actualizar dots
+            mobileDots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === currentIndex);
+            });
+            desktopDots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === currentIndex);
+            });
+        }
+
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % slides.length;
+            updateCarousel();
+        }
+
+        function prevSlide() {
+            currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+            updateCarousel();
+        }
+
+        function goToSlide(index) {
+            currentIndex = index;
+            updateCarousel();
+        }
+
+        function togglePlayPause() {
+            isPlaying = !isPlaying;
+            const icon = isPlaying ? 'fa-pause' : 'fa-play';
+            mobilePlayPause.innerHTML = `<i class="fas ${icon}"></i>`;
+            desktopPlayPause.innerHTML = `<i class="fas ${icon}"></i>`;
+            
+            if (isPlaying) {
+                startAutoPlay();
+            } else {
+                clearInterval(autoPlayInterval);
+            }
+        }
+
+        function startAutoPlay() {
+            clearInterval(autoPlayInterval);
+            autoPlayInterval = setInterval(nextSlide, 4000);
+        }
+
+        // Video functions
+        function playVideo(btn) {
+            const slide = btn.closest('.carousel-slide');
+            const video = slide.querySelector('video');
+            if (video.paused) {
+                video.play();
+                btn.innerHTML = '<i class="fas fa-pause"></i>';
+                if (isPlaying) togglePlayPause();
+            } else {
+                video.pause();
+                btn.innerHTML = '<i class="fas fa-play"></i>';
+            }
+        }
+
+        function playDesktopVideo() {
+            const video = document.getElementById('desktopVideo');
+            const btn = document.querySelector('#desktopMedia .video-play-btn');
+            if (video.paused) {
+                video.play();
+                btn.innerHTML = '<i class="fas fa-pause"></i>';
+                if (isPlaying) togglePlayPause();
+            } else {
+                video.pause();
+                btn.innerHTML = '<i class="fas fa-play"></i>';
+            }
+        }
+
+        function inquireAboutItem(item) {
+            window.location.href = `mailto:catering@supdog.com?subject=Inquiry about ${item} for catering`;
+        }
+
+        // Event listeners
+        mobilePrev.addEventListener('click', () => {
+            if (isPlaying) togglePlayPause();
+            prevSlide();
+        });
+        mobileNext.addEventListener('click', () => {
+            if (isPlaying) togglePlayPause();
+            nextSlide();
+        });
+        mobilePlayPause.addEventListener('click', togglePlayPause);
+        
+        desktopPrev.addEventListener('click', () => {
+            if (isPlaying) togglePlayPause();
+            prevSlide();
+        });
+        desktopNext.addEventListener('click', () => {
+            if (isPlaying) togglePlayPause();
+            nextSlide();
+        });
+        desktopPlayPause.addEventListener('click', togglePlayPause);
+
+        mobileDots.forEach((dot, i) => {
+            dot.addEventListener('click', () => {
+                if (isPlaying) togglePlayPause();
+                goToSlide(i);
             });
         });
 
-        // Initialize on load
-        document.addEventListener('DOMContentLoaded', function() {
-            // Trigger scroll event
-            setTimeout(() => {
-                window.dispatchEvent(new Event('scroll'));
-            }, 100);
+        desktopDots.forEach((dot, i) => {
+            dot.addEventListener('click', () => {
+                if (isPlaying) togglePlayPause();
+                goToSlide(i);
+            });
         });
+
+        // Inicializar
+        updateCarousel();
+        startAutoPlay();
 
         // iOS fixes
         let lastTouchEnd = 0;
-        document.addEventListener('touchend', function(event) {
-            const now = (new Date()).getTime();
-            if (now - lastTouchEnd <= 300) {
-                event.preventDefault();
-            }
+        document.addEventListener('touchend', (e) => {
+            const now = Date.now();
+            if (now - lastTouchEnd <= 300) e.preventDefault();
             lastTouchEnd = now;
         }, false);
     </script>
