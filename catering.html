@@ -1389,56 +1389,56 @@
         // ===== CARRUSEL HÍBRIDO =====
         const slides = [
             {
-                type: 'image',
-                src: 'images/surf-turf.jpg',
-                title: 'Surf & Turf Bites',
-                desc: 'Delicious smashed avocado bites with shrimp and beef',
-                meta: ['$35 tray', 'Best seller'],
-                icons: ['fa-tag', 'fa-star']
-            },
-            {
-                type: 'video',
-                src: 'videos/pretzel-catering.mp4',
-                poster: 'images/pretzel-poster.jpg',
-                title: 'Pretzel Tray',
-                desc: 'With honey mustard and beer cheese sauce',
-                meta: ['$35', 'Video'],
-                icons: ['fa-tag', 'fa-video']
-            },
-            {
-                type: 'image',
-                src: 'images/chicken-tostadas.jpg',
-                title: 'Chicken Tostadas',
-                desc: 'Crispy tostadas with seasoned chicken',
-                meta: ['2 for $10', 'Popular'],
-                icons: ['fa-tag', 'fa-fire']
-            },
-            {
-                type: 'image',
-                src: 'images/grilled-sandwich.jpg',
-                title: 'Chipotle Chicken',
-                desc: 'Grilled chicken with chipotle sauce',
-                meta: ['$12', 'Favorite'],
-                icons: ['fa-tag', 'fa-fire']
-            },
-            {
-                type: 'video',
-                src: 'videos/catering-event.mp4',
-                poster: 'images/event-poster.jpg',
-                title: 'Event Setup',
-                desc: 'Behind the scenes of our catering',
-                meta: ['150 guests', 'Time-lapse'],
-                icons: ['fa-users', 'fa-video']
-            },
-            {
-                type: 'image',
-                src: 'images/wings.jpg',
-                title: 'Smoked Wings',
-                desc: 'BBQ, Buffalo, or Cajun',
-                meta: ['25pc $20', 'Party favorite'],
-                icons: ['fa-tag', 'fa-star']
-            }
-        ];
+        type: 'image', // FOTO - sin símbolo de play
+        src: 'images/surf-turf.jpg',
+        title: 'Surf & Turf Bites',
+        desc: 'Delicious smashed avocado bites with shrimp and beef',
+        meta: ['$35 tray', 'Best seller'],
+        icons: ['fa-tag', 'fa-star']
+    },
+    {
+        type: 'video', // VIDEO - con símbolo de play
+        src: 'videos/pretzel-catering.mp4',
+        poster: 'images/pretzel-poster.jpg',
+        title: 'Pretzel Tray',
+        desc: 'With honey mustard and beer cheese sauce',
+        meta: ['$35', 'Video'],
+        icons: ['fa-tag', 'fa-video']
+    },
+    {
+        type: 'image', // FOTO
+        src: 'images/chicken-tostadas.jpg',
+        title: 'Chicken Tostadas',
+        desc: 'Crispy tostadas with seasoned chicken',
+        meta: ['2 for $10', 'Popular'],
+        icons: ['fa-tag', 'fa-fire']
+    },
+    {
+        type: 'image', // FOTO
+        src: 'images/grilled-sandwich.jpg',
+        title: 'Chipotle Chicken',
+        desc: 'Grilled chicken with chipotle sauce',
+        meta: ['$12', 'Favorite'],
+        icons: ['fa-tag', 'fa-fire']
+    },
+    {
+        type: 'video', // VIDEO
+        src: 'videos/catering-event.mp4',
+        poster: 'images/event-poster.jpg',
+        title: 'Event Setup',
+        desc: 'Behind the scenes of our catering',
+        meta: ['150 guests', 'Time-lapse'],
+        icons: ['fa-users', 'fa-video']
+    },
+    {
+        type: 'image', // FOTO
+        src: 'images/wings.jpg',
+        title: 'Smoked Wings',
+        desc: 'BBQ, Buffalo, or Cajun',
+        meta: ['25pc $20', 'Party favorite'],
+        icons: ['fa-tag', 'fa-star']
+    }
+];
 
         let currentIndex = 0;
         let isPlaying = true;
