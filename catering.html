@@ -325,7 +325,7 @@
             animation: fadeIn 1s ease-out 0.3s both;
         }
 
-        /* --- CATERING MENU SECTION (Tus cards existentes) --- */
+        /* --- CATERING MENU SECTION --- */
         .catering-section {
             padding: 5rem 1.5rem;
             background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
@@ -563,7 +563,7 @@
             }
         }
 
-        /* ===== NUEVO: SHOWCASE HÍBRIDO (TikTok móvil + 2 columnas desktop) ===== */
+        /* ===== SHOWCASE HÍBRIDO ===== */
         .showcase-section {
             padding: 5rem 1.5rem;
             background: linear-gradient(135deg, #1a0f0f 0%, #2a1a1a 100%);
@@ -692,30 +692,6 @@
 
         .meta-item i {
             color: var(--color-rojo-fuego);
-        }
-
-        .video-play-btn {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 60px;
-            height: 60px;
-            background: rgba(219, 54, 6, 0.9);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-            z-index: 5;
-            border: 3px solid var(--color-amarillo-cheddar);
-            transition: all 0.3s ease;
-        }
-
-        .video-play-btn:hover {
-            transform: translate(-50%, -50%) scale(1.1);
         }
 
         .mobile-controls {
@@ -1076,7 +1052,7 @@
         </div>
     </section>
 
-    <!-- CATERING MENU (Tus cards) -->
+    <!-- CATERING MENU -->
     <section id="catering-menu" class="catering-section">
         <div class="catering-container">
             <div class="catering-header">
@@ -1153,7 +1129,7 @@
         </div>
     </section>
 
-    <!-- ===== NUEVO SHOWCASE HÍBRIDO (después del menú) ===== -->
+    <!-- SHOWCASE HÍBRIDO (con AUTOPLAY y sin botones de play) -->
     <section class="showcase-section">
         <div class="showcase-container">
             <div class="showcase-header">
@@ -1166,9 +1142,9 @@
                 <div class="carousel-vertical">
                     <div class="carousel-track-container">
                         <div class="carousel-track" id="mobileTrack">
-                            <!-- Slide 1 -->
+                            <!-- Slide 1 - FOTO (sin botón de play) -->
                             <div class="carousel-slide active">
-                                <img src="images/surf-turf.JPG" alt="Surf & Turf">
+                                <img src="images/surf-turf.jpg" alt="Surf & Turf">
                                 <div class="slide-overlay-mobile">
                                     <h3 class="slide-title-mobile">Surf & Turf Bites</h3>
                                     <p class="slide-desc-mobile">Delicious smashed avocado bites with shrimp and beef</p>
@@ -1179,14 +1155,11 @@
                                 </div>
                             </div>
 
-                            <!-- Slide 2 (Video) -->
+                            <!-- Slide 2 - VIDEO (con autoplay, sin botón) -->
                             <div class="carousel-slide">
-                                <video id="video1" muted loop playsinline poster="images/pretzel-poster.JPG">
+                                <video autoplay muted loop playsinline poster="images/pretzel-poster.jpg">
                                     <source src="videos/pretzel-catering.mp4" type="video/mp4">
                                 </video>
-                                <div class="video-play-btn" onclick="playVideo(this)">
-                                    <i class="fas fa-play"></i>
-                                </div>
                                 <div class="slide-overlay-mobile">
                                     <h3 class="slide-title-mobile">Pretzel Tray</h3>
                                     <p class="slide-desc-mobile">With honey mustard and beer cheese sauce</p>
@@ -1197,9 +1170,9 @@
                                 </div>
                             </div>
 
-                            <!-- Slide 3 -->
+                            <!-- Slide 3 - FOTO -->
                             <div class="carousel-slide">
-                                <img src="images/chicken-tostadas.JPG" alt="Chicken Tostadas">
+                                <img src="images/chicken-tostadas.jpg" alt="Chicken Tostadas">
                                 <div class="slide-overlay-mobile">
                                     <h3 class="slide-title-mobile">Chicken Tostadas</h3>
                                     <p class="slide-desc-mobile">Crispy tostadas with seasoned chicken</p>
@@ -1210,9 +1183,9 @@
                                 </div>
                             </div>
 
-                            <!-- Slide 4 -->
+                            <!-- Slide 4 - FOTO -->
                             <div class="carousel-slide">
-                                <img src="images/grilled-sandwich.JPG" alt="Chipotle Sandwich">
+                                <img src="images/grilled-sandwich.jpg" alt="Chipotle Sandwich">
                                 <div class="slide-overlay-mobile">
                                     <h3 class="slide-title-mobile">Chipotle Chicken</h3>
                                     <p class="slide-desc-mobile">Grilled chicken with chipotle sauce</p>
@@ -1223,14 +1196,11 @@
                                 </div>
                             </div>
 
-                            <!-- Slide 5 (Video) -->
+                            <!-- Slide 5 - VIDEO (con autoplay, sin botón) -->
                             <div class="carousel-slide">
-                                <video id="video2" muted loop playsinline poster="images/event-poster.JPG">
-                                    <source src="videos/catering-event.MP4" type="video/mp4">
+                                <video autoplay muted loop playsinline poster="images/event-poster.jpg">
+                                    <source src="videos/catering-event.mp4" type="video/mp4">
                                 </video>
-                                <div class="video-play-btn" onclick="playVideo(this)">
-                                    <i class="fas fa-play"></i>
-                                </div>
                                 <div class="slide-overlay-mobile">
                                     <h3 class="slide-title-mobile">Event Setup</h3>
                                     <p class="slide-desc-mobile">Behind the scenes of our catering</p>
@@ -1241,9 +1211,9 @@
                                 </div>
                             </div>
 
-                            <!-- Slide 6 -->
+                            <!-- Slide 6 - FOTO -->
                             <div class="carousel-slide">
-                                <img src="images/wings.JPG" alt="Smoked Wings">
+                                <img src="images/wings.jpg" alt="Smoked Wings">
                                 <div class="slide-overlay-mobile">
                                     <h3 class="slide-title-mobile">Smoked Wings</h3>
                                     <p class="slide-desc-mobile">BBQ, Buffalo, or Cajun</p>
@@ -1276,7 +1246,7 @@
             <!-- VERSIÓN DESKTOP (2 columnas) -->
             <div class="desktop-grid" id="desktopGrid">
                 <div class="desktop-media" id="desktopMedia">
-                    <img src="images/surf-turf.jpg" alt="Surf & Turf" id="desktopImage">
+                    <img src="images/surf-turf.jpg" alt="Surf & Turf">
                 </div>
                 <div class="desktop-info" id="desktopInfo">
                     <h3 class="desktop-title" id="desktopTitle">Surf & Turf Bites</h3>
@@ -1386,59 +1356,59 @@
         });
         scrollTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-        // ===== CARRUSEL HÍBRIDO =====
+        // ===== CARRUSEL HÍBRIDO (modificado para autoplay) =====
         const slides = [
             {
-        type: 'image', // FOTO - sin símbolo de play
-        src: 'images/surf-turf.jpg',
-        title: 'Surf & Turf Bites',
-        desc: 'Delicious smashed avocado bites with shrimp and beef',
-        meta: ['$35 tray', 'Best seller'],
-        icons: ['fa-tag', 'fa-star']
-    },
-    {
-        type: 'video', // VIDEO - con símbolo de play
-        src: 'videos/pretzel-catering.mp4',
-        poster: 'images/pretzel-poster.jpg',
-        title: 'Pretzel Tray',
-        desc: 'With honey mustard and beer cheese sauce',
-        meta: ['$35', 'Video'],
-        icons: ['fa-tag', 'fa-video']
-    },
-    {
-        type: 'image', // FOTO
-        src: 'images/chicken-tostadas.jpg',
-        title: 'Chicken Tostadas',
-        desc: 'Crispy tostadas with seasoned chicken',
-        meta: ['2 for $10', 'Popular'],
-        icons: ['fa-tag', 'fa-fire']
-    },
-    {
-        type: 'image', // FOTO
-        src: 'images/grilled-sandwich.jpg',
-        title: 'Chipotle Chicken',
-        desc: 'Grilled chicken with chipotle sauce',
-        meta: ['$12', 'Favorite'],
-        icons: ['fa-tag', 'fa-fire']
-    },
-    {
-        type: 'video', // VIDEO
-        src: 'videos/catering-event.mp4',
-        poster: 'images/event-poster.jpg',
-        title: 'Event Setup',
-        desc: 'Behind the scenes of our catering',
-        meta: ['150 guests', 'Time-lapse'],
-        icons: ['fa-users', 'fa-video']
-    },
-    {
-        type: 'image', // FOTO
-        src: 'images/wings.jpg',
-        title: 'Smoked Wings',
-        desc: 'BBQ, Buffalo, or Cajun',
-        meta: ['25pc $20', 'Party favorite'],
-        icons: ['fa-tag', 'fa-star']
-    }
-];
+                type: 'image',
+                src: 'images/surf-turf.jpg',
+                title: 'Surf & Turf Bites',
+                desc: 'Delicious smashed avocado bites with shrimp and beef',
+                meta: ['$35 tray', 'Best seller'],
+                icons: ['fa-tag', 'fa-star']
+            },
+            {
+                type: 'video',
+                src: 'videos/pretzel-catering.mp4',
+                poster: 'images/pretzel-poster.jpg',
+                title: 'Pretzel Tray',
+                desc: 'With honey mustard and beer cheese sauce',
+                meta: ['$35', 'Video'],
+                icons: ['fa-tag', 'fa-video']
+            },
+            {
+                type: 'image',
+                src: 'images/chicken-tostadas.jpg',
+                title: 'Chicken Tostadas',
+                desc: 'Crispy tostadas with seasoned chicken',
+                meta: ['2 for $10', 'Popular'],
+                icons: ['fa-tag', 'fa-fire']
+            },
+            {
+                type: 'image',
+                src: 'images/grilled-sandwich.jpg',
+                title: 'Chipotle Chicken',
+                desc: 'Grilled chicken with chipotle sauce',
+                meta: ['$12', 'Favorite'],
+                icons: ['fa-tag', 'fa-fire']
+            },
+            {
+                type: 'video',
+                src: 'videos/catering-event.mp4',
+                poster: 'images/event-poster.jpg',
+                title: 'Event Setup',
+                desc: 'Behind the scenes of our catering',
+                meta: ['150 guests', 'Time-lapse'],
+                icons: ['fa-users', 'fa-video']
+            },
+            {
+                type: 'image',
+                src: 'images/wings.jpg',
+                title: 'Smoked Wings',
+                desc: 'BBQ, Buffalo, or Cajun',
+                meta: ['25pc $20', 'Party favorite'],
+                icons: ['fa-tag', 'fa-star']
+            }
+        ];
 
         let currentIndex = 0;
         let isPlaying = true;
@@ -1467,6 +1437,17 @@
                 mobileTrack.style.transform = `translateY(-${currentIndex * 100}%)`;
                 document.querySelectorAll('.carousel-slide').forEach((slide, i) => {
                     slide.classList.toggle('active', i === currentIndex);
+                    
+                    // Pausar videos que no están activos
+                    const video = slide.querySelector('video');
+                    if (video) {
+                        if (i === currentIndex) {
+                            // El video activo se reproduce automáticamente
+                            video.play().catch(e => console.log("Autoplay prevented:", e));
+                        } else {
+                            video.pause();
+                        }
+                    }
                 });
             }
 
@@ -1476,12 +1457,9 @@
                 desktopMedia.innerHTML = `<img src="${slide.src}" alt="${slide.title}" style="width:100%; height:100%; object-fit:cover;">`;
             } else {
                 desktopMedia.innerHTML = `
-                    <video id="desktopVideo" muted loop playsinline poster="${slide.poster}" style="width:100%; height:100%; object-fit:cover;">
+                    <video id="desktopVideo" autoplay muted loop playsinline poster="${slide.poster}" style="width:100%; height:100%; object-fit:cover;">
                         <source src="${slide.src}" type="video/mp4">
                     </video>
-                    <div class="video-play-btn" onclick="playDesktopVideo()">
-                        <i class="fas fa-play"></i>
-                    </div>
                 `;
             }
 
@@ -1534,33 +1512,6 @@
         function startAutoPlay() {
             clearInterval(autoPlayInterval);
             autoPlayInterval = setInterval(nextSlide, 4000);
-        }
-
-        // Video functions
-        function playVideo(btn) {
-            const slide = btn.closest('.carousel-slide');
-            const video = slide.querySelector('video');
-            if (video.paused) {
-                video.play();
-                btn.innerHTML = '<i class="fas fa-pause"></i>';
-                if (isPlaying) togglePlayPause();
-            } else {
-                video.pause();
-                btn.innerHTML = '<i class="fas fa-play"></i>';
-            }
-        }
-
-        function playDesktopVideo() {
-            const video = document.getElementById('desktopVideo');
-            const btn = document.querySelector('#desktopMedia .video-play-btn');
-            if (video.paused) {
-                video.play();
-                btn.innerHTML = '<i class="fas fa-pause"></i>';
-                if (isPlaying) togglePlayPause();
-            } else {
-                video.pause();
-                btn.innerHTML = '<i class="fas fa-play"></i>';
-            }
         }
 
         function inquireAboutItem(item) {
