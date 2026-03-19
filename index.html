@@ -76,16 +76,6 @@
             50% { text-shadow: 0 0 10px var(--color-rojo-fuego), 0 0 15px var(--color-rojo-fuego); }
         }
 
-        @keyframes slideInFromRight {
-            from { transform: translateX(100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-
-        @keyframes slideInFromLeft {
-            from { transform: translateX(-100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-
         /* --- VIDEO HERO SECTION --- */
         .video-hero {
             position: relative;
@@ -138,16 +128,7 @@
             margin: 0 auto;
         }
 
-        /* Para cuando el video no carga */
-        .no-video .video-container {
-            background: 
-                linear-gradient(135deg, rgba(15,15,15,0.9) 0%, rgba(219,54,6,0.4) 100%),
-                url('https://images.unsplash.com/photo-1550547660-d9450f859349?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80');
-            background-size: cover;
-            background-position: center;
-        }
-
-        /* ==================== PHOTO GALLERY CAROUSEL SECTION ==================== */
+        /* --- PHOTO GALLERY CAROUSEL SECTION --- */
         .photo-gallery-section {
             padding: 5rem 0;
             background: linear-gradient(135deg, #2a1a1a 0%, #1a0f0f 100%);
@@ -464,13 +445,6 @@
             justify-content: center;
         }
 
-        .story-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
         .story-image-placeholder {
             width: 100%;
             height: 100%;
@@ -600,7 +574,6 @@
             transition: all 0.3s ease;
         }
 
-        /* NUEVO: Estilo para el header cuando se hace scroll */
         header.scrolled {
             background-color: rgba(10, 10, 10, 0.95);
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
@@ -626,7 +599,6 @@
             text-shadow: 2px 2px 0px var(--color-rojo-fuego);
         }
 
-        /* --- NUEVO: BOTONES DEL HEADER (CATER Y EVENT CART) --- */
         .header-buttons {
             position: absolute;
             right: 5%;
@@ -652,7 +624,6 @@
             box-shadow: 0 3px 10px rgba(0,0,0,0.3);
         }
 
-        /* Botón Cater With Us - ROJO */
         .cater-btn {
             background: linear-gradient(135deg, var(--color-rojo-fuego) 0%, #c42f04 100%);
             animation: pulse 2s infinite;
@@ -662,13 +633,12 @@
             color: var(--color-amarillo-cheddar);
         }
 
-        /* Botón Event Cart - MORADO */
         .cart-btn {
             background: linear-gradient(135deg, var(--color-purpura-berry) 0%, #9d5b85 100%);
         }
 
         .btn-text {
-            display: none; /* Oculto por defecto para móviles */
+            display: none;
         }
 
         .btn-count {
@@ -684,7 +654,6 @@
             animation: pulse 1.5s infinite;
         }
 
-        /* Mostrar texto en desktop */
         @media (min-width: 768px) {
             .btn-text {
                 display: inline;
@@ -696,7 +665,6 @@
             }
         }
 
-        /* Hamburger Button Mobile */
         .hamburger-btn {
             position: absolute;
             left: 5%;
@@ -726,7 +694,6 @@
             transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
         }
 
-        /* --- SIDEBAR MOBILE --- */
         .sidebar {
             position: fixed; 
             top: 0; 
@@ -779,7 +746,6 @@
             transform: translateX(10px);
         }
         
-        /* NUEVO: Estilo especial para Cater en sidebar */
         .cater-link-special {
             background: linear-gradient(135deg, 
                 rgba(219, 54, 6, 0.2) 0%, 
@@ -1022,7 +988,6 @@
             display: block;
         }
 
-        /* --- BUTTONS MOBILE --- */
         .btn {
             display: inline-flex;
             align-items: center;
@@ -1051,7 +1016,6 @@
             box-shadow: 0 6px 16px rgba(219, 54, 6, 0.4);
         }
 
-        /* NUEVO: Botón Cater especial en hero */
         .btn-cater {
             background: linear-gradient(135deg, var(--color-purpura-berry) 0%, #9d5b85 100%);
             box-shadow: 0 4px 12px rgba(186, 105, 144, 0.3);
@@ -1064,6 +1028,74 @@
             text-align: center; 
             background-color: var(--color-fondo-oscuro);
             position: relative;
+        }
+
+        .menu-location-selector {
+            display: inline-flex;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 8px;
+            border-radius: 50px;
+            border: 2px solid var(--color-amarillo-cheddar);
+            backdrop-filter: blur(10px);
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .menu-location-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: 40px;
+            background: transparent;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .menu-location-option i {
+            color: var(--color-amarillo-cheddar);
+            font-size: 1rem;
+        }
+
+        .menu-location-option.active {
+            background: linear-gradient(135deg, var(--color-rojo-fuego) 0%, #c42f04 100%);
+            color: white;
+            box-shadow: 0 2px 8px rgba(219, 54, 6, 0.3);
+        }
+
+        .menu-location-option.active i {
+            color: white;
+        }
+
+        .menu-location-badge {
+            background: var(--color-purpura-berry);
+            color: white;
+            font-size: 0.7rem;
+            padding: 2px 6px;
+            border-radius: 30px;
+            margin-left: 5px;
+            animation: pulse 2s infinite;
+        }
+
+        @media (max-width: 768px) {
+            .menu-location-selector {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .menu-location-option {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+            
+            .menu-location-option span {
+                display: inline;
+            }
         }
 
         .promo-banner {
@@ -1082,7 +1114,6 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.8);
         }
 
-        /* Contenedor del texto que se desplaza */
         .scrolling-container {
             display: flex;
             white-space: nowrap;
@@ -1092,7 +1123,6 @@
             padding: 0.5rem 0;
         }
 
-        /* Texto individual que se repite */
         .scrolling-text {
             display: inline-block;
             padding: 0 40px;
@@ -1101,7 +1131,6 @@
                          0 0 16px var(--color-rojo-fuego);
         }
 
-        /* Estrellas separadoras */
         .scrolling-text::before,
         .scrolling-text::after {
             content: '✦';
@@ -1110,7 +1139,6 @@
             animation: twinkle 1.5s infinite alternate;
         }
 
-        /* Efecto de brillo LED */
         .promo-banner::before {
             content: '';
             position: absolute;
@@ -1126,7 +1154,6 @@
             z-index: 1;
         }
 
-        /* Línea de puntos LED */
         .promo-banner::after {
             content: '';
             position: absolute;
@@ -1146,7 +1173,6 @@
             opacity: 0.7;
         }
 
-        /* Animación de desplazamiento del texto */
         @keyframes scrollText {
             0% {
                 transform: translateX(0);
@@ -1156,7 +1182,6 @@
             }
         }
 
-        /* Animación del brillo LED */
         @keyframes ledGlow {
             0% {
                 opacity: 0.2;
@@ -1171,7 +1196,6 @@
             }
         }
 
-        /* Animación de las estrellas */
         @keyframes twinkle {
             0% {
                 opacity: 0.4;
@@ -1184,7 +1208,6 @@
             }
         }
 
-        /* Efecto al pasar el cursor */
         .promo-banner:hover .scrolling-container {
             animation-play-state: paused;
         }
@@ -1258,13 +1281,12 @@
             box-shadow: 0 12px 24px rgba(0,0,0,0.3);
         }
 
-        /* Reemplazo de card-image-placeholder */
         .card-image {
             width: 100%;
             height: 180px;
             object-fit: cover;
             border-bottom: 1px solid #333;
-            background-color: #444; /* fallback si la imagen no carga */
+            background-color: #444;
         }
        
         .card-content { 
@@ -1315,9 +1337,6 @@
             white-space: nowrap;
         }
 
-        /* BOTONES "Add to Cart" REMOVIDOS */
-        /* Los botones han sido eliminados, solo queda el precio */
-
         .combo-badge {
             background: linear-gradient(135deg, var(--color-purpura-berry) 0%, #9d5b85 100%);
             color: white;
@@ -1333,7 +1352,6 @@
             animation: float 3s infinite ease-in-out;
         }
 
-        /* Sides & Extras Mobile */
         .sides-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
@@ -1373,7 +1391,6 @@
             font-family: 'Bangers', cursive;
         }
 
-        /* Pretzel Special */
         .pretzel-special {
             background: linear-gradient(145deg, #2a2a2a, #222);
             border: 2px solid transparent;
@@ -1489,7 +1506,42 @@
             max-width: 300px;
         }
 
-        /* --- LOCATION MAP STYLES --- */
+        .location-box {
+            transition: all 0.3s ease;
+        }
+
+        .location-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        .location-box .btn {
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        .location-badge {
+            background: var(--color-amarillo-cheddar);
+            color: #000;
+            font-size: 0.7rem;
+            padding: 2px 6px;
+            border-radius: 30px;
+            margin-left: 5px;
+            animation: pulse 2s infinite;
+        }
+
+        @media (max-width: 768px) {
+            .location-section > div {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .location-box {
+                width: 100%;
+                max-width: 400px;
+            }
+        }
+
         .location-section { 
             padding: 4rem 1.5rem; 
             background: linear-gradient(135deg, var(--color-mostaza-suave) 0%, #d1984a 100%);
@@ -1541,7 +1593,6 @@
             border: 0;
         }
 
-        /* --- CONTACT MOBILE --- */
         .contact-section {
             padding: 4rem 1.5rem;
             text-align: center;
@@ -1614,7 +1665,6 @@
             transform: translateY(-2px);
         }
         
-        /* Scroll to Top Button Mobile */
         .scroll-top {
             position: fixed;
             bottom: 20px;
@@ -1646,7 +1696,6 @@
             box-shadow: 0 6px 16px rgba(219, 54, 6, 0.4);
         }
 
-        /* --- LEGAL CONSENT BANNER --- */
         .legal-consent-banner {
             position: fixed;
             bottom: 0;
@@ -1763,7 +1812,6 @@
             color: var(--color-rojo-fuego);
         }
 
-        /* Para dispositivos móviles */
         @media (max-width: 768px) {
             .legal-consent-content {
                 flex-direction: column;
@@ -1809,7 +1857,6 @@
             }
         }
 
-        /* --- MEDIA QUERIES FOR TABLETS --- */
         @media (min-width: 768px) {
             html {
                 font-size: 17px;
@@ -1854,7 +1901,6 @@
             }
         }
 
-        /* --- MEDIA QUERIES FOR DESKTOP --- */
         @media (min-width: 1024px) {
             .video-hero {
                 background-attachment: fixed;
@@ -1895,7 +1941,6 @@
             }
         }
 
-        /* Media query para dispositivos móviles */
         @media (max-width: 768px) {
             .video-hero {
                 min-height: 500px;
@@ -1920,7 +1965,6 @@
             }
         }
 
-        /* --- IOS SAFARI FIXES --- */
         @supports (-webkit-touch-callout: none) {
             .video-hero {
                 background-attachment: scroll;
@@ -1933,6 +1977,103 @@
             input, select, textarea, button {
                 font-size: 16px !important;
             }
+        }
+
+        /* Estilos específicos para secciones del menú de Allen */
+        .menu-category {
+            margin-top: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .menu-category-title {
+            color: var(--color-amarillo-cheddar);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            font-family: 'Bangers', cursive;
+            text-align: center;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .menu-category-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--color-rojo-fuego);
+        }
+
+        .wings-flavors {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin: 1rem 0 1.5rem;
+        }
+
+        .flavor-tag {
+            background: rgba(248, 168, 20, 0.2);
+            border: 1px solid var(--color-amarillo-cheddar);
+            color: var(--color-amarillo-cheddar);
+            padding: 5px 12px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .price-note {
+            color: #ccc;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            font-style: italic;
+        }
+
+        .addon-options {
+            color: var(--color-mostaza-suave);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            line-height: 1.6;
+        }
+
+        .addon-options i {
+            color: var(--color-amarillo-cheddar);
+            margin-right: 5px;
+        }
+
+        .brunch-note {
+            background: linear-gradient(135deg, var(--color-purpura-berry) 0%, #9d5b85 100%);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 30px;
+            display: inline-block;
+            margin-bottom: 1rem;
+            font-weight: bold;
+            font-size: 0.9rem;
+            animation: pulse 2s infinite;
+        }
+
+        .chef-special {
+            background: linear-gradient(145deg, #2a2a2a, #222);
+            border: 2px solid var(--color-amarillo-cheddar);
+            padding: 1.5rem;
+            border-radius: 16px;
+            margin: 2rem auto;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .chef-special h4 {
+            color: var(--color-amarillo-cheddar);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .chef-special p {
+            color: #ddd;
+            font-size: 0.95rem;
         }
     </style>
 </head>
@@ -2029,7 +2170,6 @@
             <li><a href="#sides" class="menu-link" onclick="toggleMenu()">SIDES</a></li>
             <li><a href="#location" class="menu-link" onclick="toggleMenu()">LOCATION</a></li>
             
-            <!-- NUEVO: Enlace especial para Catering -->
             <li class="cater-link-special" onclick="toggleMenu()">
                 <a href="catering.html" class="menu-link">
                     🍽️ CATER WITH US
@@ -2069,9 +2209,8 @@
         
         <div class="video-hero-content">
             <h1 class="animate-load">SUP<span>DOG</span></h1>
-            <p class="animate-load delay-1">Wurst Behavior. Best Flavor. <br> Only in Grapevine, TX.</p>
+            <p class="animate-load delay-1">Wurst Behavior. Best Flavor. <br> Grapevine & Allen, TX.</p>
             
-            <!-- NUEVO: Botones en Hero Section -->
             <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;">
                 <a href="#story" class="btn animate-load delay-2">
                     OUR STORY <i class="fas fa-fire"></i>
@@ -2103,8 +2242,6 @@
                 </div>
                 
                 <div class="story-image-container">
-                    <!-- Cuando tengas la imagen de los creadores, reemplaza este div con: -->
-                    <!-- <img src="founders.jpg" alt="SupDog Founders - Jonathan & María" class="story-image"> -->
                     <div class="story-image-placeholder">
                         <i class="fas fa-users"></i>
                         <p>Jonathan & María</p>
@@ -2207,6 +2344,7 @@
         </div>
     </section>
 
+    <!-- MENU SECTION CON SELECTOR DE UBICACIONES -->
     <section id="menu" class="menu-section">
         <div class="promo-banner">
             <div class="scrolling-container">
@@ -2215,136 +2353,394 @@
             </div>
         </div>
 
-        <h2 class="section-title">The Dogs</h2>
-        <p class="section-subtitle">Make it a Combo: Chips & Drink Included for $14.50!</p>
-       
-        <div class="menu-grid">
-            <div class="menu-card">
-                <span class="combo-badge">BEST SELLER</span>
-                <img src="mexican-dog.png" alt="Mexican Dog" class="card-image">
-                <div class="card-content">
-                    <h3>Mexican Dog</h3>
-                    <p>Beef Frank, Pico De Gallo, Jalapeños, Ketchup & Mustard.</p>
-                    <div class="price-row">
-                        <span class="price">$12.50</span>
-                    </div>
-                </div>
-            </div>
+        <!-- SELECTOR DE UBICACIONES EN EL MENÚ -->
+        <div class="menu-location-selector">
+            <button class="menu-location-option active" data-location="grapevine" onclick="switchMenuLocation('grapevine')">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Grapevine</span>
+            </button>
+            <button class="menu-location-option" data-location="allen" onclick="switchMenuLocation('allen')">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Allen</span>
+                <span class="menu-location-badge">NEW!</span>
+            </button>
+        </div>
 
-            <div class="menu-card">
-                <img src="german-dog.png" alt="German Dog" class="card-image">
-                <div class="card-content">
-                    <h3>German Dog</h3>
-                    <p>Bratwurst, Grilled Onions, Sauerkraut, Spicy German Mustard.</p>
-                    <div class="price-row">
-                        <span class="price">$12.50</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="menu-card">
-                <img src="hawaiian-dog.jpg" alt="Hawaiian Dog" class="card-image">
-                <div class="card-content">
-                    <h3>Hawaiian Dog</h3>
-                    <p>Jalapeño Sausage, Pineapple, Grilled Onions, Bacon Bites.</p>
-                    <div class="price-row">
-                        <span class="price">$12.50</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="menu-card">
-                <span class="combo-badge">CHICAGO STYLE</span>
-                <img src="chicago-dog.png" alt="Chicago Dog" class="card-image">
-                <div class="card-content">
-                    <h3>Chicago Dog</h3>
-                    <p>Beef Frank, Poppy Seeds Bun, Yellow Mustard, Neon Green Pickles.</p>
-                    <div class="price-row">
-                        <span class="price">$12.50</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="menu-card">
-                <span class="combo-badge">MOST POPULAR</span>
-                <img src="trainwreck.png" alt="Trainwreck" class="card-image">
-                <div class="card-content">
-                    <h3>Trainwreck</h3>
-                    <p>Beef Frank, Chipotle Sauce, Mayo, Mustard, Onions, Fries, Parmesan, Bacon.</p>
-                    <div class="price-row">
-                        <span class="price">$12.50</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="menu-card">
-                <img src="tijuana-dog.png" alt="Tijuana Dog" class="card-image">
-                <div class="card-content">
-                    <h3>Tijuana Dog</h3>
-                    <p>Jalapeño Sausage, Corn, Chipotle Sauce, Parmesan Cheese, Cilantro.</p>
-                    <div class="price-row">
-                        <span class="price">$12.50</span>
-                    </div>
-                </div>
-            </div>
+        <!-- CONTENEDOR DE MENÚ GRAPEVINE -->
+        <div id="menu-grapevine-container">
+            <h2 class="section-title">The Dogs - Grapevine</h2>
+            <p class="section-subtitle">Make it a Combo: Chips & Drink Included for $14.50!</p>
            
-            <div class="menu-card">
-                <span class="combo-badge">FOR KIDS</span>
-                <img src="kids-dog.jpg" alt="Kids Dog" class="card-image">
-                <div class="card-content">
-                    <h3>Kids Dog</h3>
-                    <p>Beef Frank, Ketchup, Jello, Kids Juice.</p>
-                    <div class="price-row">
-                        <span class="price">$10.50</span>
+            <div class="menu-grid">
+                <div class="menu-card">
+                    <span class="combo-badge">BEST SELLER</span>
+                    <img src="mexican-dog.png" alt="Mexican Dog" class="card-image">
+                    <div class="card-content">
+                        <h3>Mexican Dog</h3>
+                        <p>Beef Frank, Pico De Gallo, Jalapeños, Ketchup & Mustard.</p>
+                        <div class="price-row">
+                            <span class="price">$12.50</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-card">
+                    <img src="german-dog.png" alt="German Dog" class="card-image">
+                    <div class="card-content">
+                        <h3>German Dog</h3>
+                        <p>Bratwurst, Grilled Onions, Sauerkraut, Spicy German Mustard.</p>
+                        <div class="price-row">
+                            <span class="price">$12.50</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-card">
+                    <img src="hawaiian-dog.jpg" alt="Hawaiian Dog" class="card-image">
+                    <div class="card-content">
+                        <h3>Hawaiian Dog</h3>
+                        <p>Jalapeño Sausage, Pineapple, Grilled Onions, Bacon Bites.</p>
+                        <div class="price-row">
+                            <span class="price">$12.50</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-card">
+                    <span class="combo-badge">CHICAGO STYLE</span>
+                    <img src="chicago-dog.png" alt="Chicago Dog" class="card-image">
+                    <div class="card-content">
+                        <h3>Chicago Dog</h3>
+                        <p>Beef Frank, Poppy Seeds Bun, Yellow Mustard, Neon Green Pickles.</p>
+                        <div class="price-row">
+                            <span class="price">$12.50</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-card">
+                    <span class="combo-badge">MOST POPULAR</span>
+                    <img src="trainwreck.png" alt="Trainwreck" class="card-image">
+                    <div class="card-content">
+                        <h3>Trainwreck</h3>
+                        <p>Beef Frank, Chipotle Sauce, Mayo, Mustard, Onions, Fries, Parmesan, Bacon.</p>
+                        <div class="price-row">
+                            <span class="price">$12.50</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-card">
+                    <img src="tijuana-dog.png" alt="Tijuana Dog" class="card-image">
+                    <div class="card-content">
+                        <h3>Tijuana Dog</h3>
+                        <p>Jalapeño Sausage, Corn, Chipotle Sauce, Parmesan Cheese, Cilantro.</p>
+                        <div class="price-row">
+                            <span class="price">$12.50</span>
+                        </div>
+                    </div>
+                </div>
+               
+                <div class="menu-card">
+                    <span class="combo-badge">FOR KIDS</span>
+                    <img src="kids-dog.jpg" alt="Kids Dog" class="card-image">
+                    <div class="card-content">
+                        <h3>Kids Dog</h3>
+                        <p>Beef Frank, Ketchup, Jello, Kids Juice.</p>
+                        <div class="price-row">
+                            <span class="price">$10.50</span>
+                        </div>
+                    </div>
+                </div>
+               
+                <div class="menu-card">
+                    <img src="all-naked.png" alt="All Naked" class="card-image">
+                    <div class="card-content">
+                        <h3>All Naked</h3>
+                        <p>Bunless. Bratwurst, Grilled Onions, Sauerkraut.</p>
+                        <div class="price-row">
+                            <span class="price">$12.50</span>
+                        </div>
                     </div>
                 </div>
             </div>
-           
-            <div class="menu-card">
-                <img src="all-naked.png" alt="All Naked" class="card-image">
-                <div class="card-content">
-                    <h3>All Naked</h3>
-                    <p>Bunless. Bratwurst, Grilled Onions, Sauerkraut.</p>
-                    <div class="price-row">
-                        <span class="price">$12.50</span>
+
+            <div id="sides" style="margin-top: 4rem;">
+                <h2 class="section-title">Extras & Drinks - Grapevine</h2>
+               
+                <div class="pretzel-special">
+                    <h3 style="color: var(--color-amarillo-cheddar); font-size: 1.8rem; margin-bottom: 0.5rem;">SOFT PRETZELS</h3>
+                    <p style="color: #ddd; font-size: 1rem; margin-bottom: 1rem;">Honey Mustard & Beer Cheese Sauce included.</p>
+                    <div style="font-size: 2.2rem; color: white; font-weight: bold; margin: 1.2rem 0; text-shadow: 1px 1px 0px rgba(0,0,0,0.5);">$9.50</div>
+                </div>
+
+                <div class="sides-grid">
+                    <div class="side-item">
+                        <h4>Creamy Slaw</h4> 
+                        <span class="side-price">$4.00</span>
+                    </div>
+                    <div class="side-item">
+                        <h4>Chips Bag</h4> 
+                        <span class="side-price">$3.00</span>
+                    </div>
+                    <div class="side-item">
+                        <h4>Corn Salad</h4> 
+                        <span class="side-price">$4.00</span>
+                    </div>
+                    <div class="side-item">
+                        <h4>Potato Salad</h4> 
+                        <span class="side-price">$4.00</span>
+                    </div>
+                    <div class="side-item">
+                        <h4>Baked Beans</h4> 
+                        <span class="side-price">$6.00</span>
+                    </div>
+                    <div class="side-item" style="border-color: var(--color-rojo-fuego); background: linear-gradient(145deg, #2a1a1a, #221010);">
+                        <h4 style="color: white;">DRINKS (Cans/Water)</h4>
+                        <span class="side-price" style="color: var(--color-amarillo-cheddar);">$2.25</span>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div id="sides" style="margin-top: 4rem;">
-            <h2 class="section-title">Extras & Drinks</h2>
-           
-            <div class="pretzel-special">
-                <h3 style="color: var(--color-amarillo-cheddar); font-size: 1.8rem; margin-bottom: 0.5rem;">SOFT PRETZELS</h3>
-                <p style="color: #ddd; font-size: 1rem; margin-bottom: 1rem;">Honey Mustard & Beer Cheese Sauce included.</p>
-                <div style="font-size: 2.2rem; color: white; font-weight: bold; margin: 1.2rem 0; text-shadow: 1px 1px 0px rgba(0,0,0,0.5);">$9.50</div>
+        <!-- CONTENEDOR DE MENÚ ALLEN (oculto por defecto) -->
+        <div id="menu-allen-container" style="display: none;">
+            <h2 class="section-title">Allen Menu</h2>
+            <p class="section-subtitle">📍 1070 Watters Creek Blvd, Allen, TX 75013</p>
+            
+            <!-- WINGS -->
+            <div class="menu-category">
+                <h3 class="menu-category-title">🔥 WINGS</h3>
+                <div class="wings-flavors">
+                    <span class="flavor-tag">BBQ</span>
+                    <span class="flavor-tag">Mango Habanero</span>
+                    <span class="flavor-tag">Lemon Pepper</span>
+                    <span class="flavor-tag">Buffalo</span>
+                    <span class="flavor-tag">Sweet Chili</span>
+                </div>
+                
+                <div class="menu-grid">
+                    <div class="menu-card">
+                        <div class="card-content">
+                            <h3>6 Wings</h3>
+                            <p>Can be mixed (3 & 3)</p>
+                            <div class="price-row">
+                                <span class="price">$11.25</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="menu-card">
+                        <div class="card-content">
+                            <h3>12 Wings</h3>
+                            <p>Can be mixed (6 & 6)</p>
+                            <div class="price-row">
+                                <span class="price">$18.00</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-
-            <div class="sides-grid">
-                <div class="side-item">
-                    <h4>Creamy Slaw</h4> 
-                    <span class="side-price">$4.00</span>
+            
+            <!-- NACHOS -->
+            <div class="menu-category">
+                <h3 class="menu-category-title">🧀 NACHOS</h3>
+                <div class="menu-grid">
+                    <div class="menu-card">
+                        <div class="card-content">
+                            <h3>Loaded Nachos</h3>
+                            <p>Chips, queso, pico de gallo, jalapeños & sour cream</p>
+                            <div class="price-row">
+                                <span class="price">$10.00</span>
+                            </div>
+                            <div class="addon-options">
+                                <i class="fas fa-plus-circle"></i> Add Brisket +$6<br>
+                                <i class="fas fa-plus-circle"></i> Add Chicken Fajita +$4<br>
+                                <i class="fas fa-plus-circle"></i> Add Pulled Pork +$5
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="side-item">
-                    <h4>Chips Bag</h4> 
-                    <span class="side-price">$3.00</span>
+            </div>
+            
+            <!-- TACOS & QUESADILLAS -->
+            <div class="menu-category">
+                <h3 class="menu-category-title">🌮 TACOS & QUESADILLAS</h3>
+                <div class="menu-grid">
+                    <div class="menu-card">
+                        <div class="card-content">
+                            <h3>Tacos - 2 for $12</h3>
+                            <p>Chicken Fajita • Garlic Shrimp • Brisket • Baja Fish</p>
+                            <div class="price-row">
+                                <span class="price">$12.00</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="menu-card">
+                        <div class="card-content">
+                            <h3>Quesadilla</h3>
+                            <p>Chicken Fajita • Garlic Shrimp • Brisket • Baja Fish</p>
+                            <div class="price-row">
+                                <span class="price">$12.00</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="side-item">
-                    <h4>Corn Salad</h4> 
-                    <span class="side-price">$4.00</span>
+            </div>
+            
+            <!-- SLIDERS & ENTREES -->
+            <div class="menu-category">
+                <h3 class="menu-category-title">🍔 SLIDERS & ENTREES</h3>
+                <div class="menu-grid">
+                    <div class="menu-card">
+                        <div class="card-content">
+                            <h3>Sliders - 2 for $12</h3>
+                            <p>Brisket • Original • Pulled Pork</p>
+                            <div class="price-row">
+                                <span class="price">$12.00</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="menu-card">
+                        <div class="card-content">
+                            <h3>Fish & Chips</h3>
+                            <div class="price-row">
+                                <span class="price">$10.00</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="menu-card">
+                        <div class="card-content">
+                            <h3>Shrimp Boil</h3>
+                            <p>Potatoes, corn, sausage & 1 lb shrimp</p>
+                            <div class="price-row">
+                                <span class="price">$18.00</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="side-item">
-                    <h4>Potato Salad</h4> 
-                    <span class="side-price">$4.00</span>
+            </div>
+            
+            <!-- SIDES -->
+            <div class="menu-category">
+                <h3 class="menu-category-title">🍟 SIDES</h3>
+                <div class="sides-grid">
+                    <div class="side-item">
+                        <h4>French Fries</h4>
+                        <span class="side-price">$5.00</span>
+                    </div>
+                    <div class="side-item">
+                        <h4>Slaw</h4>
+                        <span class="side-price">$5.00</span>
+                    </div>
+                    <div class="side-item">
+                        <h4>Mac & Cheese</h4>
+                        <span class="side-price">$5.00</span>
+                    </div>
+                    <div class="side-item">
+                        <h4>Chips & Queso</h4>
+                        <span class="side-price">$8.00</span>
+                    </div>
+                    <div class="side-item">
+                        <h4>Chips & Salsa</h4>
+                        <span class="side-price">$5.00</span>
+                    </div>
                 </div>
-                <div class="side-item">
-                    <h4>Baked Beans</h4> 
-                    <span class="side-price">$6.00</span>
+            </div>
+            
+            <!-- KIDS MENU -->
+            <div class="menu-category">
+                <h3 class="menu-category-title">👶 KIDS MENU</h3>
+                <p class="price-note">All kids meals served with fries, jello & juice</p>
+                <div class="sides-grid">
+                    <div class="side-item">
+                        <h4>Kids Tenders</h4>
+                        <span class="side-price">$10.50</span>
+                    </div>
+                    <div class="side-item">
+                        <h4>Kids Fish</h4>
+                        <span class="side-price">$10.50</span>
+                    </div>
+                    <div class="side-item">
+                        <h4>Kids Shrimp</h4>
+                        <span class="side-price">$10.50</span>
+                    </div>
+                    <div class="side-item">
+                        <h4>Kids Corn Dog</h4>
+                        <span class="side-price">$10.50</span>
+                    </div>
+                    <div class="side-item">
+                        <h4>Kids Cheeseburger</h4>
+                        <span class="side-price">$10.50</span>
+                    </div>
                 </div>
-                <div class="side-item" style="border-color: var(--color-rojo-fuego); background: linear-gradient(145deg, #2a1a1a, #221010);">
-                    <h4 style="color: white;">DRINKS (Cans/Water)</h4>
-                    <span class="side-price" style="color: var(--color-amarillo-cheddar);">$2.25</span>
+            </div>
+            
+            <!-- BRUNCH (WEEKENDS ONLY) -->
+            <div class="menu-category">
+                <div class="brunch-note">
+                    <i class="fas fa-mug-hot"></i> WEEKENDS ONLY 9 AM - 4 PM
+                </div>
+                <h3 class="menu-category-title">🍳 BRUNCH</h3>
+                <div class="menu-grid">
+                    <div class="menu-card">
+                        <div class="card-content">
+                            <h3>Chilaquiles</h3>
+                            <p>Green or Red Sauce - Served with egg, fresh cheese, sour cream & side of beans</p>
+                            <div class="price-row">
+                                <span class="price">$12.00</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="menu-card">
+                        <div class="card-content">
+                            <h3>Breakfast Tacos</h3>
+                            <p>2 tacos - Mix & match: Chorizo & Egg • Potato & Egg</p>
+                            <div class="price-row">
+                                <span class="price">$10.00</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="menu-card">
+                        <div class="card-content">
+                            <h3>Steak & Eggs</h3>
+                            <p>Country potatoes, 2 eggs & 6 oz steak</p>
+                            <div class="price-row">
+                                <span class="price">$16.50</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="menu-card">
+                        <div class="card-content">
+                            <h3>Breakfast Plate</h3>
+                            <p>2 eggs + country potatoes + bacon</p>
+                            <div class="price-row">
+                                <span class="price">$12.00</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="menu-card">
+                        <div class="card-content">
+                            <h3>Kids Plate</h3>
+                            <p>2 pancakes + 2 eggs + 1 bacon + jello</p>
+                            <div class="price-row">
+                                <span class="price">$10.50</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="chef-special">
+                    <h4>👨‍🍳 Chef's Special</h4>
+                    <p>Different every week! Ask your server about today's special.</p>
+                    <p style="color: var(--color-amarillo-cheddar); font-size: 1.2rem; margin-top: 0.5rem;">Market Price</p>
                 </div>
             </div>
         </div>
@@ -2382,7 +2778,7 @@
                     <div class="promo-feature">
                         <i class="fas fa-map-marker-alt"></i>
                         <h4>We Come to You</h4>
-                        <p>Set up at your venue in Grapevine area</p>
+                        <p>Set up at your venue in Grapevine/Allen area</p>
                     </div>
                 </div>
                 
@@ -2398,29 +2794,67 @@
     </section>
 
     <section id="location" class="location-section">
-        <h2>Where to Find Us?</h2>
+        <h2>📍 Our Locations</h2>
        
-        <div class="location-box">
-            <h3 style="font-size: 2rem; margin-bottom: 0.5rem; color: var(--color-rojo-fuego);">📍 Grapevine, TX</h3>
-            <p style="font-size: 1.1rem; font-weight: bold; color: #333;">815 S Main St, Grapevine, TX 76051</p>
-            
-            <div class="map-container">
-                <iframe 
-                    src="https://maps.google.com/maps?q=815+S+Main+St,+Grapevine,+TX+76051&t=&z=15&ie=UTF8&iwloc=&output=embed" 
-                    allowfullscreen="" 
-                    loading="lazy" 
-                    referrerpolicy="no-referrer-when-downgrade">
-                </iframe>
+        <div style="display: flex; flex-wrap: wrap; gap: 2rem; justify-content: center; max-width: 1200px; margin: 0 auto;">
+            <!-- Location 1: Grapevine -->
+            <div class="location-box" style="flex: 1; min-width: 300px;">
+                <div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 1rem;">
+                    <i class="fas fa-map-pin" style="color: var(--color-rojo-fuego); font-size: 1.5rem;"></i>
+                    <h3 style="font-size: 2rem; color: var(--color-rojo-fuego);">Grapevine</h3>
+                </div>
+                <p style="font-size: 1.1rem; font-weight: bold; color: #333;">815 S Main St, Grapevine, TX 76051</p>
+                
+                <div class="map-container" style="height: 200px;">
+                    <iframe 
+                        src="https://maps.google.com/maps?q=815+S+Main+St,+Grapevine,+TX+76051&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+
+                <div style="border-top: 2px dashed #ccc; padding-top: 1rem;">
+                    <p style="font-weight: bold; color: #333; font-size: 1.1rem;">🕒 Open Hours:</p>
+                    <p style="color: #555; font-size: 1rem; margin: 0.4rem 0;">Sun - Thu: 11:00 AM - 9:00 PM</p>
+                    <p style="color: #555; font-size: 1rem;">Fri - Sat: 11:00 AM - 11:00 PM</p>
+                </div>
             </div>
 
-            <div style="border-top: 2px dashed #ccc; padding-top: 1rem;">
-                <p style="font-weight: bold; color: #333; font-size: 1.1rem;">🕒 Open Hours:</p>
-                <p style="color: #555; font-size: 1rem; margin: 0.4rem 0;">Sun - Thu: 11:00 AM - 9:00 PM</p>
-                <p style="color: #555; font-size: 1rem;">Fri - Sat: 11:00 AM - 11:00 PM</p>
-            </div>
+            <!-- Location 2: Allen (NEW) -->
+            <div class="location-box" style="flex: 1; min-width: 300px; border-color: var(--color-purpura-berry);">
+                <div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 1rem;">
+                    <i class="fas fa-map-pin" style="color: var(--color-purpura-berry); font-size: 1.5rem;"></i>
+                    <h3 style="font-size: 2rem; color: var(--color-purpura-berry);">Allen <span style="font-size: 1rem; background: var(--color-amarillo-cheddar); color: #000; padding: 3px 8px; border-radius: 30px;">NEW</span></h3>
+                </div>
+                <p style="font-size: 1.1rem; font-weight: bold; color: #333;">1070 Watters Creek Blvd, Allen, TX 75013</p>
+                
+                <div class="map-container" style="height: 200px;">
+                    <iframe 
+                        src="https://maps.google.com/maps?q=1070+Watters+Creek+Blvd,+Allen,+TX+75013&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
 
-            <a href="https://www.google.com/maps/dir//815+S+Main+St,+Grapevine,+TX+76051" target="_blank" class="btn" style="background: #1a1a1a; margin-top: 1.5rem; width: 100%; max-width: 250px;">
-                Open in Maps App <i class="fas fa-location-arrow"></i>
+                <div style="border-top: 2px dashed #ccc; padding-top: 1rem;">
+                    <p style="font-weight: bold; color: #333; font-size: 1.1rem;">🕒 Open Hours:</p>
+                    <p style="color: #555; font-size: 1rem; margin: 0.4rem 0;">Sun - Thu: 11:00 AM - 9:00 PM</p>
+                    <p style="color: #555; font-size: 1rem;">Fri - Sat: 11:00 AM - 11:00 PM</p>
+                    <p style="color: var(--color-purpura-berry); font-size: 0.9rem; margin-top: 0.5rem;">
+                        <i class="fas fa-parking"></i> Free parking available
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top: 2rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+            <a href="https://www.google.com/maps/dir//815+S+Main+St,+Grapevine,+TX+76051" target="_blank" class="btn" style="background: #1a1a1a;">
+                Directions to Grapevine <i class="fas fa-location-arrow"></i>
+            </a>
+            <a href="https://www.google.com/maps/dir//1070+Watters+Creek+Blvd,+Allen,+TX+75013" target="_blank" class="btn" style="background: var(--color-purpura-berry);">
+                Directions to Allen <i class="fas fa-location-arrow"></i>
             </a>
         </div>
     </section>
@@ -2428,7 +2862,7 @@
     <section id="contact" class="contact-section">
         <h3>Catering or Big Orders?</h3>
         <p>Call or text us directly!</p>
-        <a href="tel:+11234567890" class="contact-phone">
+        <a href="tel:+16828024868" class="contact-phone">
             <i class="fas fa-phone-alt"></i> (682) 802-4868
         </a>
         <p style="margin-top: 1.5rem; font-size: 1rem; color: var(--color-mostaza-suave); padding: 0 1rem;">
@@ -2676,6 +3110,50 @@
         const checkoutBtn = document.getElementById('checkoutBtn');
         
         // ============================================
+        // MENU LOCATION SWITCHER FUNCTIONALITY
+        // ============================================
+
+        // Variable para almacenar la ubicación actual del menú
+        let currentMenuLocation = 'grapevine';
+
+        // Función para cambiar entre ubicaciones en el menú
+        function switchMenuLocation(location) {
+            currentMenuLocation = location;
+            
+            // Actualizar clases activas en los botones del selector de menú
+            document.querySelectorAll('.menu-location-option').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.location === location) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            // Mostrar/Ocultar los contenedores de menú correspondientes
+            const menuGrapevine = document.getElementById('menu-grapevine-container');
+            const menuAllen = document.getElementById('menu-allen-container');
+            
+            if (location === 'grapevine') {
+                if (menuGrapevine) menuGrapevine.style.display = 'block';
+                if (menuAllen) menuAllen.style.display = 'none';
+                
+                // Guardar preferencia
+                localStorage.setItem('supdogPreferredLocation', 'grapevine');
+                
+            } else {
+                if (menuGrapevine) menuGrapevine.style.display = 'none';
+                if (menuAllen) menuAllen.style.display = 'block';
+                
+                // Guardar preferencia
+                localStorage.setItem('supdogPreferredLocation', 'allen');
+            }
+            
+            // Mostrar notificación
+            if (typeof eventCart !== 'undefined') {
+                eventCart.showNotification(`📍 Now showing ${location === 'grapevine' ? 'Grapevine' : 'Allen'} menu`);
+            }
+        }
+
+        // ============================================
         // PHOTO GALLERY CAROUSEL FUNCTIONALITY
         // ============================================
         class PhotoCarousel {
@@ -2823,11 +3301,6 @@
         
         // Initialize carousel when DOM is loaded
         let photoCarousel;
-        document.addEventListener('DOMContentLoaded', function() {
-            if (document.getElementById('carouselTrack')) {
-                photoCarousel = new PhotoCarousel();
-            }
-        });
         
         // Toggle Menu Function
         function toggleMenu() {
@@ -2932,6 +3405,11 @@
         
         // Initialize visibility on load
         document.addEventListener('DOMContentLoaded', function() {
+            // Initialize carousel
+            if (document.getElementById('carouselTrack')) {
+                photoCarousel = new PhotoCarousel();
+            }
+            
             // Trigger scroll event to check initial visibility
             setTimeout(() => {
                 window.dispatchEvent(new Event('scroll'));
@@ -2961,6 +3439,12 @@
                 setTimeout(() => {
                     legalConsentBanner.classList.add('active');
                 }, 2000);
+            }
+            
+            // Cargar ubicación preferida
+            const savedLocation = localStorage.getItem('supdogPreferredLocation');
+            if (savedLocation && (savedLocation === 'grapevine' || savedLocation === 'allen')) {
+                switchMenuLocation(savedLocation);
             }
         });
         
@@ -3128,4 +3612,3 @@
     </script>
 </body>
 </html>
-
