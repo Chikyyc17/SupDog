@@ -445,6 +445,13 @@
             justify-content: center;
         }
 
+        .story-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
         .story-image-placeholder {
             width: 100%;
             height: 100%;
@@ -1352,48 +1359,96 @@
             animation: float 3s infinite ease-in-out;
         }
 
+        /* Sides & Extras Mobile - AHORA CON IMÁGENES COMO LAS TARJETAS DE HOTDOGS */
         .sides-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-            gap: 1.2rem;
-            margin-top: 3rem;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            max-width: 400px;
+            margin: 0 auto;
         }
-        
-        .side-item {
-            background: linear-gradient(145deg, #222, #1a1a1a);
-            padding: 1.2rem;
-            border-radius: 12px;
-            border: 1px solid #333;
-            text-align: left;
-            transition: all 0.3s ease;
+
+        .side-card {
+            background: linear-gradient(145deg, #2a2a2a, #222);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 2px solid transparent;
+            transition: all 0.4s ease;
+            position: relative;
+            display: flex;
+            flex-direction: column;
             opacity: 0;
-            transform: translateY(15px);
+            transform: translateY(20px);
             animation: fadeIn 0.8s ease-out forwards;
-        }
-        
-        .side-item:hover {
-            transform: translateY(-5px);
-            border-color: var(--color-mostaza-suave);
             box-shadow: 0 8px 16px rgba(0,0,0,0.2);
         }
         
-        .side-item h4 { 
-            color: var(--color-mostaza-suave); 
-            margin-bottom: 0.4rem; 
-            font-size: 1.1rem;
+        .side-card.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
         
-        .side-price { 
-            float: right; 
+        .side-card:hover { 
+            transform: translateY(-8px); 
+            border-color: var(--color-amarillo-cheddar); 
+            box-shadow: 0 12px 24px rgba(0,0,0,0.3);
+        }
+
+        .side-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-bottom: 1px solid #333;
+            background-color: #444;
+        }
+        
+        .side-content { 
+            padding: 1.5rem; 
+            text-align: left; 
+            flex-grow: 1; 
+            display: flex; 
+            flex-direction: column; 
+            position: relative;
+            z-index: 2;
+        }
+
+        .side-content h4 { 
+            font-size: 1.5rem; 
             color: white; 
+            margin-bottom: 0.6rem; 
+            transition: color 0.3s ease;
+        }
+        
+        .side-card:hover .side-content h4 {
+            color: var(--color-amarillo-cheddar);
+        }
+
+        .side-price { 
+            color: var(--color-amarillo-cheddar); 
             font-weight: bold; 
-            font-size: 1.2rem;
+            font-size: 1.4rem; 
             font-family: 'Bangers', cursive;
+            text-shadow: 1px 1px 0px rgba(0,0,0,0.5);
+            white-space: nowrap;
+            margin-top: 0.5rem;
+        }
+
+        .drink-special {
+            border: 2px solid var(--color-rojo-fuego) !important;
+            background: linear-gradient(145deg, #2a1a1a, #221010) !important;
+        }
+
+        .drink-special .side-content h4 {
+            color: white;
+        }
+
+        .drink-special .side-price {
+            color: var(--color-amarillo-cheddar);
         }
 
         .pretzel-special {
             background: linear-gradient(145deg, #2a2a2a, #222);
-            border: 2px solid transparent;
+            border: 2px solid var(--color-amarillo-cheddar);
             padding: 2rem 1.5rem;
             border-radius: 16px;
             margin-bottom: 2.5rem;
@@ -1402,6 +1457,21 @@
             margin-right: auto;
             animation: fadeIn 1s ease-out;
             box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        @media (min-width: 768px) {
+            .sides-grid {
+                grid-template-columns: repeat(2, 1fr);
+                max-width: 800px;
+                gap: 2.5rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .sides-grid {
+                grid-template-columns: repeat(3, 1fr);
+                max-width: 1000px;
+            }
         }
 
         /* --- EVENT PROMO MOBILE --- */
@@ -1877,7 +1947,7 @@
             }
             
             .sides-grid {
-                grid-template-columns: repeat(3, 1fr);
+                grid-template-columns: repeat(2, 1fr);
                 max-width: 800px;
                 margin-left: auto;
                 margin-right: auto;
@@ -1912,7 +1982,7 @@
             }
             
             .sides-grid {
-                grid-template-columns: repeat(4, 1fr);
+                grid-template-columns: repeat(3, 1fr);
                 max-width: 1000px;
             }
             
@@ -2285,7 +2355,7 @@
             <div class="carousel-track" id="carouselTrack">
                 <!-- Slide 1 -->
                 <div class="carousel-slide active">
-                    <img src="supdog-cart-event.jpg" alt="SupDog Hot Dog Cart Setup" class="slide-image">
+                    <img src="imagenes dog/supdog-cart-event.jpg" alt="SupDog Hot Dog Cart Setup" class="slide-image">
                     <div class="slide-overlay">
                         <h3 class="slide-title">OUR MOBILE CART</h3>
                         <p class="slide-description">Fully equipped and ready to serve at any event. Our custom-designed cart brings the authentic SupDog experience to you!</p>
@@ -2294,7 +2364,7 @@
                 
                 <!-- Slide 2 -->
                 <div class="carousel-slide">
-                    <img src="supdog-gourmet-hotdogs.jpg" alt="Gourmet Hot Dogs" class="slide-image">
+                    <img src="imagenes dog/supdog-gourmet-hotdogs.jpg" alt="Gourmet Hot Dogs" class="slide-image">
                     <div class="slide-overlay">
                         <h3 class="slide-title">GOURMET CREATIONS</h3>
                         <p class="slide-description">Each hot dog is crafted with premium ingredients and creative toppings that explode with flavor.</p>
@@ -2312,7 +2382,7 @@
                 
                 <!-- Slide 4 -->
                 <div class="carousel-slide">
-                    <img src="supdog-fresh-toppings.jpg" alt="Delicious Toppings" class="slide-image">
+                    <img src="imagenes dog/supdog-fresh-toppings.jpg" alt="Delicious Toppings" class="slide-image">
                     <div class="slide-overlay">
                         <h3 class="slide-title">FRESH TOPPINGS</h3>
                         <p class="slide-description">From classic ketchup and mustard to gourmet toppings like pineapple, bacon, and chipotle sauce.</p>
@@ -2374,7 +2444,7 @@
             <div class="menu-grid">
                 <div class="menu-card">
                     <span class="combo-badge">BEST SELLER</span>
-                    <img src="imagenes dog/mexican-dog.jpg" alt="Mexican Dog" class="card-image">
+                    <img src="imagenes dog/mexican-dog.png" alt="Mexican Dog" class="card-image">
                     <div class="card-content">
                         <h3>Mexican Dog</h3>
                         <p>Beef Frank, Pico De Gallo, Jalapeños, Ketchup & Mustard.</p>
@@ -2385,7 +2455,7 @@
                 </div>
 
                 <div class="menu-card">
-                    <img src="imagenes dog/german-dog.jpg" alt="German Dog" class="card-image">
+                    <img src="imagenes dog/german-dog.png" alt="German Dog" class="card-image">
                     <div class="card-content">
                         <h3>German Dog</h3>
                         <p>Bratwurst, Grilled Onions, Sauerkraut, Spicy German Mustard.</p>
@@ -2408,7 +2478,7 @@
 
                 <div class="menu-card">
                     <span class="combo-badge">CHICAGO STYLE</span>
-                    <img src="imagenes dog/chicago-dog.jpg" alt="Chicago Dog" class="card-image">
+                    <img src="imagenes dog/chicago-dog.png" alt="Chicago Dog" class="card-image">
                     <div class="card-content">
                         <h3>Chicago Dog</h3>
                         <p>Beef Frank, Poppy Seeds Bun, Yellow Mustard, Neon Green Pickles.</p>
@@ -2420,7 +2490,7 @@
 
                 <div class="menu-card">
                     <span class="combo-badge">MOST POPULAR</span>
-                    <img src="imagenes dog/trainwreck.jpg" alt="Trainwreck" class="card-image">
+                    <img src="imagenes dog/trainwreck.png" alt="Trainwreck" class="card-image">
                     <div class="card-content">
                         <h3>Trainwreck</h3>
                         <p>Beef Frank, Chipotle Sauce, Mayo, Mustard, Onions, Fries, Parmesan, Bacon.</p>
@@ -2431,7 +2501,7 @@
                 </div>
 
                 <div class="menu-card">
-                    <img src="imagenes dog/tijuana-dog.jpg" alt="Tijuana Dog" class="card-image">
+                    <img src="imagenes dog/tijuana-dog.png" alt="Tijuana Dog" class="card-image">
                     <div class="card-content">
                         <h3>Tijuana Dog</h3>
                         <p>Jalapeño Sausage, Corn, Chipotle Sauce, Parmesan Cheese, Cilantro.</p>
@@ -2454,7 +2524,7 @@
                 </div>
                
                 <div class="menu-card">
-                    <img src="imagenes dog/all-naked.jpg" alt="All Naked" class="card-image">
+                    <img src="imagenes dog/all-naked.png" alt="All Naked" class="card-image">
                     <div class="card-content">
                         <h3>All Naked</h3>
                         <p>Bunless. Bratwurst, Grilled Onions, Sauerkraut.</p>
@@ -2465,6 +2535,7 @@
                 </div>
             </div>
 
+            <!-- SECCIÓN EXTRAS & DRINKS CON IMÁGENES -->
             <div id="sides" style="margin-top: 4rem;">
                 <h2 class="section-title">Extras & Drinks - Grapevine</h2>
                
@@ -2475,29 +2546,53 @@
                 </div>
 
                 <div class="sides-grid">
-                    <div class="side-item">
-                        <h4>Creamy Slaw</h4> 
-                        <span class="side-price">$4.00</span>
+                    <div class="side-card">
+                        <img src="extras & drinks/creamy-slaw.jpg" alt="Creamy Slaw" class="side-image">
+                        <div class="side-content">
+                            <h4>Creamy Slaw</h4>
+                            <div class="side-price">$4.00</div>
+                        </div>
                     </div>
-                    <div class="side-item">
-                        <h4>Chips Bag</h4> 
-                        <span class="side-price">$3.00</span>
+                    
+                    <div class="side-card">
+                        <img src="extras & drinks/chips-bag.jpg" alt="Chips Bag" class="side-image">
+                        <div class="side-content">
+                            <h4>Chips Bag</h4>
+                            <div class="side-price">$3.00</div>
+                        </div>
                     </div>
-                    <div class="side-item">
-                        <h4>Corn Salad</h4> 
-                        <span class="side-price">$4.00</span>
+                    
+                    <div class="side-card">
+                        <img src="extras & drinks/corn-salad.jpg" alt="Corn Salad" class="side-image">
+                        <div class="side-content">
+                            <h4>Corn Salad</h4>
+                            <div class="side-price">$4.00</div>
+                        </div>
                     </div>
-                    <div class="side-item">
-                        <h4>Potato Salad</h4> 
-                        <span class="side-price">$4.00</span>
+                    
+                    <div class="side-card">
+                        <img src="extras & drinks/potato-salad.jpg" alt="Potato Salad" class="side-image">
+                        <div class="side-content">
+                            <h4>Potato Salad</h4>
+                            <div class="side-price">$4.00</div>
+                        </div>
                     </div>
-                    <div class="side-item">
-                        <h4>Baked Beans</h4> 
-                        <span class="side-price">$6.00</span>
+                    
+                    <div class="side-card">
+                        <img src="extras & drinks/baked-beans.jpg" alt="Baked Beans" class="side-image">
+                        <div class="side-content">
+                            <h4>Baked Beans</h4>
+                            <div class="side-price">$6.00</div>
+                        </div>
                     </div>
-                    <div class="side-item" style="border-color: var(--color-rojo-fuego); background: linear-gradient(145deg, #2a1a1a, #221010);">
-                        <h4 style="color: white;">DRINKS (Cans/Water)</h4>
-                        <span class="side-price" style="color: var(--color-amarillo-cheddar);">$2.25</span>
+                    
+                    <div class="side-card drink-special">
+                        <img src="extras & drinks/drinks.jpg" alt="Drinks" class="side-image">
+                        <div class="side-content">
+                            <h4>DRINKS</h4>
+                            <p style="color: #aaa; font-size: 0.9rem; margin-bottom: 0.5rem;">Cans & Water</p>
+                            <div class="side-price">$2.25</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -2521,6 +2616,7 @@
                 
                 <div class="menu-grid">
                     <div class="menu-card">
+                        <img src="imagenes dog/wings.jpg" alt="6 Wings" class="card-image" onerror="this.src='https://images.unsplash.com/photo-1608039829572-78524f79c4c7?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'">
                         <div class="card-content">
                             <h3>6 Wings</h3>
                             <p>Can be mixed (3 & 3)</p>
@@ -2531,6 +2627,7 @@
                     </div>
                     
                     <div class="menu-card">
+                        <img src="imagenes dog/wings-12.jpg" alt="12 Wings" class="card-image" onerror="this.src='https://images.unsplash.com/photo-1608039829572-78524f79c4c7?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'">
                         <div class="card-content">
                             <h3>12 Wings</h3>
                             <p>Can be mixed (6 & 6)</p>
@@ -2547,6 +2644,7 @@
                 <h3 class="menu-category-title">🧀 NACHOS</h3>
                 <div class="menu-grid">
                     <div class="menu-card">
+                        <img src="imagenes dog/nachos.jpg" alt="Loaded Nachos" class="card-image" onerror="this.src='https://images.unsplash.com/photo-1513456852971-30c0b8199d4d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'">
                         <div class="card-content">
                             <h3>Loaded Nachos</h3>
                             <p>Chips, queso, pico de gallo, jalapeños & sour cream</p>
@@ -2568,6 +2666,7 @@
                 <h3 class="menu-category-title">🌮 TACOS & QUESADILLAS</h3>
                 <div class="menu-grid">
                     <div class="menu-card">
+                        <img src="imagenes dog/tacos.jpg" alt="Tacos" class="card-image" onerror="this.src='https://images.unsplash.com/photo-1599974579688-8dbdd335c77f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'">
                         <div class="card-content">
                             <h3>Tacos - 2 for $12</h3>
                             <p>Chicken Fajita • Garlic Shrimp • Brisket • Baja Fish</p>
@@ -2578,6 +2677,7 @@
                     </div>
                     
                     <div class="menu-card">
+                        <img src="imagenes dog/quesadilla.jpg" alt="Quesadilla" class="card-image" onerror="this.src='https://images.unsplash.com/photo-1618040996337-56904b7850b9?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'">
                         <div class="card-content">
                             <h3>Quesadilla</h3>
                             <p>Chicken Fajita • Garlic Shrimp • Brisket • Baja Fish</p>
@@ -2594,6 +2694,7 @@
                 <h3 class="menu-category-title">🍔 SLIDERS & ENTREES</h3>
                 <div class="menu-grid">
                     <div class="menu-card">
+                        <img src="imagenes dog/sliders.jpg" alt="Sliders" class="card-image" onerror="this.src='https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'">
                         <div class="card-content">
                             <h3>Sliders - 2 for $12</h3>
                             <p>Brisket • Original • Pulled Pork</p>
@@ -2604,49 +2705,66 @@
                     </div>
                     
                     <div class="menu-card">
+                        <img src="imagenes dog/fish-chips.jpg" alt="Fish & Chips" class="card-image" onerror="this.src='https://images.unsplash.com/photo-1579208575657-c595a05383b7?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'">
                         <div class="card-content">
                             <h3>Fish & Chips</h3>
                             <div class="price-row">
-                                <span class="price">$16.00</span>
+                                <span class="price">$10.00</span>
                             </div>
                         </div>
                     </div>
                     
                     <div class="menu-card">
+                        <img src="imagenes dog/shrimp-boil.jpg" alt="Shrimp Boil" class="card-image" onerror="this.src='https://images.unsplash.com/photo-1625943553852-781c6dd46f9c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'">
                         <div class="card-content">
                             <h3>Shrimp Boil</h3>
                             <p>Potatoes, corn, sausage & 1 lb shrimp</p>
                             <div class="price-row">
-                                <span class="price">$28.00</span>
+                                <span class="price">$18.00</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <!-- SIDES -->
+            <!-- SIDES ALLEN -->
             <div class="menu-category">
                 <h3 class="menu-category-title">🍟 SIDES</h3>
                 <div class="sides-grid">
-                    <div class="side-item">
-                        <h4>French Fries</h4>
-                        <span class="side-price">$5.00</span>
+                    <div class="side-card">
+                        <img src="extras & drinks/french-fries.jpg" alt="French Fries" class="side-image">
+                        <div class="side-content">
+                            <h4>French Fries</h4>
+                            <div class="side-price">$5.00</div>
+                        </div>
                     </div>
-                    <div class="side-item">
-                        <h4>Slaw</h4>
-                        <span class="side-price">$5.00</span>
+                    <div class="side-card">
+                        <img src="extras & drinks/slaw.jpg" alt="Slaw" class="side-image">
+                        <div class="side-content">
+                            <h4>Slaw</h4>
+                            <div class="side-price">$5.00</div>
+                        </div>
                     </div>
-                    <div class="side-item">
-                        <h4>Mac & Cheese</h4>
-                        <span class="side-price">$5.00</span>
+                    <div class="side-card">
+                        <img src="extras & drinks/mac-cheese.jpg" alt="Mac & Cheese" class="side-image">
+                        <div class="side-content">
+                            <h4>Mac & Cheese</h4>
+                            <div class="side-price">$5.00</div>
+                        </div>
                     </div>
-                    <div class="side-item">
-                        <h4>Chips & Queso</h4>
-                        <span class="side-price">$10.00</span>
+                    <div class="side-card">
+                        <img src="extras & drinks/chips-queso.jpg" alt="Chips & Queso" class="side-image">
+                        <div class="side-content">
+                            <h4>Chips & Queso</h4>
+                            <div class="side-price">$8.00</div>
+                        </div>
                     </div>
-                    <div class="side-item">
-                        <h4>Chips & Salsa</h4>
-                        <span class="side-price">$8.00</span>
+                    <div class="side-card">
+                        <img src="extras & drinks/chips-salsa.jpg" alt="Chips & Salsa" class="side-image">
+                        <div class="side-content">
+                            <h4>Chips & Salsa</h4>
+                            <div class="side-price">$5.00</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -2656,25 +2774,40 @@
                 <h3 class="menu-category-title">👶 KIDS MENU</h3>
                 <p class="price-note">All kids meals served with fries, jello & juice</p>
                 <div class="sides-grid">
-                    <div class="side-item">
-                        <h4>Kids Tenders</h4>
-                        <span class="side-price">$10.50</span>
+                    <div class="side-card">
+                        <img src="imagenes dog/kids-tenders.jpg" alt="Kids Tenders" class="side-image" onerror="this.src='https://images.unsplash.com/photo-1619895098996-1e5f1a9e3b9e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'">
+                        <div class="side-content">
+                            <h4>Kids Tenders</h4>
+                            <div class="side-price">$10.50</div>
+                        </div>
                     </div>
-                    <div class="side-item">
-                        <h4>Kids Fish</h4>
-                        <span class="side-price">$10.50</span>
+                    <div class="side-card">
+                        <img src="imagenes dog/kids-fish.jpg" alt="Kids Fish" class="side-image" onerror="this.src='https://images.unsplash.com/photo-1579208575657-c595a05383b7?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'">
+                        <div class="side-content">
+                            <h4>Kids Fish</h4>
+                            <div class="side-price">$10.50</div>
+                        </div>
                     </div>
-                    <div class="side-item">
-                        <h4>Kids Shrimp</h4>
-                        <span class="side-price">$10.50</span>
+                    <div class="side-card">
+                        <img src="imagenes dog/kids-shrimp.jpg" alt="Kids Shrimp" class="side-image" onerror="this.src='https://images.unsplash.com/photo-1625943553852-781c6dd46f9c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'">
+                        <div class="side-content">
+                            <h4>Kids Shrimp</h4>
+                            <div class="side-price">$10.50</div>
+                        </div>
                     </div>
-                    <div class="side-item">
-                        <h4>Kids Corn Dog</h4>
-                        <span class="side-price">$10.50</span>
+                    <div class="side-card">
+                        <img src="imagenes dog/kids-corn-dog.jpg" alt="Kids Corn Dog" class="side-image" onerror="this.src='https://images.unsplash.com/photo-1599490659213-e2b9527bd6a4?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'">
+                        <div class="side-content">
+                            <h4>Kids Corn Dog</h4>
+                            <div class="side-price">$10.50</div>
+                        </div>
                     </div>
-                    <div class="side-item">
-                        <h4>Kids Cheeseburger</h4>
-                        <span class="side-price">$10.50</span>
+                    <div class="side-card">
+                        <img src="imagenes dog/kids-cheeseburger.jpg" alt="Kids Cheeseburger" class="side-image" onerror="this.src='https://images.unsplash.com/photo-1571091718767-18b5b1457add?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'">
+                        <div class="side-content">
+                            <h4>Kids Cheeseburger</h4>
+                            <div class="side-price">$10.50</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -2687,6 +2820,7 @@
                 <h3 class="menu-category-title">🍳 BRUNCH</h3>
                 <div class="menu-grid">
                     <div class="menu-card">
+                        <img src="imagenes dog/chilaquiles.jpg" alt="Chilaquiles" class="card-image" onerror="this.src='https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'">
                         <div class="card-content">
                             <h3>Chilaquiles</h3>
                             <p>Green or Red Sauce - Served with egg, fresh cheese, sour cream & side of beans</p>
@@ -2697,6 +2831,7 @@
                     </div>
                     
                     <div class="menu-card">
+                        <img src="imagenes dog/breakfast-tacos.jpg" alt="Breakfast Tacos" class="card-image" onerror="this.src='https://images.unsplash.com/photo-1626700051175-6818013e1d4f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'">
                         <div class="card-content">
                             <h3>Breakfast Tacos</h3>
                             <p>2 tacos - Mix & match: Chorizo & Egg • Potato & Egg</p>
@@ -2707,6 +2842,7 @@
                     </div>
                     
                     <div class="menu-card">
+                        <img src="imagenes dog/steak-eggs.jpg" alt="Steak & Eggs" class="card-image" onerror="this.src='https://images.unsplash.com/photo-1596040033229-3a0e3c7b3b5e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'">
                         <div class="card-content">
                             <h3>Steak & Eggs</h3>
                             <p>Country potatoes, 2 eggs & 6 oz steak</p>
@@ -2717,6 +2853,7 @@
                     </div>
                     
                     <div class="menu-card">
+                        <img src="imagenes dog/breakfast-plate.jpg" alt="Breakfast Plate" class="card-image" onerror="this.src='https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'">
                         <div class="card-content">
                             <h3>Breakfast Plate</h3>
                             <p>2 eggs + country potatoes + bacon</p>
@@ -2727,6 +2864,7 @@
                     </div>
                     
                     <div class="menu-card">
+                        <img src="imagenes dog/kids-breakfast.jpg" alt="Kids Plate" class="card-image" onerror="this.src='https://images.unsplash.com/photo-1586444248902-2f64eddc13df?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'">
                         <div class="card-content">
                             <h3>Kids Plate</h3>
                             <p>2 pancakes + 2 eggs + 1 bacon + jello</p>
@@ -2840,8 +2978,8 @@
 
                 <div style="border-top: 2px dashed #ccc; padding-top: 1rem;">
                     <p style="font-weight: bold; color: #333; font-size: 1.1rem;">🕒 Open Hours:</p>
-                    <p style="color: #555; font-size: 1rem; margin: 0.4rem 0;">Sun - Thu: 9:00 AM - 11:00 PM</p>
-                    <p style="color: #555; font-size: 1rem;">Fri - Sat: 9:00 AM - 11:00 PM</p>
+                    <p style="color: #555; font-size: 1rem; margin: 0.4rem 0;">Sun - Thu: 11:00 AM - 9:00 PM</p>
+                    <p style="color: #555; font-size: 1rem;">Fri - Sat: 11:00 AM - 11:00 PM</p>
                     <p style="color: var(--color-purpura-berry); font-size: 0.9rem; margin-top: 0.5rem;">
                         <i class="fas fa-parking"></i> Free parking available
                     </p>
@@ -3382,7 +3520,7 @@
             
             // Animate menu cards on scroll
             const menuCards = document.querySelectorAll('.menu-card');
-            const sidesItems = document.querySelectorAll('.side-item');
+            const sideCards = document.querySelectorAll('.side-card');
             
             const screenPosition = window.innerHeight / 1.1;
             
@@ -3393,10 +3531,10 @@
                 }
             });
             
-            sidesItems.forEach(item => {
-                const itemPosition = item.getBoundingClientRect().top;
-                if (itemPosition < screenPosition) {
-                    item.classList.add('visible');
+            sideCards.forEach(card => {
+                const cardPosition = card.getBoundingClientRect().top;
+                if (cardPosition < screenPosition) {
+                    card.classList.add('visible');
                 }
             });
             
