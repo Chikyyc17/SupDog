@@ -7,14 +7,19 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
-        /* Mantén los mismos estilos que antes */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: #1a1a1a;
             color: #fff;
             padding: 20px;
         }
+
         .header {
             background: linear-gradient(135deg, #DB3606, #F8A814);
             padding: 20px;
@@ -26,11 +31,43 @@
             flex-wrap: wrap;
             gap: 15px;
         }
-        .header h1 { font-size: 1.8rem; display: flex; align-items: center; gap: 10px; }
-        .stats { display: flex; gap: 20px; }
-        .stat-card { background: rgba(0,0,0,0.5); padding: 10px 20px; border-radius: 10px; text-align: center; }
-        .stat-number { font-size: 1.8rem; font-weight: bold; color: #F8A814; }
-        .orders-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 20px; }
+
+        .header h1 {
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .stats {
+            display: flex;
+            gap: 20px;
+        }
+
+        .stat-card {
+            background: rgba(0,0,0,0.5);
+            padding: 10px 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #F8A814;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: #ccc;
+        }
+
+        .orders-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 20px;
+        }
+
         .order-card {
             background: linear-gradient(145deg, #2a2a2a, #222);
             border-radius: 16px;
@@ -38,35 +75,195 @@
             border-left: 5px solid #F8A814;
             animation: fadeInUp 0.3s ease;
         }
-        .order-card.new { animation: blink 0.5s ease; border-left-color: #DB3606; background: linear-gradient(145deg, #3a2a2a, #2a2a2a); }
-        @keyframes blink { 0% { background: #4a3a2a; } 100% { background: #2a2a2a; } }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        .order-header { background: rgba(248, 168, 20, 0.1); padding: 15px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; border-bottom: 1px solid rgba(255,255,255,0.1); }
-        .order-id { font-weight: bold; color: #F8A814; font-family: monospace; }
-        .order-time { font-size: 0.75rem; color: #aaa; }
-        .order-location { background: #DB3606; padding: 4px 10px; border-radius: 20px; font-size: 0.7rem; }
-        .order-body { padding: 15px; }
-        .order-items { margin-bottom: 15px; max-height: 300px; overflow-y: auto; }
-        .order-item { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px dashed rgba(255,255,255,0.1); }
-        .item-name { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-        .item-name i { color: #F8A814; }
-        .item-quantity { background: #F8A814; color: #1a1a1a; padding: 2px 8px; border-radius: 20px; font-size: 0.7rem; }
-        .order-total { margin-top: 15px; padding-top: 10px; border-top: 2px solid rgba(248, 168, 20, 0.3); display: flex; justify-content: space-between; font-weight: bold; }
-        .total-amount { color: #F8A814; font-size: 1.3rem; }
-        .order-footer { padding: 15px; background: rgba(0,0,0,0.3); }
-        .btn-complete { width: 100%; background: linear-gradient(135deg, #4CAF50, #45a049); border: none; padding: 12px; border-radius: 10px; color: white; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; }
-        .empty-state { text-align: center; padding: 60px 20px; background: rgba(255,255,255,0.05); border-radius: 20px; margin-top: 50px; }
-        .empty-state i { font-size: 4rem; color: #F8A814; margin-bottom: 20px; }
-        .connection-status { background: #333; padding: 5px 10px; border-radius: 20px; font-size: 0.7rem; display: inline-flex; align-items: center; gap: 5px; }
-        .connected { color: #4CAF50; }
-        .disconnected { color: #f44336; }
-        @media (max-width: 768px) { .orders-container { grid-template-columns: 1fr; } .header { flex-direction: column; text-align: center; } }
+
+        .order-card.new {
+            animation: blink 0.5s ease;
+            border-left-color: #DB3606;
+            background: linear-gradient(145deg, #3a2a2a, #2a2a2a);
+        }
+
+        @keyframes blink {
+            0% { background: #4a3a2a; transform: scale(1.02); }
+            100% { background: #2a2a2a; transform: scale(1); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .order-header {
+            background: rgba(248, 168, 20, 0.1);
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .order-id {
+            font-weight: bold;
+            color: #F8A814;
+            font-family: monospace;
+            font-size: 0.9rem;
+        }
+
+        .order-time {
+            font-size: 0.75rem;
+            color: #aaa;
+        }
+
+        .order-location {
+            background: #DB3606;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+        }
+
+        .order-body {
+            padding: 15px;
+        }
+
+        .order-items {
+            margin-bottom: 15px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px dashed rgba(255,255,255,0.1);
+        }
+
+        .item-name {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .item-name i {
+            color: #F8A814;
+        }
+
+        .item-quantity {
+            background: #F8A814;
+            color: #1a1a1a;
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+        }
+
+        .item-price {
+            color: #F8A814;
+            font-weight: bold;
+        }
+
+        .order-total {
+            margin-top: 15px;
+            padding-top: 10px;
+            border-top: 2px solid rgba(248, 168, 20, 0.3);
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+        }
+
+        .total-amount {
+            color: #F8A814;
+            font-size: 1.3rem;
+        }
+
+        .order-footer {
+            padding: 15px;
+            background: rgba(0,0,0,0.3);
+        }
+
+        .btn-complete {
+            width: 100%;
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            border: none;
+            padding: 12px;
+            border-radius: 10px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-complete:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 20px;
+            margin-top: 50px;
+        }
+
+        .empty-state i {
+            font-size: 4rem;
+            color: #F8A814;
+            margin-bottom: 20px;
+        }
+
+        .connection-status {
+            background: #333;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .connected {
+            color: #4CAF50;
+        }
+
+        .disconnected {
+            color: #f44336;
+        }
+
+        .refresh-btn {
+            background: #DB3606;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .orders-container {
+                grid-template-columns: 1fr;
+            }
+            .header {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
     </style>
 </head>
 <body>
 
     <div class="header">
-        <h1><i class="fas fa-utensils"></i> Panel de Cocina - SupDog</h1>
+        <h1>
+            <i class="fas fa-utensils"></i>
+            Panel de Cocina - SupDog
+        </h1>
         <div class="stats">
             <div class="stat-card">
                 <div class="stat-number" id="pendingCount">0</div>
@@ -79,6 +276,9 @@
             <div class="connection-status" id="connectionStatus">
                 <i class="fas fa-circle connected"></i> Conectado
             </div>
+            <button class="refresh-btn" onclick="loadPendingOrders()">
+                <i class="fas fa-sync-alt"></i> Actualizar
+            </button>
         </div>
     </div>
 
@@ -99,30 +299,36 @@
 
     <script>
         // ==================== CONFIGURACIÓN SUPABASE ====================
-        // REEMPLAZA ESTOS VALORES CON LOS TUYOS
-        const SUPABASE_URL = 'https://mlmaucnbhprzwovksxpo.supabase.co';  // ← CAMBIA ESTO
-        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1sbWF1Y25iaHByendvdmtzeHBvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ5ODU2MzMsImV4cCI6MjA5MDU2MTYzM30.UeGsnpKOShPh3-zVf5RR12roqqNhGAFwhK3hyckcqjs';        // ← CAMBIA ESTO
+        // ⚠️ REEMPLAZA CON TUS CREDENCIALES REALES ⚠️
+        const SUPABASE_URL = 'https://mlmaucnbhprzwovksxpo.supabase.co';  // ← TU URL (YA ESTÁ)
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1sbWF1Y25iaHByendvdmtzeHBvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ5ODU2MzMsImV4cCI6MjA5MDU2MTYzM30.UeGsnpKOShPh3-zVf5RR12roqqNhGAFwhK3hyckcqjs';                     // ← PEGA TU ANON KEY AQUÍ
         
+        // Inicializar Supabase
         const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
         
         let currentOrders = [];
         let lastOrderCount = 0;
+        let subscription = null;
         
         // Actualizar estado de conexión
-        function updateConnectionStatus(connected) {
+        function updateConnectionStatus(connected, message = '') {
             const statusDiv = document.getElementById('connectionStatus');
             if (connected) {
                 statusDiv.innerHTML = '<i class="fas fa-circle connected"></i> Conectado';
                 statusDiv.style.background = 'rgba(76, 175, 80, 0.2)';
+                console.log('✅ Conectado a Supabase');
             } else {
-                statusDiv.innerHTML = '<i class="fas fa-circle disconnected"></i> Desconectado';
+                statusDiv.innerHTML = `<i class="fas fa-circle disconnected"></i> ${message || 'Desconectado'}`;
                 statusDiv.style.background = 'rgba(244, 67, 54, 0.2)';
+                console.log('❌ Desconectado:', message);
             }
         }
         
         // Cargar pedidos pendientes
         async function loadPendingOrders() {
             try {
+                console.log('📡 Buscando pedidos pendientes...');
+                
                 const { data, error } = await supabase
                     .from('orders')
                     .select('*')
@@ -131,7 +337,7 @@
                 
                 if (error) {
                     console.error('Error cargando pedidos:', error);
-                    updateConnectionStatus(false);
+                    updateConnectionStatus(false, error.message);
                     return;
                 }
                 
@@ -140,6 +346,7 @@
                 
                 // Verificar si hay nuevos pedidos
                 if (currentOrders.length > lastOrderCount && lastOrderCount > 0) {
+                    console.log('🔔 NUEVO PEDIDO DETECTADO!');
                     playNotificationSound();
                 }
                 lastOrderCount = currentOrders.length;
@@ -151,13 +358,15 @@
                 
             } catch (error) {
                 console.error('Error:', error);
-                updateConnectionStatus(false);
+                updateConnectionStatus(false, error.message);
             }
         }
         
         // Marcar pedido como completado
         async function completeOrder(orderId) {
             try {
+                console.log(`✅ Completando pedido ${orderId}...`);
+                
                 const { error } = await supabase
                     .from('orders')
                     .update({ status: 'completed', updated_at: new Date() })
@@ -189,6 +398,9 @@
                         <p>No hay pedidos pendientes. Esperando nuevos pedidos...</p>
                         <p style="margin-top: 15px; font-size: 0.9rem;">
                             <i class="fas fa-qrcode"></i> Los pedidos aparecerán aquí automáticamente
+                        </p>
+                        <p style="margin-top: 10px; font-size: 0.8rem; color: #F8A814;">
+                            💡 Haz un pedido desde el menú QR para probar
                         </p>
                     </div>
                 `;
@@ -250,13 +462,16 @@
         
         function formatTime(timestamp) {
             const date = new Date(timestamp);
-            return date.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
+            return date.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
         }
         
         function playNotificationSound() {
             const audio = document.getElementById('notificationSound');
-            audio.play().catch(e => console.log('Autoplay bloqueado'));
+            if (audio) {
+                audio.play().catch(e => console.log('Autoplay bloqueado, haz clic en la página primero'));
+            }
             
+            // Notificación del navegador
             if (Notification.permission === 'granted') {
                 new Notification('🍔 Nuevo Pedido SupDog', {
                     body: 'Hay un nuevo pedido en la cocina',
@@ -276,9 +491,11 @@
                 padding: 12px 20px;
                 border-radius: 10px;
                 z-index: 1000;
+                animation: fadeInUp 0.3s ease;
                 display: flex;
                 align-items: center;
                 gap: 10px;
+                font-weight: bold;
             `;
             toast.innerHTML = `${type === 'success' ? '✅' : '❌'} ${message}`;
             document.body.appendChild(toast);
@@ -286,38 +503,53 @@
         }
         
         // ==================== SUSCRIPCIÓN EN TIEMPO REAL ====================
-        // Escuchar cambios en la tabla orders en tiempo real
-        const subscription = supabase
-            .channel('orders-channel')
-            .on('postgres_changes', 
-                { event: 'INSERT', schema: 'public', table: 'orders' },
-                (payload) => {
-                    console.log('🎉 Nuevo pedido recibido en tiempo real!', payload.new);
-                    playNotificationSound();
-                    loadPendingOrders();
-                }
-            )
-            .on('postgres_changes',
-                { event: 'UPDATE', schema: 'public', table: 'orders' },
-                () => {
-                    loadPendingOrders();
-                }
-            )
-            .subscribe();
+        function setupRealtimeSubscription() {
+            if (subscription) {
+                supabase.removeChannel(subscription);
+            }
+            
+            console.log('🔌 Configurando suscripción en tiempo real...');
+            
+            subscription = supabase
+                .channel('orders-channel')
+                .on('postgres_changes', 
+                    { event: 'INSERT', schema: 'public', table: 'orders' },
+                    (payload) => {
+                        console.log('🎉 NUEVO PEDIDO EN TIEMPO REAL!', payload.new);
+                        playNotificationSound();
+                        loadPendingOrders();
+                    }
+                )
+                .on('postgres_changes',
+                    { event: 'UPDATE', schema: 'public', table: 'orders' },
+                    () => {
+                        console.log('📝 Pedido actualizado');
+                        loadPendingOrders();
+                    }
+                )
+                .subscribe((status) => {
+                    console.log('📡 Estado de suscripción:', status);
+                    if (status === 'SUBSCRIBED') {
+                        console.log('✅ Escuchando pedidos en tiempo real');
+                    }
+                });
+        }
         
         // Solicitar permisos de notificación
         if (Notification.permission !== 'granted' && Notification.permission !== 'denied') {
             Notification.requestPermission();
         }
         
-        // Cargar pedidos iniciales
+        // Inicializar
         loadPendingOrders();
+        setupRealtimeSubscription();
         
         // Actualizar cada 5 segundos como respaldo
         setInterval(loadPendingOrders, 5000);
         
-        console.log('👨‍🍳 Panel de Cocina listo! Esperando pedidos en tiempo real...');
+        console.log('👨‍🍳 Panel de Cocina listo!');
         console.log(`🔌 Conectado a Supabase: ${SUPABASE_URL}`);
+        console.log('📡 Esperando pedidos en tiempo real...');
     </script>
 </body>
 </html>
