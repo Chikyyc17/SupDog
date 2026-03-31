@@ -7,10 +7,8 @@
     
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     
     <style>
-        /* ========== ESTILOS ========== */
         :root {
             --color-rojo-fuego: #DB3606;
             --color-amarillo-cheddar: #F8A814;
@@ -230,9 +228,24 @@
             animation: fadeIn 0.3s ease;
         }
 
+        .error-message {
+            background: #f44336;
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+            margin: 10px;
+            text-align: center;
+        }
+
         @keyframes fadeIn {
             from { opacity: 0; transform: translateX(-50%) translateY(20px); }
             to { opacity: 1; transform: translateX(-50%) translateY(0); }
+        }
+
+        .loading {
+            text-align: center;
+            padding: 50px;
+            color: var(--color-amarillo-cheddar);
         }
     </style>
 </head>
@@ -281,16 +294,78 @@
         <p>© 2026 SupDog - Escanea el QR y ordena desde tu mesa</p>
     </footer>
 
+    <!-- Cargar Supabase con fallback -->
     <script>
-        // ==================== CONFIGURACIÓN SUPABASE ====================
-        // ⚠️ REEMPLAZA CON TUS CREDENCIALES REALES ⚠️
-        const SUPABASE_CONFIG = {
-            url: 'https://supdogdfw.com.supabase.co',      // ← CAMBIA ESTO
-            anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1sbWF1Y25iaHByendvdmtzeHBvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ5ODU2MzMsImV4cCI6MjA5MDU2MTYzM30.UeGsnpKOShPh3-zVf5RR12roqqNhGAFwhK3hyckcqjs'              // ← CAMBIA ESTO
-        };
+        // Función para cargar Supabase dinámicamente
+        function loadSupabaseScript() {
+            return new Promise((resolve, reject) => {
+                // Verificar si ya está cargado
+                if (window.supabase) {
+                    resolve(window.supabase);
+                    return;
+                }
+                
+                const script = document.createElement('script');
+                script.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
+                script.onload = () => {
+                    console.log('✅ Supabase cargado correctamente');
+                    resolve(window.supabase);
+                };
+                script.onerror = () => {
+                    console.error('❌ Error al cargar Supabase');
+                    reject(new Error('No se pudo cargar Supabase'));
+                };
+                document.head.appendChild(script);
+            });
+        }
         
-        // Inicializar cliente Supabase (solo una vez)
-        const supabaseClient = window.supabase.createClient(SUPABASE_CONFIG.url, SUPABASE_CONFIG.anonKey);
+        // Esperar a que cargue Supabase antes de iniciar
+        let supabaseClient = null;
+        
+        loadSupabaseScript()
+            .then((supabaseModule) => {
+                console.log('📦 Supabase listo');
+                
+                // ==================== CONFIGURACIÓN SUPABASE ====================
+                // ⚠️ REEMPLAZA CON TUS CREDENCIALES REALES ⚠️
+                const SUPABASE_URL = 'https://mlmaucnbhprzwovksxpo.supabase.co';      // ← CAMBIA ESTO
+                const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1sbWF1Y25iaHByendvdmtzeHBvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ5ODU2MzMsImV4cCI6MjA5MDU2MTYzM30.UeGsnpKOShPh3-zVf5RR12roqqNhGAFwhK3hyckcqjs';            // ← CAMBIA ESTO
+                
+                // Inicializar cliente
+                supabaseClient = supabaseModule.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+                
+                // Probar conexión
+                supabaseClient.from('orders').select('count', { count: 'exact', head: true })
+                    .then(({ error }) => {
+                        if (error) {
+                            console.warn('⚠️ Conexión a Supabase con advertencia:', error.message);
+                            showErrorInUI('Conexión limitada. Los pedidos se guardarán localmente.');
+                        } else {
+                            console.log('✅ Conexión a Supabase exitosa');
+                        }
+                    })
+                    .catch(err => {
+                        console.warn('⚠️ Error de conexión:', err);
+                        showErrorInUI('Sin conexión a internet. Los pedidos se guardarán localmente.');
+                    });
+                
+                // Iniciar la aplicación
+                initApp();
+            })
+            .catch((error) => {
+                console.error('❌ Error crítico:', error);
+                showErrorInUI('Error al cargar el sistema. Por favor, recarga la página.');
+                // Iniciar app sin Supabase (modo local)
+                initApp();
+            });
+        
+        function showErrorInUI(message) {
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'error-message';
+            errorDiv.innerHTML = `<i class="fas fa-exclamation-triangle"></i> ${message}`;
+            document.body.insertBefore(errorDiv, document.body.firstChild);
+            setTimeout(() => errorDiv.remove(), 5000);
+        }
         
         // ==================== DATOS DEL MENÚ ====================
         const menuItems = [
@@ -347,8 +422,10 @@
             const totalSpan = document.getElementById('cartTotal');
             const countSpan = document.getElementById('cartCount');
             
-            countSpan.textContent = getCartItemTotalCount();
-            totalSpan.textContent = `$${getCartTotalAmount().toFixed(2)}`;
+            if (countSpan) countSpan.textContent = getCartItemTotalCount();
+            if (totalSpan) totalSpan.textContent = `$${getCartTotalAmount().toFixed(2)}`;
+            
+            if (!container) return;
             
             if (shoppingCart.length === 0) {
                 container.innerHTML = `<div style="text-align:center; padding:2rem;">🛒 Tu carrito está vacío</div>`;
@@ -366,11 +443,11 @@
                     </div>
                     <div style="display:flex; justify-content:space-between; margin-top:10px;">
                         <div>
-                            <button onclick="updateItemQuantity(${index}, ${item.quantity - 1})" style="background:#BA6990; border:none; width:30px; border-radius:50%; cursor:pointer;">-</button>
+                            <button onclick="window.updateItemQuantity(${index}, ${item.quantity - 1})" style="background:#BA6990; border:none; width:30px; border-radius:50%; cursor:pointer;">-</button>
                             <span style="margin:0 10px;">${item.quantity}</span>
-                            <button onclick="updateItemQuantity(${index}, ${item.quantity + 1})" style="background:#BA6990; border:none; width:30px; border-radius:50%; cursor:pointer;">+</button>
+                            <button onclick="window.updateItemQuantity(${index}, ${item.quantity + 1})" style="background:#BA6990; border:none; width:30px; border-radius:50%; cursor:pointer;">+</button>
                         </div>
-                        <button onclick="removeItemFromCart(${index})" style="background:none; border:none; color:#ff6b6b; cursor:pointer;">🗑️ Eliminar</button>
+                        <button onclick="window.removeItemFromCart(${index})" style="background:none; border:none; color:#ff6b6b; cursor:pointer;">🗑️ Eliminar</button>
                     </div>
                 </div>
             `).join('');
@@ -387,6 +464,23 @@
         
         // ==================== ENVIAR PEDIDO A SUPABASE ====================
         async function sendOrderToCloud(orderData) {
+            // Si no hay conexión a Supabase, guardar localmente
+            if (!supabaseClient) {
+                console.warn('⚠️ Sin conexión a Supabase, guardando localmente');
+                
+                // Guardar en localStorage para respaldo
+                const localOrders = JSON.parse(localStorage.getItem('local_orders') || '[]');
+                localOrders.push({
+                    ...orderData,
+                    savedLocally: true,
+                    timestamp: new Date().toISOString()
+                });
+                localStorage.setItem('local_orders', JSON.stringify(localOrders));
+                
+                showNotification('📱 Pedido guardado localmente. Se enviará cuando haya conexión.');
+                return { success: true, local: true };
+            }
+            
             try {
                 console.log('📤 Enviando pedido a Supabase...', orderData);
                 
@@ -443,12 +537,11 @@
             }
             
             const total = getCartTotalAmount();
-            const location = 'Grapevine'; // Cambia según tu ubicación
+            const location = 'Grapevine';
             
             showNotification('Procesando pago...');
             
             try {
-                // 1. Procesar pago
                 const payment = await processPayment(total);
                 
                 if (!payment.success) {
@@ -458,7 +551,6 @@
                 
                 showNotification(`✅ Pago aprobado!`);
                 
-                // 2. Preparar pedido
                 const orderData = {
                     orderId: payment.transactionId,
                     items: shoppingCart.map(item => ({
@@ -472,21 +564,17 @@
                     tableNumber: 'QR-MESA'
                 };
                 
-                // 3. Enviar a cocina (Supabase)
                 const result = await sendOrderToCloud(orderData);
                 
                 if (result.success) {
-                    // Limpiar carrito
                     shoppingCart = [];
                     saveCartToLocal();
                     
-                    // Cerrar modal
                     document.getElementById('cartModal').classList.remove('active');
-                    document.getElementById('overlay')?.classList.remove('active');
+                    document.body.style.overflow = 'auto';
                     
                     showNotification(`🎉 Pedido #${payment.transactionId.slice(-6)} enviado a cocina!`);
                     
-                    // Log en consola
                     console.log('========== COMANDA SUP DOG ==========');
                     console.log(`Orden: ${payment.transactionId}`);
                     console.log('Productos:', orderData.items);
@@ -503,6 +591,8 @@
         // ==================== RENDERIZAR MENÚ ====================
         function renderMenu() {
             const container = document.getElementById('menuContainer');
+            if (!container) return;
+            
             container.innerHTML = menuItems.map(item => `
                 <div class="menu-card">
                     <img src="${item.image}" alt="${item.name}" class="card-image" onerror="this.src='https://via.placeholder.com/400x300?text=SupDog'">
@@ -511,7 +601,7 @@
                         <p>${item.description}</p>
                         <div class="price-row">
                             <span class="price">$${item.price.toFixed(2)}</span>
-                            <button class="add-to-cart" onclick='addItemToCart(${JSON.stringify(item).replace(/'/g, "\\'")})'>
+                            <button class="add-to-cart" onclick='window.addItemToCart(${JSON.stringify(item).replace(/'/g, "\\'")})'>
                                 <i class="fas fa-plus"></i> Agregar
                             </button>
                         </div>
@@ -522,31 +612,42 @@
         
         // ==================== UI INTERACCIONES ====================
         function openCartModal() {
-            document.getElementById('cartModal').classList.add('active');
-            document.body.style.overflow = 'hidden';
+            const modal = document.getElementById('cartModal');
+            if (modal) {
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
         }
         
         function closeCartModal() {
-            document.getElementById('cartModal').classList.remove('active');
-            document.body.style.overflow = 'auto';
+            const modal = document.getElementById('cartModal');
+            if (modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
         }
         
-        // ==================== EVENT LISTENERS ====================
-        document.getElementById('openCartBtn').addEventListener('click', openCartModal);
-        document.getElementById('closeCartBtn').addEventListener('click', closeCartModal);
-        document.getElementById('checkoutBtn').addEventListener('click', checkout);
-        
-        // Hacer funciones globales
-        window.addItemToCart = addItemToCart;
-        window.removeItemFromCart = removeItemFromCart;
-        window.updateItemQuantity = updateItemQuantity;
-        
-        // Inicializar
-        renderMenu();
-        updateCartUI();
-        
-        console.log('🚀 SupDog QR Menu listo!');
-        console.log('📡 Supabase configurado:', SUPABASE_CONFIG.url);
+        // ==================== INICIAR APLICACIÓN ====================
+        function initApp() {
+            renderMenu();
+            updateCartUI();
+            
+            // Event listeners
+            const openBtn = document.getElementById('openCartBtn');
+            const closeBtn = document.getElementById('closeCartBtn');
+            const checkoutBtn = document.getElementById('checkoutBtn');
+            
+            if (openBtn) openBtn.addEventListener('click', openCartModal);
+            if (closeBtn) closeBtn.addEventListener('click', closeCartModal);
+            if (checkoutBtn) checkoutBtn.addEventListener('click', checkout);
+            
+            // Exponer funciones globalmente
+            window.addItemToCart = addItemToCart;
+            window.removeItemFromCart = removeItemFromCart;
+            window.updateItemQuantity = updateItemQuantity;
+            
+            console.log('🚀 SupDog QR Menu listo!');
+        }
     </script>
 </body>
 </html>
