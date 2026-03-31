@@ -1,116 +1,552 @@
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>SupDog - Menú QR | Ordena desde tu mesa</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <style>
+        /* ========== ESTILOS ========== */
+        :root {
+            --color-rojo-fuego: #DB3606;
+            --color-amarillo-cheddar: #F8A814;
+            --color-purpura-berry: #BA6990;
+            --color-fondo-oscuro: #0f0f0f;
+            --color-texto-claro: #ffffff;
+            --color-exito: #4CAF50;
+        }
 
-<script>
-// ==================== CONFIGURACIÓN SUPABASE ====================
-// REEMPLAZA ESTOS VALORES CON LOS TUYOS
-const SUPABASE_URL = 'https://supdogdfw.supabase.co';  // ← CAMBIA ESTO
-const SUPABASE_ANON_KEY = 'sb_publishable_8jMfYjBtLbshlvvwWEbKUQ_ebayqE7U';        // ← CAMBIA ESTO
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+        }
 
-// Inicializar Supabase
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--color-fondo-oscuro);
+            color: var(--color-texto-claro);
+            overflow-x: hidden;
+        }
 
-// ==================== FUNCIÓN PARA GUARDAR PEDIDO EN LA NUBE ====================
-async function sendOrderToKitchen(orderData) {
-    try {
-        console.log('📤 Enviando pedido a la nube...', orderData);
-        
-        // Preparar datos para Supabase
-        const orderToSave = {
-            order_id: orderData.orderId,
-            customer_name: 'Cliente QR',
-            table_number: 'Mesa QR',
-            items: orderData.items,
-            total: orderData.total,
-            location: orderData.location,
-            status: 'pending'
+        header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0.8rem 5%;
+            background-color: rgba(15, 15, 15, 0.98);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            height: 70px;
+        }
+
+        .logo-text {
+            font-size: 2rem;
+            cursor: pointer;
+            color: white;
+            text-shadow: 2px 2px 0px var(--color-rojo-fuego);
+            font-family: 'Bangers', cursive;
+        }
+
+        .logo-text span {
+            color: var(--color-amarillo-cheddar);
+        }
+
+        .cart-btn {
+            position: absolute;
+            right: 5%;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(135deg, var(--color-purpura-berry), #9d5b85);
+            padding: 8px 16px;
+            border-radius: 50px;
+            color: white;
+            cursor: pointer;
+            border: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .cart-count {
+            background: var(--color-rojo-fuego);
+            border-radius: 50%;
+            width: 22px;
+            height: 22px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+
+        .cart-modal {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            max-width: 450px;
+            height: 100vh;
+            background: var(--color-fondo-oscuro);
+            z-index: 2000;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cart-modal.active {
+            transform: translateX(0);
+        }
+
+        .cart-header {
+            padding: 1.5rem;
+            background: linear-gradient(135deg, rgba(186,105,144,0.2), rgba(219,54,6,0.1));
+            border-bottom: 2px solid var(--color-purpura-berry);
+            position: relative;
+        }
+
+        .close-cart {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .cart-items {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1rem;
+        }
+
+        .cart-item {
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .cart-footer {
+            padding: 1.5rem;
+            background: linear-gradient(135deg, rgba(186,105,144,0.2), rgba(219,54,6,0.1));
+            border-top: 2px solid var(--color-purpura-berry);
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--color-purpura-berry), #9d5b85);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .menu-section {
+            padding: 5rem 1.5rem 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            color: var(--color-amarillo-cheddar);
+            margin-bottom: 1rem;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .menu-card {
+            background: linear-gradient(145deg, #2a2a2a, #222);
+            border-radius: 16px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 1rem;
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 0.5rem;
+        }
+
+        .price {
+            color: var(--color-amarillo-cheddar);
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+
+        .add-to-cart {
+            background: linear-gradient(135deg, var(--color-rojo-fuego), #c42f04);
+            border: none;
+            padding: 6px 12px;
+            border-radius: 20px;
+            color: white;
+            cursor: pointer;
+        }
+
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--color-exito);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            z-index: 3000;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateX(-50%) translateY(20px); }
+            to { opacity: 1; transform: translateX(-50%) translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- MODAL CARRITO -->
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-header">
+            <button class="close-cart" id="closeCartBtn"><i class="fas fa-times"></i></button>
+            <h2><i class="fas fa-shopping-cart"></i> Mi Pedido</h2>
+        </div>
+        <div class="cart-items" id="cartItemsContainer">
+            <div style="text-align:center; padding:2rem;">Carrito vacío</div>
+        </div>
+        <div class="cart-footer">
+            <div style="display:flex; justify-content:space-between; margin-bottom:1rem;">
+                <span>Total:</span>
+                <span id="cartTotal" style="color:var(--color-amarillo-cheddar); font-size:1.3rem;">$0.00</span>
+            </div>
+            <button class="checkout-btn" id="checkoutBtn">
+                <i class="fas fa-credit-card"></i> Pagar y Enviar Pedido
+            </button>
+        </div>
+    </div>
+
+    <!-- HEADER -->
+    <header>
+        <div class="logo-text" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+            SUP<span>DOG</span>
+        </div>
+        <button class="cart-btn" id="openCartBtn">
+            <i class="fas fa-shopping-cart"></i>
+            <span>Carrito</span>
+            <span class="cart-count" id="cartCount">0</span>
+        </button>
+    </header>
+
+    <!-- MENÚ SECTION -->
+    <section id="menu" class="menu-section">
+        <h2 class="section-title">🍔 Nuestro Menú</h2>
+        <p style="text-align:center; margin-bottom:2rem;">Elige tus productos, agrega al carrito y paga desde tu celular</p>
+        <div id="menuContainer" class="menu-grid"></div>
+    </section>
+
+    <footer style="text-align:center; padding:2rem; background:#0a0a0a;">
+        <p>© 2026 SupDog - Escanea el QR y ordena desde tu mesa</p>
+    </footer>
+
+    <script>
+        // ==================== CONFIGURACIÓN SUPABASE ====================
+        // ⚠️ REEMPLAZA CON TUS CREDENCIALES REALES ⚠️
+        const SUPABASE_CONFIG = {
+            url: 'https://tusitio.supabase.co',      // ← CAMBIA ESTO
+            anonKey: 'tu-anon-key-aqui'              // ← CAMBIA ESTO
         };
         
-        // Guardar en Supabase
-        const { data, error } = await supabase
-            .from('orders')
-            .insert([orderToSave])
-            .select();
+        // Inicializar cliente Supabase (solo una vez)
+        const supabaseClient = window.supabase.createClient(SUPABASE_CONFIG.url, SUPABASE_CONFIG.anonKey);
         
-        if (error) {
-            console.error('❌ Error en Supabase:', error);
-            showNotification('Error al enviar pedido. Contacta al personal.', true);
-            return { success: false, error: error.message };
+        // ==================== DATOS DEL MENÚ ====================
+        const menuItems = [
+            { id: 1, name: "Mexican Dog", description: "Beef Frank, Pico De Gallo, Jalapeños", price: 12.50, image: "https://images.unsplash.com/photo-1618692481326-6b5c3f03d3a3?w=400&h=300&fit=crop" },
+            { id: 2, name: "German Dog", description: "Bratwurst, Grilled Onions, Sauerkraut", price: 12.50, image: "https://images.unsplash.com/photo-1618692481326-6b5c3f03d3a3?w=400&h=300&fit=crop" },
+            { id: 3, name: "Hawaiian Dog", description: "Jalapeño Sausage, Pineapple, Bacon", price: 12.50, image: "https://images.unsplash.com/photo-1618692481326-6b5c3f03d3a3?w=400&h=300&fit=crop" },
+            { id: 4, name: "French Fries", description: "Shoestring fries", price: 5.00, image: "https://images.unsplash.com/photo-1630384060421-cb20b0e0649d?w=400&h=300&fit=crop" },
+            { id: 5, name: "Soft Drink", description: "Coca-Cola, Sprite, Fanta", price: 2.50, image: "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=400&h=300&fit=crop" }
+        ];
+        
+        // ==================== CARRITO ====================
+        let shoppingCart = JSON.parse(localStorage.getItem('supdog_cart')) || [];
+        
+        function saveCartToLocal() {
+            localStorage.setItem('supdog_cart', JSON.stringify(shoppingCart));
+            updateCartUI();
         }
         
-        console.log('✅ Pedido guardado en la nube:', data);
-        showNotification(`✅ Pedido #${orderData.orderId.slice(-6)} enviado a cocina!`);
-        
-        return { success: true, orderId: orderData.orderId };
-        
-    } catch (error) {
-        console.error('❌ Error al enviar pedido:', error);
-        showNotification('Error al enviar pedido. Contacta al personal.', true);
-        return { success: false, error: error.message };
-    }
-}
-
-// ==================== MODIFICAR LA FUNCIÓN CHECKOUT ====================
-// Reemplaza la función checkout existente con esta versión async
-async function checkout() {
-    if (cart.length === 0) {
-        showNotification('El carrito está vacío', true);
-        return;
-    }
-    
-    const total = getCartTotal();
-    const currentLocation = document.querySelector('.location-btn.active')?.innerText.includes('Grapevine') ? 'Grapevine' : 'Allen';
-    
-    showNotification('Procesando pago...');
-    
-    try {
-        // 1. Simular pago (aquí va tu integración real con SHAZE BANK)
-        const paymentResult = await processPayment(total, cart);
-        
-        if (!paymentResult.success) {
-            showNotification('Error en el pago. Intenta nuevamente', true);
-            return;
+        function addItemToCart(item) {
+            const existing = shoppingCart.find(i => i.id === item.id);
+            if (existing) {
+                existing.quantity++;
+            } else {
+                shoppingCart.push({ ...item, quantity: 1 });
+            }
+            saveCartToLocal();
+            showNotification(`${item.name} agregado al carrito`);
         }
         
-        showNotification(`✅ Pago aprobado!`);
+        function removeItemFromCart(index) {
+            shoppingCart.splice(index, 1);
+            saveCartToLocal();
+        }
         
-        // 2. Preparar datos para cocina
-        const orderData = {
-            orderId: paymentResult.transactionId,
-            items: cart.map(item => ({
-                name: item.name,
-                quantity: item.quantity,
-                price: item.price,
-                subtotal: item.price * item.quantity
-            })),
-            total: total,
-            location: currentLocation,
-            tableNumber: 'QR-MESA',
-            paymentId: paymentResult.transactionId,
-            paymentConfirmed: true
-        };
+        function updateItemQuantity(index, newQuantity) {
+            if (newQuantity <= 0) {
+                removeItemFromCart(index);
+            } else {
+                shoppingCart[index].quantity = newQuantity;
+                saveCartToLocal();
+            }
+        }
         
-        // 3. Enviar a cocina (AHORA A LA NUBE)
-        const kitchenResult = await sendOrderToKitchen(orderData);
+        function getCartTotalAmount() {
+            return shoppingCart.reduce((total, item) => total + (item.price * item.quantity), 0);
+        }
         
-        if (kitchenResult.success) {
-            // 4. Limpiar carrito
-            cart = [];
-            saveCart();
+        function getCartItemTotalCount() {
+            return shoppingCart.reduce((count, item) => count + item.quantity, 0);
+        }
+        
+        function updateCartUI() {
+            const container = document.getElementById('cartItemsContainer');
+            const totalSpan = document.getElementById('cartTotal');
+            const countSpan = document.getElementById('cartCount');
             
-            // 5. Cerrar modal
+            countSpan.textContent = getCartItemTotalCount();
+            totalSpan.textContent = `$${getCartTotalAmount().toFixed(2)}`;
+            
+            if (shoppingCart.length === 0) {
+                container.innerHTML = `<div style="text-align:center; padding:2rem;">🛒 Tu carrito está vacío</div>`;
+                return;
+            }
+            
+            container.innerHTML = shoppingCart.map((item, index) => `
+                <div class="cart-item">
+                    <div style="display:flex; justify-content:space-between;">
+                        <div>
+                            <strong>${item.name}</strong><br>
+                            <small>$${item.price.toFixed(2)} c/u</small>
+                        </div>
+                        <div>$${(item.price * item.quantity).toFixed(2)}</div>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; margin-top:10px;">
+                        <div>
+                            <button onclick="updateItemQuantity(${index}, ${item.quantity - 1})" style="background:#BA6990; border:none; width:30px; border-radius:50%; cursor:pointer;">-</button>
+                            <span style="margin:0 10px;">${item.quantity}</span>
+                            <button onclick="updateItemQuantity(${index}, ${item.quantity + 1})" style="background:#BA6990; border:none; width:30px; border-radius:50%; cursor:pointer;">+</button>
+                        </div>
+                        <button onclick="removeItemFromCart(${index})" style="background:none; border:none; color:#ff6b6b; cursor:pointer;">🗑️ Eliminar</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        function showNotification(message, isError = false) {
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            notification.style.background = isError ? '#f44336' : '#4CAF50';
+            notification.innerHTML = `<i class="fas ${isError ? 'fa-exclamation-triangle' : 'fa-check-circle'}"></i> ${message}`;
+            document.body.appendChild(notification);
+            setTimeout(() => notification.remove(), 3000);
+        }
+        
+        // ==================== ENVIAR PEDIDO A SUPABASE ====================
+        async function sendOrderToCloud(orderData) {
+            try {
+                console.log('📤 Enviando pedido a Supabase...', orderData);
+                
+                const orderToSave = {
+                    order_id: orderData.orderId,
+                    customer_name: 'Cliente QR',
+                    table_number: 'Mesa QR',
+                    items: orderData.items,
+                    total: orderData.total,
+                    location: orderData.location,
+                    status: 'pending'
+                };
+                
+                const { data, error } = await supabaseClient
+                    .from('orders')
+                    .insert([orderToSave])
+                    .select();
+                
+                if (error) {
+                    console.error('❌ Error Supabase:', error);
+                    showNotification(`Error: ${error.message}`, true);
+                    return { success: false, error: error.message };
+                }
+                
+                console.log('✅ Pedido guardado en la nube:', data);
+                showNotification(`✅ Pedido enviado a cocina!`);
+                return { success: true, data: data };
+                
+            } catch (error) {
+                console.error('❌ Error:', error);
+                showNotification('Error al conectar con servidor', true);
+                return { success: false, error: error.message };
+            }
+        }
+        
+        // ==================== SIMULAR PAGO ====================
+        async function processPayment(total) {
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    resolve({
+                        success: true,
+                        transactionId: `ORD-${Date.now()}-${Math.floor(Math.random() * 1000)}`,
+                        amount: total
+                    });
+                }, 1000);
+            });
+        }
+        
+        // ==================== CHECKOUT ====================
+        async function checkout() {
+            if (shoppingCart.length === 0) {
+                showNotification('El carrito está vacío', true);
+                return;
+            }
+            
+            const total = getCartTotalAmount();
+            const location = 'Grapevine'; // Cambia según tu ubicación
+            
+            showNotification('Procesando pago...');
+            
+            try {
+                // 1. Procesar pago
+                const payment = await processPayment(total);
+                
+                if (!payment.success) {
+                    showNotification('Error en el pago', true);
+                    return;
+                }
+                
+                showNotification(`✅ Pago aprobado!`);
+                
+                // 2. Preparar pedido
+                const orderData = {
+                    orderId: payment.transactionId,
+                    items: shoppingCart.map(item => ({
+                        name: item.name,
+                        quantity: item.quantity,
+                        price: item.price,
+                        subtotal: item.price * item.quantity
+                    })),
+                    total: total,
+                    location: location,
+                    tableNumber: 'QR-MESA'
+                };
+                
+                // 3. Enviar a cocina (Supabase)
+                const result = await sendOrderToCloud(orderData);
+                
+                if (result.success) {
+                    // Limpiar carrito
+                    shoppingCart = [];
+                    saveCartToLocal();
+                    
+                    // Cerrar modal
+                    document.getElementById('cartModal').classList.remove('active');
+                    document.getElementById('overlay')?.classList.remove('active');
+                    
+                    showNotification(`🎉 Pedido #${payment.transactionId.slice(-6)} enviado a cocina!`);
+                    
+                    // Log en consola
+                    console.log('========== COMANDA SUP DOG ==========');
+                    console.log(`Orden: ${payment.transactionId}`);
+                    console.log('Productos:', orderData.items);
+                    console.log(`Total: $${total}`);
+                    console.log('=====================================');
+                }
+                
+            } catch (error) {
+                console.error('Error:', error);
+                showNotification('Error al procesar el pedido', true);
+            }
+        }
+        
+        // ==================== RENDERIZAR MENÚ ====================
+        function renderMenu() {
+            const container = document.getElementById('menuContainer');
+            container.innerHTML = menuItems.map(item => `
+                <div class="menu-card">
+                    <img src="${item.image}" alt="${item.name}" class="card-image" onerror="this.src='https://via.placeholder.com/400x300?text=SupDog'">
+                    <div class="card-content">
+                        <h3>${item.name}</h3>
+                        <p>${item.description}</p>
+                        <div class="price-row">
+                            <span class="price">$${item.price.toFixed(2)}</span>
+                            <button class="add-to-cart" onclick='addItemToCart(${JSON.stringify(item).replace(/'/g, "\\'")})'>
+                                <i class="fas fa-plus"></i> Agregar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        // ==================== UI INTERACCIONES ====================
+        function openCartModal() {
+            document.getElementById('cartModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeCartModal() {
             document.getElementById('cartModal').classList.remove('active');
-            document.getElementById('overlay').classList.remove('active');
-            
-            // 6. Mostrar mensaje de éxito
-            showNotification(`🎉 Pedido enviado a cocina! Tu comida estará lista pronto.`);
-            
-        } else {
-            showNotification('Error al enviar a cocina. Contacta al personal', true);
+            document.body.style.overflow = 'auto';
         }
         
-    } catch (error) {
-        console.error('Error en checkout:', error);
-        showNotification('Error al procesar el pedido', true);
-    }
-}
-</script>
+        // ==================== EVENT LISTENERS ====================
+        document.getElementById('openCartBtn').addEventListener('click', openCartModal);
+        document.getElementById('closeCartBtn').addEventListener('click', closeCartModal);
+        document.getElementById('checkoutBtn').addEventListener('click', checkout);
+        
+        // Hacer funciones globales
+        window.addItemToCart = addItemToCart;
+        window.removeItemFromCart = removeItemFromCart;
+        window.updateItemQuantity = updateItemQuantity;
+        
+        // Inicializar
+        renderMenu();
+        updateCartUI();
+        
+        console.log('🚀 SupDog QR Menu listo!');
+        console.log('📡 Supabase configurado:', SUPABASE_CONFIG.url);
+    </script>
+</body>
+</html>
