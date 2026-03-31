@@ -42,6 +42,8 @@
         .stats {
             display: flex;
             gap: 20px;
+            align-items: center;
+            flex-wrap: wrap;
         }
 
         .stat-card {
@@ -244,6 +246,11 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            font-size: 0.9rem;
+        }
+
+        .refresh-btn:hover {
+            background: #c42f04;
         }
 
         @media (max-width: 768px) {
@@ -253,6 +260,9 @@
             .header {
                 flex-direction: column;
                 text-align: center;
+            }
+            .stats {
+                justify-content: center;
             }
         }
     </style>
@@ -276,7 +286,7 @@
             <div class="connection-status" id="connectionStatus">
                 <i class="fas fa-circle connected"></i> Conectado
             </div>
-            <button class="refresh-btn" onclick="loadPendingOrders()">
+            <button class="refresh-btn" id="refreshBtn">
                 <i class="fas fa-sync-alt"></i> Actualizar
             </button>
         </div>
@@ -300,15 +310,15 @@
     <script>
         // ==================== CONFIGURACIÓN SUPABASE ====================
         // ⚠️ REEMPLAZA CON TUS CREDENCIALES REALES ⚠️
-        const SUPABASE_URL = 'https://mlmaucnbhprzwovksxpo.supabase.co';  // ← TU URL (YA ESTÁ)
-        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1sbWF1Y25iaHByendvdmtzeHBvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ5ODU2MzMsImV4cCI6MjA5MDU2MTYzM30.UeGsnpKOShPh3-zVf5RR12roqqNhGAFwhK3hyckcqjs';                     // ← PEGA TU ANON KEY AQUÍ
+        const SUPABASE_URL = 'https://mlmaucnbhprzwovksxpo.supabase.co';  // ← TU URL
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1sbWF1Y25iaHByendvdmtzeHBvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ5ODU2MzMsImV4cCI6MjA5MDU2MTYzM30.UeGsnpKOShPh3-zVf5RR12roqqNhGAFwhK3hyckcqjs';                     // ← TU ANON KEY (PONLA AQUÍ)
         
-        // Inicializar Supabase
-        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        // Inicializar Supabase - USANDO UN NOMBRE ÚNICO
+        const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
         
         let currentOrders = [];
         let lastOrderCount = 0;
-        let subscription = null;
+        let realtimeChannel = null;
         
         // Actualizar estado de conexión
         function updateConnectionStatus(connected, message = '') {
@@ -324,12 +334,12 @@
             }
         }
         
-        // Cargar pedidos pendientes
-        async function loadPendingOrders() {
+        // Cargar pedidos pendientes (FUNCIÓN GLOBAL)
+        window.loadPendingOrders = async function() {
             try {
                 console.log('📡 Buscando pedidos pendientes...');
                 
-                const { data, error } = await supabase
+                const { data, error } = await supabaseClient
                     .from('orders')
                     .select('*')
                     .eq('status', 'pending')
@@ -360,14 +370,14 @@
                 console.error('Error:', error);
                 updateConnectionStatus(false, error.message);
             }
-        }
+        };
         
-        // Marcar pedido como completado
-        async function completeOrder(orderId) {
+        // Marcar pedido como completado (FUNCIÓN GLOBAL)
+        window.completeOrder = async function(orderId) {
             try {
                 console.log(`✅ Completando pedido ${orderId}...`);
                 
-                const { error } = await supabase
+                const { error } = await supabaseClient
                     .from('orders')
                     .update({ status: 'completed', updated_at: new Date() })
                     .eq('id', orderId);
@@ -379,12 +389,12 @@
                 }
                 
                 showToast('✅ Pedido completado', 'success');
-                loadPendingOrders(); // Recargar lista
+                window.loadPendingOrders(); // Recargar lista
                 
             } catch (error) {
                 console.error('Error:', error);
             }
-        }
+        };
         
         // Renderizar pedidos
         function renderOrders() {
@@ -439,7 +449,7 @@
                         </div>
                     </div>
                     <div class="order-footer">
-                        <button class="btn-complete" onclick="completeOrder(${order.id})">
+                        <button class="btn-complete" onclick="window.completeOrder(${order.id})">
                             <i class="fas fa-check-circle"></i> Pedido Listo
                         </button>
                     </div>
@@ -504,27 +514,27 @@
         
         // ==================== SUSCRIPCIÓN EN TIEMPO REAL ====================
         function setupRealtimeSubscription() {
-            if (subscription) {
-                supabase.removeChannel(subscription);
+            if (realtimeChannel) {
+                supabaseClient.removeChannel(realtimeChannel);
             }
             
             console.log('🔌 Configurando suscripción en tiempo real...');
             
-            subscription = supabase
+            realtimeChannel = supabaseClient
                 .channel('orders-channel')
                 .on('postgres_changes', 
                     { event: 'INSERT', schema: 'public', table: 'orders' },
                     (payload) => {
                         console.log('🎉 NUEVO PEDIDO EN TIEMPO REAL!', payload.new);
                         playNotificationSound();
-                        loadPendingOrders();
+                        window.loadPendingOrders();
                     }
                 )
                 .on('postgres_changes',
                     { event: 'UPDATE', schema: 'public', table: 'orders' },
                     () => {
                         console.log('📝 Pedido actualizado');
-                        loadPendingOrders();
+                        window.loadPendingOrders();
                     }
                 )
                 .subscribe((status) => {
@@ -535,21 +545,42 @@
                 });
         }
         
-        // Solicitar permisos de notificación
-        if (Notification.permission !== 'granted' && Notification.permission !== 'denied') {
-            Notification.requestPermission();
+        // ==================== INICIALIZAR ====================
+        function init() {
+            // Solicitar permisos de notificación
+            if (Notification.permission !== 'granted' && Notification.permission !== 'denied') {
+                Notification.requestPermission();
+            }
+            
+            // Configurar botón de actualización
+            const refreshBtn = document.getElementById('refreshBtn');
+            if (refreshBtn) {
+                refreshBtn.addEventListener('click', () => {
+                    window.loadPendingOrders();
+                    showToast('Buscando nuevos pedidos...', 'success');
+                });
+            }
+            
+            // Cargar pedidos iniciales
+            window.loadPendingOrders();
+            
+            // Configurar suscripción en tiempo real
+            setupRealtimeSubscription();
+            
+            // Actualizar cada 5 segundos como respaldo
+            setInterval(() => window.loadPendingOrders(), 5000);
+            
+            console.log('👨‍🍳 Panel de Cocina listo!');
+            console.log(`🔌 Conectado a Supabase: ${SUPABASE_URL}`);
+            console.log('📡 Esperando pedidos en tiempo real...');
         }
         
-        // Inicializar
-        loadPendingOrders();
-        setupRealtimeSubscription();
-        
-        // Actualizar cada 5 segundos como respaldo
-        setInterval(loadPendingOrders, 5000);
-        
-        console.log('👨‍🍳 Panel de Cocina listo!');
-        console.log(`🔌 Conectado a Supabase: ${SUPABASE_URL}`);
-        console.log('📡 Esperando pedidos en tiempo real...');
+        // Iniciar cuando el DOM esté listo
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
     </script>
 </body>
 </html>
