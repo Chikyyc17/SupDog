@@ -3,53 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>SupDog - Menú QR | Ordena desde tu mesa</title>
+    <title>Lucy's Yard - Menú QR | Ordena desde tu mesa</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
         :root {
             --color-rojo-fuego: #DB3606;
             --color-amarillo-cheddar: #F8A814;
+            --color-mostaza-suave: #E0A851;
             --color-purpura-berry: #BA6990;
             --color-fondo-oscuro: #0f0f0f;
             --color-texto-claro: #ffffff;
             --color-exito: #4CAF50;
-        }
-
-        * { 
-            margin: 0; 
-            padding: 0; 
-            box-sizing: border-box; 
+            --color-card-bg: #2a2a2a;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.2);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.3);
+            --shadow-lg: 0 8px 24px rgba(0,0,0,0.4);
         }
 
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: var(--color-fondo-oscuro);
+            background: linear-gradient(135deg, var(--color-fondo-oscuro) 0%, #1a0f0f 100%);
             color: var(--color-texto-claro);
             overflow-x: hidden;
+            min-height: 100vh;
         }
 
+        /* Header */
         header {
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 0.8rem 5%;
-            background-color: rgba(15, 15, 15, 0.98);
+            background: rgba(15, 15, 15, 0.98);
             position: fixed;
             top: 0;
             width: 100%;
             z-index: 1000;
             height: 70px;
+            border-bottom: 3px solid var(--color-amarillo-cheddar);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-sm);
         }
 
         .logo-text {
-            font-size: 2rem;
+            font-size: clamp(1.5rem, 5vw, 2rem);
             cursor: pointer;
             color: white;
             text-shadow: 2px 2px 0px var(--color-rojo-fuego);
             font-family: 'Bangers', cursive;
+            letter-spacing: 1px;
         }
 
         .logo-text span {
@@ -70,6 +82,12 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            font-weight: 600;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .cart-btn:active {
+            transform: translateY(-50%) scale(0.96);
         }
 
         .cart-count {
@@ -81,21 +99,24 @@
             align-items: center;
             justify-content: center;
             font-size: 0.7rem;
+            font-weight: bold;
         }
 
+        /* Modal Carrito Mejorado */
         .cart-modal {
             position: fixed;
             top: 0;
             right: 0;
             width: 100%;
-            max-width: 450px;
+            max-width: 480px;
             height: 100vh;
             background: var(--color-fondo-oscuro);
             z-index: 2000;
             transform: translateX(100%);
-            transition: transform 0.3s ease;
+            transition: transform 0.3s cubic-bezier(0.77, 0, 0.175, 1);
             display: flex;
             flex-direction: column;
+            box-shadow: -5px 0 30px rgba(0,0,0,0.5);
         }
 
         .cart-modal.active {
@@ -109,6 +130,13 @@
             position: relative;
         }
 
+        .cart-header h2 {
+            color: var(--color-amarillo-cheddar);
+            text-align: center;
+            font-family: 'Bangers', cursive;
+            font-size: 1.6rem;
+        }
+
         .close-cart {
             position: absolute;
             top: 15px;
@@ -120,19 +148,106 @@
             height: 40px;
             border-radius: 50%;
             cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .close-cart:active {
+            background: rgba(255,255,255,0.2);
         }
 
         .cart-items {
             flex: 1;
             overflow-y: auto;
             padding: 1rem;
+            -webkit-overflow-scrolling: touch;
         }
 
         .cart-item {
-            background: rgba(255,255,255,0.05);
-            border-radius: 12px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 16px;
             padding: 1rem;
             margin-bottom: 1rem;
+            transition: transform 0.2s ease;
+        }
+
+        .cart-item-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.8rem;
+        }
+
+        .cart-item-name {
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--color-amarillo-cheddar);
+        }
+
+        .cart-item-price {
+            font-weight: 700;
+            color: var(--color-amarillo-cheddar);
+        }
+
+        .cart-item-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(255,255,255,0.05);
+            padding: 0.3rem 0.8rem;
+            border-radius: 40px;
+        }
+
+        .quantity-btn {
+            background: var(--color-purpura-berry);
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .quantity-btn:active {
+            transform: scale(0.92);
+        }
+
+        .quantity-value {
+            font-weight: 600;
+            min-width: 30px;
+            text-align: center;
+            font-size: 1rem;
+        }
+
+        .remove-item {
+            background: rgba(255,107,107,0.2);
+            border: none;
+            padding: 8px 14px;
+            border-radius: 30px;
+            color: #ff6b6b;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .remove-item:active {
+            background: rgba(255,107,107,0.4);
         }
 
         .cart-footer {
@@ -141,56 +256,147 @@
             border-top: 2px solid var(--color-purpura-berry);
         }
 
+        .cart-total-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.2rem;
+            font-size: 1.2rem;
+        }
+
+        .total-label {
+            font-weight: 600;
+        }
+
+        .total-amount {
+            color: var(--color-amarillo-cheddar);
+            font-size: 1.5rem;
+            font-weight: bold;
+            font-family: 'Bangers', cursive;
+        }
+
         .checkout-btn {
             width: 100%;
             padding: 1rem;
             background: linear-gradient(135deg, var(--color-purpura-berry), #9d5b85);
             border: none;
-            border-radius: 12px;
+            border-radius: 50px;
             color: white;
             font-weight: bold;
             cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.2s ease;
         }
 
+        .checkout-btn:active {
+            transform: scale(0.98);
+        }
+
+        /* Hero Banner */
         .menu-section {
             padding: 5rem 1.5rem 2rem;
         }
 
-        .section-title {
+        .hero-banner {
+            background: linear-gradient(135deg, rgba(219,54,6,0.15), rgba(186,105,144,0.15));
+            border-radius: 24px;
+            padding: 1.8rem;
             text-align: center;
-            font-size: 2rem;
-            color: var(--color-amarillo-cheddar);
-            margin-bottom: 1rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(248,168,20,0.3);
+            backdrop-filter: blur(10px);
         }
 
+        .hero-banner h1 {
+            font-size: clamp(1.8rem, 6vw, 2.5rem);
+            font-family: 'Bangers', cursive;
+            color: var(--color-amarillo-cheddar);
+            text-shadow: 2px 2px 0px var(--color-rojo-fuego);
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-banner p {
+            color: var(--color-texto-claro);
+            font-size: 0.9rem;
+        }
+
+        /* Secciones */
+        .section-title {
+            text-align: center;
+            font-size: clamp(1.6rem, 5vw, 2rem);
+            color: var(--color-amarillo-cheddar);
+            margin: 2rem 0 1rem;
+            position: relative;
+            font-family: 'Bangers', cursive;
+            letter-spacing: 1px;
+        }
+
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background: var(--color-rojo-fuego);
+            margin: 0.5rem auto;
+            border-radius: 2px;
+        }
+
+        /* Grid de productos */
         .menu-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 1.5rem;
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
         }
 
         .menu-card {
             background: linear-gradient(145deg, #2a2a2a, #222);
-            border-radius: 16px;
+            border-radius: 20px;
             overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(248,168,20,0.2);
             cursor: pointer;
-            transition: transform 0.3s ease;
         }
 
         .menu-card:hover {
             transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--color-amarillo-cheddar);
         }
 
         .card-image {
             width: 100%;
             height: 180px;
             object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .menu-card:hover .card-image {
+            transform: scale(1.02);
         }
 
         .card-content {
-            padding: 1rem;
+            padding: 1.2rem;
+        }
+
+        .card-content h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--color-amarillo-cheddar);
+            font-family: 'Bangers', cursive;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .card-content p {
+            color: #ccc;
+            font-size: 0.85rem;
+            margin-bottom: 0.8rem;
+            line-height: 1.4;
         }
 
         .price-row {
@@ -198,23 +404,70 @@
             justify-content: space-between;
             align-items: center;
             margin-top: 0.5rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
         }
 
         .price {
             color: var(--color-amarillo-cheddar);
             font-size: 1.3rem;
             font-weight: bold;
+            font-family: 'Bangers', cursive;
         }
 
         .add-to-cart {
             background: linear-gradient(135deg, var(--color-rojo-fuego), #c42f04);
             border: none;
-            padding: 6px 12px;
-            border-radius: 20px;
+            padding: 8px 18px;
+            border-radius: 40px;
             color: white;
             cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.85rem;
         }
 
+        .add-to-cart:active {
+            transform: scale(0.95);
+        }
+
+        .badge {
+            display: inline-block;
+            background: var(--color-purpura-berry);
+            color: white;
+            font-size: 0.65rem;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .addon-info {
+            font-size: 0.7rem;
+            color: var(--color-mostaza-suave);
+            margin-top: 0.5rem;
+            background: rgba(0,0,0,0.3);
+            padding: 5px 8px;
+            border-radius: 12px;
+        }
+
+        .brunch-banner {
+            background: linear-gradient(135deg, var(--color-purpura-berry), var(--color-rojo-fuego));
+            text-align: center;
+            padding: 0.8rem;
+            border-radius: 40px;
+            margin: 1rem 0 2rem;
+        }
+
+        .brunch-banner p {
+            color: white;
+            font-weight: bold;
+            font-size: 0.85rem;
+        }
+
+        /* Notificación */
         .notification {
             position: fixed;
             bottom: 20px;
@@ -222,48 +475,138 @@
             transform: translateX(-50%);
             background: var(--color-exito);
             color: white;
-            padding: 10px 20px;
+            padding: 12px 24px;
             border-radius: 50px;
             z-index: 3000;
-            animation: fadeIn 0.3s ease;
+            animation: slideUp 0.3s ease;
+            font-weight: 500;
+            box-shadow: var(--shadow-md);
+            white-space: nowrap;
         }
 
-        .error-message {
-            background: #f44336;
-            color: white;
-            padding: 10px;
-            border-radius: 8px;
-            margin: 10px;
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+
+        /* Scroll personalizado */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1a1a1a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--color-rojo-fuego);
+            border-radius: 3px;
+        }
+
+        /* Footer */
+        footer {
             text-align: center;
+            padding: 2rem;
+            background: #0a0a0a;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(248,168,20,0.2);
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateX(-50%) translateY(20px); }
-            to { opacity: 1; transform: translateX(-50%) translateY(0); }
-        }
-
-        .loading {
+        /* Empty cart */
+        .empty-cart {
             text-align: center;
-            padding: 50px;
-            color: var(--color-amarillo-cheddar);
+            padding: 3rem 1.5rem;
+            color: #aaa;
+        }
+
+        .empty-cart i {
+            font-size: 3rem;
+            color: var(--color-purpura-berry);
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .menu-section {
+                padding: 5rem 1rem 1.5rem;
+            }
+            
+            .menu-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .cart-modal {
+                max-width: 100%;
+            }
+            
+            .hero-banner {
+                padding: 1.2rem;
+            }
+            
+            .notification {
+                white-space: normal;
+                text-align: center;
+                max-width: 90%;
+                font-size: 0.85rem;
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .menu-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1025px) {
+            .menu-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        /* Prevenir parpadeos */
+        .menu-card, .cart-item, .notification {
+            will-change: transform;
+        }
+        
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Mejorar rendimiento */
+        img {
+            content-visibility: auto;
         }
     </style>
 </head>
 <body>
 
-    <!-- MODAL CARRITO -->
+    <!-- MODAL CARRITO MEJORADO -->
     <div class="cart-modal" id="cartModal">
         <div class="cart-header">
             <button class="close-cart" id="closeCartBtn"><i class="fas fa-times"></i></button>
             <h2><i class="fas fa-shopping-cart"></i> Mi Pedido</h2>
+            <p style="text-align:center; font-size:0.75rem; margin-top:5px; opacity:0.8;">📍 Lucy's Yard - Allen</p>
         </div>
         <div class="cart-items" id="cartItemsContainer">
-            <div style="text-align:center; padding:2rem;">Carrito vacío</div>
+            <div class="empty-cart">
+                <i class="fas fa-shopping-basket"></i>
+                <p>Tu carrito está vacío</p>
+                <p style="font-size:0.8rem;">Agrega productos del menú</p>
+            </div>
         </div>
         <div class="cart-footer">
-            <div style="display:flex; justify-content:space-between; margin-bottom:1rem;">
-                <span>Total:</span>
-                <span id="cartTotal" style="color:var(--color-amarillo-cheddar); font-size:1.3rem;">$0.00</span>
+            <div class="cart-total-row">
+                <span class="total-label">Total:</span>
+                <span class="total-amount" id="cartTotal">$0.00</span>
             </div>
             <button class="checkout-btn" id="checkoutBtn">
                 <i class="fas fa-credit-card"></i> Pagar y Enviar Pedido
@@ -274,7 +617,7 @@
     <!-- HEADER -->
     <header>
         <div class="logo-text" onclick="window.scrollTo({top:0,behavior:'smooth'})">
-            SUP<span>DOG</span>
+            LUCY'S<span>YARD</span>
         </div>
         <button class="cart-btn" id="openCartBtn">
             <i class="fas fa-shopping-cart"></i>
@@ -285,102 +628,68 @@
 
     <!-- MENÚ SECTION -->
     <section id="menu" class="menu-section">
-        <h2 class="section-title">🍔 Nuestro Menú</h2>
-        <p style="text-align:center; margin-bottom:2rem;">Elige tus productos, agrega al carrito y paga desde tu celular</p>
-        <div id="menuContainer" class="menu-grid"></div>
+        <div class="hero-banner">
+            <h1>🌿 LUCY'S YARD</h1>
+            <p>📍 Allen, TX | 1070 Watters Creek Blvd</p>
+            <p>🕒 Dom-Sáb: 9am - 11pm | Brunch: Fines de semana 9am-4pm</p>
+        </div>
+        <div id="menuContainer"></div>
     </section>
 
-    <footer style="text-align:center; padding:2rem; background:#0a0a0a;">
-        <p>© 2026 SupDog - Escanea el QR y ordena desde tu mesa</p>
+    <footer>
+        <p>© 2026 Lucy's Yard - Escanea el QR y ordena desde tu mesa</p>
+        <p style="font-size:0.75rem; margin-top:0.5rem; opacity:0.7;">📍 1070 Watters Creek Blvd, Allen, TX 75013</p>
     </footer>
 
-    <!-- Cargar Supabase con fallback -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
-        // Función para cargar Supabase dinámicamente
-        function loadSupabaseScript() {
-            return new Promise((resolve, reject) => {
-                // Verificar si ya está cargado
-                if (window.supabase) {
-                    resolve(window.supabase);
-                    return;
-                }
-                
-                const script = document.createElement('script');
-                script.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
-                script.onload = () => {
-                    console.log('✅ Supabase cargado correctamente');
-                    resolve(window.supabase);
-                };
-                script.onerror = () => {
-                    console.error('❌ Error al cargar Supabase');
-                    reject(new Error('No se pudo cargar Supabase'));
-                };
-                document.head.appendChild(script);
-            });
-        }
+        // ==================== CONFIGURACIÓN SUPABASE ====================
+        const SUPABASE_URL = 'https://mlmaucnbhprzwovksxpo.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1sbWF1Y25iaHByendvdmtzeHBvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ5ODU2MzMsImV4cCI6MjA5MDU2MTYzM30.UeGsnpKOShPh3-zVf5RR12roqqNhGAFwhK3hyckcqjs';
         
-        // Esperar a que cargue Supabase antes de iniciar
-        let supabaseClient = null;
+        const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
         
-        loadSupabaseScript()
-            .then((supabaseModule) => {
-                console.log('📦 Supabase listo');
-                
-                // ==================== CONFIGURACIÓN SUPABASE ====================
-                // ⚠️ REEMPLAZA CON TUS CREDENCIALES REALES ⚠️
-                const SUPABASE_URL = 'https://mlmaucnbhprzwovksxpo.supabase.co';      // ← CAMBIA ESTO
-                const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1sbWF1Y25iaHByendvdmtzeHBvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ5ODU2MzMsImV4cCI6MjA5MDU2MTYzM30.UeGsnpKOShPh3-zVf5RR12roqqNhGAFwhK3hyckcqjs';            // ← CAMBIA ESTO
-                
-                // Inicializar cliente
-                supabaseClient = supabaseModule.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-                
-                // Probar conexión
-                supabaseClient.from('orders').select('count', { count: 'exact', head: true })
-                    .then(({ error }) => {
-                        if (error) {
-                            console.warn('⚠️ Conexión a Supabase con advertencia:', error.message);
-                            showErrorInUI('Conexión limitada. Los pedidos se guardarán localmente.');
-                        } else {
-                            console.log('✅ Conexión a Supabase exitosa');
-                        }
-                    })
-                    .catch(err => {
-                        console.warn('⚠️ Error de conexión:', err);
-                        showErrorInUI('Sin conexión a internet. Los pedidos se guardarán localmente.');
-                    });
-                
-                // Iniciar la aplicación
-                initApp();
-            })
-            .catch((error) => {
-                console.error('❌ Error crítico:', error);
-                showErrorInUI('Error al cargar el sistema. Por favor, recarga la página.');
-                // Iniciar app sin Supabase (modo local)
-                initApp();
-            });
-        
-        function showErrorInUI(message) {
-            const errorDiv = document.createElement('div');
-            errorDiv.className = 'error-message';
-            errorDiv.innerHTML = `<i class="fas fa-exclamation-triangle"></i> ${message}`;
-            document.body.insertBefore(errorDiv, document.body.firstChild);
-            setTimeout(() => errorDiv.remove(), 5000);
-        }
-        
-        // ==================== DATOS DEL MENÚ ====================
+        // ==================== MENÚ COMPLETO ====================
         const menuItems = [
-            { id: 1, name: "Mexican Dog", description: "Beef Frank, Pico De Gallo, Jalapeños", price: 12.50, image: "https://images.unsplash.com/photo-1618692481326-6b5c3f03d3a3?w=400&h=300&fit=crop" },
-            { id: 2, name: "German Dog", description: "Bratwurst, Grilled Onions, Sauerkraut", price: 12.50, image: "https://images.unsplash.com/photo-1618692481326-6b5c3f03d3a3?w=400&h=300&fit=crop" },
-            { id: 3, name: "Hawaiian Dog", description: "Jalapeño Sausage, Pineapple, Bacon", price: 12.50, image: "https://images.unsplash.com/photo-1618692481326-6b5c3f03d3a3?w=400&h=300&fit=crop" },
-            { id: 4, name: "French Fries", description: "Shoestring fries", price: 5.00, image: "https://images.unsplash.com/photo-1630384060421-cb20b0e0649d?w=400&h=300&fit=crop" },
-            { id: 5, name: "Soft Drink", description: "Coca-Cola, Sprite, Fanta", price: 2.50, image: "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=400&h=300&fit=crop" }
+            { id: 1, name: "6 Wings", description: "BBQ | Mango Habanero | Lemon Pepper | Buffalo | Sweet Chili", price: 11.25, category: "Appetizers", image: "https://images.unsplash.com/photo-1608039829572-78524f79c4c7?w=400&h=300&fit=crop" },
+            { id: 2, name: "12 Wings", description: "BBQ | Mango Habanero | Lemon Pepper | Buffalo | Sweet Chili", price: 18.00, category: "Appetizers", image: "https://images.unsplash.com/photo-1608039829572-78524f79c4c7?w=400&h=300&fit=crop" },
+            { id: 3, name: "Chips & Queso", description: "Tortilla chips con queso fundido", price: 10.00, category: "Appetizers", image: "https://images.unsplash.com/photo-1593195743443-2f5b6b4d2c8f?w=400&h=300&fit=crop" },
+            { id: 4, name: "Chips & Salsa", description: "Tortilla chips con salsa fresca", price: 8.00, category: "Appetizers", image: "https://images.unsplash.com/photo-1569591159212-b02ea8a9f6b1?w=400&h=300&fit=crop" },
+            { id: 5, name: "Loaded Nachos", description: "Chips, queso, pico de gallo, jalapeños, crema", price: 10.00, category: "Appetizers", image: "https://images.unsplash.com/photo-1513456852971-30c0b8199d4d?w=400&h=300&fit=crop", addons: "Add Brisket +$6 | Add Chicken Fajita +$4 | Add Pulled Pork +$5" },
+            { id: 6, name: "House Salad", description: "Spring mix, slaw, pico, cheese, tortilla strips, chipotle aioli", price: 8.00, category: "Salads & Bowls", image: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=300&fit=crop" },
+            { id: 7, name: "Wedge Salad", description: "Iceberg lettuce, blue cheese, grape tomatoes, chives, bacon", price: 8.00, category: "Salads & Bowls", image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=300&fit=crop" },
+            { id: 8, name: "Chopped Salad", description: "Chopped greens, grape tomatoes, avocado, bacon, eggs, cheese", price: 8.00, category: "Salads & Bowls", image: "https://images.unsplash.com/photo-1546793665-c74683f339c1?w=400&h=300&fit=crop" },
+            { id: 9, name: "Power Bowl", description: "Cilantro lime rice, black beans, roasted corn, slaw, pico, cheese, lime chipotle sauce", price: 9.00, category: "Salads & Bowls", image: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=300&fit=crop", addons: "Add Protein: Garlic Shrimp +$5 | Blackened Shrimp +$5 | Salmon +$7 | Brisket +$6 | Garlic Chicken +$5" },
+            { id: 10, name: "Veggie Bowl", description: "Cilantro lime rice, beans, corn, avocado, slaw, pico, roasted cauliflower", price: 12.00, category: "Salads & Bowls", image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=300&fit=crop", addons: "Add Protein: Garlic Shrimp +$5 | Blackened Shrimp +$5 | Salmon +$7 | Brisket +$6 | Garlic Chicken +$5" },
+            { id: 11, name: "Tacos (2)", description: "Chicken Fajita | Garlic Shrimp | Brisket | Baja Fish", price: 12.00, category: "Tacos & Quesadillas", image: "https://images.unsplash.com/photo-1599974579688-8dbdd335c77f?w=400&h=300&fit=crop" },
+            { id: 12, name: "Quesadilla", description: "Chicken Fajita | Garlic Shrimp | Brisket", price: 12.00, category: "Tacos & Quesadillas", image: "https://images.unsplash.com/photo-1618040996337-56904b7850b9?w=400&h=300&fit=crop" },
+            { id: 13, name: "Classic Burger", description: "1/3lb patty, cheddar cheese, lettuce, tomatoes, onions, pickles", price: 11.95, category: "Burgers", image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&h=300&fit=crop" },
+            { id: 14, name: "BBQ Burger", description: "1/3lb patty, homemade BBQ sauce, onion strings, pickles", price: 12.95, category: "Burgers", image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&h=300&fit=crop" },
+            { id: 15, name: "Bacon Cheese Burger", description: "1/3lb patty, crispy bacon, cheddar cheese, lettuce, tomatoes, onions", price: 12.95, category: "Burgers", image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&h=300&fit=crop" },
+            { id: 16, name: "Sliders (2)", description: "Brisket | Pulled Pork", price: 12.00, category: "Burgers", image: "https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?w=400&h=300&fit=crop" },
+            { id: 17, name: "Fish & Chips", description: "Fish, hush puppies, fries, slaw, lemon", price: 16.00, category: "Seafood", image: "https://images.unsplash.com/photo-1579208575657-c595a05383b7?w=400&h=300&fit=crop" },
+            { id: 18, name: "Shrimp Boil", description: "Potatoes, corn, sausage & 1 lb shrimp", price: 28.00, category: "Seafood", image: "https://images.unsplash.com/photo-1625943553852-781c6dd46f9c?w=400&h=300&fit=crop" },
+            { id: 19, name: "Kids Tenders", description: "Con fries, jello y jugo", price: 10.50, category: "Kids Menu", image: "https://images.unsplash.com/photo-1619895098996-1e5f1a9e3b9e?w=400&h=300&fit=crop" },
+            { id: 20, name: "Kids Shrimp", description: "Con fries, jello y jugo", price: 10.50, category: "Kids Menu", image: "https://images.unsplash.com/photo-1625943553852-781c6dd46f9c?w=400&h=300&fit=crop" },
+            { id: 21, name: "Kids Cheeseburger", description: "Con fries, jello y jugo", price: 10.50, category: "Kids Menu", image: "https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=400&h=300&fit=crop" },
+            { id: 22, name: "Kids Fish", description: "Con fries, jello y jugo", price: 10.50, category: "Kids Menu", image: "https://images.unsplash.com/photo-1579208575657-c595a05383b7?w=400&h=300&fit=crop" },
+            { id: 23, name: "Kids Corn Dog", description: "Con fries, jello y jugo", price: 10.50, category: "Kids Menu", image: "https://images.unsplash.com/photo-1599490659213-e2b9527bd6a4?w=400&h=300&fit=crop" },
+            { id: 24, name: "French Fries", description: "Shoestring fries", price: 5.00, category: "Sides", image: "https://images.unsplash.com/photo-1630384060421-cb20b0e0649d?w=400&h=300&fit=crop" },
+            { id: 25, name: "Slaw", description: "Coleslaw fresca", price: 5.00, category: "Sides", image: "https://images.unsplash.com/photo-1572445278543-3a4c9c8f9c8f?w=400&h=300&fit=crop" },
+            { id: 26, name: "Mac & Cheese", description: "Cremoso macaroni con queso", price: 5.00, category: "Sides", image: "https://images.unsplash.com/photo-1543339308-43e59d6b73a4?w=400&h=300&fit=crop" },
+            { id: 27, name: "Chilaquiles", description: "Green or Red Sauce - Served with egg, fresh cheese, sour cream & side of beans", price: 12.00, category: "Brunch", image: "https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?w=400&h=300&fit=crop", badge: "🌿 Brunch" },
+            { id: 28, name: "Breakfast Tacos (2)", description: "Mix & match - Chorizo & Egg | Potato & Egg", price: 10.00, category: "Brunch", image: "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=400&h=300&fit=crop", badge: "🌿 Brunch" },
+            { id: 29, name: "Steak & Eggs", description: "Country potatoes, 2 eggs & 6 oz steak", price: 16.50, category: "Brunch", image: "https://images.unsplash.com/photo-1596040033229-3a0e3c7b3b5e?w=400&h=300&fit=crop", badge: "🌿 Brunch" },
+            { id: 30, name: "Breakfast Plate", description: "2 eggs + country potatoes + bacon", price: 12.00, category: "Brunch", image: "https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?w=400&h=300&fit=crop", badge: "🌿 Brunch" },
+            { id: 31, name: "Kids Plate", description: "2 pancakes + 2 eggs + 1 bacon + jello", price: 10.50, category: "Brunch", image: "https://images.unsplash.com/photo-1586444248902-2f64eddc13df?w=400&h=300&fit=crop", badge: "🌿 Brunch" },
+            { id: 32, name: "Chef's Special", description: "Different every week! Ask your server", price: 0, category: "Brunch", image: "https://images.unsplash.com/photo-1544025162-d76694265947?w=400&h=300&fit=crop", badge: "👨‍🍳 Especial del Chef", priceText: "Precio del mercado" }
         ];
         
         // ==================== CARRITO ====================
-        let shoppingCart = JSON.parse(localStorage.getItem('supdog_cart')) || [];
+        let shoppingCart = JSON.parse(localStorage.getItem('lucysyard_cart')) || [];
         
         function saveCartToLocal() {
-            localStorage.setItem('supdog_cart', JSON.stringify(shoppingCart));
+            localStorage.setItem('lucysyard_cart', JSON.stringify(shoppingCart));
             updateCartUI();
         }
         
@@ -428,69 +737,62 @@
             if (!container) return;
             
             if (shoppingCart.length === 0) {
-                container.innerHTML = `<div style="text-align:center; padding:2rem;">🛒 Tu carrito está vacío</div>`;
+                container.innerHTML = `<div class="empty-cart"><i class="fas fa-shopping-basket"></i><p>Tu carrito está vacío</p><p style="font-size:0.8rem;">Agrega productos del menú</p></div>`;
                 return;
             }
             
             container.innerHTML = shoppingCart.map((item, index) => `
                 <div class="cart-item">
-                    <div style="display:flex; justify-content:space-between;">
+                    <div class="cart-item-info">
                         <div>
-                            <strong>${item.name}</strong><br>
-                            <small>$${item.price.toFixed(2)} c/u</small>
+                            <div class="cart-item-name">${item.name}</div>
+                            <div style="font-size:0.7rem; opacity:0.7;">$${item.price.toFixed(2)} c/u</div>
                         </div>
-                        <div>$${(item.price * item.quantity).toFixed(2)}</div>
+                        <div class="cart-item-price">$${(item.price * item.quantity).toFixed(2)}</div>
                     </div>
-                    <div style="display:flex; justify-content:space-between; margin-top:10px;">
-                        <div>
-                            <button onclick="window.updateItemQuantity(${index}, ${item.quantity - 1})" style="background:#BA6990; border:none; width:30px; border-radius:50%; cursor:pointer;">-</button>
-                            <span style="margin:0 10px;">${item.quantity}</span>
-                            <button onclick="window.updateItemQuantity(${index}, ${item.quantity + 1})" style="background:#BA6990; border:none; width:30px; border-radius:50%; cursor:pointer;">+</button>
+                    <div class="cart-item-controls">
+                        <div class="quantity-control">
+                            <button class="quantity-btn" onclick="window.updateItemQuantity(${index}, ${item.quantity - 1})">-</button>
+                            <span class="quantity-value">${item.quantity}</span>
+                            <button class="quantity-btn" onclick="window.updateItemQuantity(${index}, ${item.quantity + 1})">+</button>
                         </div>
-                        <button onclick="window.removeItemFromCart(${index})" style="background:none; border:none; color:#ff6b6b; cursor:pointer;">🗑️ Eliminar</button>
+                        <button class="remove-item" onclick="window.removeItemFromCart(${index})">
+                            <i class="fas fa-trash-alt"></i> Eliminar
+                        </button>
                     </div>
                 </div>
             `).join('');
         }
         
+        let notificationTimeout;
         function showNotification(message, isError = false) {
+            if (notificationTimeout) clearTimeout(notificationTimeout);
+            
+            const existingNotification = document.querySelector('.notification');
+            if (existingNotification) existingNotification.remove();
+            
             const notification = document.createElement('div');
             notification.className = 'notification';
-            notification.style.background = isError ? '#f44336' : '#4CAF50';
+            notification.style.background = isError ? '#f44336' : 'linear-gradient(135deg, #4CAF50, #45a049)';
             notification.innerHTML = `<i class="fas ${isError ? 'fa-exclamation-triangle' : 'fa-check-circle'}"></i> ${message}`;
             document.body.appendChild(notification);
-            setTimeout(() => notification.remove(), 3000);
+            
+            notificationTimeout = setTimeout(() => {
+                notification.style.opacity = '0';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
         }
         
-        // ==================== ENVIAR PEDIDO A SUPABASE ====================
+        // ==================== ENVIAR PEDIDO ====================
         async function sendOrderToCloud(orderData) {
-            // Si no hay conexión a Supabase, guardar localmente
-            if (!supabaseClient) {
-                console.warn('⚠️ Sin conexión a Supabase, guardando localmente');
-                
-                // Guardar en localStorage para respaldo
-                const localOrders = JSON.parse(localStorage.getItem('local_orders') || '[]');
-                localOrders.push({
-                    ...orderData,
-                    savedLocally: true,
-                    timestamp: new Date().toISOString()
-                });
-                localStorage.setItem('local_orders', JSON.stringify(localOrders));
-                
-                showNotification('📱 Pedido guardado localmente. Se enviará cuando haya conexión.');
-                return { success: true, local: true };
-            }
-            
             try {
-                console.log('📤 Enviando pedido a Supabase...', orderData);
-                
                 const orderToSave = {
                     order_id: orderData.orderId,
                     customer_name: 'Cliente QR',
                     table_number: 'Mesa QR',
                     items: orderData.items,
                     total: orderData.total,
-                    location: orderData.location,
+                    location: 'Allen - Lucy\'s Yard',
                     status: 'pending'
                 };
                 
@@ -500,23 +802,22 @@
                     .select();
                 
                 if (error) {
-                    console.error('❌ Error Supabase:', error);
+                    console.error('Error Supabase:', error);
                     showNotification(`Error: ${error.message}`, true);
-                    return { success: false, error: error.message };
+                    return { success: false };
                 }
                 
-                console.log('✅ Pedido guardado en la nube:', data);
+                console.log('✅ Pedido guardado:', data);
                 showNotification(`✅ Pedido enviado a cocina!`);
-                return { success: true, data: data };
+                return { success: true };
                 
             } catch (error) {
-                console.error('❌ Error:', error);
+                console.error('Error:', error);
                 showNotification('Error al conectar con servidor', true);
-                return { success: false, error: error.message };
+                return { success: false };
             }
         }
         
-        // ==================== SIMULAR PAGO ====================
         async function processPayment(total) {
             return new Promise((resolve) => {
                 setTimeout(() => {
@@ -525,11 +826,10 @@
                         transactionId: `ORD-${Date.now()}-${Math.floor(Math.random() * 1000)}`,
                         amount: total
                     });
-                }, 1000);
+                }, 800);
             });
         }
         
-        // ==================== CHECKOUT ====================
         async function checkout() {
             if (shoppingCart.length === 0) {
                 showNotification('El carrito está vacío', true);
@@ -537,8 +837,6 @@
             }
             
             const total = getCartTotalAmount();
-            const location = 'Grapevine';
-            
             showNotification('Procesando pago...');
             
             try {
@@ -549,8 +847,6 @@
                     return;
                 }
                 
-                showNotification(`✅ Pago aprobado!`);
-                
                 const orderData = {
                     orderId: payment.transactionId,
                     items: shoppingCart.map(item => ({
@@ -560,7 +856,7 @@
                         subtotal: item.price * item.quantity
                     })),
                     total: total,
-                    location: location,
+                    location: 'Allen - Lucy\'s Yard',
                     tableNumber: 'QR-MESA'
                 };
                 
@@ -569,17 +865,13 @@
                 if (result.success) {
                     shoppingCart = [];
                     saveCartToLocal();
-                    
-                    document.getElementById('cartModal').classList.remove('active');
-                    document.body.style.overflow = 'auto';
-                    
+                    closeCartModal();
                     showNotification(`🎉 Pedido #${payment.transactionId.slice(-6)} enviado a cocina!`);
                     
-                    console.log('========== COMANDA SUP DOG ==========');
+                    console.log('========== COMANDA ==========');
                     console.log(`Orden: ${payment.transactionId}`);
                     console.log('Productos:', orderData.items);
                     console.log(`Total: $${total}`);
-                    console.log('=====================================');
                 }
                 
             } catch (error) {
@@ -593,21 +885,47 @@
             const container = document.getElementById('menuContainer');
             if (!container) return;
             
-            container.innerHTML = menuItems.map(item => `
-                <div class="menu-card">
-                    <img src="${item.image}" alt="${item.name}" class="card-image" onerror="this.src='https://via.placeholder.com/400x300?text=SupDog'">
-                    <div class="card-content">
-                        <h3>${item.name}</h3>
-                        <p>${item.description}</p>
-                        <div class="price-row">
-                            <span class="price">$${item.price.toFixed(2)}</span>
-                            <button class="add-to-cart" onclick='window.addItemToCart(${JSON.stringify(item).replace(/'/g, "\\'")})'>
-                                <i class="fas fa-plus"></i> Agregar
-                            </button>
+            const categories = [...new Set(menuItems.map(item => item.category))];
+            let html = '';
+            
+            categories.forEach(category => {
+                const categoryItems = menuItems.filter(item => item.category === category);
+                const isBrunch = category === 'Brunch';
+                
+                html += `
+                    <div style="margin-bottom: 2rem;">
+                        <h2 class="section-title">
+                            ${category === 'Brunch' ? '🍳 ' : ''}${category}
+                            ${category === 'Brunch' ? '<span class="badge">WEEKENDS ONLY 9AM-4PM</span>' : ''}
+                        </h2>
+                        ${isBrunch ? '<div class="brunch-banner"><p>🌿 SOLO FINES DE SEMANA • 9:00 AM - 4:00 PM 🌿</p></div>' : ''}
+                        <div class="menu-grid">
+                `;
+                
+                categoryItems.forEach(item => {
+                    const priceDisplay = item.priceText ? item.priceText : `$${item.price.toFixed(2)}`;
+                    html += `
+                        <div class="menu-card">
+                            <img src="${item.image}" alt="${item.name}" class="card-image" loading="lazy" onerror="this.src='https://via.placeholder.com/400x300?text=Lucy%27s+Yard'">
+                            <div class="card-content">
+                                <h3>${item.name} ${item.badge ? `<span class="badge">${item.badge}</span>` : ''}</h3>
+                                <p>${item.description}</p>
+                                ${item.addons ? `<div class="addon-info"><i class="fas fa-plus-circle"></i> ${item.addons}</div>` : ''}
+                                <div class="price-row">
+                                    <span class="price">${priceDisplay}</span>
+                                    ${item.price > 0 || item.priceText ? `<button class="add-to-cart" onclick='window.addItemToCart(${JSON.stringify(item).replace(/'/g, "\\'")})'>
+                                        <i class="fas fa-plus"></i> Agregar
+                                    </button>` : ''}
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-            `).join('');
+                    `;
+                });
+                
+                html += `</div></div>`;
+            });
+            
+            container.innerHTML = html;
         }
         
         // ==================== UI INTERACCIONES ====================
@@ -627,27 +945,23 @@
             }
         }
         
-        // ==================== INICIAR APLICACIÓN ====================
-        function initApp() {
+        // ==================== INICIAR ====================
+        function init() {
             renderMenu();
             updateCartUI();
             
-            // Event listeners
-            const openBtn = document.getElementById('openCartBtn');
-            const closeBtn = document.getElementById('closeCartBtn');
-            const checkoutBtn = document.getElementById('checkoutBtn');
+            document.getElementById('openCartBtn').addEventListener('click', openCartModal);
+            document.getElementById('closeCartBtn').addEventListener('click', closeCartModal);
+            document.getElementById('checkoutBtn').addEventListener('click', checkout);
             
-            if (openBtn) openBtn.addEventListener('click', openCartModal);
-            if (closeBtn) closeBtn.addEventListener('click', closeCartModal);
-            if (checkoutBtn) checkoutBtn.addEventListener('click', checkout);
-            
-            // Exponer funciones globalmente
             window.addItemToCart = addItemToCart;
             window.removeItemFromCart = removeItemFromCart;
             window.updateItemQuantity = updateItemQuantity;
             
-            console.log('🚀 SupDog QR Menu listo!');
+            console.log('🌿 Lucy\'s Yard QR Menu listo!');
         }
+        
+        init();
     </script>
 </body>
 </html>
