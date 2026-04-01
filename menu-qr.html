@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Lucy's Yard - Menú QR | Ordena desde tu mesa</title>
+    <title>Lucy's Yard - Menú QR</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -13,24 +13,20 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
         }
 
         :root {
-            --color-rojo-fuego: #DB3606;
-            --color-amarillo-cheddar: #F8A814;
-            --color-purpura-berry: #BA6990;
-            --color-fondo-oscuro: #0f0f0f;
-            --color-texto-claro: #ffffff;
-            --color-exito: #4CAF50;
+            --rojo: #DB3606;
+            --amarillo: #F8A814;
+            --morado: #BA6990;
+            --fondo: #0f0f0f;
+            --texto: #ffffff;
         }
 
         body {
             font-family: 'Poppins', sans-serif;
-            background: var(--color-fondo-oscuro);
-            color: var(--color-texto-claro);
-            overflow-x: hidden;
-            min-height: 100vh;
+            background: var(--fondo);
+            color: var(--texto);
         }
 
         header {
@@ -41,23 +37,22 @@
             background: rgba(15, 15, 15, 0.98);
             position: fixed;
             top: 0;
-            left: 0;
-            right: 0;
+            width: 100%;
             z-index: 1000;
             height: 70px;
-            border-bottom: 3px solid var(--color-amarillo-cheddar);
+            border-bottom: 3px solid var(--amarillo);
         }
 
         .logo-text {
             font-size: 2rem;
             cursor: pointer;
             color: white;
-            text-shadow: 2px 2px 0px var(--color-rojo-fuego);
+            text-shadow: 2px 2px 0px var(--rojo);
             font-family: 'Bangers', cursive;
         }
 
         .logo-text span {
-            color: var(--color-amarillo-cheddar);
+            color: var(--amarillo);
         }
 
         .cart-btn {
@@ -65,7 +60,7 @@
             right: 5%;
             top: 50%;
             transform: translateY(-50%);
-            background: linear-gradient(135deg, var(--color-purpura-berry), #9d5b85);
+            background: linear-gradient(135deg, var(--morado), #9d5b85);
             padding: 8px 16px;
             border-radius: 50px;
             color: white;
@@ -78,7 +73,7 @@
         }
 
         .cart-count {
-            background: var(--color-rojo-fuego);
+            background: var(--rojo);
             border-radius: 50%;
             width: 22px;
             height: 22px;
@@ -90,6 +85,7 @@
 
         .main-content {
             padding-top: 70px;
+            min-height: 100vh;
         }
 
         /* Modal Carrito */
@@ -100,7 +96,7 @@
             width: 100%;
             max-width: 480px;
             height: 100vh;
-            background: var(--color-fondo-oscuro);
+            background: var(--fondo);
             z-index: 2000;
             transform: translateX(100%);
             transition: transform 0.25s ease-out;
@@ -115,12 +111,12 @@
         .cart-header {
             padding: 1.5rem;
             background: linear-gradient(135deg, rgba(186,105,144,0.2), rgba(219,54,6,0.1));
-            border-bottom: 2px solid var(--color-purpura-berry);
+            border-bottom: 2px solid var(--morado);
             position: relative;
         }
 
         .cart-header h2 {
-            color: var(--color-amarillo-cheddar);
+            color: var(--amarillo);
             text-align: center;
             font-family: 'Bangers', cursive;
         }
@@ -159,12 +155,12 @@
 
         .cart-item-name {
             font-weight: 600;
-            color: var(--color-amarillo-cheddar);
+            color: var(--amarillo);
         }
 
         .cart-item-price {
             font-weight: 700;
-            color: var(--color-amarillo-cheddar);
+            color: var(--amarillo);
         }
 
         .cart-item-controls {
@@ -183,7 +179,7 @@
         }
 
         .quantity-btn {
-            background: var(--color-purpura-berry);
+            background: var(--morado);
             border: none;
             width: 32px;
             height: 32px;
@@ -206,7 +202,7 @@
         .cart-footer {
             padding: 1.5rem;
             background: linear-gradient(135deg, rgba(186,105,144,0.2), rgba(219,54,6,0.1));
-            border-top: 2px solid var(--color-purpura-berry);
+            border-top: 2px solid var(--morado);
         }
 
         .cart-total-row {
@@ -217,7 +213,7 @@
         }
 
         .total-amount {
-            color: var(--color-amarillo-cheddar);
+            color: var(--amarillo);
             font-size: 1.5rem;
             font-weight: bold;
         }
@@ -225,7 +221,7 @@
         .checkout-btn {
             width: 100%;
             padding: 1rem;
-            background: linear-gradient(135deg, var(--color-purpura-berry), #9d5b85);
+            background: linear-gradient(135deg, var(--morado), #9d5b85);
             border: none;
             border-radius: 50px;
             color: white;
@@ -268,13 +264,13 @@
 
         .invoice-header {
             text-align: center;
-            border-bottom: 2px solid var(--color-rojo-fuego);
+            border-bottom: 2px solid var(--rojo);
             padding-bottom: 1rem;
             margin-bottom: 1rem;
         }
 
         .invoice-header h2 {
-            color: var(--color-rojo-fuego);
+            color: var(--rojo);
             font-size: 1.8rem;
             font-family: 'Bangers', cursive;
         }
@@ -297,7 +293,7 @@
         .invoice-total {
             margin-top: 1rem;
             padding-top: 1rem;
-            border-top: 2px solid var(--color-rojo-fuego);
+            border-top: 2px solid var(--rojo);
             font-weight: bold;
             display: flex;
             justify-content: space-between;
@@ -319,12 +315,12 @@
         }
 
         .btn-close-invoice {
-            background: var(--color-purpura-berry);
+            background: var(--morado);
             color: white;
         }
 
         .btn-print-invoice {
-            background: linear-gradient(135deg, var(--color-rojo-fuego), #c42f04);
+            background: linear-gradient(135deg, var(--rojo), #c42f04);
             color: white;
         }
 
@@ -345,14 +341,14 @@
         .hero-banner h1 {
             font-size: 2.2rem;
             font-family: 'Bangers', cursive;
-            color: var(--color-amarillo-cheddar);
-            text-shadow: 2px 2px 0px var(--color-rojo-fuego);
+            color: var(--amarillo);
+            text-shadow: 2px 2px 0px var(--rojo);
         }
 
         .section-title {
             text-align: center;
             font-size: 1.8rem;
-            color: var(--color-amarillo-cheddar);
+            color: var(--amarillo);
             margin: 2rem 0 1rem;
             font-family: 'Bangers', cursive;
         }
@@ -362,7 +358,7 @@
             display: block;
             width: 80px;
             height: 3px;
-            background: var(--color-rojo-fuego);
+            background: var(--rojo);
             margin: 0.5rem auto;
         }
 
@@ -394,7 +390,7 @@
         .card-content h3 {
             font-size: 1.2rem;
             margin-bottom: 0.5rem;
-            color: var(--color-amarillo-cheddar);
+            color: var(--amarillo);
             font-family: 'Bangers', cursive;
         }
 
@@ -412,13 +408,13 @@
         }
 
         .price {
-            color: var(--color-amarillo-cheddar);
+            color: var(--amarillo);
             font-size: 1.3rem;
             font-weight: bold;
         }
 
         .add-to-cart {
-            background: linear-gradient(135deg, var(--color-rojo-fuego), #c42f04);
+            background: linear-gradient(135deg, var(--rojo), #c42f04);
             border: none;
             padding: 8px 18px;
             border-radius: 40px;
@@ -428,7 +424,7 @@
         }
 
         .badge {
-            background: var(--color-purpura-berry);
+            background: var(--morado);
             color: white;
             font-size: 0.65rem;
             padding: 3px 10px;
@@ -462,11 +458,11 @@
             max-width: 400px;
             width: 90%;
             padding: 1.5rem;
-            border: 2px solid var(--color-amarillo-cheddar);
+            border: 2px solid var(--amarillo);
         }
 
         .extras-container h3 {
-            color: var(--color-amarillo-cheddar);
+            color: var(--amarillo);
             text-align: center;
             margin-bottom: 1rem;
         }
@@ -482,7 +478,7 @@
         }
 
         .extras-option.selected {
-            background: linear-gradient(135deg, var(--color-purpura-berry), #9d5b85);
+            background: linear-gradient(135deg, var(--morado), #9d5b85);
         }
 
         .extras-buttons {
@@ -501,7 +497,7 @@
         }
 
         .extras-confirm {
-            background: linear-gradient(135deg, var(--color-rojo-fuego), #c42f04);
+            background: linear-gradient(135deg, var(--rojo), #c42f04);
             color: white;
         }
 
@@ -522,7 +518,7 @@
         }
 
         .brunch-banner {
-            background: linear-gradient(135deg, var(--color-purpura-berry), var(--color-rojo-fuego));
+            background: linear-gradient(135deg, var(--morado), var(--rojo));
             text-align: center;
             padding: 0.8rem;
             border-radius: 40px;
@@ -534,7 +530,7 @@
             bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
-            background: var(--color-exito);
+            background: #4CAF50;
             color: white;
             padding: 12px 24px;
             border-radius: 50px;
@@ -558,7 +554,6 @@
         @media (max-width: 768px) {
             .menu-grid { grid-template-columns: 1fr; }
             .cart-modal { max-width: 100%; }
-            .hero-banner h1 { font-size: 1.8rem; }
         }
     </style>
 </head>
@@ -569,7 +564,7 @@
         <div class="invoice-container" id="invoiceContainer"></div>
     </div>
 
-    <!-- MODAL DE EXTRAS -->
+    <!-- MODAL EXTRAS -->
     <div class="extras-modal" id="extrasModal">
         <div class="extras-container">
             <h3 id="extrasTitle">Agregar proteína</h3>
@@ -620,22 +615,51 @@
         </footer>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
-        // ==================== CONFIGURACIÓN ====================
-        const SUPABASE_URL = 'https://mlmaucnbhprzwovksxpo.supabase.co';
-        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1sbWF1Y25iaHByendvdmtzeHBvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ5ODU2MzMsImV4cCI6MjA5MDU2MTYzM30.UeGsnpKOShPh3-zVf5RR12roqqNhGAFwhK3hyckcqjs';
+        // ==================== MENÚ COMPLETO ====================
+        const menuItems = [
+            { id: 1, name: "6 Wings", desc: "BBQ | Mango Habanero | Lemon Pepper | Buffalo | Sweet Chili", price: 11.25, cat: "Appetizers", img: "https://images.unsplash.com/photo-1608039829572-78524f79c4c7?w=400&h=300&fit=crop" },
+            { id: 2, name: "12 Wings", desc: "BBQ | Mango Habanero | Lemon Pepper | Buffalo | Sweet Chili", price: 18.00, cat: "Appetizers", img: "https://images.unsplash.com/photo-1608039829572-78524f79c4c7?w=400&h=300&fit=crop" },
+            { id: 3, name: "Chips & Queso", desc: "Tortilla chips con queso fundido", price: 10.00, cat: "Appetizers", img: "https://images.unsplash.com/photo-1593195743443-2f5b6b4d2c8f?w=400&h=300&fit=crop" },
+            { id: 4, name: "Chips & Salsa", desc: "Tortilla chips con salsa fresca", price: 8.00, cat: "Appetizers", img: "https://images.unsplash.com/photo-1569591159212-b02ea8a9f6b1?w=400&h=300&fit=crop" },
+            { id: 5, name: "Loaded Nachos", desc: "Chips, queso, pico de gallo, jalapeños, crema", price: 10.00, cat: "Appetizers", img: "https://images.unsplash.com/photo-1513456852971-30c0b8199d4d?w=400&h=300&fit=crop", extras: true, extraType: "nachos" },
+            { id: 6, name: "House Salad", desc: "Spring mix, slaw, pico, cheese, tortilla strips, chipotle aioli", price: 8.00, cat: "Salads & Bowls", img: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=300&fit=crop" },
+            { id: 7, name: "Wedge Salad", desc: "Iceberg lettuce, blue cheese, grape tomatoes, chives, bacon", price: 8.00, cat: "Salads & Bowls", img: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=300&fit=crop" },
+            { id: 8, name: "Chopped Salad", desc: "Chopped greens, grape tomatoes, avocado, bacon, eggs, cheese", price: 8.00, cat: "Salads & Bowls", img: "https://images.unsplash.com/photo-1546793665-c74683f339c1?w=400&h=300&fit=crop" },
+            { id: 9, name: "Power Bowl", desc: "Cilantro lime rice, black beans, roasted corn, slaw, pico, cheese, lime chipotle sauce", price: 9.00, cat: "Salads & Bowls", img: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=300&fit=crop", extras: true, extraType: "bowl" },
+            { id: 10, name: "Veggie Bowl", desc: "Cilantro lime rice, beans, corn, avocado, slaw, pico, roasted cauliflower", price: 12.00, cat: "Salads & Bowls", img: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=300&fit=crop", extras: true, extraType: "bowl" },
+            { id: 11, name: "Tacos (2)", desc: "Chicken Fajita | Garlic Shrimp | Brisket | Baja Fish", price: 12.00, cat: "Tacos & Quesadillas", img: "https://images.unsplash.com/photo-1599974579688-8dbdd335c77f?w=400&h=300&fit=crop" },
+            { id: 12, name: "Quesadilla", desc: "Chicken Fajita | Garlic Shrimp | Brisket", price: 12.00, cat: "Tacos & Quesadillas", img: "https://images.unsplash.com/photo-1618040996337-56904b7850b9?w=400&h=300&fit=crop" },
+            { id: 13, name: "Classic Burger", desc: "1/3lb patty, cheddar cheese, lettuce, tomatoes, onions, pickles", price: 11.95, cat: "Burgers", img: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&h=300&fit=crop" },
+            { id: 14, name: "BBQ Burger", desc: "1/3lb patty, homemade BBQ sauce, onion strings, pickles", price: 12.95, cat: "Burgers", img: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&h=300&fit=crop" },
+            { id: 15, name: "Bacon Cheese Burger", desc: "1/3lb patty, crispy bacon, cheddar cheese, lettuce, tomatoes, onions", price: 12.95, cat: "Burgers", img: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&h=300&fit=crop" },
+            { id: 16, name: "Sliders (2)", desc: "Brisket | Pulled Pork", price: 12.00, cat: "Burgers", img: "https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?w=400&h=300&fit=crop" },
+            { id: 17, name: "Fish & Chips", desc: "Fish, hush puppies, fries, slaw, lemon", price: 16.00, cat: "Seafood", img: "https://images.unsplash.com/photo-1579208575657-c595a05383b7?w=400&h=300&fit=crop" },
+            { id: 18, name: "Shrimp Boil", desc: "Potatoes, corn, sausage & 1 lb shrimp", price: 28.00, cat: "Seafood", img: "https://images.unsplash.com/photo-1625943553852-781c6dd46f9c?w=400&h=300&fit=crop" },
+            { id: 19, name: "Kids Tenders", desc: "Con fries, jello y jugo", price: 10.50, cat: "Kids Menu", img: "https://images.unsplash.com/photo-1619895098996-1e5f1a9e3b9e?w=400&h=300&fit=crop" },
+            { id: 20, name: "Kids Shrimp", desc: "Con fries, jello y jugo", price: 10.50, cat: "Kids Menu", img: "https://images.unsplash.com/photo-1625943553852-781c6dd46f9c?w=400&h=300&fit=crop" },
+            { id: 21, name: "Kids Cheeseburger", desc: "Con fries, jello y jugo", price: 10.50, cat: "Kids Menu", img: "https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=400&h=300&fit=crop" },
+            { id: 22, name: "Kids Fish", desc: "Con fries, jello y jugo", price: 10.50, cat: "Kids Menu", img: "https://images.unsplash.com/photo-1579208575657-c595a05383b7?w=400&h=300&fit=crop" },
+            { id: 23, name: "Kids Corn Dog", desc: "Con fries, jello y jugo", price: 10.50, cat: "Kids Menu", img: "https://images.unsplash.com/photo-1599490659213-e2b9527bd6a4?w=400&h=300&fit=crop" },
+            { id: 24, name: "French Fries", desc: "Shoestring fries", price: 5.00, cat: "Sides", img: "https://images.unsplash.com/photo-1630384060421-cb20b0e0649d?w=400&h=300&fit=crop" },
+            { id: 25, name: "Slaw", desc: "Coleslaw fresca", price: 5.00, cat: "Sides", img: "https://images.unsplash.com/photo-1572445278543-3a4c9c8f9c8f?w=400&h=300&fit=crop" },
+            { id: 26, name: "Mac & Cheese", desc: "Cremoso macaroni con queso", price: 5.00, cat: "Sides", img: "https://images.unsplash.com/photo-1543339308-43e59d6b73a4?w=400&h=300&fit=crop" },
+            { id: 27, name: "Chilaquiles", desc: "Green or Red Sauce - With egg, fresh cheese, sour cream & beans", price: 12.00, cat: "Brunch", img: "https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?w=400&h=300&fit=crop", badge: "🌿 Brunch" },
+            { id: 28, name: "Breakfast Tacos (2)", desc: "Chorizo & Egg | Potato & Egg", price: 10.00, cat: "Brunch", img: "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=400&h=300&fit=crop", badge: "🌿 Brunch" },
+            { id: 29, name: "Steak & Eggs", desc: "Country potatoes, 2 eggs & 6 oz steak", price: 16.50, cat: "Brunch", img: "https://images.unsplash.com/photo-1596040033229-3a0e3c7b3b5e?w=400&h=300&fit=crop", badge: "🌿 Brunch" },
+            { id: 30, name: "Breakfast Plate", desc: "2 eggs + country potatoes + bacon", price: 12.00, cat: "Brunch", img: "https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?w=400&h=300&fit=crop", badge: "🌿 Brunch" },
+            { id: 31, name: "Kids Plate", desc: "2 pancakes + 2 eggs + 1 bacon + jello", price: 10.50, cat: "Brunch", img: "https://images.unsplash.com/photo-1586444248902-2f64eddc13df?w=400&h=300&fit=crop", badge: "🌿 Brunch" },
+            { id: 32, name: "Chef's Special", desc: "Different every week! Ask your server", price: 0, cat: "Brunch", img: "https://images.unsplash.com/photo-1544025162-d76694265947?w=400&h=300&fit=crop", badge: "👨‍🍳 Especial", priceText: "Precio del mercado" }
+        ];
         
-        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-        
-        // ==================== EXTRAS ====================
-        const extrasOptions = {
+        // Opciones de extras
+        const extraOptions = {
             nachos: [
                 { name: "Brisket", price: 6.00 },
                 { name: "Chicken Fajita", price: 4.00 },
                 { name: "Pulled Pork", price: 5.00 }
             ],
-            bowlProteins: [
+            bowl: [
                 { name: "Garlic Shrimp", price: 5.00 },
                 { name: "Blackened Shrimp", price: 5.00 },
                 { name: "Salmon", price: 7.00 },
@@ -643,42 +667,6 @@
                 { name: "Garlic Chicken", price: 5.00 }
             ]
         };
-        
-        // ==================== MENÚ COMPLETO ====================
-        const menuItems = [
-            { id: 1, name: "6 Wings", description: "BBQ | Mango Habanero | Lemon Pepper | Buffalo | Sweet Chili", price: 11.25, category: "Appetizers", image: "https://images.unsplash.com/photo-1608039829572-78524f79c4c7?w=400&h=300&fit=crop" },
-            { id: 2, name: "12 Wings", description: "BBQ | Mango Habanero | Lemon Pepper | Buffalo | Sweet Chili", price: 18.00, category: "Appetizers", image: "https://images.unsplash.com/photo-1608039829572-78524f79c4c7?w=400&h=300&fit=crop" },
-            { id: 3, name: "Chips & Queso", description: "Tortilla chips con queso fundido", price: 10.00, category: "Appetizers", image: "https://images.unsplash.com/photo-1593195743443-2f5b6b4d2c8f?w=400&h=300&fit=crop" },
-            { id: 4, name: "Chips & Salsa", description: "Tortilla chips con salsa fresca", price: 8.00, category: "Appetizers", image: "https://images.unsplash.com/photo-1569591159212-b02ea8a9f6b1?w=400&h=300&fit=crop" },
-            { id: 5, name: "Loaded Nachos", description: "Chips, queso, pico de gallo, jalapeños, crema", price: 10.00, category: "Appetizers", image: "https://images.unsplash.com/photo-1513456852971-30c0b8199d4d?w=400&h=300&fit=crop", hasExtras: true, extraType: "nachos" },
-            { id: 6, name: "House Salad", description: "Spring mix, slaw, pico, cheese, tortilla strips, chipotle aioli", price: 8.00, category: "Salads & Bowls", image: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=300&fit=crop" },
-            { id: 7, name: "Wedge Salad", description: "Iceberg lettuce, blue cheese, grape tomatoes, chives, bacon", price: 8.00, category: "Salads & Bowls", image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=300&fit=crop" },
-            { id: 8, name: "Chopped Salad", description: "Chopped greens, grape tomatoes, avocado, bacon, eggs, cheese", price: 8.00, category: "Salads & Bowls", image: "https://images.unsplash.com/photo-1546793665-c74683f339c1?w=400&h=300&fit=crop" },
-            { id: 9, name: "Power Bowl", description: "Cilantro lime rice, black beans, roasted corn, slaw, pico, cheese, lime chipotle sauce", price: 9.00, category: "Salads & Bowls", image: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=300&fit=crop", hasExtras: true, extraType: "bowlProteins" },
-            { id: 10, name: "Veggie Bowl", description: "Cilantro lime rice, beans, corn, avocado, slaw, pico, roasted cauliflower", price: 12.00, category: "Salads & Bowls", image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=300&fit=crop", hasExtras: true, extraType: "bowlProteins" },
-            { id: 11, name: "Tacos (2)", description: "Chicken Fajita | Garlic Shrimp | Brisket | Baja Fish", price: 12.00, category: "Tacos & Quesadillas", image: "https://images.unsplash.com/photo-1599974579688-8dbdd335c77f?w=400&h=300&fit=crop" },
-            { id: 12, name: "Quesadilla", description: "Chicken Fajita | Garlic Shrimp | Brisket", price: 12.00, category: "Tacos & Quesadillas", image: "https://images.unsplash.com/photo-1618040996337-56904b7850b9?w=400&h=300&fit=crop" },
-            { id: 13, name: "Classic Burger", description: "1/3lb patty, cheddar cheese, lettuce, tomatoes, onions, pickles", price: 11.95, category: "Burgers", image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&h=300&fit=crop" },
-            { id: 14, name: "BBQ Burger", description: "1/3lb patty, homemade BBQ sauce, onion strings, pickles", price: 12.95, category: "Burgers", image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&h=300&fit=crop" },
-            { id: 15, name: "Bacon Cheese Burger", description: "1/3lb patty, crispy bacon, cheddar cheese, lettuce, tomatoes, onions", price: 12.95, category: "Burgers", image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&h=300&fit=crop" },
-            { id: 16, name: "Sliders (2)", description: "Brisket | Pulled Pork", price: 12.00, category: "Burgers", image: "https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?w=400&h=300&fit=crop" },
-            { id: 17, name: "Fish & Chips", description: "Fish, hush puppies, fries, slaw, lemon", price: 16.00, category: "Seafood", image: "https://images.unsplash.com/photo-1579208575657-c595a05383b7?w=400&h=300&fit=crop" },
-            { id: 18, name: "Shrimp Boil", description: "Potatoes, corn, sausage & 1 lb shrimp", price: 28.00, category: "Seafood", image: "https://images.unsplash.com/photo-1625943553852-781c6dd46f9c?w=400&h=300&fit=crop" },
-            { id: 19, name: "Kids Tenders", description: "Con fries, jello y jugo", price: 10.50, category: "Kids Menu", image: "https://images.unsplash.com/photo-1619895098996-1e5f1a9e3b9e?w=400&h=300&fit=crop" },
-            { id: 20, name: "Kids Shrimp", description: "Con fries, jello y jugo", price: 10.50, category: "Kids Menu", image: "https://images.unsplash.com/photo-1625943553852-781c6dd46f9c?w=400&h=300&fit=crop" },
-            { id: 21, name: "Kids Cheeseburger", description: "Con fries, jello y jugo", price: 10.50, category: "Kids Menu", image: "https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=400&h=300&fit=crop" },
-            { id: 22, name: "Kids Fish", description: "Con fries, jello y jugo", price: 10.50, category: "Kids Menu", image: "https://images.unsplash.com/photo-1579208575657-c595a05383b7?w=400&h=300&fit=crop" },
-            { id: 23, name: "Kids Corn Dog", description: "Con fries, jello y jugo", price: 10.50, category: "Kids Menu", image: "https://images.unsplash.com/photo-1599490659213-e2b9527bd6a4?w=400&h=300&fit=crop" },
-            { id: 24, name: "French Fries", description: "Shoestring fries", price: 5.00, category: "Sides", image: "https://images.unsplash.com/photo-1630384060421-cb20b0e0649d?w=400&h=300&fit=crop" },
-            { id: 25, name: "Slaw", description: "Coleslaw fresca", price: 5.00, category: "Sides", image: "https://images.unsplash.com/photo-1572445278543-3a4c9c8f9c8f?w=400&h=300&fit=crop" },
-            { id: 26, name: "Mac & Cheese", description: "Cremoso macaroni con queso", price: 5.00, category: "Sides", image: "https://images.unsplash.com/photo-1543339308-43e59d6b73a4?w=400&h=300&fit=crop" },
-            { id: 27, name: "Chilaquiles", description: "Green or Red Sauce - With egg, fresh cheese, sour cream & beans", price: 12.00, category: "Brunch", image: "https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?w=400&h=300&fit=crop", badge: "🌿 Brunch" },
-            { id: 28, name: "Breakfast Tacos (2)", description: "Chorizo & Egg | Potato & Egg", price: 10.00, category: "Brunch", image: "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=400&h=300&fit=crop", badge: "🌿 Brunch" },
-            { id: 29, name: "Steak & Eggs", description: "Country potatoes, 2 eggs & 6 oz steak", price: 16.50, category: "Brunch", image: "https://images.unsplash.com/photo-1596040033229-3a0e3c7b3b5e?w=400&h=300&fit=crop", badge: "🌿 Brunch" },
-            { id: 30, name: "Breakfast Plate", description: "2 eggs + country potatoes + bacon", price: 12.00, category: "Brunch", image: "https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?w=400&h=300&fit=crop", badge: "🌿 Brunch" },
-            { id: 31, name: "Kids Plate", description: "2 pancakes + 2 eggs + 1 bacon + jello", price: 10.50, category: "Brunch", image: "https://images.unsplash.com/photo-1586444248902-2f64eddc13df?w=400&h=300&fit=crop", badge: "🌿 Brunch" },
-            { id: 32, name: "Chef's Special", description: "Different every week! Ask your server", price: 0, category: "Brunch", image: "https://images.unsplash.com/photo-1544025162-d76694265947?w=400&h=300&fit=crop", badge: "👨‍🍳 Especial", priceText: "Precio del mercado" }
-        ];
         
         // ==================== CARRITO ====================
         let cart = JSON.parse(localStorage.getItem('lucysyard_cart')) || [];
@@ -692,7 +680,7 @@
         }
         
         function addToCart(item) {
-            const existing = cart.find(i => i.id === item.id && i.extraAdded === item.extraAdded);
+            const existing = cart.find(i => i.id === item.id && i.extra === item.extra);
             if (existing) {
                 existing.qty++;
             } else {
@@ -744,8 +732,7 @@
                     <div class="cart-item-info">
                         <div>
                             <div class="cart-item-name">${item.name}</div>
-                            ${item.extraAdded ? `<div style="font-size:0.7rem;">+ ${item.extraAdded} (+$${item.extraPrice})</div>` : ''}
-                            <div style="font-size:0.7rem;">$${item.originalPrice || item.price} c/u</div>
+                            ${item.extra ? `<div style="font-size:0.7rem;">+ ${item.extra} (+$${item.extraPrice})</div>` : ''}
                         </div>
                         <div class="cart-item-price">$${(item.price * item.qty).toFixed(2)}</div>
                     </div>
@@ -775,7 +762,7 @@
             currentExtraItem = item;
             selectedExtra = null;
             
-            const list = extrasOptions[item.extraType] || [];
+            const list = extraOptions[item.extraType] || [];
             const modal = document.getElementById('extrasModal');
             const title = document.getElementById('extrasTitle');
             const opts = document.getElementById('extrasOptions');
@@ -822,7 +809,7 @@
                     ...currentExtraItem,
                     price: currentExtraItem.price + selectedExtra.price,
                     name: `${currentExtraItem.name} + ${selectedExtra.name}`,
-                    extraAdded: selectedExtra.name,
+                    extra: selectedExtra.name,
                     extraPrice: selectedExtra.price,
                     originalPrice: currentExtraItem.price
                 };
@@ -832,7 +819,7 @@
         }
         
         // ==================== FACTURA ====================
-        function generateInvoice(orderData) {
+        function generateInvoice(orderId, items, total) {
             const now = new Date();
             const invNum = `INV-${now.getFullYear()}${(now.getMonth()+1).toString().padStart(2,'0')}${now.getDate().toString().padStart(2,'0')}-${Math.floor(Math.random()*10000)}`;
             
@@ -843,35 +830,34 @@
                 </div>
                 <div class="invoice-number">
                     <strong>FACTURA:</strong> ${invNum}<br>
-                    <strong>ORDEN:</strong> ${orderData.orderId}<br>
+                    <strong>ORDEN:</strong> ${orderId}<br>
                     <strong>FECHA:</strong> ${now.toLocaleString('es-ES')}
                 </div>
                 <div style="margin:1rem 0;">
-                    ${orderData.items.map(item => `
+                    ${items.map(item => `
                         <div class="invoice-item">
                             <span>${item.name} x${item.qty}</span>
-                            <span>$${item.subtotal.toFixed(2)}</span>
+                            <span>$${(item.price * item.qty).toFixed(2)}</span>
                         </div>
                     `).join('')}
                 </div>
                 <div class="invoice-total">
                     <span>TOTAL PAGADO</span>
-                    <span>$${orderData.total.toFixed(2)}</span>
+                    <span>$${total.toFixed(2)}</span>
                 </div>
-                <div class="invoice-footer" style="margin-top:1rem; text-align:center; font-size:0.8rem;">
+                <div style="margin-top:1rem; text-align:center; font-size:0.8rem;">
                     <p>✅ PAGO CONFIRMADO</p>
                     <p>Tiempo estimado: 15-20 minutos</p>
-                    <p>¡Gracias por tu compra!</p>
                 </div>
             `;
             
-            lastInvoice = { html, number: invNum, data: orderData };
+            lastInvoice = { html, number: invNum };
             
             const container = document.getElementById('invoiceContainer');
             container.innerHTML = html + `
                 <div class="invoice-buttons">
                     <button class="btn-close-invoice" onclick="closeInvoice()">Cerrar</button>
-                    <button class="btn-print-invoice" onclick="printInvoice()">🖨️ Imprimir / Guardar</button>
+                    <button class="btn-print-invoice" onclick="printInvoice()">🖨️ Imprimir</button>
                 </div>
             `;
             
@@ -896,34 +882,15 @@
                     .invoice-number { background: #f5f5f5; padding: 0.5rem; text-align: center; margin: 1rem 0; }
                     .invoice-item { display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px dashed #ddd; }
                     .invoice-total { margin-top: 1rem; padding-top: 1rem; border-top: 2px solid #DB3606; display: flex; justify-content: space-between; font-weight: bold; }
-                    .invoice-footer { margin-top: 1rem; text-align: center; }
                     @media print { button { display: none; } }
                 </style>
-                </head><body>${lastInvoice.html}<div style="text-align:center; margin-top:1rem;">🌿 Lucy's Yard - ¡Gracias por tu visita!</div></body></html>
+                </head><body>${lastInvoice.html}<div style="text-align:center; margin-top:1rem;">🌿 Lucy's Yard - ¡Gracias!</div></body></html>
             `);
             w.document.close();
             w.print();
         }
         
-        // ==================== ENVIAR A COCINA ====================
-        async function sendToKitchen(orderData) {
-            try {
-                await supabase.from('orders').insert([{
-                    order_id: orderData.orderId,
-                    customer_name: 'Cliente QR',
-                    table_number: 'Mesa QR',
-                    items: orderData.items,
-                    total: orderData.total,
-                    location: 'Allen - Lucy\'s Yard',
-                    status: 'pending'
-                }]);
-                return true;
-            } catch(e) {
-                console.error('Error al enviar:', e);
-                return false;
-            }
-        }
-        
+        // ==================== PAGO ====================
         async function checkout() {
             if (cart.length === 0) {
                 showNotif('El carrito está vacío', true);
@@ -933,58 +900,46 @@
             const total = getTotal();
             showNotif('Procesando pago...');
             
-            setTimeout(async () => {
+            setTimeout(() => {
                 const orderId = `ORD-${Date.now()}-${Math.floor(Math.random()*1000)}`;
-                const orderData = {
-                    orderId: orderId,
-                    items: cart.map(i => ({ name: i.name, qty: i.qty, subtotal: i.price * i.qty })),
-                    total: total
-                };
-                
-                const ok = await sendToKitchen(orderData);
-                if (ok) {
-                    generateInvoice(orderData);
-                    cart = [];
-                    saveCart();
-                    closeCartModal();
-                    showNotif(`🎉 Pedido #${orderId.slice(-6)} enviado a cocina!`);
-                } else {
-                    showNotif('Error al enviar el pedido', true);
-                }
+                generateInvoice(orderId, cart, total);
+                cart = [];
+                saveCart();
+                closeCartModal();
+                showNotif(`✅ Pedido #${orderId.slice(-6)} enviado a cocina!`);
             }, 500);
         }
         
-        // ==================== RENDERIZAR MENÚ ====================
+        // ==================== RENDER MENÚ ====================
         function renderMenu() {
             const container = document.getElementById('menuContainer');
             if (!container) return;
             
-            const categories = [...new Set(menuItems.map(item => item.category))];
+            const categories = [...new Set(menuItems.map(item => item.cat))];
             let html = '';
             
             categories.forEach(category => {
-                const categoryItems = menuItems.filter(item => item.category === category);
+                const items = menuItems.filter(item => item.cat === category);
                 const isBrunch = category === 'Brunch';
                 
-                html += `<h2 class="section-title">${category}${isBrunch ? ' <span class="badge">WEEKENDS ONLY 9AM-4PM</span>' : ''}</h2>`;
-                if (isBrunch) html += `<div class="brunch-banner"><p>🌿 SOLO FINES DE SEMANA • 9:00 AM - 4:00 PM 🌿</p></div>`;
+                html += `<h2 class="section-title">${category}${isBrunch ? ' <span class="badge">WEEKENDS ONLY</span>' : ''}</h2>`;
+                if (isBrunch) html += `<div class="brunch-banner"><p>🌿 SOLO FINES DE SEMANA • 9AM - 4PM 🌿</p></div>`;
                 html += `<div class="menu-grid">`;
                 
-                categoryItems.forEach(item => {
-                    const priceDisplay = item.priceText ? item.priceText : `$${item.price.toFixed(2)}`;
-                    const hasExtras = item.hasExtras;
-                    const itemData = JSON.stringify(item).replace(/'/g, "\\'");
+                items.forEach(item => {
+                    const priceShow = item.priceText ? item.priceText : `$${item.price.toFixed(2)}`;
+                    const hasExtras = item.extras;
                     
                     html += `
                         <div class="menu-card">
-                            <img src="${item.image}" class="card-image" onerror="this.src='https://via.placeholder.com/400x300?text=Lucy%27s+Yard'">
+                            <img src="${item.img}" class="card-image" onerror="this.src='https://via.placeholder.com/400x300?text=Lucy%27s+Yard'">
                             <div class="card-content">
                                 <h3>${item.name}${item.badge ? `<span class="badge">${item.badge}</span>` : ''}</h3>
-                                <p>${item.description}</p>
-                                ${hasExtras ? `<div class="addon-info" onclick="openExtrasModal(${itemData})"><i class="fas fa-plus-circle"></i> + Agregar proteína</div>` : ''}
+                                <p>${item.desc}</p>
+                                ${hasExtras ? `<div class="addon-info" onclick='openExtrasModal(${JSON.stringify(item).replace(/'/g, "\\'")})'><i class="fas fa-plus-circle"></i> + Agregar proteína</div>` : ''}
                                 <div class="price-row">
-                                    <span class="price">${priceDisplay}</span>
-                                    <button class="add-to-cart" onclick="${hasExtras ? `openExtrasModal(${itemData})` : `addToCart(${itemData})`}">
+                                    <span class="price">${priceShow}</span>
+                                    <button class="add-to-cart" onclick='${hasExtras ? `openExtrasModal(${JSON.stringify(item).replace(/'/g, "\\'")})` : `addToCart(${JSON.stringify(item).replace(/'/g, "\\'")})`}'>
                                         <i class="fas fa-plus"></i> Agregar
                                     </button>
                                 </div>
