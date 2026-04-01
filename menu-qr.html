@@ -671,7 +671,7 @@
     <!-- MODAL FACTURA -->
     <div class="invoice-modal" id="invoiceModal">
         <div class="invoice-container" id="invoiceContainer">
-            <!-- Contenido dinámico de la factura -->
+            <!-- Contenido dinámico -->
         </div>
     </div>
 
@@ -803,12 +803,86 @@
         let selectedExtra = null;
         let lastInvoice = null;
         
-        function saveCartToLocal() {
+        // FUNCIONES DEL CARRITO - EXPUESTAS GLOBALMENTE
+        window.addToCart = function(item) {
+            const existing = shoppingCart.find(i => i.id === item.id && i.extraAdded === item.extraAdded);
+            if (existing) {
+                existing.quantity++;
+            } else {
+                shoppingCart.push({ ...item, quantity: 1 });
+            }
+            saveCart();
+            showNotification(`${item.name} agregado al carrito`);
+        };
+        
+        window.removeFromCart = function(index) {
+            shoppingCart.splice(index, 1);
+            saveCart();
+        };
+        
+        window.updateQuantity = function(index, newQuantity) {
+            if (newQuantity <= 0) {
+                window.removeFromCart(index);
+            } else {
+                shoppingCart[index].quantity = newQuantity;
+                saveCart();
+            }
+        };
+        
+        function saveCart() {
             localStorage.setItem('lucysyard_cart', JSON.stringify(shoppingCart));
             updateCartUI();
         }
         
-        function openExtrasModal(item) {
+        function getCartTotal() {
+            return shoppingCart.reduce((total, item) => total + (item.price * item.quantity), 0);
+        }
+        
+        function getCartCount() {
+            return shoppingCart.reduce((count, item) => count + item.quantity, 0);
+        }
+        
+        function updateCartUI() {
+            const container = document.getElementById('cartItemsContainer');
+            const totalSpan = document.getElementById('cartTotal');
+            const countSpan = document.getElementById('cartCount');
+            
+            if (countSpan) countSpan.textContent = getCartCount();
+            if (totalSpan) totalSpan.textContent = `$${getCartTotal().toFixed(2)}`;
+            
+            if (!container) return;
+            
+            if (shoppingCart.length === 0) {
+                container.innerHTML = `<div class="empty-cart"><i class="fas fa-shopping-basket"></i><p>Tu carrito está vacío</p></div>`;
+                return;
+            }
+            
+            container.innerHTML = shoppingCart.map((item, index) => `
+                <div class="cart-item">
+                    <div class="cart-item-info">
+                        <div>
+                            <div class="cart-item-name">${escapeHtml(item.name)}</div>
+                            ${item.extraAdded ? `<div class="cart-item-detail">+ ${escapeHtml(item.extraAdded)} (+$${item.extraPrice.toFixed(2)})</div>` : ''}
+                            <div style="font-size:0.7rem; opacity:0.7;">$${item.originalPrice || item.price} c/u</div>
+                        </div>
+                        <div class="cart-item-price">$${(item.price * item.quantity).toFixed(2)}</div>
+                    </div>
+                    <div class="cart-item-controls">
+                        <div class="quantity-control">
+                            <button class="quantity-btn" onclick="window.updateQuantity(${index}, ${item.quantity - 1})">-</button>
+                            <span class="quantity-value">${item.quantity}</span>
+                            <button class="quantity-btn" onclick="window.updateQuantity(${index}, ${item.quantity + 1})">+</button>
+                        </div>
+                        <button class="remove-item" onclick="window.removeFromCart(${index})">
+                            <i class="fas fa-trash-alt"></i> Eliminar
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        // FUNCIONES DE EXTRAS
+        window.openExtrasModal = function(item) {
             currentExtrasItem = item;
             selectedExtra = null;
             
@@ -839,7 +913,7 @@
             
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
-        }
+        };
         
         function closeExtrasModal() {
             document.getElementById('extrasModal').classList.remove('active');
@@ -865,81 +939,9 @@
                     originalPrice: currentExtrasItem.price
                 };
                 
-                addItemToCart(itemWithExtra);
+                window.addToCart(itemWithExtra);
                 closeExtrasModal();
             }
-        }
-        
-        function addItemToCart(item) {
-            const existing = shoppingCart.find(i => i.id === item.id && i.extraAdded === item.extraAdded);
-            if (existing) {
-                existing.quantity++;
-            } else {
-                shoppingCart.push({ ...item, quantity: 1 });
-            }
-            saveCartToLocal();
-            showNotification(`${item.name} agregado al carrito`);
-        }
-        
-        function removeItemFromCart(index) {
-            shoppingCart.splice(index, 1);
-            saveCartToLocal();
-        }
-        
-        function updateItemQuantity(index, newQuantity) {
-            if (newQuantity <= 0) {
-                removeItemFromCart(index);
-            } else {
-                shoppingCart[index].quantity = newQuantity;
-                saveCartToLocal();
-            }
-        }
-        
-        function getCartTotalAmount() {
-            return shoppingCart.reduce((total, item) => total + (item.price * item.quantity), 0);
-        }
-        
-        function getCartItemTotalCount() {
-            return shoppingCart.reduce((count, item) => count + item.quantity, 0);
-        }
-        
-        function updateCartUI() {
-            const container = document.getElementById('cartItemsContainer');
-            const totalSpan = document.getElementById('cartTotal');
-            const countSpan = document.getElementById('cartCount');
-            
-            if (countSpan) countSpan.textContent = getCartItemTotalCount();
-            if (totalSpan) totalSpan.textContent = `$${getCartTotalAmount().toFixed(2)}`;
-            
-            if (!container) return;
-            
-            if (shoppingCart.length === 0) {
-                container.innerHTML = `<div class="empty-cart"><i class="fas fa-shopping-basket"></i><p>Tu carrito está vacío</p></div>`;
-                return;
-            }
-            
-            container.innerHTML = shoppingCart.map((item, index) => `
-                <div class="cart-item">
-                    <div class="cart-item-info">
-                        <div>
-                            <div class="cart-item-name">${escapeHtml(item.name)}</div>
-                            ${item.extraAdded ? `<div class="cart-item-detail">+ ${escapeHtml(item.extraAdded)} (+$${item.extraPrice.toFixed(2)})</div>` : ''}
-                            <div style="font-size:0.7rem; opacity:0.7;">$${item.originalPrice || item.price} c/u</div>
-                        </div>
-                        <div class="cart-item-price">$${(item.price * item.quantity).toFixed(2)}</div>
-                    </div>
-                    <div class="cart-item-controls">
-                        <div class="quantity-control">
-                            <button class="quantity-btn" onclick="updateItemQuantity(${index}, ${item.quantity - 1})">-</button>
-                            <span class="quantity-value">${item.quantity}</span>
-                            <button class="quantity-btn" onclick="updateItemQuantity(${index}, ${item.quantity + 1})">+</button>
-                        </div>
-                        <button class="remove-item" onclick="removeItemFromCart(${index})">
-                            <i class="fas fa-trash-alt"></i> Eliminar
-                        </button>
-                    </div>
-                </div>
-            `).join('');
         }
         
         function escapeHtml(str) {
@@ -1012,12 +1014,8 @@
                 </div>
                 <div class="invoice-footer">
                     <p>✅ PAGO CONFIRMADO - TRANSACCIÓN APROBADA</p>
-                    <p>Este documento es tu comprobante de pago. Presenta este código QR al llegar al local.</p>
-                    <p style="margin-top:0.5rem;">📱 Escanea este código para reclamar tu pedido</p>
-                    <div style="margin-top:0.5rem; font-size:0.65rem;">
-                        <i class="fas fa-check-circle" style="color:#4CAF50;"></i> Pedido confirmado<br>
-                        <i class="fas fa-clock"></i> Tiempo estimado: 15-20 minutos
-                    </div>
+                    <p>Este documento es tu comprobante de pago.</p>
+                    <p style="margin-top:0.5rem;">📱 Tiempo estimado: 15-20 minutos</p>
                 </div>
             `;
             
@@ -1036,12 +1034,12 @@
             document.body.style.overflow = 'hidden';
         }
         
-        function closeInvoiceModal() {
+        window.closeInvoiceModal = function() {
             document.getElementById('invoiceModal').classList.remove('active');
             document.body.style.overflow = '';
-        }
+        };
         
-        function printInvoice() {
+        window.printInvoice = function() {
             if (!lastInvoice) return;
             
             const printWindow = window.open('', '_blank');
@@ -1051,73 +1049,26 @@
                 <head>
                     <title>Factura Lucy's Yard - ${lastInvoice.number}</title>
                     <style>
-                        body {
-                            font-family: 'Poppins', 'Segoe UI', sans-serif;
-                            padding: 2rem;
-                            max-width: 600px;
-                            margin: 0 auto;
-                        }
-                        .invoice-header {
-                            text-align: center;
-                            border-bottom: 2px solid #DB3606;
-                            padding-bottom: 1rem;
-                            margin-bottom: 1rem;
-                        }
-                        .invoice-header h2 { color: #DB3606; margin-bottom: 0.5rem; }
-                        .invoice-number {
-                            background: #f5f5f5;
-                            padding: 0.5rem;
-                            text-align: center;
-                            border-radius: 8px;
-                            margin: 1rem 0;
-                            font-family: monospace;
-                        }
-                        .invoice-row {
-                            display: flex;
-                            justify-content: space-between;
-                            padding: 0.5rem 0;
-                            border-bottom: 1px solid #eee;
-                        }
-                        .invoice-item {
-                            display: flex;
-                            justify-content: space-between;
-                            padding: 0.5rem 0;
-                            border-bottom: 1px dashed #ddd;
-                        }
-                        .invoice-total {
-                            margin-top: 1rem;
-                            padding-top: 1rem;
-                            border-top: 2px solid #DB3606;
-                            font-weight: bold;
-                            font-size: 1.2rem;
-                            display: flex;
-                            justify-content: space-between;
-                        }
-                        .invoice-footer {
-                            margin-top: 1.5rem;
-                            text-align: center;
-                            font-size: 0.7rem;
-                            color: #666;
-                            border-top: 1px solid #eee;
-                            padding-top: 1rem;
-                        }
-                        @media print {
-                            body { padding: 0; }
-                            button { display: none; }
-                        }
+                        body { font-family: 'Poppins', 'Segoe UI', sans-serif; padding: 2rem; max-width: 600px; margin: 0 auto; }
+                        .invoice-header { text-align: center; border-bottom: 2px solid #DB3606; padding-bottom: 1rem; margin-bottom: 1rem; }
+                        .invoice-header h2 { color: #DB3606; }
+                        .invoice-number { background: #f5f5f5; padding: 0.5rem; text-align: center; border-radius: 8px; margin: 1rem 0; }
+                        .invoice-row { display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid #eee; }
+                        .invoice-item { display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px dashed #ddd; }
+                        .invoice-total { margin-top: 1rem; padding-top: 1rem; border-top: 2px solid #DB3606; font-weight: bold; font-size: 1.2rem; display: flex; justify-content: space-between; }
+                        .invoice-footer { margin-top: 1.5rem; text-align: center; font-size: 0.7rem; color: #666; border-top: 1px solid #eee; padding-top: 1rem; }
+                        @media print { body { padding: 0; } button { display: none; } }
                     </style>
                 </head>
                 <body>
                     ${lastInvoice.html}
-                    <div style="text-align:center; margin-top:1rem; font-size:0.7rem;">
-                        <p>¡Gracias por tu compra! Vuelve pronto a Lucy's Yard 🌿</p>
-                    </div>
+                    <div style="text-align:center; margin-top:1rem;">¡Gracias por tu compra! 🌿</div>
                 </body>
                 </html>
             `);
             printWindow.document.close();
             printWindow.print();
-        }
+        };
         
         // ==================== ENVIAR PEDIDO ====================
         async function sendOrderToCloud(orderData) {
@@ -1142,7 +1093,6 @@
                     showNotification(`Error: ${error.message}`, true);
                     return { success: false };
                 }
-                
                 return { success: true };
             } catch (error) {
                 console.error('Error:', error);
@@ -1169,7 +1119,7 @@
                 return;
             }
             
-            const total = getCartTotalAmount();
+            const total = getCartTotal();
             showNotification('Procesando pago...');
             
             try {
@@ -1195,16 +1145,11 @@
                 const result = await sendOrderToCloud(orderData);
                 
                 if (result.success) {
-                    // Generar factura antes de limpiar el carrito
                     generateInvoice(orderData);
-                    
-                    // Limpiar carrito
                     shoppingCart = [];
-                    saveCartToLocal();
+                    saveCart();
                     closeCartModal();
-                    
                     showNotification(`🎉 Pedido #${payment.transactionId.slice(-6)} enviado a cocina!`);
-                    console.log('========== COMANDA ==========', orderData);
                 }
             } catch (error) {
                 console.error('Error:', error);
@@ -1245,10 +1190,10 @@
                             <div class="card-content">
                                 <h3>${escapeHtml(item.name)} ${item.badge ? `<span class="badge">${escapeHtml(item.badge)}</span>` : ''}</h3>
                                 <p>${escapeHtml(item.description)}</p>
-                                ${hasExtras ? `<div class="addon-info" onclick="openExtrasModal(${itemData})"><i class="fas fa-plus-circle"></i> + Agregar proteína</div>` : ''}
+                                ${hasExtras ? `<div class="addon-info" onclick="window.openExtrasModal(${itemData})"><i class="fas fa-plus-circle"></i> + Agregar proteína</div>` : ''}
                                 <div class="price-row">
                                     <span class="price">${priceDisplay}</span>
-                                    ${item.price > 0 || item.priceText ? `<button class="add-to-cart" onclick="${hasExtras ? `openExtrasModal(${itemData})` : `addItemToCart(${itemData})`}">
+                                    ${item.price > 0 || item.priceText ? `<button class="add-to-cart" onclick="${hasExtras ? `window.openExtrasModal(${itemData})` : `window.addToCart(${itemData})`}">
                                         <i class="fas fa-plus"></i> Agregar
                                     </button>` : ''}
                                 </div>
@@ -1284,13 +1229,6 @@
             document.getElementById('checkoutBtn').addEventListener('click', checkout);
             document.getElementById('extrasCancelBtn').addEventListener('click', closeExtrasModal);
             document.getElementById('extrasConfirmBtn').addEventListener('click', confirmExtrasAndAdd);
-            
-            window.addItemToCart = addItemToCart;
-            window.removeItemFromCart = removeItemFromCart;
-            window.updateItemQuantity = updateItemQuantity;
-            window.openExtrasModal = openExtrasModal;
-            window.closeInvoiceModal = closeInvoiceModal;
-            window.printInvoice = printInvoice;
             
             console.log('🌿 Lucy\'s Yard QR Menu listo!');
         }
