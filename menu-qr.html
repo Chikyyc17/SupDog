@@ -19,7 +19,6 @@
         :root {
             --color-rojo-fuego: #DB3606;
             --color-amarillo-cheddar: #F8A814;
-            --color-mostaza-suave: #E0A851;
             --color-purpura-berry: #BA6990;
             --color-fondo-oscuro: #0f0f0f;
             --color-texto-claro: #ffffff;
@@ -513,7 +512,7 @@
 
         .addon-info {
             font-size: 0.7rem;
-            color: var(--color-mostaza-suave);
+            color: #E0A851;
             margin-top: 0.5rem;
             background: rgba(0,0,0,0.3);
             padding: 5px 8px;
@@ -623,12 +622,13 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
-        // ==================== DATOS ====================
+        // ==================== CONFIGURACIÓN ====================
         const SUPABASE_URL = 'https://mlmaucnbhprzwovksxpo.supabase.co';
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1sbWF1Y25iaHByendvdmtzeHBvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ5ODU2MzMsImV4cCI6MjA5MDU2MTYzM30.UeGsnpKOShPh3-zVf5RR12roqqNhGAFwhK3hyckcqjs';
         
         const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
         
+        // ==================== EXTRAS ====================
         const extrasOptions = {
             nachos: [
                 { name: "Brisket", price: 6.00 },
@@ -644,39 +644,40 @@
             ]
         };
         
+        // ==================== MENÚ COMPLETO ====================
         const menuItems = [
-            { id: 1, name: "6 Wings", desc: "BBQ | Mango Habanero | Lemon Pepper | Buffalo | Sweet Chili", price: 11.25, cat: "Appetizers", img: "https://images.unsplash.com/photo-1608039829572-78524f79c4c7?w=400&h=300&fit=crop" },
-            { id: 2, name: "12 Wings", desc: "BBQ | Mango Habanero | Lemon Pepper | Buffalo | Sweet Chili", price: 18.00, cat: "Appetizers", img: "https://images.unsplash.com/photo-1608039829572-78524f79c4c7?w=400&h=300&fit=crop" },
-            { id: 3, name: "Chips & Queso", desc: "Tortilla chips con queso fundido", price: 10.00, cat: "Appetizers", img: "https://images.unsplash.com/photo-1593195743443-2f5b6b4d2c8f?w=400&h=300&fit=crop" },
-            { id: 4, name: "Chips & Salsa", desc: "Tortilla chips con salsa fresca", price: 8.00, cat: "Appetizers", img: "https://images.unsplash.com/photo-1569591159212-b02ea8a9f6b1?w=400&h=300&fit=crop" },
-            { id: 5, name: "Loaded Nachos", desc: "Chips, queso, pico de gallo, jalapeños, crema", price: 10.00, cat: "Appetizers", img: "https://images.unsplash.com/photo-1513456852971-30c0b8199d4d?w=400&h=300&fit=crop", hasExtras: true, extraType: "nachos" },
-            { id: 6, name: "House Salad", desc: "Spring mix, slaw, pico, cheese, tortilla strips, chipotle aioli", price: 8.00, cat: "Salads & Bowls", img: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=300&fit=crop" },
-            { id: 7, name: "Wedge Salad", desc: "Iceberg lettuce, blue cheese, grape tomatoes, chives, bacon", price: 8.00, cat: "Salads & Bowls", img: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=300&fit=crop" },
-            { id: 8, name: "Chopped Salad", desc: "Chopped greens, grape tomatoes, avocado, bacon, eggs, cheese", price: 8.00, cat: "Salads & Bowls", img: "https://images.unsplash.com/photo-1546793665-c74683f339c1?w=400&h=300&fit=crop" },
-            { id: 9, name: "Power Bowl", desc: "Cilantro lime rice, black beans, roasted corn, slaw, pico, cheese, lime chipotle sauce", price: 9.00, cat: "Salads & Bowls", img: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=300&fit=crop", hasExtras: true, extraType: "bowlProteins" },
-            { id: 10, name: "Veggie Bowl", desc: "Cilantro lime rice, beans, corn, avocado, slaw, pico, roasted cauliflower", price: 12.00, cat: "Salads & Bowls", img: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=300&fit=crop", hasExtras: true, extraType: "bowlProteins" },
-            { id: 11, name: "Tacos (2)", desc: "Chicken Fajita | Garlic Shrimp | Brisket | Baja Fish", price: 12.00, cat: "Tacos & Quesadillas", img: "https://images.unsplash.com/photo-1599974579688-8dbdd335c77f?w=400&h=300&fit=crop" },
-            { id: 12, name: "Quesadilla", desc: "Chicken Fajita | Garlic Shrimp | Brisket", price: 12.00, cat: "Tacos & Quesadillas", img: "https://images.unsplash.com/photo-1618040996337-56904b7850b9?w=400&h=300&fit=crop" },
-            { id: 13, name: "Classic Burger", desc: "1/3lb patty, cheddar cheese, lettuce, tomatoes, onions, pickles", price: 11.95, cat: "Burgers", img: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&h=300&fit=crop" },
-            { id: 14, name: "BBQ Burger", desc: "1/3lb patty, homemade BBQ sauce, onion strings, pickles", price: 12.95, cat: "Burgers", img: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&h=300&fit=crop" },
-            { id: 15, name: "Bacon Cheese Burger", desc: "1/3lb patty, crispy bacon, cheddar cheese, lettuce, tomatoes, onions", price: 12.95, cat: "Burgers", img: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&h=300&fit=crop" },
-            { id: 16, name: "Sliders (2)", desc: "Brisket | Pulled Pork", price: 12.00, cat: "Burgers", img: "https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?w=400&h=300&fit=crop" },
-            { id: 17, name: "Fish & Chips", desc: "Fish, hush puppies, fries, slaw, lemon", price: 16.00, cat: "Seafood", img: "https://images.unsplash.com/photo-1579208575657-c595a05383b7?w=400&h=300&fit=crop" },
-            { id: 18, name: "Shrimp Boil", desc: "Potatoes, corn, sausage & 1 lb shrimp", price: 28.00, cat: "Seafood", img: "https://images.unsplash.com/photo-1625943553852-781c6dd46f9c?w=400&h=300&fit=crop" },
-            { id: 19, name: "Kids Tenders", desc: "Con fries, jello y jugo", price: 10.50, cat: "Kids Menu", img: "https://images.unsplash.com/photo-1619895098996-1e5f1a9e3b9e?w=400&h=300&fit=crop" },
-            { id: 20, name: "Kids Shrimp", desc: "Con fries, jello y jugo", price: 10.50, cat: "Kids Menu", img: "https://images.unsplash.com/photo-1625943553852-781c6dd46f9c?w=400&h=300&fit=crop" },
-            { id: 21, name: "Kids Cheeseburger", desc: "Con fries, jello y jugo", price: 10.50, cat: "Kids Menu", img: "https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=400&h=300&fit=crop" },
-            { id: 22, name: "Kids Fish", desc: "Con fries, jello y jugo", price: 10.50, cat: "Kids Menu", img: "https://images.unsplash.com/photo-1579208575657-c595a05383b7?w=400&h=300&fit=crop" },
-            { id: 23, name: "Kids Corn Dog", desc: "Con fries, jello y jugo", price: 10.50, cat: "Kids Menu", img: "https://images.unsplash.com/photo-1599490659213-e2b9527bd6a4?w=400&h=300&fit=crop" },
-            { id: 24, name: "French Fries", desc: "Shoestring fries", price: 5.00, cat: "Sides", img: "https://images.unsplash.com/photo-1630384060421-cb20b0e0649d?w=400&h=300&fit=crop" },
-            { id: 25, name: "Slaw", desc: "Coleslaw fresca", price: 5.00, cat: "Sides", img: "https://images.unsplash.com/photo-1572445278543-3a4c9c8f9c8f?w=400&h=300&fit=crop" },
-            { id: 26, name: "Mac & Cheese", desc: "Cremoso macaroni con queso", price: 5.00, cat: "Sides", img: "https://images.unsplash.com/photo-1543339308-43e59d6b73a4?w=400&h=300&fit=crop" },
-            { id: 27, name: "Chilaquiles", desc: "Green or Red Sauce - With egg, fresh cheese, sour cream & beans", price: 12.00, cat: "Brunch", img: "https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?w=400&h=300&fit=crop", badge: "🌿 Brunch" },
-            { id: 28, name: "Breakfast Tacos (2)", desc: "Chorizo & Egg | Potato & Egg", price: 10.00, cat: "Brunch", img: "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=400&h=300&fit=crop", badge: "🌿 Brunch" },
-            { id: 29, name: "Steak & Eggs", desc: "Country potatoes, 2 eggs & 6 oz steak", price: 16.50, cat: "Brunch", img: "https://images.unsplash.com/photo-1596040033229-3a0e3c7b3b5e?w=400&h=300&fit=crop", badge: "🌿 Brunch" },
-            { id: 30, name: "Breakfast Plate", desc: "2 eggs + country potatoes + bacon", price: 12.00, cat: "Brunch", img: "https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?w=400&h=300&fit=crop", badge: "🌿 Brunch" },
-            { id: 31, name: "Kids Plate", desc: "2 pancakes + 2 eggs + 1 bacon + jello", price: 10.50, cat: "Brunch", img: "https://images.unsplash.com/photo-1586444248902-2f64eddc13df?w=400&h=300&fit=crop", badge: "🌿 Brunch" },
-            { id: 32, name: "Chef's Special", desc: "Different every week! Ask your server", price: 0, cat: "Brunch", img: "https://images.unsplash.com/photo-1544025162-d76694265947?w=400&h=300&fit=crop", badge: "👨‍🍳 Especial", priceText: "Precio del mercado" }
+            { id: 1, name: "6 Wings", description: "BBQ | Mango Habanero | Lemon Pepper | Buffalo | Sweet Chili", price: 11.25, category: "Appetizers", image: "https://images.unsplash.com/photo-1608039829572-78524f79c4c7?w=400&h=300&fit=crop" },
+            { id: 2, name: "12 Wings", description: "BBQ | Mango Habanero | Lemon Pepper | Buffalo | Sweet Chili", price: 18.00, category: "Appetizers", image: "https://images.unsplash.com/photo-1608039829572-78524f79c4c7?w=400&h=300&fit=crop" },
+            { id: 3, name: "Chips & Queso", description: "Tortilla chips con queso fundido", price: 10.00, category: "Appetizers", image: "https://images.unsplash.com/photo-1593195743443-2f5b6b4d2c8f?w=400&h=300&fit=crop" },
+            { id: 4, name: "Chips & Salsa", description: "Tortilla chips con salsa fresca", price: 8.00, category: "Appetizers", image: "https://images.unsplash.com/photo-1569591159212-b02ea8a9f6b1?w=400&h=300&fit=crop" },
+            { id: 5, name: "Loaded Nachos", description: "Chips, queso, pico de gallo, jalapeños, crema", price: 10.00, category: "Appetizers", image: "https://images.unsplash.com/photo-1513456852971-30c0b8199d4d?w=400&h=300&fit=crop", hasExtras: true, extraType: "nachos" },
+            { id: 6, name: "House Salad", description: "Spring mix, slaw, pico, cheese, tortilla strips, chipotle aioli", price: 8.00, category: "Salads & Bowls", image: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=300&fit=crop" },
+            { id: 7, name: "Wedge Salad", description: "Iceberg lettuce, blue cheese, grape tomatoes, chives, bacon", price: 8.00, category: "Salads & Bowls", image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=300&fit=crop" },
+            { id: 8, name: "Chopped Salad", description: "Chopped greens, grape tomatoes, avocado, bacon, eggs, cheese", price: 8.00, category: "Salads & Bowls", image: "https://images.unsplash.com/photo-1546793665-c74683f339c1?w=400&h=300&fit=crop" },
+            { id: 9, name: "Power Bowl", description: "Cilantro lime rice, black beans, roasted corn, slaw, pico, cheese, lime chipotle sauce", price: 9.00, category: "Salads & Bowls", image: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=300&fit=crop", hasExtras: true, extraType: "bowlProteins" },
+            { id: 10, name: "Veggie Bowl", description: "Cilantro lime rice, beans, corn, avocado, slaw, pico, roasted cauliflower", price: 12.00, category: "Salads & Bowls", image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=300&fit=crop", hasExtras: true, extraType: "bowlProteins" },
+            { id: 11, name: "Tacos (2)", description: "Chicken Fajita | Garlic Shrimp | Brisket | Baja Fish", price: 12.00, category: "Tacos & Quesadillas", image: "https://images.unsplash.com/photo-1599974579688-8dbdd335c77f?w=400&h=300&fit=crop" },
+            { id: 12, name: "Quesadilla", description: "Chicken Fajita | Garlic Shrimp | Brisket", price: 12.00, category: "Tacos & Quesadillas", image: "https://images.unsplash.com/photo-1618040996337-56904b7850b9?w=400&h=300&fit=crop" },
+            { id: 13, name: "Classic Burger", description: "1/3lb patty, cheddar cheese, lettuce, tomatoes, onions, pickles", price: 11.95, category: "Burgers", image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&h=300&fit=crop" },
+            { id: 14, name: "BBQ Burger", description: "1/3lb patty, homemade BBQ sauce, onion strings, pickles", price: 12.95, category: "Burgers", image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&h=300&fit=crop" },
+            { id: 15, name: "Bacon Cheese Burger", description: "1/3lb patty, crispy bacon, cheddar cheese, lettuce, tomatoes, onions", price: 12.95, category: "Burgers", image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&h=300&fit=crop" },
+            { id: 16, name: "Sliders (2)", description: "Brisket | Pulled Pork", price: 12.00, category: "Burgers", image: "https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?w=400&h=300&fit=crop" },
+            { id: 17, name: "Fish & Chips", description: "Fish, hush puppies, fries, slaw, lemon", price: 16.00, category: "Seafood", image: "https://images.unsplash.com/photo-1579208575657-c595a05383b7?w=400&h=300&fit=crop" },
+            { id: 18, name: "Shrimp Boil", description: "Potatoes, corn, sausage & 1 lb shrimp", price: 28.00, category: "Seafood", image: "https://images.unsplash.com/photo-1625943553852-781c6dd46f9c?w=400&h=300&fit=crop" },
+            { id: 19, name: "Kids Tenders", description: "Con fries, jello y jugo", price: 10.50, category: "Kids Menu", image: "https://images.unsplash.com/photo-1619895098996-1e5f1a9e3b9e?w=400&h=300&fit=crop" },
+            { id: 20, name: "Kids Shrimp", description: "Con fries, jello y jugo", price: 10.50, category: "Kids Menu", image: "https://images.unsplash.com/photo-1625943553852-781c6dd46f9c?w=400&h=300&fit=crop" },
+            { id: 21, name: "Kids Cheeseburger", description: "Con fries, jello y jugo", price: 10.50, category: "Kids Menu", image: "https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=400&h=300&fit=crop" },
+            { id: 22, name: "Kids Fish", description: "Con fries, jello y jugo", price: 10.50, category: "Kids Menu", image: "https://images.unsplash.com/photo-1579208575657-c595a05383b7?w=400&h=300&fit=crop" },
+            { id: 23, name: "Kids Corn Dog", description: "Con fries, jello y jugo", price: 10.50, category: "Kids Menu", image: "https://images.unsplash.com/photo-1599490659213-e2b9527bd6a4?w=400&h=300&fit=crop" },
+            { id: 24, name: "French Fries", description: "Shoestring fries", price: 5.00, category: "Sides", image: "https://images.unsplash.com/photo-1630384060421-cb20b0e0649d?w=400&h=300&fit=crop" },
+            { id: 25, name: "Slaw", description: "Coleslaw fresca", price: 5.00, category: "Sides", image: "https://images.unsplash.com/photo-1572445278543-3a4c9c8f9c8f?w=400&h=300&fit=crop" },
+            { id: 26, name: "Mac & Cheese", description: "Cremoso macaroni con queso", price: 5.00, category: "Sides", image: "https://images.unsplash.com/photo-1543339308-43e59d6b73a4?w=400&h=300&fit=crop" },
+            { id: 27, name: "Chilaquiles", description: "Green or Red Sauce - With egg, fresh cheese, sour cream & beans", price: 12.00, category: "Brunch", image: "https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?w=400&h=300&fit=crop", badge: "🌿 Brunch" },
+            { id: 28, name: "Breakfast Tacos (2)", description: "Chorizo & Egg | Potato & Egg", price: 10.00, category: "Brunch", image: "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=400&h=300&fit=crop", badge: "🌿 Brunch" },
+            { id: 29, name: "Steak & Eggs", description: "Country potatoes, 2 eggs & 6 oz steak", price: 16.50, category: "Brunch", image: "https://images.unsplash.com/photo-1596040033229-3a0e3c7b3b5e?w=400&h=300&fit=crop", badge: "🌿 Brunch" },
+            { id: 30, name: "Breakfast Plate", description: "2 eggs + country potatoes + bacon", price: 12.00, category: "Brunch", image: "https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?w=400&h=300&fit=crop", badge: "🌿 Brunch" },
+            { id: 31, name: "Kids Plate", description: "2 pancakes + 2 eggs + 1 bacon + jello", price: 10.50, category: "Brunch", image: "https://images.unsplash.com/photo-1586444248902-2f64eddc13df?w=400&h=300&fit=crop", badge: "🌿 Brunch" },
+            { id: 32, name: "Chef's Special", description: "Different every week! Ask your server", price: 0, category: "Brunch", image: "https://images.unsplash.com/photo-1544025162-d76694265947?w=400&h=300&fit=crop", badge: "👨‍🍳 Especial", priceText: "Precio del mercado" }
         ];
         
         // ==================== CARRITO ====================
@@ -698,7 +699,7 @@
                 cart.push({ ...item, qty: 1 });
             }
             saveCart();
-            showNotif(`${item.name} agregado`);
+            showNotif(`${item.name} agregado al carrito`);
         }
         
         function removeFromCart(idx) {
@@ -728,8 +729,8 @@
             const totalSpan = document.getElementById('cartTotal');
             const countSpan = document.getElementById('cartCount');
             
-            countSpan.textContent = getCount();
-            totalSpan.textContent = `$${getTotal().toFixed(2)}`;
+            if (countSpan) countSpan.textContent = getCount();
+            if (totalSpan) totalSpan.textContent = `$${getTotal().toFixed(2)}`;
             
             if (!container) return;
             
@@ -744,6 +745,7 @@
                         <div>
                             <div class="cart-item-name">${item.name}</div>
                             ${item.extraAdded ? `<div style="font-size:0.7rem;">+ ${item.extraAdded} (+$${item.extraPrice})</div>` : ''}
+                            <div style="font-size:0.7rem;">$${item.originalPrice || item.price} c/u</div>
                         </div>
                         <div class="cart-item-price">$${(item.price * item.qty).toFixed(2)}</div>
                     </div>
@@ -753,7 +755,7 @@
                             <span>${item.qty}</span>
                             <button class="quantity-btn" onclick="updateQty(${idx}, ${item.qty + 1})">+</button>
                         </div>
-                        <button class="remove-item" onclick="removeFromCart(${idx})">🗑️ Eliminar</button>
+                        <button class="remove-item" onclick="removeFromCart(${idx})"><i class="fas fa-trash-alt"></i> Eliminar</button>
                     </div>
                 </div>
             `).join('');
@@ -853,12 +855,13 @@
                     `).join('')}
                 </div>
                 <div class="invoice-total">
-                    <span>TOTAL</span>
+                    <span>TOTAL PAGADO</span>
                     <span>$${orderData.total.toFixed(2)}</span>
                 </div>
-                <div class="invoice-footer">
+                <div class="invoice-footer" style="margin-top:1rem; text-align:center; font-size:0.8rem;">
                     <p>✅ PAGO CONFIRMADO</p>
-                    <p>Tiempo estimado: 15-20 min</p>
+                    <p>Tiempo estimado: 15-20 minutos</p>
+                    <p>¡Gracias por tu compra!</p>
                 </div>
             `;
             
@@ -868,7 +871,7 @@
             container.innerHTML = html + `
                 <div class="invoice-buttons">
                     <button class="btn-close-invoice" onclick="closeInvoice()">Cerrar</button>
-                    <button class="btn-print-invoice" onclick="printInvoice()">Imprimir</button>
+                    <button class="btn-print-invoice" onclick="printInvoice()">🖨️ Imprimir / Guardar</button>
                 </div>
             `;
             
@@ -887,26 +890,28 @@
             w.document.write(`
                 <html><head><title>Factura ${lastInvoice.number}</title>
                 <style>
-                    body { font-family: sans-serif; padding: 2rem; max-width: 500px; margin: 0 auto; }
+                    body { font-family: 'Poppins', sans-serif; padding: 2rem; max-width: 500px; margin: 0 auto; }
                     .invoice-header { text-align: center; border-bottom: 2px solid #DB3606; padding-bottom: 1rem; }
                     .invoice-header h2 { color: #DB3606; }
                     .invoice-number { background: #f5f5f5; padding: 0.5rem; text-align: center; margin: 1rem 0; }
                     .invoice-item { display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px dashed #ddd; }
                     .invoice-total { margin-top: 1rem; padding-top: 1rem; border-top: 2px solid #DB3606; display: flex; justify-content: space-between; font-weight: bold; }
-                    .invoice-footer { margin-top: 1rem; text-align: center; font-size: 0.8rem; }
+                    .invoice-footer { margin-top: 1rem; text-align: center; }
                     @media print { button { display: none; } }
                 </style>
-                </head><body>${lastInvoice.html}<div style="text-align:center; margin-top:1rem;">¡Gracias por tu compra!</div></body></html>
+                </head><body>${lastInvoice.html}<div style="text-align:center; margin-top:1rem;">🌿 Lucy's Yard - ¡Gracias por tu visita!</div></body></html>
             `);
             w.document.close();
             w.print();
         }
         
-        // ==================== PAGO ====================
+        // ==================== ENVIAR A COCINA ====================
         async function sendToKitchen(orderData) {
             try {
                 await supabase.from('orders').insert([{
                     order_id: orderData.orderId,
+                    customer_name: 'Cliente QR',
+                    table_number: 'Mesa QR',
                     items: orderData.items,
                     total: orderData.total,
                     location: 'Allen - Lucy\'s Yard',
@@ -914,14 +919,14 @@
                 }]);
                 return true;
             } catch(e) {
-                console.error(e);
+                console.error('Error al enviar:', e);
                 return false;
             }
         }
         
         async function checkout() {
             if (cart.length === 0) {
-                showNotif('Carrito vacío', true);
+                showNotif('El carrito está vacío', true);
                 return;
             }
             
@@ -942,43 +947,44 @@
                     cart = [];
                     saveCart();
                     closeCartModal();
-                    showNotif(`✅ Pedido #${orderId.slice(-6)} enviado!`);
+                    showNotif(`🎉 Pedido #${orderId.slice(-6)} enviado a cocina!`);
                 } else {
-                    showNotif('Error al enviar', true);
+                    showNotif('Error al enviar el pedido', true);
                 }
             }, 500);
         }
         
-        // ==================== RENDER MENÚ ====================
+        // ==================== RENDERIZAR MENÚ ====================
         function renderMenu() {
             const container = document.getElementById('menuContainer');
             if (!container) return;
             
-            const cats = [...new Set(menuItems.map(i => i.cat))];
+            const categories = [...new Set(menuItems.map(item => item.category))];
             let html = '';
             
-            cats.forEach(cat => {
-                const items = menuItems.filter(i => i.cat === cat);
-                const isBrunch = cat === 'Brunch';
+            categories.forEach(category => {
+                const categoryItems = menuItems.filter(item => item.category === category);
+                const isBrunch = category === 'Brunch';
                 
-                html += `<h2 class="section-title">${cat}${isBrunch ? ' <span class="badge">WEEKENDS ONLY</span>' : ''}</h2>`;
-                if (isBrunch) html += `<div class="brunch-banner"><p>🌿 SOLO FINES DE SEMANA • 9AM - 4PM 🌿</p></div>`;
+                html += `<h2 class="section-title">${category}${isBrunch ? ' <span class="badge">WEEKENDS ONLY 9AM-4PM</span>' : ''}</h2>`;
+                if (isBrunch) html += `<div class="brunch-banner"><p>🌿 SOLO FINES DE SEMANA • 9:00 AM - 4:00 PM 🌿</p></div>`;
                 html += `<div class="menu-grid">`;
                 
-                items.forEach(item => {
-                    const priceShow = item.priceText ? item.priceText : `$${item.price.toFixed(2)}`;
+                categoryItems.forEach(item => {
+                    const priceDisplay = item.priceText ? item.priceText : `$${item.price.toFixed(2)}`;
                     const hasExtras = item.hasExtras;
+                    const itemData = JSON.stringify(item).replace(/'/g, "\\'");
                     
                     html += `
                         <div class="menu-card">
-                            <img src="${item.img}" class="card-image" onerror="this.src='https://via.placeholder.com/400x300'">
+                            <img src="${item.image}" class="card-image" onerror="this.src='https://via.placeholder.com/400x300?text=Lucy%27s+Yard'">
                             <div class="card-content">
                                 <h3>${item.name}${item.badge ? `<span class="badge">${item.badge}</span>` : ''}</h3>
-                                <p>${item.desc}</p>
-                                ${hasExtras ? `<div class="addon-info" onclick="openExtrasModal(${JSON.stringify(item).replace(/'/g, "\\'")})"><i class="fas fa-plus-circle"></i> + Agregar proteína</div>` : ''}
+                                <p>${item.description}</p>
+                                ${hasExtras ? `<div class="addon-info" onclick="openExtrasModal(${itemData})"><i class="fas fa-plus-circle"></i> + Agregar proteína</div>` : ''}
                                 <div class="price-row">
-                                    <span class="price">${priceShow}</span>
-                                    <button class="add-to-cart" onclick="addToCart(${JSON.stringify(item).replace(/'/g, "\\'")})">
+                                    <span class="price">${priceDisplay}</span>
+                                    <button class="add-to-cart" onclick="${hasExtras ? `openExtrasModal(${itemData})` : `addToCart(${itemData})`}">
                                         <i class="fas fa-plus"></i> Agregar
                                     </button>
                                 </div>
@@ -1023,6 +1029,7 @@
         updateCartDisplay();
         
         console.log('✅ Lucy\'s Yard QR Menu listo!');
+        console.log(`📦 ${menuItems.length} productos cargados`);
     </script>
 </body>
 </html>
