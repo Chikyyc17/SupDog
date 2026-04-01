@@ -24,21 +24,19 @@
             --color-fondo-oscuro: #0f0f0f;
             --color-texto-claro: #ffffff;
             --color-exito: #4CAF50;
-            --color-card-bg: #2a2a2a;
             --shadow-sm: 0 2px 8px rgba(0,0,0,0.2);
             --shadow-md: 0 4px 12px rgba(0,0,0,0.3);
-            --shadow-lg: 0 8px 24px rgba(0,0,0,0.4);
         }
 
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, var(--color-fondo-oscuro) 0%, #1a0f0f 100%);
+            background: var(--color-fondo-oscuro);
             color: var(--color-texto-claro);
             overflow-x: hidden;
+            overflow-y: auto;
             min-height: 100vh;
         }
 
-        /* Header */
         header {
             display: flex;
             justify-content: center;
@@ -47,12 +45,13 @@
             background: rgba(15, 15, 15, 0.98);
             position: fixed;
             top: 0;
+            left: 0;
+            right: 0;
             width: 100%;
             z-index: 1000;
             height: 70px;
             border-bottom: 3px solid var(--color-amarillo-cheddar);
             backdrop-filter: blur(10px);
-            box-shadow: var(--shadow-sm);
         }
 
         .logo-text {
@@ -61,7 +60,6 @@
             color: white;
             text-shadow: 2px 2px 0px var(--color-rojo-fuego);
             font-family: 'Bangers', cursive;
-            letter-spacing: 1px;
         }
 
         .logo-text span {
@@ -83,11 +81,6 @@
             align-items: center;
             gap: 8px;
             font-weight: 600;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .cart-btn:active {
-            transform: translateY(-50%) scale(0.96);
         }
 
         .cart-count {
@@ -102,7 +95,12 @@
             font-weight: bold;
         }
 
-        /* Modal Carrito Mejorado */
+        .main-content {
+            padding-top: 70px;
+            min-height: 100vh;
+        }
+
+        /* Modal Carrito */
         .cart-modal {
             position: fixed;
             top: 0;
@@ -113,7 +111,7 @@
             background: var(--color-fondo-oscuro);
             z-index: 2000;
             transform: translateX(100%);
-            transition: transform 0.3s cubic-bezier(0.77, 0, 0.175, 1);
+            transition: transform 0.25s ease-out;
             display: flex;
             flex-direction: column;
             box-shadow: -5px 0 30px rgba(0,0,0,0.5);
@@ -128,6 +126,7 @@
             background: linear-gradient(135deg, rgba(186,105,144,0.2), rgba(219,54,6,0.1));
             border-bottom: 2px solid var(--color-purpura-berry);
             position: relative;
+            flex-shrink: 0;
         }
 
         .cart-header h2 {
@@ -148,18 +147,12 @@
             height: 40px;
             border-radius: 50%;
             cursor: pointer;
-            transition: background 0.2s ease;
-        }
-
-        .close-cart:active {
-            background: rgba(255,255,255,0.2);
         }
 
         .cart-items {
             flex: 1;
             overflow-y: auto;
             padding: 1rem;
-            -webkit-overflow-scrolling: touch;
         }
 
         .cart-item {
@@ -167,20 +160,25 @@
             border-radius: 16px;
             padding: 1rem;
             margin-bottom: 1rem;
-            transition: transform 0.2s ease;
         }
 
         .cart-item-info {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            margin-bottom: 0.8rem;
+            margin-bottom: 0.5rem;
         }
 
         .cart-item-name {
             font-weight: 600;
             font-size: 1rem;
             color: var(--color-amarillo-cheddar);
+        }
+
+        .cart-item-detail {
+            font-size: 0.7rem;
+            opacity: 0.7;
+            margin-top: 2px;
         }
 
         .cart-item-price {
@@ -194,6 +192,7 @@
             align-items: center;
             flex-wrap: wrap;
             gap: 0.8rem;
+            margin-top: 0.5rem;
         }
 
         .quantity-control {
@@ -214,21 +213,12 @@
             color: white;
             font-size: 1.1rem;
             cursor: pointer;
-            transition: all 0.2s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .quantity-btn:active {
-            transform: scale(0.92);
         }
 
         .quantity-value {
             font-weight: 600;
             min-width: 30px;
             text-align: center;
-            font-size: 1rem;
         }
 
         .remove-item {
@@ -239,21 +229,16 @@
             color: #ff6b6b;
             cursor: pointer;
             font-size: 0.8rem;
-            font-weight: 500;
-            transition: all 0.2s ease;
             display: flex;
             align-items: center;
             gap: 5px;
-        }
-
-        .remove-item:active {
-            background: rgba(255,107,107,0.4);
         }
 
         .cart-footer {
             padding: 1.5rem;
             background: linear-gradient(135deg, rgba(186,105,144,0.2), rgba(219,54,6,0.1));
             border-top: 2px solid var(--color-purpura-berry);
+            flex-shrink: 0;
         }
 
         .cart-total-row {
@@ -262,10 +247,6 @@
             align-items: center;
             margin-bottom: 1.2rem;
             font-size: 1.2rem;
-        }
-
-        .total-label {
-            font-weight: 600;
         }
 
         .total-amount {
@@ -285,16 +266,143 @@
             font-weight: bold;
             cursor: pointer;
             font-size: 1rem;
-            transition: all 0.2s ease;
         }
 
-        .checkout-btn:active {
-            transform: scale(0.98);
+        /* Modal Factura */
+        .invoice-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 3000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.2s ease;
         }
 
-        /* Hero Banner */
+        .invoice-modal.active {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .invoice-container {
+            background: white;
+            color: #1a1a1a;
+            border-radius: 24px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 85vh;
+            overflow-y: auto;
+            padding: 1.8rem;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .invoice-header {
+            text-align: center;
+            border-bottom: 2px solid var(--color-rojo-fuego);
+            padding-bottom: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .invoice-header h2 {
+            color: var(--color-rojo-fuego);
+            font-size: 1.8rem;
+            font-family: 'Bangers', cursive;
+        }
+
+        .invoice-header p {
+            color: #666;
+            font-size: 0.8rem;
+        }
+
+        .invoice-number {
+            background: #f5f5f5;
+            padding: 0.5rem;
+            text-align: center;
+            border-radius: 8px;
+            margin: 1rem 0;
+            font-family: monospace;
+            font-size: 0.9rem;
+        }
+
+        .invoice-details {
+            margin: 1rem 0;
+        }
+
+        .invoice-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .invoice-items {
+            margin: 1rem 0;
+        }
+
+        .invoice-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px dashed #ddd;
+        }
+
+        .invoice-total {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 2px solid var(--color-rojo-fuego);
+            font-weight: bold;
+            font-size: 1.2rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .invoice-footer {
+            margin-top: 1.5rem;
+            text-align: center;
+            font-size: 0.7rem;
+            color: #666;
+            border-top: 1px solid #eee;
+            padding-top: 1rem;
+        }
+
+        .invoice-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .btn-close-invoice {
+            flex: 1;
+            background: var(--color-purpura-berry);
+            border: none;
+            padding: 12px;
+            border-radius: 40px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .btn-print-invoice {
+            flex: 1;
+            background: linear-gradient(135deg, var(--color-rojo-fuego), #c42f04);
+            border: none;
+            padding: 12px;
+            border-radius: 40px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* Menú */
         .menu-section {
-            padding: 5rem 1.5rem 2rem;
+            padding: 1.5rem;
         }
 
         .hero-banner {
@@ -304,7 +412,6 @@
             text-align: center;
             margin-bottom: 2rem;
             border: 1px solid rgba(248,168,20,0.3);
-            backdrop-filter: blur(10px);
         }
 
         .hero-banner h1 {
@@ -312,23 +419,14 @@
             font-family: 'Bangers', cursive;
             color: var(--color-amarillo-cheddar);
             text-shadow: 2px 2px 0px var(--color-rojo-fuego);
-            margin-bottom: 0.5rem;
         }
 
-        .hero-banner p {
-            color: var(--color-texto-claro);
-            font-size: 0.9rem;
-        }
-
-        /* Secciones */
         .section-title {
             text-align: center;
             font-size: clamp(1.6rem, 5vw, 2rem);
             color: var(--color-amarillo-cheddar);
             margin: 2rem 0 1rem;
-            position: relative;
             font-family: 'Bangers', cursive;
-            letter-spacing: 1px;
         }
 
         .section-title:after {
@@ -338,13 +436,11 @@
             height: 3px;
             background: var(--color-rojo-fuego);
             margin: 0.5rem auto;
-            border-radius: 2px;
         }
 
-        /* Grid de productos */
         .menu-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 1.5rem;
             max-width: 1400px;
             margin: 0 auto;
@@ -354,26 +450,13 @@
             background: linear-gradient(145deg, #2a2a2a, #222);
             border-radius: 20px;
             overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
             border: 1px solid rgba(248,168,20,0.2);
-            cursor: pointer;
-        }
-
-        .menu-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-lg);
-            border-color: var(--color-amarillo-cheddar);
         }
 
         .card-image {
             width: 100%;
             height: 180px;
             object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-
-        .menu-card:hover .card-image {
-            transform: scale(1.02);
         }
 
         .card-content {
@@ -385,7 +468,6 @@
             margin-bottom: 0.5rem;
             color: var(--color-amarillo-cheddar);
             font-family: 'Bangers', cursive;
-            letter-spacing: 0.5px;
             display: flex;
             align-items: center;
             flex-wrap: wrap;
@@ -396,7 +478,6 @@
             color: #ccc;
             font-size: 0.85rem;
             margin-bottom: 0.8rem;
-            line-height: 1.4;
         }
 
         .price-row {
@@ -423,15 +504,9 @@
             color: white;
             cursor: pointer;
             font-weight: 600;
-            transition: all 0.2s ease;
             display: flex;
             align-items: center;
             gap: 6px;
-            font-size: 0.85rem;
-        }
-
-        .add-to-cart:active {
-            transform: scale(0.95);
         }
 
         .badge {
@@ -441,7 +516,95 @@
             font-size: 0.65rem;
             padding: 3px 10px;
             border-radius: 20px;
-            font-family: 'Poppins', sans-serif;
+        }
+
+        .extras-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 4000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .extras-modal.active {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .extras-container {
+            background: linear-gradient(145deg, #2a2a2a, #222);
+            border-radius: 24px;
+            max-width: 400px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            padding: 1.5rem;
+            border: 2px solid var(--color-amarillo-cheddar);
+        }
+
+        .extras-container h3 {
+            color: var(--color-amarillo-cheddar);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            text-align: center;
+            font-family: 'Bangers', cursive;
+        }
+
+        .extras-option {
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 0.8rem;
+            margin-bottom: 0.8rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .extras-option.selected {
+            background: linear-gradient(135deg, var(--color-purpura-berry), #9d5b85);
+        }
+
+        .extras-name {
+            font-weight: 500;
+        }
+
+        .extras-price {
+            color: var(--color-amarillo-cheddar);
+            font-weight: bold;
+        }
+
+        .extras-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .extras-confirm, .extras-cancel {
+            flex: 1;
+            padding: 10px;
+            border-radius: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+        }
+
+        .extras-confirm {
+            background: linear-gradient(135deg, var(--color-rojo-fuego), #c42f04);
+            color: white;
+        }
+
+        .extras-cancel {
+            background: rgba(255,255,255,0.1);
+            color: white;
         }
 
         .addon-info {
@@ -451,6 +614,8 @@
             background: rgba(0,0,0,0.3);
             padding: 5px 8px;
             border-radius: 12px;
+            cursor: pointer;
+            display: inline-block;
         }
 
         .brunch-banner {
@@ -461,13 +626,6 @@
             margin: 1rem 0 2rem;
         }
 
-        .brunch-banner p {
-            color: white;
-            font-weight: bold;
-            font-size: 0.85rem;
-        }
-
-        /* Notificación */
         .notification {
             position: fixed;
             bottom: 20px;
@@ -477,135 +635,74 @@
             color: white;
             padding: 12px 24px;
             border-radius: 50px;
-            z-index: 3000;
-            animation: slideUp 0.3s ease;
+            z-index: 5000;
             font-weight: 500;
-            box-shadow: var(--shadow-md);
             white-space: nowrap;
         }
 
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateX(-50%) translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(-50%) translateY(0);
-            }
-        }
-
-        /* Scroll personalizado */
-        ::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: #1a1a1a;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--color-rojo-fuego);
-            border-radius: 3px;
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 2rem;
-            background: #0a0a0a;
-            margin-top: 2rem;
-            border-top: 1px solid rgba(248,168,20,0.2);
-        }
-
-        /* Empty cart */
         .empty-cart {
             text-align: center;
             padding: 3rem 1.5rem;
             color: #aaa;
         }
 
-        .empty-cart i {
-            font-size: 3rem;
-            color: var(--color-purpura-berry);
-            margin-bottom: 1rem;
-            display: block;
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: #0a0a0a;
+            margin-top: 2rem;
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
-            .menu-section {
-                padding: 5rem 1rem 1.5rem;
-            }
-            
-            .menu-grid {
-                grid-template-columns: 1fr;
-                gap: 1rem;
-            }
-            
-            .cart-modal {
-                max-width: 100%;
-            }
-            
-            .hero-banner {
-                padding: 1.2rem;
-            }
-            
-            .notification {
-                white-space: normal;
-                text-align: center;
-                max-width: 90%;
-                font-size: 0.85rem;
-            }
+            .menu-section { padding: 1rem; }
+            .menu-grid { grid-template-columns: 1fr; }
+            .cart-modal { max-width: 100%; }
+            .notification { white-space: normal; text-align: center; max-width: 90%; font-size: 0.85rem; }
+            .invoice-container { width: 95%; padding: 1rem; }
         }
 
         @media (min-width: 769px) and (max-width: 1024px) {
-            .menu-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (min-width: 1025px) {
-            .menu-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-
-        /* Prevenir parpadeos */
-        .menu-card, .cart-item, .notification {
-            will-change: transform;
-        }
-        
-        /* Smooth scrolling */
-        html {
-            scroll-behavior: smooth;
-        }
-        
-        /* Mejorar rendimiento */
-        img {
-            content-visibility: auto;
+            .menu-grid { grid-template-columns: repeat(2, 1fr); }
         }
     </style>
 </head>
 <body>
 
-    <!-- MODAL CARRITO MEJORADO -->
+    <!-- MODAL FACTURA -->
+    <div class="invoice-modal" id="invoiceModal">
+        <div class="invoice-container" id="invoiceContainer">
+            <!-- Contenido dinámico de la factura -->
+        </div>
+    </div>
+
+    <!-- MODAL DE EXTRAS -->
+    <div class="extras-modal" id="extrasModal">
+        <div class="extras-container">
+            <h3 id="extrasTitle">Agregar Extra</h3>
+            <div id="extrasOptions"></div>
+            <div class="extras-buttons">
+                <button class="extras-cancel" id="extrasCancelBtn">Cancelar</button>
+                <button class="extras-confirm" id="extrasConfirmBtn">Agregar al Carrito</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL CARRITO -->
     <div class="cart-modal" id="cartModal">
         <div class="cart-header">
             <button class="close-cart" id="closeCartBtn"><i class="fas fa-times"></i></button>
             <h2><i class="fas fa-shopping-cart"></i> Mi Pedido</h2>
-            <p style="text-align:center; font-size:0.75rem; margin-top:5px; opacity:0.8;">📍 Lucy's Yard - Allen</p>
+            <p style="text-align:center; font-size:0.75rem; margin-top:5px;">📍 Lucy's Yard - Allen</p>
         </div>
         <div class="cart-items" id="cartItemsContainer">
             <div class="empty-cart">
                 <i class="fas fa-shopping-basket"></i>
                 <p>Tu carrito está vacío</p>
-                <p style="font-size:0.8rem;">Agrega productos del menú</p>
             </div>
         </div>
         <div class="cart-footer">
             <div class="cart-total-row">
-                <span class="total-label">Total:</span>
+                <span>Total:</span>
                 <span class="total-amount" id="cartTotal">$0.00</span>
             </div>
             <button class="checkout-btn" id="checkoutBtn">
@@ -614,7 +711,6 @@
         </div>
     </div>
 
-    <!-- HEADER -->
     <header>
         <div class="logo-text" onclick="window.scrollTo({top:0,behavior:'smooth'})">
             LUCY'S<span>YARD</span>
@@ -626,28 +722,44 @@
         </button>
     </header>
 
-    <!-- MENÚ SECTION -->
-    <section id="menu" class="menu-section">
-        <div class="hero-banner">
-            <h1>🌿 LUCY'S YARD</h1>
-            <p>📍 Allen, TX | 1070 Watters Creek Blvd</p>
-            <p>🕒 Dom-Sáb: 9am - 11pm | Brunch: Fines de semana 9am-4pm</p>
-        </div>
-        <div id="menuContainer"></div>
-    </section>
-
-    <footer>
-        <p>© 2026 Lucy's Yard - Escanea el QR y ordena desde tu mesa</p>
-        <p style="font-size:0.75rem; margin-top:0.5rem; opacity:0.7;">📍 1070 Watters Creek Blvd, Allen, TX 75013</p>
-    </footer>
+    <div class="main-content">
+        <section class="menu-section">
+            <div class="hero-banner">
+                <h1>🌿 LUCY'S YARD</h1>
+                <p>📍 Allen, TX | 1070 Watters Creek Blvd</p>
+                <p>🕒 Dom-Sáb: 9am - 11pm | Brunch: Fines de semana 9am-4pm</p>
+            </div>
+            <div id="menuContainer"></div>
+        </section>
+        <footer>
+            <p>© 2026 Lucy's Yard - Escanea el QR y ordena desde tu mesa</p>
+            <p style="font-size:0.75rem; margin-top:0.5rem;">📍 1070 Watters Creek Blvd, Allen, TX 75013</p>
+        </footer>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
-        // ==================== CONFIGURACIÓN SUPABASE ====================
+        // ==================== CONFIGURACIÓN ====================
         const SUPABASE_URL = 'https://mlmaucnbhprzwovksxpo.supabase.co';
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1sbWF1Y25iaHByendvdmtzeHBvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ5ODU2MzMsImV4cCI6MjA5MDU2MTYzM30.UeGsnpKOShPh3-zVf5RR12roqqNhGAFwhK3hyckcqjs';
         
         const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        
+        // ==================== EXTRAS ====================
+        const extrasOptions = {
+            nachos: [
+                { name: "Brisket", price: 6.00 },
+                { name: "Chicken Fajita", price: 4.00 },
+                { name: "Pulled Pork", price: 5.00 }
+            ],
+            bowlProteins: [
+                { name: "Garlic Shrimp", price: 5.00 },
+                { name: "Blackened Shrimp", price: 5.00 },
+                { name: "Salmon", price: 7.00 },
+                { name: "Brisket", price: 6.00 },
+                { name: "Garlic Chicken", price: 5.00 }
+            ]
+        };
         
         // ==================== MENÚ COMPLETO ====================
         const menuItems = [
@@ -655,12 +767,12 @@
             { id: 2, name: "12 Wings", description: "BBQ | Mango Habanero | Lemon Pepper | Buffalo | Sweet Chili", price: 18.00, category: "Appetizers", image: "https://images.unsplash.com/photo-1608039829572-78524f79c4c7?w=400&h=300&fit=crop" },
             { id: 3, name: "Chips & Queso", description: "Tortilla chips con queso fundido", price: 10.00, category: "Appetizers", image: "https://images.unsplash.com/photo-1593195743443-2f5b6b4d2c8f?w=400&h=300&fit=crop" },
             { id: 4, name: "Chips & Salsa", description: "Tortilla chips con salsa fresca", price: 8.00, category: "Appetizers", image: "https://images.unsplash.com/photo-1569591159212-b02ea8a9f6b1?w=400&h=300&fit=crop" },
-            { id: 5, name: "Loaded Nachos", description: "Chips, queso, pico de gallo, jalapeños, crema", price: 10.00, category: "Appetizers", image: "https://images.unsplash.com/photo-1513456852971-30c0b8199d4d?w=400&h=300&fit=crop", addons: "Add Brisket +$6 | Add Chicken Fajita +$4 | Add Pulled Pork +$5" },
+            { id: 5, name: "Loaded Nachos", description: "Chips, queso, pico de gallo, jalapeños, crema", price: 10.00, category: "Appetizers", image: "https://images.unsplash.com/photo-1513456852971-30c0b8199d4d?w=400&h=300&fit=crop", hasExtras: true, extraType: "nachos" },
             { id: 6, name: "House Salad", description: "Spring mix, slaw, pico, cheese, tortilla strips, chipotle aioli", price: 8.00, category: "Salads & Bowls", image: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=300&fit=crop" },
             { id: 7, name: "Wedge Salad", description: "Iceberg lettuce, blue cheese, grape tomatoes, chives, bacon", price: 8.00, category: "Salads & Bowls", image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=300&fit=crop" },
             { id: 8, name: "Chopped Salad", description: "Chopped greens, grape tomatoes, avocado, bacon, eggs, cheese", price: 8.00, category: "Salads & Bowls", image: "https://images.unsplash.com/photo-1546793665-c74683f339c1?w=400&h=300&fit=crop" },
-            { id: 9, name: "Power Bowl", description: "Cilantro lime rice, black beans, roasted corn, slaw, pico, cheese, lime chipotle sauce", price: 9.00, category: "Salads & Bowls", image: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=300&fit=crop", addons: "Add Protein: Garlic Shrimp +$5 | Blackened Shrimp +$5 | Salmon +$7 | Brisket +$6 | Garlic Chicken +$5" },
-            { id: 10, name: "Veggie Bowl", description: "Cilantro lime rice, beans, corn, avocado, slaw, pico, roasted cauliflower", price: 12.00, category: "Salads & Bowls", image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=300&fit=crop", addons: "Add Protein: Garlic Shrimp +$5 | Blackened Shrimp +$5 | Salmon +$7 | Brisket +$6 | Garlic Chicken +$5" },
+            { id: 9, name: "Power Bowl", description: "Cilantro lime rice, black beans, roasted corn, slaw, pico, cheese, lime chipotle sauce", price: 9.00, category: "Salads & Bowls", image: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=300&fit=crop", hasExtras: true, extraType: "bowlProteins" },
+            { id: 10, name: "Veggie Bowl", description: "Cilantro lime rice, beans, corn, avocado, slaw, pico, roasted cauliflower", price: 12.00, category: "Salads & Bowls", image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=300&fit=crop", hasExtras: true, extraType: "bowlProteins" },
             { id: 11, name: "Tacos (2)", description: "Chicken Fajita | Garlic Shrimp | Brisket | Baja Fish", price: 12.00, category: "Tacos & Quesadillas", image: "https://images.unsplash.com/photo-1599974579688-8dbdd335c77f?w=400&h=300&fit=crop" },
             { id: 12, name: "Quesadilla", description: "Chicken Fajita | Garlic Shrimp | Brisket", price: 12.00, category: "Tacos & Quesadillas", image: "https://images.unsplash.com/photo-1618040996337-56904b7850b9?w=400&h=300&fit=crop" },
             { id: 13, name: "Classic Burger", description: "1/3lb patty, cheddar cheese, lettuce, tomatoes, onions, pickles", price: 11.95, category: "Burgers", image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&h=300&fit=crop" },
@@ -687,14 +799,79 @@
         
         // ==================== CARRITO ====================
         let shoppingCart = JSON.parse(localStorage.getItem('lucysyard_cart')) || [];
+        let currentExtrasItem = null;
+        let selectedExtra = null;
+        let lastInvoice = null;
         
         function saveCartToLocal() {
             localStorage.setItem('lucysyard_cart', JSON.stringify(shoppingCart));
             updateCartUI();
         }
         
+        function openExtrasModal(item) {
+            currentExtrasItem = item;
+            selectedExtra = null;
+            
+            const extrasList = extrasOptions[item.extraType] || [];
+            const modal = document.getElementById('extrasModal');
+            const title = document.getElementById('extrasTitle');
+            const optionsContainer = document.getElementById('extrasOptions');
+            
+            title.innerHTML = `Agregar proteína a ${item.name}`;
+            
+            optionsContainer.innerHTML = extrasList.map(extra => `
+                <div class="extras-option" data-extra-name="${extra.name}" data-extra-price="${extra.price}">
+                    <span class="extras-name">${extra.name}</span>
+                    <span class="extras-price">+$${extra.price.toFixed(2)}</span>
+                </div>
+            `).join('');
+            
+            document.querySelectorAll('.extras-option').forEach(opt => {
+                opt.addEventListener('click', function() {
+                    document.querySelectorAll('.extras-option').forEach(o => o.classList.remove('selected'));
+                    this.classList.add('selected');
+                    selectedExtra = {
+                        name: this.dataset.extraName,
+                        price: parseFloat(this.dataset.extraPrice)
+                    };
+                });
+            });
+            
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeExtrasModal() {
+            document.getElementById('extrasModal').classList.remove('active');
+            document.body.style.overflow = '';
+            currentExtrasItem = null;
+            selectedExtra = null;
+        }
+        
+        function confirmExtrasAndAdd() {
+            if (!selectedExtra) {
+                showNotification('Por favor selecciona una proteína', true);
+                return;
+            }
+            
+            if (currentExtrasItem) {
+                const totalPrice = currentExtrasItem.price + selectedExtra.price;
+                const itemWithExtra = {
+                    ...currentExtrasItem,
+                    price: totalPrice,
+                    name: `${currentExtrasItem.name} + ${selectedExtra.name}`,
+                    extraAdded: selectedExtra.name,
+                    extraPrice: selectedExtra.price,
+                    originalPrice: currentExtrasItem.price
+                };
+                
+                addItemToCart(itemWithExtra);
+                closeExtrasModal();
+            }
+        }
+        
         function addItemToCart(item) {
-            const existing = shoppingCart.find(i => i.id === item.id);
+            const existing = shoppingCart.find(i => i.id === item.id && i.extraAdded === item.extraAdded);
             if (existing) {
                 existing.quantity++;
             } else {
@@ -737,7 +914,7 @@
             if (!container) return;
             
             if (shoppingCart.length === 0) {
-                container.innerHTML = `<div class="empty-cart"><i class="fas fa-shopping-basket"></i><p>Tu carrito está vacío</p><p style="font-size:0.8rem;">Agrega productos del menú</p></div>`;
+                container.innerHTML = `<div class="empty-cart"><i class="fas fa-shopping-basket"></i><p>Tu carrito está vacío</p></div>`;
                 return;
             }
             
@@ -745,18 +922,19 @@
                 <div class="cart-item">
                     <div class="cart-item-info">
                         <div>
-                            <div class="cart-item-name">${item.name}</div>
-                            <div style="font-size:0.7rem; opacity:0.7;">$${item.price.toFixed(2)} c/u</div>
+                            <div class="cart-item-name">${escapeHtml(item.name)}</div>
+                            ${item.extraAdded ? `<div class="cart-item-detail">+ ${escapeHtml(item.extraAdded)} (+$${item.extraPrice.toFixed(2)})</div>` : ''}
+                            <div style="font-size:0.7rem; opacity:0.7;">$${item.originalPrice || item.price} c/u</div>
                         </div>
                         <div class="cart-item-price">$${(item.price * item.quantity).toFixed(2)}</div>
                     </div>
                     <div class="cart-item-controls">
                         <div class="quantity-control">
-                            <button class="quantity-btn" onclick="window.updateItemQuantity(${index}, ${item.quantity - 1})">-</button>
+                            <button class="quantity-btn" onclick="updateItemQuantity(${index}, ${item.quantity - 1})">-</button>
                             <span class="quantity-value">${item.quantity}</span>
-                            <button class="quantity-btn" onclick="window.updateItemQuantity(${index}, ${item.quantity + 1})">+</button>
+                            <button class="quantity-btn" onclick="updateItemQuantity(${index}, ${item.quantity + 1})">+</button>
                         </div>
-                        <button class="remove-item" onclick="window.removeItemFromCart(${index})">
+                        <button class="remove-item" onclick="removeItemFromCart(${index})">
                             <i class="fas fa-trash-alt"></i> Eliminar
                         </button>
                     </div>
@@ -764,23 +942,181 @@
             `).join('');
         }
         
+        function escapeHtml(str) {
+            if (!str) return '';
+            return str.replace(/[&<>]/g, function(m) {
+                if (m === '&') return '&amp;';
+                if (m === '<') return '&lt;';
+                if (m === '>') return '&gt;';
+                return m;
+            });
+        }
+        
         let notificationTimeout;
         function showNotification(message, isError = false) {
             if (notificationTimeout) clearTimeout(notificationTimeout);
-            
-            const existingNotification = document.querySelector('.notification');
-            if (existingNotification) existingNotification.remove();
+            const existing = document.querySelector('.notification');
+            if (existing) existing.remove();
             
             const notification = document.createElement('div');
             notification.className = 'notification';
             notification.style.background = isError ? '#f44336' : 'linear-gradient(135deg, #4CAF50, #45a049)';
-            notification.innerHTML = `<i class="fas ${isError ? 'fa-exclamation-triangle' : 'fa-check-circle'}"></i> ${message}`;
+            notification.innerHTML = `<i class="fas ${isError ? 'fa-exclamation-triangle' : 'fa-check-circle'}"></i> ${escapeHtml(message)}`;
             document.body.appendChild(notification);
             
             notificationTimeout = setTimeout(() => {
-                notification.style.opacity = '0';
-                setTimeout(() => notification.remove(), 300);
-            }, 3000);
+                if (notification) notification.remove();
+            }, 2500);
+        }
+        
+        // ==================== GENERAR FACTURA ====================
+        function generateInvoice(orderData) {
+            const now = new Date();
+            const invoiceNumber = `INV-${now.getFullYear()}${(now.getMonth()+1).toString().padStart(2,'0')}${now.getDate().toString().padStart(2,'0')}-${Math.floor(Math.random() * 10000)}`;
+            const orderId = orderData.orderId;
+            
+            const invoiceHTML = `
+                <div class="invoice-header">
+                    <h2>🌿 LUCY'S YARD</h2>
+                    <p>Allen, TX | 1070 Watters Creek Blvd</p>
+                    <p>Tel: (682) 802-4868</p>
+                </div>
+                <div class="invoice-number">
+                    <strong>FACTURA N°:</strong> ${invoiceNumber}<br>
+                    <strong>ORDEN N°:</strong> ${orderId}<br>
+                    <strong>FECHA:</strong> ${now.toLocaleDateString('es-ES')} ${now.toLocaleTimeString('es-ES')}<br>
+                    <strong>MESA:</strong> QR-MESA
+                </div>
+                <div class="invoice-details">
+                    <div class="invoice-row">
+                        <span><strong>CLIENTE:</strong></span>
+                        <span>Cliente QR</span>
+                    </div>
+                    <div class="invoice-row">
+                        <span><strong>UBICACIÓN:</strong></span>
+                        <span>Allen - Lucy's Yard</span>
+                    </div>
+                </div>
+                <div class="invoice-items">
+                    <div style="font-weight:bold; margin-bottom:0.5rem;">DETALLE DEL PEDIDO:</div>
+                    ${orderData.items.map(item => `
+                        <div class="invoice-item">
+                            <span>${escapeHtml(item.name)} x${item.quantity}</span>
+                            <span>$${item.subtotal.toFixed(2)}</span>
+                        </div>
+                    `).join('')}
+                </div>
+                <div class="invoice-total">
+                    <span>TOTAL PAGADO:</span>
+                    <span>$${orderData.total.toFixed(2)}</span>
+                </div>
+                <div class="invoice-footer">
+                    <p>✅ PAGO CONFIRMADO - TRANSACCIÓN APROBADA</p>
+                    <p>Este documento es tu comprobante de pago. Presenta este código QR al llegar al local.</p>
+                    <p style="margin-top:0.5rem;">📱 Escanea este código para reclamar tu pedido</p>
+                    <div style="margin-top:0.5rem; font-size:0.65rem;">
+                        <i class="fas fa-check-circle" style="color:#4CAF50;"></i> Pedido confirmado<br>
+                        <i class="fas fa-clock"></i> Tiempo estimado: 15-20 minutos
+                    </div>
+                </div>
+            `;
+            
+            lastInvoice = { html: invoiceHTML, number: invoiceNumber, orderId: orderId, data: orderData };
+            
+            const container = document.getElementById('invoiceContainer');
+            container.innerHTML = `
+                ${invoiceHTML}
+                <div class="invoice-buttons">
+                    <button class="btn-close-invoice" onclick="closeInvoiceModal()">Cerrar</button>
+                    <button class="btn-print-invoice" onclick="printInvoice()">🖨️ Imprimir / Guardar</button>
+                </div>
+            `;
+            
+            document.getElementById('invoiceModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeInvoiceModal() {
+            document.getElementById('invoiceModal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        
+        function printInvoice() {
+            if (!lastInvoice) return;
+            
+            const printWindow = window.open('', '_blank');
+            printWindow.document.write(`
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>Factura Lucy's Yard - ${lastInvoice.number}</title>
+                    <style>
+                        body {
+                            font-family: 'Poppins', 'Segoe UI', sans-serif;
+                            padding: 2rem;
+                            max-width: 600px;
+                            margin: 0 auto;
+                        }
+                        .invoice-header {
+                            text-align: center;
+                            border-bottom: 2px solid #DB3606;
+                            padding-bottom: 1rem;
+                            margin-bottom: 1rem;
+                        }
+                        .invoice-header h2 { color: #DB3606; margin-bottom: 0.5rem; }
+                        .invoice-number {
+                            background: #f5f5f5;
+                            padding: 0.5rem;
+                            text-align: center;
+                            border-radius: 8px;
+                            margin: 1rem 0;
+                            font-family: monospace;
+                        }
+                        .invoice-row {
+                            display: flex;
+                            justify-content: space-between;
+                            padding: 0.5rem 0;
+                            border-bottom: 1px solid #eee;
+                        }
+                        .invoice-item {
+                            display: flex;
+                            justify-content: space-between;
+                            padding: 0.5rem 0;
+                            border-bottom: 1px dashed #ddd;
+                        }
+                        .invoice-total {
+                            margin-top: 1rem;
+                            padding-top: 1rem;
+                            border-top: 2px solid #DB3606;
+                            font-weight: bold;
+                            font-size: 1.2rem;
+                            display: flex;
+                            justify-content: space-between;
+                        }
+                        .invoice-footer {
+                            margin-top: 1.5rem;
+                            text-align: center;
+                            font-size: 0.7rem;
+                            color: #666;
+                            border-top: 1px solid #eee;
+                            padding-top: 1rem;
+                        }
+                        @media print {
+                            body { padding: 0; }
+                            button { display: none; }
+                        }
+                    </style>
+                </head>
+                <body>
+                    ${lastInvoice.html}
+                    <div style="text-align:center; margin-top:1rem; font-size:0.7rem;">
+                        <p>¡Gracias por tu compra! Vuelve pronto a Lucy's Yard 🌿</p>
+                    </div>
+                </body>
+                </html>
+            `);
+            printWindow.document.close();
+            printWindow.print();
         }
         
         // ==================== ENVIAR PEDIDO ====================
@@ -802,15 +1138,12 @@
                     .select();
                 
                 if (error) {
-                    console.error('Error Supabase:', error);
+                    console.error('Error:', error);
                     showNotification(`Error: ${error.message}`, true);
                     return { success: false };
                 }
                 
-                console.log('✅ Pedido guardado:', data);
-                showNotification(`✅ Pedido enviado a cocina!`);
                 return { success: true };
-                
             } catch (error) {
                 console.error('Error:', error);
                 showNotification('Error al conectar con servidor', true);
@@ -826,7 +1159,7 @@
                         transactionId: `ORD-${Date.now()}-${Math.floor(Math.random() * 1000)}`,
                         amount: total
                     });
-                }, 800);
+                }, 500);
             });
         }
         
@@ -841,7 +1174,6 @@
             
             try {
                 const payment = await processPayment(total);
-                
                 if (!payment.success) {
                     showNotification('Error en el pago', true);
                     return;
@@ -863,17 +1195,17 @@
                 const result = await sendOrderToCloud(orderData);
                 
                 if (result.success) {
+                    // Generar factura antes de limpiar el carrito
+                    generateInvoice(orderData);
+                    
+                    // Limpiar carrito
                     shoppingCart = [];
                     saveCartToLocal();
                     closeCartModal();
-                    showNotification(`🎉 Pedido #${payment.transactionId.slice(-6)} enviado a cocina!`);
                     
-                    console.log('========== COMANDA ==========');
-                    console.log(`Orden: ${payment.transactionId}`);
-                    console.log('Productos:', orderData.items);
-                    console.log(`Total: $${total}`);
+                    showNotification(`🎉 Pedido #${payment.transactionId.slice(-6)} enviado a cocina!`);
+                    console.log('========== COMANDA ==========', orderData);
                 }
-                
             } catch (error) {
                 console.error('Error:', error);
                 showNotification('Error al procesar el pedido', true);
@@ -904,16 +1236,19 @@
                 
                 categoryItems.forEach(item => {
                     const priceDisplay = item.priceText ? item.priceText : `$${item.price.toFixed(2)}`;
+                    const hasExtras = item.hasExtras;
+                    const itemData = JSON.stringify(item).replace(/'/g, "\\'");
+                    
                     html += `
                         <div class="menu-card">
                             <img src="${item.image}" alt="${item.name}" class="card-image" loading="lazy" onerror="this.src='https://via.placeholder.com/400x300?text=Lucy%27s+Yard'">
                             <div class="card-content">
-                                <h3>${item.name} ${item.badge ? `<span class="badge">${item.badge}</span>` : ''}</h3>
-                                <p>${item.description}</p>
-                                ${item.addons ? `<div class="addon-info"><i class="fas fa-plus-circle"></i> ${item.addons}</div>` : ''}
+                                <h3>${escapeHtml(item.name)} ${item.badge ? `<span class="badge">${escapeHtml(item.badge)}</span>` : ''}</h3>
+                                <p>${escapeHtml(item.description)}</p>
+                                ${hasExtras ? `<div class="addon-info" onclick="openExtrasModal(${itemData})"><i class="fas fa-plus-circle"></i> + Agregar proteína</div>` : ''}
                                 <div class="price-row">
                                     <span class="price">${priceDisplay}</span>
-                                    ${item.price > 0 || item.priceText ? `<button class="add-to-cart" onclick='window.addItemToCart(${JSON.stringify(item).replace(/'/g, "\\'")})'>
+                                    ${item.price > 0 || item.priceText ? `<button class="add-to-cart" onclick="${hasExtras ? `openExtrasModal(${itemData})` : `addItemToCart(${itemData})`}">
                                         <i class="fas fa-plus"></i> Agregar
                                     </button>` : ''}
                                 </div>
@@ -930,19 +1265,13 @@
         
         // ==================== UI INTERACCIONES ====================
         function openCartModal() {
-            const modal = document.getElementById('cartModal');
-            if (modal) {
-                modal.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            }
+            document.getElementById('cartModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
         }
         
         function closeCartModal() {
-            const modal = document.getElementById('cartModal');
-            if (modal) {
-                modal.classList.remove('active');
-                document.body.style.overflow = 'auto';
-            }
+            document.getElementById('cartModal').classList.remove('active');
+            document.body.style.overflow = '';
         }
         
         // ==================== INICIAR ====================
@@ -953,10 +1282,15 @@
             document.getElementById('openCartBtn').addEventListener('click', openCartModal);
             document.getElementById('closeCartBtn').addEventListener('click', closeCartModal);
             document.getElementById('checkoutBtn').addEventListener('click', checkout);
+            document.getElementById('extrasCancelBtn').addEventListener('click', closeExtrasModal);
+            document.getElementById('extrasConfirmBtn').addEventListener('click', confirmExtrasAndAdd);
             
             window.addItemToCart = addItemToCart;
             window.removeItemFromCart = removeItemFromCart;
             window.updateItemQuantity = updateItemQuantity;
+            window.openExtrasModal = openExtrasModal;
+            window.closeInvoiceModal = closeInvoiceModal;
+            window.printInvoice = printInvoice;
             
             console.log('🌿 Lucy\'s Yard QR Menu listo!');
         }
