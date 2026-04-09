@@ -146,6 +146,7 @@
             width: 100%;
             height: 160px;
             object-fit: cover;
+            background: #2a2a2a;
         }
 
         .card-content {
@@ -563,9 +564,11 @@
             actualizarCarritoUI();
         }
         
-        function agregarAlCarrito(producto) {
+        // Función GLOBAL para agregar al carrito
+        window.agregarAlCarrito = function(producto) {
+            console.log('Agregando:', producto);
             if (producto.special) {
-                mostrarNotificacion('El especial del chef varía cada semana', true);
+                window.mostrarNotificacion('El especial del chef varía cada semana', true);
                 return;
             }
             const existe = carrito.find(i => i.id === producto.id);
@@ -575,22 +578,22 @@
                 carrito.push({ ...producto, cantidad: 1 });
             }
             guardarCarrito();
-            mostrarNotificacion(`${producto.name} agregado`);
-        }
+            window.mostrarNotificacion(`${producto.name} agregado`);
+        };
         
-        function eliminarDelCarrito(indice) {
+        window.eliminarDelCarrito = function(indice) {
             carrito.splice(indice, 1);
             guardarCarrito();
-        }
+        };
         
-        function actualizarCantidad(indice, nuevaCantidad) {
+        window.actualizarCantidad = function(indice, nuevaCantidad) {
             if (nuevaCantidad <= 0) {
-                eliminarDelCarrito(indice);
+                window.eliminarDelCarrito(indice);
             } else {
                 carrito[indice].cantidad = nuevaCantidad;
                 guardarCarrito();
             }
-        }
+        };
         
         function totalCarrito() {
             return carrito.reduce((t, i) => t + (i.price * i.cantidad), 0);
@@ -605,8 +608,10 @@
             const totalSpan = document.getElementById('cartTotal');
             const contadorSpan = document.getElementById('cartCount');
             
-            contadorSpan.textContent = cantidadTotal();
-            totalSpan.textContent = `$${totalCarrito().toFixed(2)}`;
+            if (contadorSpan) contadorSpan.textContent = cantidadTotal();
+            if (totalSpan) totalSpan.textContent = `$${totalCarrito().toFixed(2)}`;
+            
+            if (!contenedor) return;
             
             if (carrito.length === 0) {
                 contenedor.innerHTML = `<div class="empty-cart">Tu carrito está vacío</div>`;
@@ -621,24 +626,24 @@
                     </div>
                     <div class="cart-item-controls">
                         <div class="qty-control">
-                            <button class="qty-btn" onclick="actualizarCantidad(${idx}, ${item.cantidad - 1})">-</button>
+                            <button class="qty-btn" onclick="window.actualizarCantidad(${idx}, ${item.cantidad - 1})">-</button>
                             <span>${item.cantidad}</span>
-                            <button class="qty-btn" onclick="actualizarCantidad(${idx}, ${item.cantidad + 1})">+</button>
+                            <button class="qty-btn" onclick="window.actualizarCantidad(${idx}, ${item.cantidad + 1})">+</button>
                         </div>
-                        <button class="remove-item" onclick="eliminarDelCarrito(${idx})">Eliminar</button>
+                        <button class="remove-item" onclick="window.eliminarDelCarrito(${idx})">Eliminar</button>
                     </div>
                 </div>
             `).join('');
         }
         
-        function mostrarNotificacion(mensaje, error = false) {
+        window.mostrarNotificacion = function(mensaje, error = false) {
             const notif = document.createElement('div');
             notif.className = 'notification';
             notif.style.background = error ? '#f44336' : '#4CAF50';
             notif.innerHTML = `<i class="fas ${error ? 'fa-exclamation-triangle' : 'fa-check-circle'}"></i> ${mensaje}`;
             document.body.appendChild(notif);
             setTimeout(() => notif.remove(), 2500);
-        }
+        };
         
         // ==================== SUPABASE ====================
         async function enviarACocina(orderId, items, total) {
@@ -700,8 +705,8 @@
             const contenedor = document.getElementById('invoiceContent');
             contenedor.innerHTML = html + `
                 <div class="invoice-buttons">
-                    <button class="invoice-btn invoice-close" onclick="cerrarFactura()">Cerrar</button>
-                    <button class="invoice-btn invoice-print" onclick="imprimirFactura()">🖨️ Imprimir</button>
+                    <button class="invoice-btn invoice-close" onclick="window.cerrarFactura()">Cerrar</button>
+                    <button class="invoice-btn invoice-print" onclick="window.imprimirFactura()">🖨️ Imprimir</button>
                 </div>
             `;
             
@@ -709,12 +714,12 @@
             document.body.style.overflow = 'hidden';
         }
         
-        function cerrarFactura() {
+        window.cerrarFactura = function() {
             document.getElementById('invoiceModal').classList.remove('active');
             document.body.style.overflow = '';
-        }
+        };
         
-        function imprimirFactura() {
+        window.imprimirFactura = function() {
             if (!ultimaFactura) return;
             const ventana = window.open('', '_blank');
             ventana.document.write(`
@@ -732,19 +737,19 @@
             `);
             ventana.document.close();
             ventana.print();
-        }
+        };
         
         // ==================== CHECKOUT ====================
         async function finalizarPedido() {
             if (carrito.length === 0) {
-                mostrarNotificacion('Carrito vacío', true);
+                window.mostrarNotificacion('Carrito vacío', true);
                 return;
             }
             
             const total = totalCarrito();
             const orderId = `ORD-${Date.now()}-${Math.floor(Math.random()*1000)}`;
             
-            mostrarNotificacion('Procesando pago...');
+            window.mostrarNotificacion('Procesando pago...');
             
             const enviado = await enviarACocina(orderId, carrito, total);
             
@@ -753,9 +758,9 @@
                 carrito = [];
                 guardarCarrito();
                 cerrarCarrito();
-                mostrarNotificacion(`🎉 Pedido #${orderId.slice(-6)} enviado a cocina!`);
+                window.mostrarNotificacion(`🎉 Pedido #${orderId.slice(-6)} enviado a cocina!`);
             } else {
-                mostrarNotificacion('Error al enviar pedido', true);
+                window.mostrarNotificacion('Error al enviar pedido', true);
             }
         }
         
@@ -788,17 +793,16 @@
                     if (producto.category !== categoria) continue;
                     
                     const precioMostrar = producto.special ? 'Precio del mercado' : `$${producto.price.toFixed(2)}`;
-                    const datosProducto = JSON.stringify(producto).replace(/'/g, "\\'");
                     
                     html += `
                         <div class="menu-card">
-                            <img src="${producto.img}" class="card-image" onerror="this.src='https://via.placeholder.com/400x300?text=Lucy%27s+Yard'">
+                            <img src="${producto.img}" class="card-image" onerror="this.src='https://placehold.co/400x300?text=Lucy%27s+Yard'">
                             <div class="card-content">
                                 <h3>${producto.name}${producto.badge ? `<span class="badge">Brunch</span>` : ''}</h3>
                                 <p>${producto.desc}</p>
                                 <div class="price-row">
                                     <span class="price">${precioMostrar}</span>
-                                    ${!producto.special ? `<button class="add-btn" onclick="agregarAlCarrito(${datosProducto})">
+                                    ${!producto.special ? `<button class="add-btn" onclick="window.agregarAlCarrito(${JSON.stringify(producto).replace(/'/g, "\\'")})">
                                         <i class="fas fa-plus"></i> Agregar
                                     </button>` : ''}
                                 </div>
@@ -824,13 +828,6 @@
             document.getElementById('cartModal').classList.remove('active');
             document.body.style.overflow = '';
         }
-        
-        // ==================== EXPONER FUNCIONES GLOBALES ====================
-        window.agregarAlCarrito = agregarAlCarrito;
-        window.eliminarDelCarrito = eliminarDelCarrito;
-        window.actualizarCantidad = actualizarCantidad;
-        window.cerrarFactura = cerrarFactura;
-        window.imprimirFactura = imprimirFactura;
         
         // ==================== INICIAR ====================
         document.getElementById('openCartBtn').onclick = abrirCarrito;
