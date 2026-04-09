@@ -29,6 +29,8 @@
             background-color: var(--color-fondo-oscuro);
             color: var(--color-texto-claro);
             overflow-x: hidden;
+            min-height: 100vh;
+            position: relative;
         }
 
         header {
@@ -39,6 +41,8 @@
             background-color: rgba(15, 15, 15, 0.98);
             position: fixed;
             top: 0;
+            left: 0;
+            right: 0;
             width: 100%;
             z-index: 1000;
             height: 70px;
@@ -71,6 +75,7 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            font-weight: 600;
         }
 
         .cart-count {
@@ -82,6 +87,7 @@
             align-items: center;
             justify-content: center;
             font-size: 0.7rem;
+            font-weight: bold;
         }
 
         .cart-modal {
@@ -90,13 +96,15 @@
             right: 0;
             width: 100%;
             max-width: 450px;
-            height: 100vh;
+            height: 100%;
             background: var(--color-fondo-oscuro);
             z-index: 2000;
             transform: translateX(100%);
             transition: transform 0.3s ease;
             display: flex;
             flex-direction: column;
+            /* Para iPhone y dispositivos móviles - evitar que el botón se oculte */
+            padding-bottom: env(safe-area-inset-bottom, 20px);
         }
 
         .cart-modal.active {
@@ -104,28 +112,33 @@
         }
 
         .cart-header {
-            padding: 1.5rem;
+            padding: 1.2rem;
             background: linear-gradient(135deg, rgba(186,105,144,0.2), rgba(219,54,6,0.1));
             border-bottom: 2px solid var(--color-purpura-berry);
             position: relative;
+            flex-shrink: 0;
         }
 
         .cart-header h2 {
             color: var(--color-amarillo-cheddar);
             text-align: center;
+            font-size: 1.4rem;
         }
 
         .close-cart {
             position: absolute;
-            top: 15px;
-            right: 15px;
+            top: 12px;
+            right: 12px;
             background: rgba(255,255,255,0.1);
             border: none;
             color: white;
-            width: 40px;
-            height: 40px;
+            width: 35px;
+            height: 35px;
             border-radius: 50%;
             cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .cart-items {
@@ -142,9 +155,13 @@
         }
 
         .cart-footer {
-            padding: 1.5rem;
+            padding: 1rem;
             background: linear-gradient(135deg, rgba(186,105,144,0.2), rgba(219,54,6,0.1));
             border-top: 2px solid var(--color-purpura-berry);
+            flex-shrink: 0;
+            /* Para iPhone - espacio extra en la parte inferior */
+            margin-bottom: 0;
+            padding-bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
         }
 
         .checkout-btn {
@@ -152,35 +169,48 @@
             padding: 1rem;
             background: linear-gradient(135deg, var(--color-purpura-berry), #9d5b85);
             border: none;
-            border-radius: 12px;
+            border-radius: 50px;
             color: white;
             font-weight: bold;
             cursor: pointer;
+            font-size: 1rem;
         }
 
+        /* HERO BANNER - CORREGIDO */
         .menu-section {
-            padding: 5rem 1.5rem 2rem;
+            padding: 5rem 1rem 2rem 1rem;
         }
 
         .hero-banner {
             background: linear-gradient(135deg, rgba(219,54,6,0.15), rgba(186,105,144,0.15));
-            border-radius: 24px;
-            padding: 1.5rem;
+            border-radius: 20px;
+            padding: 1.2rem;
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             border: 1px solid rgba(248,168,20,0.3);
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .hero-banner h1 {
-            font-size: 2rem;
+            font-size: 1.6rem;
             font-family: 'Bangers', cursive;
             color: var(--color-amarillo-cheddar);
             text-shadow: 2px 2px 0px var(--color-rojo-fuego);
+            margin-bottom: 0.3rem;
+        }
+
+        .hero-banner p {
+            font-size: 0.8rem;
+            color: #ccc;
+            line-height: 1.4;
         }
 
         .section-title {
             text-align: center;
-            font-size: 2rem;
+            font-size: 1.6rem;
             color: var(--color-amarillo-cheddar);
             margin-bottom: 1rem;
             font-family: 'Bangers', cursive;
@@ -189,7 +219,7 @@
         .section-title:after {
             content: '';
             display: block;
-            width: 80px;
+            width: 60px;
             height: 3px;
             background: var(--color-rojo-fuego);
             margin: 0.5rem auto;
@@ -197,8 +227,8 @@
 
         .menu-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1rem;
             max-width: 1200px;
             margin: 0 auto;
         }
@@ -207,79 +237,84 @@
             background: linear-gradient(145deg, #2a2a2a, #222);
             border-radius: 16px;
             overflow: hidden;
-            transition: transform 0.3s ease;
             border: 1px solid rgba(248,168,20,0.2);
-        }
-
-        .menu-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--color-amarillo-cheddar);
         }
 
         .card-image {
             width: 100%;
-            height: 180px;
+            height: 170px;
             object-fit: cover;
         }
 
         .card-content {
-            padding: 1rem;
+            padding: 0.8rem;
         }
 
         .card-content h3 {
-            font-size: 1.1rem;
+            font-size: 1rem;
             color: var(--color-amarillo-cheddar);
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.3rem;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.3rem;
         }
 
         .card-content p {
             color: #aaa;
-            font-size: 0.8rem;
-            margin-bottom: 0.8rem;
+            font-size: 0.75rem;
+            margin-bottom: 0.5rem;
+            line-height: 1.4;
         }
 
         .price-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-top: 0.5rem;
+            margin-top: 0.3rem;
         }
 
         .price {
             color: var(--color-amarillo-cheddar);
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             font-weight: bold;
         }
 
         .add-to-cart {
             background: linear-gradient(135deg, var(--color-rojo-fuego), #c42f04);
             border: none;
-            padding: 8px 16px;
+            padding: 6px 14px;
             border-radius: 25px;
             color: white;
             cursor: pointer;
             font-weight: 600;
+            font-size: 0.75rem;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 5px;
         }
 
         .badge {
             background: var(--color-purpura-berry);
             color: white;
-            font-size: 0.65rem;
-            padding: 2px 8px;
-            border-radius: 20px;
-            margin-left: 5px;
+            font-size: 0.6rem;
+            padding: 2px 6px;
+            border-radius: 15px;
         }
 
         .brunch-banner {
             background: linear-gradient(135deg, var(--color-purpura-berry), var(--color-rojo-fuego));
             text-align: center;
-            padding: 0.6rem;
-            border-radius: 40px;
-            margin: 1rem auto;
-            max-width: 500px;
+            padding: 0.5rem;
+            border-radius: 30px;
+            margin: 0.8rem auto;
+            max-width: 400px;
+        }
+
+        .brunch-banner p {
+            font-size: 0.7rem;
+            font-weight: bold;
+            color: white;
         }
 
         .notification {
@@ -292,12 +327,9 @@
             padding: 10px 20px;
             border-radius: 50px;
             z-index: 5000;
-            animation: fadeIn 0.3s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateX(-50%) translateY(20px); }
-            to { opacity: 1; transform: translateX(-50%) translateY(0); }
+            font-size: 0.85rem;
+            white-space: nowrap;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
         }
 
         .empty-cart {
@@ -308,17 +340,114 @@
 
         footer {
             text-align: center;
-            padding: 2rem;
+            padding: 1rem;
             background: #0a0a0a;
-            margin-top: 2rem;
+            margin-top: 1rem;
+            font-size: 0.7rem;
         }
 
-        @media (max-width: 768px) {
-            .menu-grid { grid-template-columns: 1fr; }
-            .cart-modal { max-width: 100%; }
-            .hero-banner h1 { font-size: 1.6rem; }
-            .cart-btn span:not(.cart-count) { display: none; }
-            .cart-btn { padding: 8px 12px; }
+        /* ========== RESPONSIVE ========== */
+        /* Móviles pequeños (iPhone SE, iPhone 5/6/7/8) */
+        @media (max-width: 380px) {
+            .hero-banner {
+                padding: 0.8rem;
+            }
+            .hero-banner h1 {
+                font-size: 1.3rem;
+            }
+            .hero-banner p {
+                font-size: 0.7rem;
+            }
+            .menu-grid {
+                grid-template-columns: 1fr;
+                gap: 0.8rem;
+            }
+            .card-image {
+                height: 150px;
+            }
+            .cart-btn span:not(.cart-count) {
+                display: none;
+            }
+            .cart-btn {
+                padding: 8px 12px;
+            }
+            .logo-text {
+                font-size: 1.5rem;
+            }
+            .section-title {
+                font-size: 1.3rem;
+            }
+        }
+
+        /* Móviles medianos (iPhone X, 11, 12, 13, 14, Samsung) */
+        @media (min-width: 381px) and (max-width: 768px) {
+            .hero-banner {
+                padding: 1rem;
+                max-width: 95%;
+            }
+            .hero-banner h1 {
+                font-size: 1.5rem;
+            }
+            .menu-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            .cart-btn span:not(.cart-count) {
+                display: none;
+            }
+            .cart-btn {
+                padding: 8px 12px;
+            }
+            .logo-text {
+                font-size: 1.6rem;
+            }
+        }
+
+        /* Tablets */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .menu-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .hero-banner {
+                max-width: 80%;
+            }
+            .cart-modal {
+                max-width: 420px;
+            }
+        }
+
+        /* Escritorio */
+        @media (min-width: 1025px) {
+            .menu-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .hero-banner {
+                max-width: 600px;
+            }
+            .cart-modal {
+                max-width: 450px;
+            }
+        }
+
+        /* Para iPhone con notch (safe area) */
+        @supports (padding: max(0px)) {
+            .cart-footer {
+                padding-bottom: max(1rem, env(safe-area-inset-bottom, 1rem));
+            }
+            .cart-modal {
+                padding-bottom: env(safe-area-inset-bottom, 0px);
+            }
+        }
+
+        /* Notificación responsive */
+        @media (max-width: 480px) {
+            .notification {
+                white-space: normal;
+                text-align: center;
+                max-width: 90%;
+                font-size: 0.75rem;
+                padding: 8px 16px;
+            }
         }
     </style>
 </head>
@@ -329,15 +458,15 @@
         <div class="cart-header">
             <button class="close-cart" id="closeCartBtn"><i class="fas fa-times"></i></button>
             <h2><i class="fas fa-shopping-cart"></i> Mi Pedido</h2>
-            <p style="text-align:center; font-size:0.7rem;">📍 Lucy's Yard - Allen</p>
+            <p style="text-align:center; font-size:0.7rem; margin-top:4px;">📍 Lucy's Yard - Allen</p>
         </div>
         <div class="cart-items" id="cartItemsContainer">
             <div class="empty-cart"><i class="fas fa-shopping-basket"></i><p>Tu carrito está vacío</p></div>
         </div>
         <div class="cart-footer">
-            <div style="display:flex; justify-content:space-between; margin-bottom:1rem;">
-                <span>Total:</span>
-                <span id="cartTotal" style="color:var(--color-amarillo-cheddar); font-size:1.3rem;">$0.00</span>
+            <div style="display:flex; justify-content:space-between; margin-bottom:0.8rem;">
+                <span style="font-size:0.9rem;">Total:</span>
+                <span id="cartTotal" style="color:var(--color-amarillo-cheddar); font-size:1.2rem; font-weight:bold;">$0.00</span>
             </div>
             <button class="checkout-btn" id="checkoutBtn">
                 <i class="fas fa-credit-card"></i> Pagar y Enviar Pedido
@@ -376,42 +505,34 @@
         
         const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
         
-        // ==================== DATOS DEL MENÚ LUCY'S YARD ====================
+        // ==================== DATOS DEL MENÚ ====================
         const menuItems = [
-            // Appetizers
             { id: 1, name: "6 Wings", description: "BBQ, Mango Habanero, Lemon Pepper, Buffalo, Sweet Chili", price: 11.25, category: "Appetizers", image: "https://images.unsplash.com/photo-1608039829572-78524f79c4c7?w=400&h=300&fit=crop" },
             { id: 2, name: "12 Wings", description: "BBQ, Mango Habanero, Lemon Pepper, Buffalo, Sweet Chili", price: 18.00, category: "Appetizers", image: "https://images.unsplash.com/photo-1608039829572-78524f79c4c7?w=400&h=300&fit=crop" },
             { id: 3, name: "Chips & Queso", description: "Tortilla chips con queso fundido", price: 10.00, category: "Appetizers", image: "https://images.unsplash.com/photo-1593195743443-2f5b6b4d2c8f?w=400&h=300&fit=crop" },
             { id: 4, name: "Chips & Salsa", description: "Tortilla chips con salsa fresca", price: 8.00, category: "Appetizers", image: "https://images.unsplash.com/photo-1569591159212-b02ea8a9f6b1?w=400&h=300&fit=crop" },
             { id: 5, name: "Loaded Nachos", description: "Chips, queso, pico de gallo, jalapeños, crema", price: 10.00, category: "Appetizers", image: "https://images.unsplash.com/photo-1513456852971-30c0b8199d4d?w=400&h=300&fit=crop" },
-            // Salads & Bowls
             { id: 6, name: "House Salad", description: "Spring mix, slaw, pico, cheese, tortilla strips, chipotle aioli", price: 8.00, category: "Salads & Bowls", image: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=300&fit=crop" },
             { id: 7, name: "Wedge Salad", description: "Iceberg lettuce, blue cheese, grape tomatoes, chives, bacon", price: 8.00, category: "Salads & Bowls", image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=300&fit=crop" },
             { id: 8, name: "Chopped Salad", description: "Chopped greens, grape tomatoes, avocado, bacon, eggs, cheese", price: 8.00, category: "Salads & Bowls", image: "https://images.unsplash.com/photo-1546793665-c74683f339c1?w=400&h=300&fit=crop" },
             { id: 9, name: "Power Bowl", description: "Cilantro lime rice, black beans, roasted corn, slaw, pico, cheese, lime chipotle sauce", price: 9.00, category: "Salads & Bowls", image: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=300&fit=crop" },
             { id: 10, name: "Veggie Bowl", description: "Cilantro lime rice, beans, corn, avocado, slaw, pico, roasted cauliflower", price: 12.00, category: "Salads & Bowls", image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=300&fit=crop" },
-            // Tacos & Quesadillas
             { id: 11, name: "Tacos (2)", description: "Chicken Fajita, Garlic Shrimp, Brisket, Baja Fish", price: 12.00, category: "Tacos & Quesadillas", image: "https://images.unsplash.com/photo-1599974579688-8dbdd335c77f?w=400&h=300&fit=crop" },
             { id: 12, name: "Quesadilla", description: "Chicken Fajita, Garlic Shrimp, Brisket", price: 12.00, category: "Tacos & Quesadillas", image: "https://images.unsplash.com/photo-1618040996337-56904b7850b9?w=400&h=300&fit=crop" },
-            // Burgers
             { id: 13, name: "Classic Burger", description: "1/3lb patty, cheddar cheese, lettuce, tomatoes, onions, pickles", price: 11.95, category: "Burgers", image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&h=300&fit=crop" },
             { id: 14, name: "BBQ Burger", description: "1/3lb patty, homemade BBQ sauce, onion strings, pickles", price: 12.95, category: "Burgers", image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&h=300&fit=crop" },
             { id: 15, name: "Bacon Cheese Burger", description: "1/3lb patty, crispy bacon, cheddar cheese, lettuce, tomatoes, onions", price: 12.95, category: "Burgers", image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&h=300&fit=crop" },
             { id: 16, name: "Sliders (2)", description: "Brisket, Pulled Pork", price: 12.00, category: "Burgers", image: "https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?w=400&h=300&fit=crop" },
-            // Seafood
             { id: 17, name: "Fish & Chips", description: "Fish, hush puppies, fries, slaw, lemon", price: 16.00, category: "Seafood", image: "https://images.unsplash.com/photo-1579208575657-c595a05383b7?w=400&h=300&fit=crop" },
             { id: 18, name: "Shrimp Boil", description: "Potatoes, corn, sausage & 1 lb shrimp", price: 28.00, category: "Seafood", image: "https://images.unsplash.com/photo-1625943553852-781c6dd46f9c?w=400&h=300&fit=crop" },
-            // Kids Menu
             { id: 19, name: "Kids Tenders", description: "Con fries, jello y jugo", price: 10.50, category: "Kids Menu", image: "https://images.unsplash.com/photo-1619895098996-1e5f1a9e3b9e?w=400&h=300&fit=crop" },
             { id: 20, name: "Kids Shrimp", description: "Con fries, jello y jugo", price: 10.50, category: "Kids Menu", image: "https://images.unsplash.com/photo-1625943553852-781c6dd46f9c?w=400&h=300&fit=crop" },
             { id: 21, name: "Kids Cheeseburger", description: "Con fries, jello y jugo", price: 10.50, category: "Kids Menu", image: "https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=400&h=300&fit=crop" },
             { id: 22, name: "Kids Fish", description: "Con fries, jello y jugo", price: 10.50, category: "Kids Menu", image: "https://images.unsplash.com/photo-1579208575657-c595a05383b7?w=400&h=300&fit=crop" },
             { id: 23, name: "Kids Corn Dog", description: "Con fries, jello y jugo", price: 10.50, category: "Kids Menu", image: "https://images.unsplash.com/photo-1599490659213-e2b9527bd6a4?w=400&h=300&fit=crop" },
-            // Sides
             { id: 24, name: "French Fries", description: "Shoestring fries", price: 5.00, category: "Sides", image: "https://images.unsplash.com/photo-1630384060421-cb20b0e0649d?w=400&h=300&fit=crop" },
             { id: 25, name: "Slaw", description: "Coleslaw fresca", price: 5.00, category: "Sides", image: "https://images.unsplash.com/photo-1572445278543-3a4c9c8f9c8f?w=400&h=300&fit=crop" },
             { id: 26, name: "Mac & Cheese", description: "Cremoso macaroni con queso", price: 5.00, category: "Sides", image: "https://images.unsplash.com/photo-1543339308-43e59d6b73a4?w=400&h=300&fit=crop" },
-            // Brunch
             { id: 27, name: "Chilaquiles", description: "Green or Red Sauce - With egg, cheese, sour cream & beans", price: 12.00, category: "Brunch", image: "https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?w=400&h=300&fit=crop", badge: "Brunch" },
             { id: 28, name: "Breakfast Tacos (2)", description: "Chorizo & Egg, Potato & Egg", price: 10.00, category: "Brunch", image: "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=400&h=300&fit=crop", badge: "Brunch" },
             { id: 29, name: "Steak & Eggs", description: "Country potatoes, 2 eggs & 6 oz steak", price: 16.50, category: "Brunch", image: "https://images.unsplash.com/photo-1596040033229-3a0e3c7b3b5e?w=400&h=300&fit=crop", badge: "Brunch" },
@@ -480,18 +601,18 @@
                 <div class="cart-item">
                     <div style="display:flex; justify-content:space-between;">
                         <div>
-                            <strong>${item.name}</strong><br>
-                            <small>$${item.price.toFixed(2)} c/u</small>
+                            <strong style="font-size:0.9rem;">${item.name}</strong><br>
+                            <small style="font-size:0.7rem;">$${item.price.toFixed(2)} c/u</small>
                         </div>
-                        <div>$${(item.price * item.quantity).toFixed(2)}</div>
+                        <div style="font-weight:bold;">$${(item.price * item.quantity).toFixed(2)}</div>
                     </div>
                     <div style="display:flex; justify-content:space-between; margin-top:10px;">
                         <div>
-                            <button onclick="window.updateItemQuantity(${index}, ${item.quantity - 1})" style="background:#BA6990; border:none; width:30px; border-radius:50%; cursor:pointer;">-</button>
-                            <span style="margin:0 10px;">${item.quantity}</span>
-                            <button onclick="window.updateItemQuantity(${index}, ${item.quantity + 1})" style="background:#BA6990; border:none; width:30px; border-radius:50%; cursor:pointer;">+</button>
+                            <button onclick="window.updateItemQuantity(${index}, ${item.quantity - 1})" style="background:#BA6990; border:none; width:28px; height:28px; border-radius:50%; cursor:pointer; color:white;">-</button>
+                            <span style="margin:0 10px; font-size:0.9rem;">${item.quantity}</span>
+                            <button onclick="window.updateItemQuantity(${index}, ${item.quantity + 1})" style="background:#BA6990; border:none; width:28px; height:28px; border-radius:50%; cursor:pointer; color:white;">+</button>
                         </div>
-                        <button onclick="window.removeItemFromCart(${index})" style="background:none; border:none; color:#ff6b6b; cursor:pointer;">🗑️ Eliminar</button>
+                        <button onclick="window.removeItemFromCart(${index})" style="background:none; border:none; color:#ff6b6b; cursor:pointer; font-size:0.75rem;">🗑️ Eliminar</button>
                     </div>
                 </div>
             `).join('');
@@ -527,7 +648,7 @@
                     </div>
                     <div>
                         ${items.map(item => `
-                            <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px dashed #ddd;">
+                            <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px dashed #ddd; font-size:0.85rem;">
                                 <span>${item.name} x${item.quantity}</span>
                                 <span>$${(item.price * item.quantity).toFixed(2)}</span>
                             </div>
@@ -537,7 +658,7 @@
                         <span>TOTAL PAGADO</span>
                         <span>$${total.toFixed(2)}</span>
                     </div>
-                    <div style="margin-top:15px; text-align:center; font-size:12px;">
+                    <div style="margin-top:15px; text-align:center; font-size:11px;">
                         <p>✅ PAGO CONFIRMADO</p>
                         <p>Tiempo estimado: 15-20 minutos</p>
                         <p>¡Gracias por tu compra!</p>
@@ -552,8 +673,8 @@
             modal.style.cssText = 'position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.95); z-index:6000; display:flex; align-items:center; justify-content:center; flex-direction:column;';
             modal.innerHTML = invoiceHtml + `
                 <div style="display:flex; gap:10px; margin-top:15px;">
-                    <button onclick="this.parentElement.parentElement.remove()" style="padding:10px 20px; background:#BA6990; border:none; border-radius:30px; color:white; font-weight:bold;">Cerrar</button>
-                    <button onclick="printInvoice()" style="padding:10px 20px; background:#DB3606; border:none; border-radius:30px; color:white; font-weight:bold;">🖨️ Imprimir</button>
+                    <button onclick="this.parentElement.parentElement.remove()" style="padding:10px 20px; background:#BA6990; border:none; border-radius:30px; color:white; font-weight:bold; cursor:pointer;">Cerrar</button>
+                    <button onclick="printInvoice()" style="padding:10px 20px; background:#DB3606; border:none; border-radius:30px; color:white; font-weight:bold; cursor:pointer;">🖨️ Imprimir</button>
                 </div>
             `;
             document.body.appendChild(modal);
@@ -690,7 +811,6 @@
             const container = document.getElementById('menuContainer');
             if (!container) return;
             
-            // Agrupar por categorías
             const categories = [...new Set(menuItems.map(item => item.category))];
             let html = '';
             
