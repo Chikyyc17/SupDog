@@ -3,75 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Lucy's Yard - Menú QR</title>
+    <title>Lucy's Yard - Menú QR | Ordena desde tu mesa</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --color-rojo-fuego: #DB3606;
+            --color-amarillo-cheddar: #F8A814;
+            --color-purpura-berry: #BA6990;
+            --color-fondo-oscuro: #0f0f0f;
+            --color-texto-claro: #ffffff;
+            --color-exito: #4CAF50;
         }
 
-        :root {
-            --rojo: #DB3606;
-            --amarillo: #F8A814;
-            --morado: #BA6990;
-            --fondo: #0f0f0f;
-            --card: #1e1e1e;
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
         }
 
         body {
             font-family: 'Poppins', sans-serif;
-            background: var(--fondo);
-            color: white;
+            background-color: var(--color-fondo-oscuro);
+            color: var(--color-texto-claro);
+            overflow-x: hidden;
         }
 
         header {
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
             padding: 0.8rem 5%;
-            background: rgba(15, 15, 15, 0.98);
+            background-color: rgba(15, 15, 15, 0.98);
             position: fixed;
             top: 0;
-            left: 0;
-            right: 0;
+            width: 100%;
             z-index: 1000;
-            height: 65px;
-            border-bottom: 3px solid var(--amarillo);
+            height: 70px;
+            border-bottom: 3px solid var(--color-amarillo-cheddar);
         }
 
-        .logo {
-            font-size: 1.6rem;
-            font-family: 'Bangers', cursive;
-            color: white;
-            text-shadow: 2px 2px 0 var(--rojo);
+        .logo-text {
+            font-size: 2rem;
             cursor: pointer;
+            color: white;
+            text-shadow: 2px 2px 0px var(--color-rojo-fuego);
+            font-family: 'Bangers', cursive;
         }
 
-        .logo span {
-            color: var(--amarillo);
+        .logo-text span {
+            color: var(--color-amarillo-cheddar);
         }
 
         .cart-btn {
-            background: linear-gradient(135deg, var(--morado), #9d5b85);
+            position: absolute;
+            right: 5%;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(135deg, var(--color-purpura-berry), #9d5b85);
             padding: 8px 16px;
-            border-radius: 40px;
+            border-radius: 50px;
             color: white;
             cursor: pointer;
             border: none;
             display: flex;
             align-items: center;
             gap: 8px;
-            font-weight: 600;
         }
 
         .cart-count {
-            background: var(--rojo);
+            background: var(--color-rojo-fuego);
             border-radius: 50%;
             width: 22px;
             height: 22px;
@@ -81,139 +84,14 @@
             font-size: 0.7rem;
         }
 
-        @media (max-width: 768px) {
-            .cart-btn span:not(.cart-count) { display: none; }
-            .cart-btn { padding: 8px 12px; }
-            .logo { font-size: 1.3rem; }
-        }
-
-        .main-content {
-            padding-top: 75px;
-        }
-
-        .hero {
-            background: linear-gradient(135deg, rgba(219,54,6,0.15), rgba(186,105,144,0.15));
-            border-radius: 20px;
-            padding: 1.5rem;
-            text-align: center;
-            margin: 1rem;
-            border: 1px solid rgba(248,168,20,0.3);
-        }
-
-        .hero h1 {
-            font-size: 1.8rem;
-            font-family: 'Bangers', cursive;
-            color: var(--amarillo);
-        }
-
-        .menu-section {
-            padding: 1rem;
-        }
-
-        .category-title {
-            text-align: center;
-            font-size: 1.5rem;
-            color: var(--amarillo);
-            margin: 1.5rem 0 1rem;
-            font-family: 'Bangers', cursive;
-        }
-
-        .category-title:after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 3px;
-            background: var(--rojo);
-            margin: 0.5rem auto;
-        }
-
-        .menu-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .menu-card {
-            background: linear-gradient(145deg, var(--card), #161616);
-            border-radius: 16px;
-            overflow: hidden;
-            border: 1px solid rgba(248,168,20,0.2);
-        }
-
-        .card-image {
-            width: 100%;
-            height: 160px;
-            object-fit: cover;
-            background: #2a2a2a;
-        }
-
-        .card-content {
-            padding: 0.8rem;
-        }
-
-        .card-content h3 {
-            font-size: 1rem;
-            color: var(--amarillo);
-            margin-bottom: 0.3rem;
-        }
-
-        .card-content p {
-            color: #aaa;
-            font-size: 0.7rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .price-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .price {
-            color: var(--amarillo);
-            font-size: 1.1rem;
-            font-weight: bold;
-        }
-
-        .add-btn {
-            background: linear-gradient(135deg, var(--rojo), #c42f04);
-            border: none;
-            padding: 5px 12px;
-            border-radius: 20px;
-            color: white;
-            cursor: pointer;
-            font-size: 0.7rem;
-            font-weight: 600;
-        }
-
-        .badge {
-            background: var(--morado);
-            color: white;
-            font-size: 0.55rem;
-            padding: 2px 6px;
-            border-radius: 12px;
-            margin-left: 5px;
-        }
-
-        .brunch-banner {
-            background: linear-gradient(135deg, var(--morado), var(--rojo));
-            text-align: center;
-            padding: 0.4rem;
-            border-radius: 30px;
-            margin: 0.5rem auto;
-            max-width: 300px;
-        }
-
         .cart-modal {
             position: fixed;
             top: 0;
             right: 0;
             width: 100%;
-            max-width: 400px;
+            max-width: 450px;
             height: 100vh;
-            background: var(--fondo);
+            background: var(--color-fondo-oscuro);
             z-index: 2000;
             transform: translateX(100%);
             transition: transform 0.3s ease;
@@ -226,212 +104,182 @@
         }
 
         .cart-header {
-            padding: 1rem;
+            padding: 1.5rem;
             background: linear-gradient(135deg, rgba(186,105,144,0.2), rgba(219,54,6,0.1));
-            border-bottom: 2px solid var(--morado);
+            border-bottom: 2px solid var(--color-purpura-berry);
             position: relative;
         }
 
         .cart-header h2 {
-            color: var(--amarillo);
+            color: var(--color-amarillo-cheddar);
             text-align: center;
-            font-size: 1.2rem;
         }
 
         .close-cart {
             position: absolute;
-            top: 10px;
-            right: 10px;
+            top: 15px;
+            right: 15px;
             background: rgba(255,255,255,0.1);
             border: none;
             color: white;
-            width: 30px;
-            height: 30px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             cursor: pointer;
         }
 
-        .cart-items-list {
+        .cart-items {
             flex: 1;
             overflow-y: auto;
-            padding: 0.8rem;
+            padding: 1rem;
         }
 
         .cart-item {
             background: rgba(255,255,255,0.05);
             border-radius: 12px;
-            padding: 0.8rem;
-            margin-bottom: 0.8rem;
-        }
-
-        .cart-item-info {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.5rem;
-        }
-
-        .cart-item-name {
-            font-weight: 600;
-            color: var(--amarillo);
-            font-size: 0.85rem;
-        }
-
-        .cart-item-controls {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .qty-control {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(255,255,255,0.1);
-            padding: 0.2rem 0.5rem;
-            border-radius: 20px;
-        }
-
-        .qty-btn {
-            background: var(--morado);
-            border: none;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            color: white;
-            cursor: pointer;
-        }
-
-        .remove-item {
-            background: rgba(255,107,107,0.2);
-            border: none;
-            padding: 4px 10px;
-            border-radius: 15px;
-            color: #ff6b6b;
-            cursor: pointer;
-            font-size: 0.65rem;
+            padding: 1rem;
+            margin-bottom: 1rem;
         }
 
         .cart-footer {
-            padding: 1rem;
+            padding: 1.5rem;
             background: linear-gradient(135deg, rgba(186,105,144,0.2), rgba(219,54,6,0.1));
-            border-top: 2px solid var(--morado);
-        }
-
-        .cart-total {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.8rem;
-        }
-
-        .total-amount {
-            color: var(--amarillo);
-            font-size: 1.2rem;
-            font-weight: bold;
+            border-top: 2px solid var(--color-purpura-berry);
         }
 
         .checkout-btn {
             width: 100%;
-            padding: 0.7rem;
-            background: linear-gradient(135deg, var(--morado), #9d5b85);
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--color-purpura-berry), #9d5b85);
             border: none;
-            border-radius: 30px;
+            border-radius: 12px;
             color: white;
             font-weight: bold;
             cursor: pointer;
         }
 
-        .invoice-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.95);
-            z-index: 3000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            visibility: hidden;
-            opacity: 0;
+        .menu-section {
+            padding: 5rem 1.5rem 2rem;
         }
 
-        .invoice-modal.active {
-            visibility: visible;
-            opacity: 1;
-        }
-
-        .invoice-container {
-            background: white;
-            color: black;
-            border-radius: 20px;
-            max-width: 380px;
-            width: 90%;
-            max-height: 80vh;
-            overflow-y: auto;
-            padding: 1.2rem;
-        }
-
-        .invoice-header {
+        .hero-banner {
+            background: linear-gradient(135deg, rgba(219,54,6,0.15), rgba(186,105,144,0.15));
+            border-radius: 24px;
+            padding: 1.5rem;
             text-align: center;
-            border-bottom: 2px solid var(--rojo);
-            padding-bottom: 0.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(248,168,20,0.3);
+        }
+
+        .hero-banner h1 {
+            font-size: 2rem;
+            font-family: 'Bangers', cursive;
+            color: var(--color-amarillo-cheddar);
+            text-shadow: 2px 2px 0px var(--color-rojo-fuego);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            color: var(--color-amarillo-cheddar);
+            margin-bottom: 1rem;
+            font-family: 'Bangers', cursive;
+        }
+
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background: var(--color-rojo-fuego);
+            margin: 0.5rem auto;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .menu-card {
+            background: linear-gradient(145deg, #2a2a2a, #222);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            border: 1px solid rgba(248,168,20,0.2);
+        }
+
+        .menu-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--color-amarillo-cheddar);
+        }
+
+        .card-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 1rem;
+        }
+
+        .card-content h3 {
+            font-size: 1.1rem;
+            color: var(--color-amarillo-cheddar);
+            margin-bottom: 0.5rem;
+        }
+
+        .card-content p {
+            color: #aaa;
+            font-size: 0.8rem;
             margin-bottom: 0.8rem;
         }
 
-        .invoice-header h2 {
-            color: var(--rojo);
-            font-size: 1.2rem;
-        }
-
-        .invoice-number {
-            background: #f5f5f5;
-            padding: 0.4rem;
-            text-align: center;
-            border-radius: 6px;
-            margin: 0.8rem 0;
-            font-size: 0.7rem;
-        }
-
-        .invoice-item {
+        .price-row {
             display: flex;
             justify-content: space-between;
-            padding: 0.4rem 0;
-            border-bottom: 1px dashed #ddd;
-            font-size: 0.75rem;
+            align-items: center;
+            margin-top: 0.5rem;
         }
 
-        .invoice-total {
-            margin-top: 0.8rem;
-            padding-top: 0.8rem;
-            border-top: 2px solid var(--rojo);
+        .price {
+            color: var(--color-amarillo-cheddar);
+            font-size: 1.3rem;
             font-weight: bold;
-            display: flex;
-            justify-content: space-between;
         }
 
-        .invoice-buttons {
-            display: flex;
-            gap: 0.8rem;
-            margin-top: 1rem;
-        }
-
-        .invoice-btn {
-            flex: 1;
-            padding: 0.5rem;
-            border-radius: 30px;
-            font-weight: bold;
-            cursor: pointer;
+        .add-to-cart {
+            background: linear-gradient(135deg, var(--color-rojo-fuego), #c42f04);
             border: none;
+            padding: 8px 16px;
+            border-radius: 25px;
+            color: white;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
-        .invoice-close {
-            background: var(--morado);
+        .badge {
+            background: var(--color-purpura-berry);
             color: white;
+            font-size: 0.65rem;
+            padding: 2px 8px;
+            border-radius: 20px;
+            margin-left: 5px;
         }
 
-        .invoice-print {
-            background: linear-gradient(135deg, var(--rojo), #c42f04);
-            color: white;
+        .brunch-banner {
+            background: linear-gradient(135deg, var(--color-purpura-berry), var(--color-rojo-fuego));
+            text-align: center;
+            padding: 0.6rem;
+            border-radius: 40px;
+            margin: 1rem auto;
+            max-width: 500px;
         }
 
         .notification {
@@ -439,60 +287,68 @@
             bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
-            background: #4CAF50;
+            background: var(--color-exito);
             color: white;
-            padding: 8px 16px;
-            border-radius: 30px;
-            z-index: 4000;
-            font-size: 0.8rem;
+            padding: 10px 20px;
+            border-radius: 50px;
+            z-index: 5000;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateX(-50%) translateY(20px); }
+            to { opacity: 1; transform: translateX(-50%) translateY(0); }
         }
 
         .empty-cart {
             text-align: center;
-            padding: 1.5rem;
+            padding: 2rem;
             color: #aaa;
         }
 
         footer {
             text-align: center;
-            padding: 1rem;
+            padding: 2rem;
             background: #0a0a0a;
-            font-size: 0.7rem;
+            margin-top: 2rem;
         }
 
         @media (max-width: 768px) {
             .menu-grid { grid-template-columns: 1fr; }
             .cart-modal { max-width: 100%; }
+            .hero-banner h1 { font-size: 1.6rem; }
+            .cart-btn span:not(.cart-count) { display: none; }
+            .cart-btn { padding: 8px 12px; }
         }
     </style>
 </head>
 <body>
-
-    <!-- MODAL FACTURA -->
-    <div class="invoice-modal" id="invoiceModal">
-        <div class="invoice-container" id="invoiceContent"></div>
-    </div>
 
     <!-- MODAL CARRITO -->
     <div class="cart-modal" id="cartModal">
         <div class="cart-header">
             <button class="close-cart" id="closeCartBtn"><i class="fas fa-times"></i></button>
             <h2><i class="fas fa-shopping-cart"></i> Mi Pedido</h2>
+            <p style="text-align:center; font-size:0.7rem;">📍 Lucy's Yard - Allen</p>
         </div>
-        <div class="cart-items-list" id="cartItemsList">
-            <div class="empty-cart">Tu carrito está vacío</div>
+        <div class="cart-items" id="cartItemsContainer">
+            <div class="empty-cart"><i class="fas fa-shopping-basket"></i><p>Tu carrito está vacío</p></div>
         </div>
         <div class="cart-footer">
-            <div class="cart-total">
+            <div style="display:flex; justify-content:space-between; margin-bottom:1rem;">
                 <span>Total:</span>
-                <span class="total-amount" id="cartTotal">$0.00</span>
+                <span id="cartTotal" style="color:var(--color-amarillo-cheddar); font-size:1.3rem;">$0.00</span>
             </div>
-            <button class="checkout-btn" id="checkoutBtn">Pagar y Enviar</button>
+            <button class="checkout-btn" id="checkoutBtn">
+                <i class="fas fa-credit-card"></i> Pagar y Enviar Pedido
+            </button>
         </div>
     </div>
 
     <header>
-        <div class="logo" onclick="window.scrollTo({top:0,behavior:'smooth'})">LUCY'S<span>YARD</span></div>
+        <div class="logo-text" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+            LUCY'S<span>YARD</span>
+        </div>
         <button class="cart-btn" id="openCartBtn">
             <i class="fas fa-shopping-cart"></i>
             <span>Carrito</span>
@@ -501,7 +357,7 @@
     </header>
 
     <div class="main-content">
-        <div class="hero">
+        <div class="hero-banner">
             <h1>🌿 LUCY'S YARD</h1>
             <p>📍 Allen, TX | 1070 Watters Creek Blvd</p>
             <p>🕒 Dom-Sáb: 9am - 11pm | Brunch: Fines de semana 9am-4pm</p>
@@ -512,334 +368,409 @@
         </footer>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
         // ==================== CONFIGURACIÓN SUPABASE ====================
         const SUPABASE_URL = 'https://mlmaucnbhprzwovksxpo.supabase.co';
-        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1sbWF1Y25iaHByendvdmtzeHBvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ5ODU2MzMsImV4cCI6MjA5MDU2MTYzM30.UeGsnpKOShPh3-zVf5RR12roqqNhGAFwhK3hyckcqjs';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1sbWF1Y25iaHByendvdmtzeHBvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ5ODU2MzMsImV4cCI6MjA5MDU2MTYzM30.UeGsnpKOShPh3-zVf5RR12roqqNhGAFwhK3hyckcqjs';
         
-        const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+        const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
         
-        // ==================== DATOS DEL MENÚ ====================
-        const menuData = [
-            { id: 1, name: "6 Wings", desc: "BBQ, Mango Habanero, Lemon Pepper, Buffalo, Sweet Chili", price: 11.25, category: "Appetizers", img: "https://images.unsplash.com/photo-1608039829572-78524f79c4c7?w=400&h=300&fit=crop" },
-            { id: 2, name: "12 Wings", desc: "BBQ, Mango Habanero, Lemon Pepper, Buffalo, Sweet Chili", price: 18.00, category: "Appetizers", img: "https://images.unsplash.com/photo-1608039829572-78524f79c4c7?w=400&h=300&fit=crop" },
-            { id: 3, name: "Chips & Queso", desc: "Tortilla chips con queso fundido", price: 10.00, category: "Appetizers", img: "https://images.unsplash.com/photo-1593195743443-2f5b6b4d2c8f?w=400&h=300&fit=crop" },
-            { id: 4, name: "Chips & Salsa", desc: "Tortilla chips con salsa fresca", price: 8.00, category: "Appetizers", img: "https://images.unsplash.com/photo-1569591159212-b02ea8a9f6b1?w=400&h=300&fit=crop" },
-            { id: 5, name: "Loaded Nachos", desc: "Chips, queso, pico de gallo, jalapeños, crema", price: 10.00, category: "Appetizers", img: "https://images.unsplash.com/photo-1513456852971-30c0b8199d4d?w=400&h=300&fit=crop" },
-            { id: 6, name: "House Salad", desc: "Spring mix, slaw, pico, cheese, tortilla strips, chipotle aioli", price: 8.00, category: "Salads & Bowls", img: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=300&fit=crop" },
-            { id: 7, name: "Wedge Salad", desc: "Iceberg lettuce, blue cheese, grape tomatoes, chives, bacon", price: 8.00, category: "Salads & Bowls", img: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=300&fit=crop" },
-            { id: 8, name: "Chopped Salad", desc: "Chopped greens, grape tomatoes, avocado, bacon, eggs, cheese", price: 8.00, category: "Salads & Bowls", img: "https://images.unsplash.com/photo-1546793665-c74683f339c1?w=400&h=300&fit=crop" },
-            { id: 9, name: "Power Bowl", desc: "Cilantro lime rice, black beans, roasted corn, slaw, pico, cheese, lime chipotle sauce", price: 9.00, category: "Salads & Bowls", img: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=300&fit=crop" },
-            { id: 10, name: "Veggie Bowl", desc: "Cilantro lime rice, beans, corn, avocado, slaw, pico, roasted cauliflower", price: 12.00, category: "Salads & Bowls", img: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=300&fit=crop" },
-            { id: 11, name: "Tacos (2)", desc: "Chicken Fajita, Garlic Shrimp, Brisket, Baja Fish", price: 12.00, category: "Tacos & Quesadillas", img: "https://images.unsplash.com/photo-1599974579688-8dbdd335c77f?w=400&h=300&fit=crop" },
-            { id: 12, name: "Quesadilla", desc: "Chicken Fajita, Garlic Shrimp, Brisket", price: 12.00, category: "Tacos & Quesadillas", img: "https://images.unsplash.com/photo-1618040996337-56904b7850b9?w=400&h=300&fit=crop" },
-            { id: 13, name: "Classic Burger", desc: "1/3lb patty, cheddar cheese, lettuce, tomatoes, onions, pickles", price: 11.95, category: "Burgers", img: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&h=300&fit=crop" },
-            { id: 14, name: "BBQ Burger", desc: "1/3lb patty, homemade BBQ sauce, onion strings, pickles", price: 12.95, category: "Burgers", img: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&h=300&fit=crop" },
-            { id: 15, name: "Bacon Cheese Burger", desc: "1/3lb patty, crispy bacon, cheddar cheese, lettuce, tomatoes, onions", price: 12.95, category: "Burgers", img: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&h=300&fit=crop" },
-            { id: 16, name: "Sliders (2)", desc: "Brisket, Pulled Pork", price: 12.00, category: "Burgers", img: "https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?w=400&h=300&fit=crop" },
-            { id: 17, name: "Fish & Chips", desc: "Fish, hush puppies, fries, slaw, lemon", price: 16.00, category: "Seafood", img: "https://images.unsplash.com/photo-1579208575657-c595a05383b7?w=400&h=300&fit=crop" },
-            { id: 18, name: "Shrimp Boil", desc: "Potatoes, corn, sausage & 1 lb shrimp", price: 28.00, category: "Seafood", img: "https://images.unsplash.com/photo-1625943553852-781c6dd46f9c?w=400&h=300&fit=crop" },
-            { id: 19, name: "Kids Tenders", desc: "Con fries, jello y jugo", price: 10.50, category: "Kids Menu", img: "https://images.unsplash.com/photo-1619895098996-1e5f1a9e3b9e?w=400&h=300&fit=crop" },
-            { id: 20, name: "Kids Shrimp", desc: "Con fries, jello y jugo", price: 10.50, category: "Kids Menu", img: "https://images.unsplash.com/photo-1625943553852-781c6dd46f9c?w=400&h=300&fit=crop" },
-            { id: 21, name: "Kids Cheeseburger", desc: "Con fries, jello y jugo", price: 10.50, category: "Kids Menu", img: "https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=400&h=300&fit=crop" },
-            { id: 22, name: "Kids Fish", desc: "Con fries, jello y jugo", price: 10.50, category: "Kids Menu", img: "https://images.unsplash.com/photo-1579208575657-c595a05383b7?w=400&h=300&fit=crop" },
-            { id: 23, name: "Kids Corn Dog", desc: "Con fries, jello y jugo", price: 10.50, category: "Kids Menu", img: "https://images.unsplash.com/photo-1599490659213-e2b9527bd6a4?w=400&h=300&fit=crop" },
-            { id: 24, name: "French Fries", desc: "Shoestring fries", price: 5.00, category: "Sides", img: "https://images.unsplash.com/photo-1630384060421-cb20b0e0649d?w=400&h=300&fit=crop" },
-            { id: 25, name: "Slaw", desc: "Coleslaw fresca", price: 5.00, category: "Sides", img: "https://images.unsplash.com/photo-1572445278543-3a4c9c8f9c8f?w=400&h=300&fit=crop" },
-            { id: 26, name: "Mac & Cheese", desc: "Cremoso macaroni con queso", price: 5.00, category: "Sides", img: "https://images.unsplash.com/photo-1543339308-43e59d6b73a4?w=400&h=300&fit=crop" },
-            { id: 27, name: "Chilaquiles", desc: "Green or Red Sauce - With egg, cheese, sour cream & beans", price: 12.00, category: "Brunch", img: "https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?w=400&h=300&fit=crop", badge: true },
-            { id: 28, name: "Breakfast Tacos (2)", desc: "Chorizo & Egg, Potato & Egg", price: 10.00, category: "Brunch", img: "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=400&h=300&fit=crop", badge: true },
-            { id: 29, name: "Steak & Eggs", desc: "Country potatoes, 2 eggs & 6 oz steak", price: 16.50, category: "Brunch", img: "https://images.unsplash.com/photo-1596040033229-3a0e3c7b3b5e?w=400&h=300&fit=crop", badge: true },
-            { id: 30, name: "Breakfast Plate", desc: "2 eggs + country potatoes + bacon", price: 12.00, category: "Brunch", img: "https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?w=400&h=300&fit=crop", badge: true },
-            { id: 31, name: "Kids Plate", desc: "2 pancakes + 2 eggs + 1 bacon + jello", price: 10.50, category: "Brunch", img: "https://images.unsplash.com/photo-1586444248902-2f64eddc13df?w=400&h=300&fit=crop", badge: true },
-            { id: 32, name: "Chef's Special", desc: "Different every week! Ask your server", price: 0, category: "Brunch", img: "https://images.unsplash.com/photo-1544025162-d76694265947?w=400&h=300&fit=crop", badge: true, special: true }
+        // ==================== DATOS DEL MENÚ LUCY'S YARD ====================
+        const menuItems = [
+            // Appetizers
+            { id: 1, name: "6 Wings", description: "BBQ, Mango Habanero, Lemon Pepper, Buffalo, Sweet Chili", price: 11.25, category: "Appetizers", image: "https://images.unsplash.com/photo-1608039829572-78524f79c4c7?w=400&h=300&fit=crop" },
+            { id: 2, name: "12 Wings", description: "BBQ, Mango Habanero, Lemon Pepper, Buffalo, Sweet Chili", price: 18.00, category: "Appetizers", image: "https://images.unsplash.com/photo-1608039829572-78524f79c4c7?w=400&h=300&fit=crop" },
+            { id: 3, name: "Chips & Queso", description: "Tortilla chips con queso fundido", price: 10.00, category: "Appetizers", image: "https://images.unsplash.com/photo-1593195743443-2f5b6b4d2c8f?w=400&h=300&fit=crop" },
+            { id: 4, name: "Chips & Salsa", description: "Tortilla chips con salsa fresca", price: 8.00, category: "Appetizers", image: "https://images.unsplash.com/photo-1569591159212-b02ea8a9f6b1?w=400&h=300&fit=crop" },
+            { id: 5, name: "Loaded Nachos", description: "Chips, queso, pico de gallo, jalapeños, crema", price: 10.00, category: "Appetizers", image: "https://images.unsplash.com/photo-1513456852971-30c0b8199d4d?w=400&h=300&fit=crop" },
+            // Salads & Bowls
+            { id: 6, name: "House Salad", description: "Spring mix, slaw, pico, cheese, tortilla strips, chipotle aioli", price: 8.00, category: "Salads & Bowls", image: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=300&fit=crop" },
+            { id: 7, name: "Wedge Salad", description: "Iceberg lettuce, blue cheese, grape tomatoes, chives, bacon", price: 8.00, category: "Salads & Bowls", image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=300&fit=crop" },
+            { id: 8, name: "Chopped Salad", description: "Chopped greens, grape tomatoes, avocado, bacon, eggs, cheese", price: 8.00, category: "Salads & Bowls", image: "https://images.unsplash.com/photo-1546793665-c74683f339c1?w=400&h=300&fit=crop" },
+            { id: 9, name: "Power Bowl", description: "Cilantro lime rice, black beans, roasted corn, slaw, pico, cheese, lime chipotle sauce", price: 9.00, category: "Salads & Bowls", image: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=300&fit=crop" },
+            { id: 10, name: "Veggie Bowl", description: "Cilantro lime rice, beans, corn, avocado, slaw, pico, roasted cauliflower", price: 12.00, category: "Salads & Bowls", image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=300&fit=crop" },
+            // Tacos & Quesadillas
+            { id: 11, name: "Tacos (2)", description: "Chicken Fajita, Garlic Shrimp, Brisket, Baja Fish", price: 12.00, category: "Tacos & Quesadillas", image: "https://images.unsplash.com/photo-1599974579688-8dbdd335c77f?w=400&h=300&fit=crop" },
+            { id: 12, name: "Quesadilla", description: "Chicken Fajita, Garlic Shrimp, Brisket", price: 12.00, category: "Tacos & Quesadillas", image: "https://images.unsplash.com/photo-1618040996337-56904b7850b9?w=400&h=300&fit=crop" },
+            // Burgers
+            { id: 13, name: "Classic Burger", description: "1/3lb patty, cheddar cheese, lettuce, tomatoes, onions, pickles", price: 11.95, category: "Burgers", image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&h=300&fit=crop" },
+            { id: 14, name: "BBQ Burger", description: "1/3lb patty, homemade BBQ sauce, onion strings, pickles", price: 12.95, category: "Burgers", image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&h=300&fit=crop" },
+            { id: 15, name: "Bacon Cheese Burger", description: "1/3lb patty, crispy bacon, cheddar cheese, lettuce, tomatoes, onions", price: 12.95, category: "Burgers", image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&h=300&fit=crop" },
+            { id: 16, name: "Sliders (2)", description: "Brisket, Pulled Pork", price: 12.00, category: "Burgers", image: "https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?w=400&h=300&fit=crop" },
+            // Seafood
+            { id: 17, name: "Fish & Chips", description: "Fish, hush puppies, fries, slaw, lemon", price: 16.00, category: "Seafood", image: "https://images.unsplash.com/photo-1579208575657-c595a05383b7?w=400&h=300&fit=crop" },
+            { id: 18, name: "Shrimp Boil", description: "Potatoes, corn, sausage & 1 lb shrimp", price: 28.00, category: "Seafood", image: "https://images.unsplash.com/photo-1625943553852-781c6dd46f9c?w=400&h=300&fit=crop" },
+            // Kids Menu
+            { id: 19, name: "Kids Tenders", description: "Con fries, jello y jugo", price: 10.50, category: "Kids Menu", image: "https://images.unsplash.com/photo-1619895098996-1e5f1a9e3b9e?w=400&h=300&fit=crop" },
+            { id: 20, name: "Kids Shrimp", description: "Con fries, jello y jugo", price: 10.50, category: "Kids Menu", image: "https://images.unsplash.com/photo-1625943553852-781c6dd46f9c?w=400&h=300&fit=crop" },
+            { id: 21, name: "Kids Cheeseburger", description: "Con fries, jello y jugo", price: 10.50, category: "Kids Menu", image: "https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=400&h=300&fit=crop" },
+            { id: 22, name: "Kids Fish", description: "Con fries, jello y jugo", price: 10.50, category: "Kids Menu", image: "https://images.unsplash.com/photo-1579208575657-c595a05383b7?w=400&h=300&fit=crop" },
+            { id: 23, name: "Kids Corn Dog", description: "Con fries, jello y jugo", price: 10.50, category: "Kids Menu", image: "https://images.unsplash.com/photo-1599490659213-e2b9527bd6a4?w=400&h=300&fit=crop" },
+            // Sides
+            { id: 24, name: "French Fries", description: "Shoestring fries", price: 5.00, category: "Sides", image: "https://images.unsplash.com/photo-1630384060421-cb20b0e0649d?w=400&h=300&fit=crop" },
+            { id: 25, name: "Slaw", description: "Coleslaw fresca", price: 5.00, category: "Sides", image: "https://images.unsplash.com/photo-1572445278543-3a4c9c8f9c8f?w=400&h=300&fit=crop" },
+            { id: 26, name: "Mac & Cheese", description: "Cremoso macaroni con queso", price: 5.00, category: "Sides", image: "https://images.unsplash.com/photo-1543339308-43e59d6b73a4?w=400&h=300&fit=crop" },
+            // Brunch
+            { id: 27, name: "Chilaquiles", description: "Green or Red Sauce - With egg, cheese, sour cream & beans", price: 12.00, category: "Brunch", image: "https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?w=400&h=300&fit=crop", badge: "Brunch" },
+            { id: 28, name: "Breakfast Tacos (2)", description: "Chorizo & Egg, Potato & Egg", price: 10.00, category: "Brunch", image: "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=400&h=300&fit=crop", badge: "Brunch" },
+            { id: 29, name: "Steak & Eggs", description: "Country potatoes, 2 eggs & 6 oz steak", price: 16.50, category: "Brunch", image: "https://images.unsplash.com/photo-1596040033229-3a0e3c7b3b5e?w=400&h=300&fit=crop", badge: "Brunch" },
+            { id: 30, name: "Breakfast Plate", description: "2 eggs + country potatoes + bacon", price: 12.00, category: "Brunch", image: "https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?w=400&h=300&fit=crop", badge: "Brunch" },
+            { id: 31, name: "Kids Plate", description: "2 pancakes + 2 eggs + 1 bacon + jello", price: 10.50, category: "Brunch", image: "https://images.unsplash.com/photo-1586444248902-2f64eddc13df?w=400&h=300&fit=crop", badge: "Brunch" },
+            { id: 32, name: "Chef's Special", description: "Different every week! Ask your server", price: 0, category: "Brunch", image: "https://images.unsplash.com/photo-1544025162-d76694265947?w=400&h=300&fit=crop", badge: "Chef's Special", priceText: "Precio del mercado" }
         ];
-
+        
         // ==================== CARRITO ====================
-        let carrito = JSON.parse(localStorage.getItem('carrito_lucys')) || [];
-        let ultimaFactura = null;
+        let shoppingCart = JSON.parse(localStorage.getItem('lucysyard_cart')) || [];
         
-        function guardarCarrito() {
-            localStorage.setItem('carrito_lucys', JSON.stringify(carrito));
-            actualizarCarritoUI();
+        function saveCartToLocal() {
+            localStorage.setItem('lucysyard_cart', JSON.stringify(shoppingCart));
+            updateCartUI();
         }
         
-        // Función GLOBAL para agregar al carrito
-        window.agregarAlCarrito = function(producto) {
-            console.log('Agregando:', producto);
-            if (producto.special) {
-                window.mostrarNotificacion('El especial del chef varía cada semana', true);
-                return;
-            }
-            const existe = carrito.find(i => i.id === producto.id);
-            if (existe) {
-                existe.cantidad++;
+        function addItemToCart(item) {
+            const existing = shoppingCart.find(i => i.id === item.id);
+            if (existing) {
+                existing.quantity++;
             } else {
-                carrito.push({ ...producto, cantidad: 1 });
+                shoppingCart.push({ ...item, quantity: 1 });
             }
-            guardarCarrito();
-            window.mostrarNotificacion(`${producto.name} agregado`);
-        };
+            saveCartToLocal();
+            showNotification(`${item.name} agregado al carrito`);
+        }
         
-        window.eliminarDelCarrito = function(indice) {
-            carrito.splice(indice, 1);
-            guardarCarrito();
-        };
+        function removeItemFromCart(index) {
+            shoppingCart.splice(index, 1);
+            saveCartToLocal();
+        }
         
-        window.actualizarCantidad = function(indice, nuevaCantidad) {
-            if (nuevaCantidad <= 0) {
-                window.eliminarDelCarrito(indice);
+        function updateItemQuantity(index, newQuantity) {
+            if (newQuantity <= 0) {
+                removeItemFromCart(index);
             } else {
-                carrito[indice].cantidad = nuevaCantidad;
-                guardarCarrito();
+                shoppingCart[index].quantity = newQuantity;
+                saveCartToLocal();
             }
-        };
-        
-        function totalCarrito() {
-            return carrito.reduce((t, i) => t + (i.price * i.cantidad), 0);
         }
         
-        function cantidadTotal() {
-            return carrito.reduce((c, i) => c + i.cantidad, 0);
+        function getCartTotalAmount() {
+            return shoppingCart.reduce((total, item) => total + (item.price * item.quantity), 0);
         }
         
-        function actualizarCarritoUI() {
-            const contenedor = document.getElementById('cartItemsList');
+        function getCartItemTotalCount() {
+            return shoppingCart.reduce((count, item) => count + item.quantity, 0);
+        }
+        
+        function updateCartUI() {
+            const container = document.getElementById('cartItemsContainer');
             const totalSpan = document.getElementById('cartTotal');
-            const contadorSpan = document.getElementById('cartCount');
+            const countSpan = document.getElementById('cartCount');
             
-            if (contadorSpan) contadorSpan.textContent = cantidadTotal();
-            if (totalSpan) totalSpan.textContent = `$${totalCarrito().toFixed(2)}`;
+            if (countSpan) countSpan.textContent = getCartItemTotalCount();
+            if (totalSpan) totalSpan.textContent = `$${getCartTotalAmount().toFixed(2)}`;
             
-            if (!contenedor) return;
+            if (!container) return;
             
-            if (carrito.length === 0) {
-                contenedor.innerHTML = `<div class="empty-cart">Tu carrito está vacío</div>`;
+            if (shoppingCart.length === 0) {
+                container.innerHTML = `<div class="empty-cart"><i class="fas fa-shopping-basket"></i><p>Tu carrito está vacío</p></div>`;
                 return;
             }
             
-            contenedor.innerHTML = carrito.map((item, idx) => `
+            container.innerHTML = shoppingCart.map((item, index) => `
                 <div class="cart-item">
-                    <div class="cart-item-info">
-                        <span class="cart-item-name">${item.name}</span>
-                        <span>$${(item.price * item.cantidad).toFixed(2)}</span>
-                    </div>
-                    <div class="cart-item-controls">
-                        <div class="qty-control">
-                            <button class="qty-btn" onclick="window.actualizarCantidad(${idx}, ${item.cantidad - 1})">-</button>
-                            <span>${item.cantidad}</span>
-                            <button class="qty-btn" onclick="window.actualizarCantidad(${idx}, ${item.cantidad + 1})">+</button>
+                    <div style="display:flex; justify-content:space-between;">
+                        <div>
+                            <strong>${item.name}</strong><br>
+                            <small>$${item.price.toFixed(2)} c/u</small>
                         </div>
-                        <button class="remove-item" onclick="window.eliminarDelCarrito(${idx})">Eliminar</button>
+                        <div>$${(item.price * item.quantity).toFixed(2)}</div>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; margin-top:10px;">
+                        <div>
+                            <button onclick="window.updateItemQuantity(${index}, ${item.quantity - 1})" style="background:#BA6990; border:none; width:30px; border-radius:50%; cursor:pointer;">-</button>
+                            <span style="margin:0 10px;">${item.quantity}</span>
+                            <button onclick="window.updateItemQuantity(${index}, ${item.quantity + 1})" style="background:#BA6990; border:none; width:30px; border-radius:50%; cursor:pointer;">+</button>
+                        </div>
+                        <button onclick="window.removeItemFromCart(${index})" style="background:none; border:none; color:#ff6b6b; cursor:pointer;">🗑️ Eliminar</button>
                     </div>
                 </div>
             `).join('');
         }
         
-        window.mostrarNotificacion = function(mensaje, error = false) {
-            const notif = document.createElement('div');
-            notif.className = 'notification';
-            notif.style.background = error ? '#f44336' : '#4CAF50';
-            notif.innerHTML = `<i class="fas ${error ? 'fa-exclamation-triangle' : 'fa-check-circle'}"></i> ${mensaje}`;
-            document.body.appendChild(notif);
-            setTimeout(() => notif.remove(), 2500);
-        };
-        
-        // ==================== SUPABASE ====================
-        async function enviarACocina(orderId, items, total) {
-            try {
-                const datos = {
-                    order_id: orderId,
-                    customer_name: 'Cliente QR',
-                    table_number: 'Mesa QR',
-                    items: items.map(i => ({ name: i.name, quantity: i.cantidad, price: i.price, subtotal: i.price * i.cantidad })),
-                    total: total,
-                    location: 'Allen - Lucy\'s Yard',
-                    status: 'pending'
-                };
-                const { error } = await supabaseClient.from('orders').insert([datos]);
-                if (error) throw error;
-                return true;
-            } catch(e) {
-                console.error(e);
-                return false;
-            }
+        function showNotification(message, isError = false) {
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            notification.style.background = isError ? '#f44336' : '#4CAF50';
+            notification.innerHTML = `<i class="fas ${isError ? 'fa-exclamation-triangle' : 'fa-check-circle'}"></i> ${message}`;
+            document.body.appendChild(notification);
+            setTimeout(() => notification.remove(), 3000);
         }
         
         // ==================== FACTURA ====================
-        function generarFactura(orderId, items, total) {
-            const ahora = new Date();
-            const numFactura = `INV-${ahora.getFullYear()}${(ahora.getMonth()+1).toString().padStart(2,'0')}${ahora.getDate().toString().padStart(2,'0')}-${Math.floor(Math.random()*10000)}`;
+        let lastInvoice = null;
+        
+        function generateInvoice(orderId, items, total) {
+            const now = new Date();
+            const invoiceNumber = `INV-${now.getFullYear()}${(now.getMonth()+1).toString().padStart(2,'0')}${now.getDate().toString().padStart(2,'0')}-${Math.floor(Math.random()*10000)}`;
             
-            const html = `
-                <div class="invoice-header">
-                    <h2>🌿 LUCY'S YARD</h2>
-                    <p>Allen, TX | 1070 Watters Creek Blvd</p>
-                </div>
-                <div class="invoice-number">
-                    <strong>FACTURA:</strong> ${numFactura}<br>
-                    <strong>ORDEN:</strong> ${orderId}<br>
-                    <strong>FECHA:</strong> ${ahora.toLocaleString('es-ES')}<br>
-                    <strong>MESA:</strong> QR-MESA
-                </div>
-                <div>
-                    ${items.map(item => `
-                        <div class="invoice-item">
-                            <span>${item.name} x${item.cantidad}</span>
-                            <span>$${(item.price * item.cantidad).toFixed(2)}</span>
-                        </div>
-                    `).join('')}
-                </div>
-                <div class="invoice-total">
-                    <span>TOTAL PAGADO</span>
-                    <span>$${total.toFixed(2)}</span>
-                </div>
-                <div style="margin-top:0.8rem; text-align:center; font-size:0.65rem;">
-                    <p>✅ PAGO CONFIRMADO</p>
-                    <p>Tiempo estimado: 15-20 minutos</p>
+            const invoiceHtml = `
+                <div style="background:white; color:black; padding:20px; border-radius:20px; max-width:400px; margin:0 auto;">
+                    <div style="text-align:center; border-bottom:2px solid #DB3606; padding-bottom:10px; margin-bottom:15px;">
+                        <h2 style="color:#DB3606;">🌿 LUCY'S YARD</h2>
+                        <p>Allen, TX | 1070 Watters Creek Blvd</p>
+                    </div>
+                    <div style="background:#f5f5f5; padding:10px; text-align:center; border-radius:8px; margin:10px 0;">
+                        <strong>FACTURA:</strong> ${invoiceNumber}<br>
+                        <strong>ORDEN:</strong> ${orderId}<br>
+                        <strong>FECHA:</strong> ${now.toLocaleString('es-ES')}<br>
+                        <strong>MESA:</strong> QR-MESA
+                    </div>
+                    <div>
+                        ${items.map(item => `
+                            <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px dashed #ddd;">
+                                <span>${item.name} x${item.quantity}</span>
+                                <span>$${(item.price * item.quantity).toFixed(2)}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div style="margin-top:15px; padding-top:10px; border-top:2px solid #DB3606; font-weight:bold; display:flex; justify-content:space-between;">
+                        <span>TOTAL PAGADO</span>
+                        <span>$${total.toFixed(2)}</span>
+                    </div>
+                    <div style="margin-top:15px; text-align:center; font-size:12px;">
+                        <p>✅ PAGO CONFIRMADO</p>
+                        <p>Tiempo estimado: 15-20 minutos</p>
+                        <p>¡Gracias por tu compra!</p>
+                    </div>
                 </div>
             `;
             
-            ultimaFactura = { html, numero: numFactura };
+            lastInvoice = { html: invoiceHtml, number: invoiceNumber };
             
-            const contenedor = document.getElementById('invoiceContent');
-            contenedor.innerHTML = html + `
-                <div class="invoice-buttons">
-                    <button class="invoice-btn invoice-close" onclick="window.cerrarFactura()">Cerrar</button>
-                    <button class="invoice-btn invoice-print" onclick="window.imprimirFactura()">🖨️ Imprimir</button>
+            const modal = document.createElement('div');
+            modal.id = 'dynamicInvoiceModal';
+            modal.style.cssText = 'position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.95); z-index:6000; display:flex; align-items:center; justify-content:center; flex-direction:column;';
+            modal.innerHTML = invoiceHtml + `
+                <div style="display:flex; gap:10px; margin-top:15px;">
+                    <button onclick="this.parentElement.parentElement.remove()" style="padding:10px 20px; background:#BA6990; border:none; border-radius:30px; color:white; font-weight:bold;">Cerrar</button>
+                    <button onclick="printInvoice()" style="padding:10px 20px; background:#DB3606; border:none; border-radius:30px; color:white; font-weight:bold;">🖨️ Imprimir</button>
                 </div>
             `;
-            
-            document.getElementById('invoiceModal').classList.add('active');
+            document.body.appendChild(modal);
             document.body.style.overflow = 'hidden';
         }
         
-        window.cerrarFactura = function() {
-            document.getElementById('invoiceModal').classList.remove('active');
-            document.body.style.overflow = '';
-        };
-        
-        window.imprimirFactura = function() {
-            if (!ultimaFactura) return;
-            const ventana = window.open('', '_blank');
-            ventana.document.write(`
-                <html><head><title>Factura ${ultimaFactura.numero}</title>
+        function printInvoice() {
+            if (!lastInvoice) return;
+            const win = window.open('', '_blank');
+            win.document.write(`
+                <html><head><title>Factura ${lastInvoice.number}</title>
                 <style>
-                    body { font-family: 'Poppins', sans-serif; padding: 1rem; max-width: 400px; margin: 0 auto; }
-                    .invoice-header { text-align: center; border-bottom: 2px solid #DB3606; }
-                    .invoice-header h2 { color: #DB3606; }
-                    .invoice-number { background: #f5f5f5; padding: 0.5rem; text-align: center; margin: 1rem 0; }
-                    .invoice-item { display: flex; justify-content: space-between; padding: 0.4rem 0; border-bottom: 1px dashed #ddd; }
-                    .invoice-total { margin-top: 1rem; padding-top: 0.5rem; border-top: 2px solid #DB3606; display: flex; justify-content: space-between; font-weight: bold; }
-                    @media print { button { display: none; } }
+                    body { font-family: 'Poppins', sans-serif; padding: 20px; max-width: 500px; margin: 0 auto; }
+                    button { display: none; }
                 </style>
-                </head><body>${ultimaFactura.html}</body></html>
+                </head><body>${lastInvoice.html}</body></html>
             `);
-            ventana.document.close();
-            ventana.print();
-        };
+            win.document.close();
+            win.print();
+        }
+        
+        // ==================== ENVIAR PEDIDO A SUPABASE ====================
+        async function sendOrderToCloud(orderData) {
+            try {
+                console.log('📤 Enviando pedido a Supabase...', orderData);
+                
+                const orderToSave = {
+                    order_id: orderData.orderId,
+                    customer_name: 'Cliente QR',
+                    table_number: 'Mesa QR',
+                    items: orderData.items,
+                    total: orderData.total,
+                    location: 'Allen - Lucy\'s Yard',
+                    status: 'pending'
+                };
+                
+                const { data, error } = await supabaseClient
+                    .from('orders')
+                    .insert([orderToSave])
+                    .select();
+                
+                if (error) {
+                    console.error('❌ Error Supabase:', error);
+                    showNotification(`Error: ${error.message}`, true);
+                    return { success: false, error: error.message };
+                }
+                
+                console.log('✅ Pedido guardado en la nube:', data);
+                showNotification(`✅ Pedido enviado a cocina!`);
+                return { success: true, data: data };
+                
+            } catch (error) {
+                console.error('❌ Error:', error);
+                showNotification('Error al conectar con servidor', true);
+                return { success: false, error: error.message };
+            }
+        }
+        
+        // ==================== SIMULAR PAGO ====================
+        async function processPayment(total) {
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    resolve({
+                        success: true,
+                        transactionId: `ORD-${Date.now()}-${Math.floor(Math.random() * 1000)}`,
+                        amount: total
+                    });
+                }, 1000);
+            });
+        }
         
         // ==================== CHECKOUT ====================
-        async function finalizarPedido() {
-            if (carrito.length === 0) {
-                window.mostrarNotificacion('Carrito vacío', true);
+        async function checkout() {
+            if (shoppingCart.length === 0) {
+                showNotification('El carrito está vacío', true);
                 return;
             }
             
-            const total = totalCarrito();
-            const orderId = `ORD-${Date.now()}-${Math.floor(Math.random()*1000)}`;
+            const total = getCartTotalAmount();
+            const location = 'Allen - Lucy\'s Yard';
             
-            window.mostrarNotificacion('Procesando pago...');
+            showNotification('Procesando pago...');
             
-            const enviado = await enviarACocina(orderId, carrito, total);
-            
-            if (enviado) {
-                generarFactura(orderId, carrito, total);
-                carrito = [];
-                guardarCarrito();
-                cerrarCarrito();
-                window.mostrarNotificacion(`🎉 Pedido #${orderId.slice(-6)} enviado a cocina!`);
-            } else {
-                window.mostrarNotificacion('Error al enviar pedido', true);
+            try {
+                const payment = await processPayment(total);
+                
+                if (!payment.success) {
+                    showNotification('Error en el pago', true);
+                    return;
+                }
+                
+                showNotification(`✅ Pago aprobado!`);
+                
+                const orderData = {
+                    orderId: payment.transactionId,
+                    items: shoppingCart.map(item => ({
+                        name: item.name,
+                        quantity: item.quantity,
+                        price: item.price,
+                        subtotal: item.price * item.quantity
+                    })),
+                    total: total,
+                    location: location,
+                    tableNumber: 'QR-MESA'
+                };
+                
+                const result = await sendOrderToCloud(orderData);
+                
+                if (result.success) {
+                    generateInvoice(payment.transactionId, shoppingCart, total);
+                    shoppingCart = [];
+                    saveCartToLocal();
+                    
+                    document.getElementById('cartModal').classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                    
+                    showNotification(`🎉 Pedido #${payment.transactionId.slice(-6)} enviado a cocina!`);
+                    
+                    console.log('========== COMANDA LUCYS YARD ==========');
+                    console.log(`Orden: ${payment.transactionId}`);
+                    console.log('Productos:', orderData.items);
+                    console.log(`Total: $${total}`);
+                    console.log('=========================================');
+                }
+                
+            } catch (error) {
+                console.error('Error:', error);
+                showNotification('Error al procesar el pedido', true);
             }
         }
         
         // ==================== RENDERIZAR MENÚ ====================
-        function renderizarMenu() {
-            const contenedor = document.getElementById('menuContainer');
-            if (!contenedor) return;
+        function renderMenu() {
+            const container = document.getElementById('menuContainer');
+            if (!container) return;
             
-            const categorias = [];
-            for (let i = 0; i < menuData.length; i++) {
-                if (!categorias.includes(menuData[i].category)) {
-                    categorias.push(menuData[i].category);
-                }
-            }
-            
+            // Agrupar por categorías
+            const categories = [...new Set(menuItems.map(item => item.category))];
             let html = '';
             
-            for (let c = 0; c < categorias.length; c++) {
-                const categoria = categorias[c];
-                const esBrunch = categoria === 'Brunch';
+            categories.forEach(category => {
+                const items = menuItems.filter(item => item.category === category);
+                const isBrunch = category === 'Brunch';
                 
-                html += `<h2 class="category-title">${categoria}</h2>`;
-                if (esBrunch) {
-                    html += `<div class="brunch-banner"><p>🌿 SOLO FINES DE SEMANA • 9AM - 4PM 🌿</p></div>`;
+                html += `<h2 class="section-title">${category}</h2>`;
+                if (isBrunch) {
+                    html += `<div class="brunch-banner"><p>🌿 SOLO FINES DE SEMANA • 9:00 AM - 4:00 PM 🌿</p></div>`;
                 }
                 html += `<div class="menu-grid">`;
                 
-                for (let i = 0; i < menuData.length; i++) {
-                    const producto = menuData[i];
-                    if (producto.category !== categoria) continue;
-                    
-                    const precioMostrar = producto.special ? 'Precio del mercado' : `$${producto.price.toFixed(2)}`;
-                    
+                items.forEach(item => {
+                    const priceDisplay = item.priceText ? item.priceText : `$${item.price.toFixed(2)}`;
                     html += `
                         <div class="menu-card">
-                            <img src="${producto.img}" class="card-image" onerror="this.src='https://placehold.co/400x300?text=Lucy%27s+Yard'">
+                            <img src="${item.image}" alt="${item.name}" class="card-image" onerror="this.src='https://placehold.co/400x300?text=Lucy%27s+Yard'">
                             <div class="card-content">
-                                <h3>${producto.name}${producto.badge ? `<span class="badge">Brunch</span>` : ''}</h3>
-                                <p>${producto.desc}</p>
+                                <h3>${item.name} ${item.badge ? `<span class="badge">${item.badge}</span>` : ''}</h3>
+                                <p>${item.description}</p>
                                 <div class="price-row">
-                                    <span class="price">${precioMostrar}</span>
-                                    ${!producto.special ? `<button class="add-btn" onclick="window.agregarAlCarrito(${JSON.stringify(producto).replace(/'/g, "\\'")})">
+                                    <span class="price">${priceDisplay}</span>
+                                    <button class="add-to-cart" onclick='window.addItemToCart(${JSON.stringify(item).replace(/'/g, "\\'")})'>
                                         <i class="fas fa-plus"></i> Agregar
-                                    </button>` : ''}
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     `;
-                }
+                });
                 
                 html += `</div>`;
-            }
+            });
             
-            contenedor.innerHTML = html;
-            console.log('✅ Menú renderizado con', menuData.length, 'productos');
+            container.innerHTML = html;
+            console.log('✅ Menú renderizado con', menuItems.length, 'productos');
         }
         
-        // ==================== MODALES ====================
-        function abrirCarrito() {
-            document.getElementById('cartModal').classList.add('active');
-            document.body.style.overflow = 'hidden';
+        // ==================== UI INTERACCIONES ====================
+        function openCartModal() {
+            const modal = document.getElementById('cartModal');
+            if (modal) {
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
         }
         
-        function cerrarCarrito() {
-            document.getElementById('cartModal').classList.remove('active');
-            document.body.style.overflow = '';
+        function closeCartModal() {
+            const modal = document.getElementById('cartModal');
+            if (modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
         }
         
-        // ==================== INICIAR ====================
-        document.getElementById('openCartBtn').onclick = abrirCarrito;
-        document.getElementById('closeCartBtn').onclick = cerrarCarrito;
-        document.getElementById('checkoutBtn').onclick = finalizarPedido;
+        // ==================== EXPONER FUNCIONES GLOBALES ====================
+        window.addItemToCart = addItemToCart;
+        window.removeItemFromCart = removeItemFromCart;
+        window.updateItemQuantity = updateItemQuantity;
+        window.printInvoice = printInvoice;
         
-        renderizarMenu();
-        actualizarCarritoUI();
+        // ==================== INICIAR APLICACIÓN ====================
+        function initApp() {
+            renderMenu();
+            updateCartUI();
+            
+            const openBtn = document.getElementById('openCartBtn');
+            const closeBtn = document.getElementById('closeCartBtn');
+            const checkoutBtn = document.getElementById('checkoutBtn');
+            
+            if (openBtn) openBtn.addEventListener('click', openCartModal);
+            if (closeBtn) closeBtn.addEventListener('click', closeCartModal);
+            if (checkoutBtn) checkoutBtn.addEventListener('click', checkout);
+            
+            console.log('🚀 Lucy\'s Yard QR Menu listo!');
+            console.log('📦 Total productos:', menuItems.length);
+        }
         
-        console.log('✅ Lucy\'s Yard QR Menu listo!');
-        console.log(`📦 ${menuData.length} productos cargados`);
-        console.log('📡 Conectado a Supabase');
+        initApp();
     </script>
 </body>
 </html>
