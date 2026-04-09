@@ -18,7 +18,6 @@
             --color-exito: #4CAF50;
         }
 
-        /* Evitar zoom por doble tap en iOS */
         * {
             margin: 0;
             padding: 0;
@@ -33,15 +32,7 @@
             color: var(--color-texto-claro);
             overflow-x: hidden;
             min-height: 100vh;
-            position: relative;
-            /* Evitar zoom en iOS */
             -webkit-text-size-adjust: 100%;
-            touch-action: pan-x pan-y;
-        }
-
-        /* Deshabilitar zoom en elementos interactivos */
-        button, .add-to-cart, .cart-btn, .close-cart, .checkout-btn, .qty-btn {
-            touch-action: manipulation;
         }
 
         header {
@@ -98,16 +89,13 @@
             align-items: center;
             justify-content: center;
             font-size: 0.7rem;
-            font-weight: bold;
         }
 
-        /* CONTENEDOR PRINCIPAL - Ajustado para mejor visibilidad */
         .main-content {
             padding-top: 80px;
-            min-height: 100vh;
         }
 
-        /* MODAL CARRITO - Optimizado para iPhone */
+        /* MODAL CARRITO */
         .cart-modal {
             position: fixed;
             top: 0;
@@ -153,9 +141,6 @@
             height: 32px;
             border-radius: 50%;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
         .cart-items {
@@ -191,7 +176,86 @@
             font-size: 0.9rem;
         }
 
-        /* HERO BANNER - BAJADO Y CENTRADO */
+        /* MODAL EXTRAS */
+        .extras-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 3000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .extras-modal.active {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .extras-container {
+            background: linear-gradient(145deg, #2a2a2a, #222);
+            border-radius: 24px;
+            max-width: 380px;
+            width: 90%;
+            padding: 1.2rem;
+            border: 2px solid var(--color-amarillo-cheddar);
+        }
+
+        .extras-container h3 {
+            color: var(--color-amarillo-cheddar);
+            text-align: center;
+            margin-bottom: 1rem;
+            font-family: 'Bangers', cursive;
+        }
+
+        .extras-option {
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 0.8rem;
+            margin-bottom: 0.8rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            transition: all 0.2s;
+        }
+
+        .extras-option.selected {
+            background: linear-gradient(135deg, var(--color-purpura-berry), #9d5b85);
+            border: 1px solid var(--color-amarillo-cheddar);
+        }
+
+        .extras-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .extras-confirm, .extras-cancel {
+            flex: 1;
+            padding: 0.7rem;
+            border-radius: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+        }
+
+        .extras-confirm {
+            background: linear-gradient(135deg, var(--color-rojo-fuego), #c42f04);
+            color: white;
+        }
+
+        .extras-cancel {
+            background: rgba(255,255,255,0.1);
+            color: white;
+        }
+
+        /* HERO BANNER */
         .menu-section {
             padding: 0.5rem 1rem 2rem 1rem;
         }
@@ -199,7 +263,7 @@
         .hero-banner {
             background: linear-gradient(135deg, rgba(219,54,6,0.15), rgba(186,105,144,0.15));
             border-radius: 20px;
-            padding: 1.2rem;
+            padding: 1rem;
             text-align: center;
             margin: 0.5rem auto 1.5rem auto;
             border: 1px solid rgba(248,168,20,0.3);
@@ -212,14 +276,13 @@
             font-family: 'Bangers', cursive;
             color: var(--color-amarillo-cheddar);
             text-shadow: 2px 2px 0px var(--color-rojo-fuego);
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.3rem;
         }
 
         .hero-banner p {
             font-size: 0.75rem;
             color: #ccc;
-            line-height: 1.5;
-            margin: 0.2rem 0;
+            line-height: 1.4;
         }
 
         .section-title {
@@ -286,6 +349,8 @@
             justify-content: space-between;
             align-items: center;
             margin-top: 0.3rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
         }
 
         .price {
@@ -306,6 +371,17 @@
             display: flex;
             align-items: center;
             gap: 4px;
+        }
+
+        .addon-info {
+            font-size: 0.65rem;
+            color: #E0A851;
+            margin-top: 0.3rem;
+            background: rgba(0,0,0,0.3);
+            padding: 4px 8px;
+            border-radius: 15px;
+            cursor: pointer;
+            display: inline-block;
         }
 
         .badge {
@@ -343,7 +419,6 @@
             z-index: 5000;
             font-size: 0.8rem;
             white-space: nowrap;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
         }
 
         .empty-cart {
@@ -360,129 +435,52 @@
             font-size: 0.65rem;
         }
 
-        /* ========== RESPONSIVE ========== */
-        @media (max-width: 380px) {
-            .hero-banner {
-                padding: 0.8rem;
-                margin: 0.3rem auto 1rem auto;
-            }
-            .hero-banner h1 {
-                font-size: 1.3rem;
-            }
-            .hero-banner p {
-                font-size: 0.65rem;
-            }
-            .menu-grid {
-                grid-template-columns: 1fr;
-                gap: 0.8rem;
-            }
-            .card-image {
-                height: 140px;
-            }
-            .cart-btn span:not(.cart-count) {
-                display: none;
-            }
-            .cart-btn {
-                padding: 8px 12px;
-            }
-            .logo-text {
-                font-size: 1.4rem;
-            }
-            .section-title {
-                font-size: 1.3rem;
-            }
-            .main-content {
-                padding-top: 75px;
-            }
-        }
-
-        @media (min-width: 381px) and (max-width: 768px) {
-            .hero-banner {
-                padding: 1rem;
-                margin: 0.5rem auto 1.2rem auto;
-            }
-            .hero-banner h1 {
-                font-size: 1.4rem;
-            }
-            .menu-grid {
-                grid-template-columns: 1fr;
-                gap: 1rem;
-            }
-            .cart-btn span:not(.cart-count) {
-                display: none;
-            }
-            .cart-btn {
-                padding: 8px 12px;
-            }
-            .logo-text {
-                font-size: 1.5rem;
-            }
-            .main-content {
-                padding-top: 78px;
-            }
+        @media (max-width: 768px) {
+            .cart-btn span:not(.cart-count) { display: none; }
+            .cart-btn { padding: 8px 12px; }
+            .logo-text { font-size: 1.5rem; }
+            .menu-grid { grid-template-columns: 1fr; }
+            .cart-modal { max-width: 100%; }
+            .notification { white-space: normal; text-align: center; max-width: 90%; font-size: 0.7rem; }
         }
 
         @media (min-width: 769px) and (max-width: 1024px) {
-            .menu-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .hero-banner {
-                max-width: 80%;
-            }
-            .cart-modal {
-                max-width: 420px;
-            }
+            .menu-grid { grid-template-columns: repeat(2, 1fr); }
         }
 
         @media (min-width: 1025px) {
-            .menu-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-            .hero-banner {
-                max-width: 600px;
-            }
-            .cart-modal {
-                max-width: 450px;
-            }
-        }
-
-        /* Para iPhone con notch (safe area) */
-        @supports (padding: max(0px)) {
-            .cart-footer {
-                padding-bottom: max(0.8rem, env(safe-area-inset-bottom, 0.8rem));
-            }
-            .cart-modal {
-                padding-bottom: env(safe-area-inset-bottom, 0px);
-            }
-        }
-
-        @media (max-width: 480px) {
-            .notification {
-                white-space: normal;
-                text-align: center;
-                max-width: 90%;
-                font-size: 0.7rem;
-                padding: 8px 12px;
-            }
+            .menu-grid { grid-template-columns: repeat(3, 1fr); }
         }
     </style>
 </head>
 <body>
+
+    <!-- MODAL EXTRAS -->
+    <div class="extras-modal" id="extrasModal">
+        <div class="extras-container">
+            <h3 id="extrasTitle">Agregar proteína</h3>
+            <div id="extrasOptions"></div>
+            <div class="extras-buttons">
+                <button class="extras-cancel" id="extrasCancelBtn">Cancelar</button>
+                <button class="extras-confirm" id="extrasConfirmBtn">Agregar</button>
+            </div>
+        </div>
+    </div>
 
     <!-- MODAL CARRITO -->
     <div class="cart-modal" id="cartModal">
         <div class="cart-header">
             <button class="close-cart" id="closeCartBtn"><i class="fas fa-times"></i></button>
             <h2><i class="fas fa-shopping-cart"></i> Mi Pedido</h2>
-            <p style="text-align:center; font-size:0.65rem; margin-top:4px;">📍 Lucy's Yard - Allen</p>
+            <p style="text-align:center; font-size:0.65rem;">📍 Lucy's Yard - Allen</p>
         </div>
         <div class="cart-items" id="cartItemsContainer">
             <div class="empty-cart"><i class="fas fa-shopping-basket"></i><p>Tu carrito está vacío</p></div>
         </div>
         <div class="cart-footer">
             <div style="display:flex; justify-content:space-between; margin-bottom:0.5rem;">
-                <span style="font-size:0.85rem;">Total:</span>
-                <span id="cartTotal" style="color:var(--color-amarillo-cheddar); font-size:1.1rem; font-weight:bold;">$0.00</span>
+                <span>Total:</span>
+                <span id="cartTotal" style="color:var(--color-amarillo-cheddar); font-weight:bold;">$0.00</span>
             </div>
             <button class="checkout-btn" id="checkoutBtn">
                 <i class="fas fa-credit-card"></i> Pagar y Enviar Pedido
@@ -527,12 +525,12 @@
             { id: 2, name: "12 Wings", description: "BBQ, Mango Habanero, Lemon Pepper, Buffalo, Sweet Chili", price: 18.00, category: "Appetizers", image: "https://images.unsplash.com/photo-1608039829572-78524f79c4c7?w=400&h=300&fit=crop" },
             { id: 3, name: "Chips & Queso", description: "Tortilla chips con queso fundido", price: 10.00, category: "Appetizers", image: "https://images.unsplash.com/photo-1593195743443-2f5b6b4d2c8f?w=400&h=300&fit=crop" },
             { id: 4, name: "Chips & Salsa", description: "Tortilla chips con salsa fresca", price: 8.00, category: "Appetizers", image: "https://images.unsplash.com/photo-1569591159212-b02ea8a9f6b1?w=400&h=300&fit=crop" },
-            { id: 5, name: "Loaded Nachos", description: "Chips, queso, pico de gallo, jalapeños, crema", price: 10.00, category: "Appetizers", image: "https://images.unsplash.com/photo-1513456852971-30c0b8199d4d?w=400&h=300&fit=crop" },
+            { id: 5, name: "Loaded Nachos", description: "Chips, queso, pico de gallo, jalapeños, crema", price: 10.00, category: "Appetizers", image: "https://images.unsplash.com/photo-1513456852971-30c0b8199d4d?w=400&h=300&fit=crop", hasExtras: true, extraType: "nachos" },
             { id: 6, name: "House Salad", description: "Spring mix, slaw, pico, cheese, tortilla strips, chipotle aioli", price: 8.00, category: "Salads & Bowls", image: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=300&fit=crop" },
             { id: 7, name: "Wedge Salad", description: "Iceberg lettuce, blue cheese, grape tomatoes, chives, bacon", price: 8.00, category: "Salads & Bowls", image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=300&fit=crop" },
             { id: 8, name: "Chopped Salad", description: "Chopped greens, grape tomatoes, avocado, bacon, eggs, cheese", price: 8.00, category: "Salads & Bowls", image: "https://images.unsplash.com/photo-1546793665-c74683f339c1?w=400&h=300&fit=crop" },
-            { id: 9, name: "Power Bowl", description: "Cilantro lime rice, black beans, roasted corn, slaw, pico, cheese, lime chipotle sauce", price: 9.00, category: "Salads & Bowls", image: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=300&fit=crop" },
-            { id: 10, name: "Veggie Bowl", description: "Cilantro lime rice, beans, corn, avocado, slaw, pico, roasted cauliflower", price: 12.00, category: "Salads & Bowls", image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=300&fit=crop" },
+            { id: 9, name: "Power Bowl", description: "Cilantro lime rice, black beans, roasted corn, slaw, pico, cheese, lime chipotle sauce", price: 9.00, category: "Salads & Bowls", image: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=300&fit=crop", hasExtras: true, extraType: "bowl" },
+            { id: 10, name: "Veggie Bowl", description: "Cilantro lime rice, beans, corn, avocado, slaw, pico, roasted cauliflower", price: 12.00, category: "Salads & Bowls", image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=300&fit=crop", hasExtras: true, extraType: "bowl" },
             { id: 11, name: "Tacos (2)", description: "Chicken Fajita, Garlic Shrimp, Brisket, Baja Fish", price: 12.00, category: "Tacos & Quesadillas", image: "https://images.unsplash.com/photo-1599974579688-8dbdd335c77f?w=400&h=300&fit=crop" },
             { id: 12, name: "Quesadilla", description: "Chicken Fajita, Garlic Shrimp, Brisket", price: 12.00, category: "Tacos & Quesadillas", image: "https://images.unsplash.com/photo-1618040996337-56904b7850b9?w=400&h=300&fit=crop" },
             { id: 13, name: "Classic Burger", description: "1/3lb patty, cheddar cheese, lettuce, tomatoes, onions, pickles", price: 11.95, category: "Burgers", image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&h=300&fit=crop" },
@@ -556,17 +554,36 @@
             { id: 31, name: "Kids Plate", description: "2 pancakes + 2 eggs + 1 bacon + jello", price: 10.50, category: "Brunch", image: "https://images.unsplash.com/photo-1586444248902-2f64eddc13df?w=400&h=300&fit=crop", badge: "Brunch" },
             { id: 32, name: "Chef's Special", description: "Different every week! Ask your server", price: 0, category: "Brunch", image: "https://images.unsplash.com/photo-1544025162-d76694265947?w=400&h=300&fit=crop", badge: "Chef's Special", priceText: "Precio del mercado" }
         ];
+
+        // Opciones de extras
+        const extraOptions = {
+            nachos: [
+                { name: "Brisket", price: 6.00 },
+                { name: "Chicken Fajita", price: 4.00 },
+                { name: "Pulled Pork", price: 5.00 }
+            ],
+            bowl: [
+                { name: "Garlic Shrimp", price: 5.00 },
+                { name: "Blackened Shrimp", price: 5.00 },
+                { name: "Salmon", price: 7.00 },
+                { name: "Brisket", price: 6.00 },
+                { name: "Garlic Chicken", price: 5.00 }
+            ]
+        };
         
         // ==================== CARRITO ====================
         let shoppingCart = JSON.parse(localStorage.getItem('lucysyard_cart')) || [];
+        let currentExtraItem = null;
+        let selectedExtra = null;
         
         function saveCartToLocal() {
             localStorage.setItem('lucysyard_cart', JSON.stringify(shoppingCart));
             updateCartUI();
         }
         
+        // Función para agregar al carrito (SIMPLE Y DIRECTA)
         window.addItemToCart = function(item) {
-            const existing = shoppingCart.find(i => i.id === item.id);
+            const existing = shoppingCart.find(i => i.id === item.id && i.extraAdded === item.extraAdded);
             if (existing) {
                 existing.quantity++;
             } else {
@@ -576,6 +593,71 @@
             showNotification(`${item.name} agregado al carrito`);
         };
         
+        // Función para abrir modal de extras
+        window.openExtrasModal = function(item) {
+            console.log("Abriendo modal para:", item.name);
+            currentExtraItem = item;
+            selectedExtra = null;
+            
+            const extrasList = extraOptions[item.extraType] || [];
+            const modal = document.getElementById('extrasModal');
+            const title = document.getElementById('extrasTitle');
+            const optionsContainer = document.getElementById('extrasOptions');
+            
+            title.innerHTML = `Agregar proteína a ${item.name}`;
+            
+            optionsContainer.innerHTML = extrasList.map(extra => `
+                <div class="extras-option" data-name="${extra.name}" data-price="${extra.price}">
+                    <span>${extra.name}</span>
+                    <span>+$${extra.price.toFixed(2)}</span>
+                </div>
+            `).join('');
+            
+            // Agregar eventos de selección
+            document.querySelectorAll('.extras-option').forEach(opt => {
+                opt.onclick = function() {
+                    document.querySelectorAll('.extras-option').forEach(o => o.classList.remove('selected'));
+                    this.classList.add('selected');
+                    selectedExtra = {
+                        name: this.dataset.name,
+                        price: parseFloat(this.dataset.price)
+                    };
+                };
+            });
+            
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        };
+        
+        function closeExtrasModal() {
+            document.getElementById('extrasModal').classList.remove('active');
+            document.body.style.overflow = '';
+            currentExtraItem = null;
+            selectedExtra = null;
+        }
+        
+        function confirmExtrasAndAdd() {
+            if (!selectedExtra) {
+                showNotification('Por favor selecciona una proteína', true);
+                return;
+            }
+            
+            if (currentExtraItem) {
+                const totalPrice = currentExtraItem.price + selectedExtra.price;
+                const itemWithExtra = {
+                    ...currentExtraItem,
+                    price: totalPrice,
+                    name: `${currentExtraItem.name} + ${selectedExtra.name}`,
+                    extraAdded: selectedExtra.name,
+                    extraPrice: selectedExtra.price,
+                    originalPrice: currentExtraItem.price
+                };
+                window.addItemToCart(itemWithExtra);
+                closeExtrasModal();
+            }
+        }
+        
+        // Funciones del carrito
         window.removeItemFromCart = function(index) {
             shoppingCart.splice(index, 1);
             saveCartToLocal();
@@ -617,18 +699,19 @@
                 <div class="cart-item">
                     <div style="display:flex; justify-content:space-between;">
                         <div>
-                            <strong style="font-size:0.85rem;">${item.name}</strong><br>
-                            <small style="font-size:0.65rem;">$${item.price.toFixed(2)} c/u</small>
+                            <strong>${item.name}</strong><br>
+                            ${item.extraAdded ? `<small style="color:var(--color-amarillo-cheddar);">+ ${item.extraAdded} (+$${item.extraPrice})</small><br>` : ''}
+                            <small>$${item.originalPrice || item.price} c/u</small>
                         </div>
-                        <div style="font-weight:bold; font-size:0.85rem;">$${(item.price * item.quantity).toFixed(2)}</div>
+                        <div>$${(item.price * item.quantity).toFixed(2)}</div>
                     </div>
                     <div style="display:flex; justify-content:space-between; margin-top:8px;">
                         <div>
-                            <button onclick="window.updateItemQuantity(${index}, ${item.quantity - 1})" style="background:#BA6990; border:none; width:26px; height:26px; border-radius:50%; cursor:pointer; color:white; font-size:0.9rem;">-</button>
-                            <span style="margin:0 8px; font-size:0.85rem;">${item.quantity}</span>
-                            <button onclick="window.updateItemQuantity(${index}, ${item.quantity + 1})" style="background:#BA6990; border:none; width:26px; height:26px; border-radius:50%; cursor:pointer; color:white; font-size:0.9rem;">+</button>
+                            <button onclick="window.updateItemQuantity(${index}, ${item.quantity - 1})" style="background:#BA6990; border:none; width:28px; height:28px; border-radius:50%; cursor:pointer; color:white;">-</button>
+                            <span style="margin:0 10px;">${item.quantity}</span>
+                            <button onclick="window.updateItemQuantity(${index}, ${item.quantity + 1})" style="background:#BA6990; border:none; width:28px; height:28px; border-radius:50%; cursor:pointer; color:white;">+</button>
                         </div>
-                        <button onclick="window.removeItemFromCart(${index})" style="background:none; border:none; color:#ff6b6b; cursor:pointer; font-size:0.7rem;">🗑️ Eliminar</button>
+                        <button onclick="window.removeItemFromCart(${index})" style="background:none; border:none; color:#ff6b6b; cursor:pointer;">🗑️ Eliminar</button>
                     </div>
                 </div>
             `).join('');
@@ -664,7 +747,7 @@
                     </div>
                     <div>
                         ${items.map(item => `
-                            <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px dashed #ddd; font-size:0.8rem;">
+                            <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px dashed #ddd;">
                                 <span>${item.name} x${item.quantity}</span>
                                 <span>$${(item.price * item.quantity).toFixed(2)}</span>
                             </div>
@@ -715,8 +798,6 @@
         // ==================== ENVIAR PEDIDO A SUPABASE ====================
         async function sendOrderToCloud(orderData) {
             try {
-                console.log('📤 Enviando pedido a Supabase...', orderData);
-                
                 const orderToSave = {
                     order_id: orderData.orderId,
                     customer_name: 'Cliente QR',
@@ -733,23 +814,22 @@
                     .select();
                 
                 if (error) {
-                    console.error('❌ Error Supabase:', error);
+                    console.error('Error Supabase:', error);
                     showNotification(`Error: ${error.message}`, true);
-                    return { success: false, error: error.message };
+                    return { success: false };
                 }
                 
                 console.log('✅ Pedido guardado en la nube:', data);
                 showNotification(`✅ Pedido enviado a cocina!`);
-                return { success: true, data: data };
+                return { success: true };
                 
             } catch (error) {
-                console.error('❌ Error:', error);
+                console.error('Error:', error);
                 showNotification('Error al conectar con servidor', true);
-                return { success: false, error: error.message };
+                return { success: false };
             }
         }
         
-        // ==================== SIMULAR PAGO ====================
         async function processPayment(total) {
             return new Promise((resolve) => {
                 setTimeout(() => {
@@ -762,7 +842,6 @@
             });
         }
         
-        // ==================== CHECKOUT ====================
         async function checkout() {
             if (shoppingCart.length === 0) {
                 showNotification('El carrito está vacío', true);
@@ -770,7 +849,6 @@
             }
             
             const total = getCartTotalAmount();
-            const location = 'Allen - Lucy\'s Yard';
             
             showNotification('Procesando pago...');
             
@@ -782,8 +860,6 @@
                     return;
                 }
                 
-                showNotification(`✅ Pago aprobado!`);
-                
                 const orderData = {
                     orderId: payment.transactionId,
                     items: shoppingCart.map(item => ({
@@ -793,7 +869,7 @@
                         subtotal: item.price * item.quantity
                     })),
                     total: total,
-                    location: location,
+                    location: 'Allen - Lucy\'s Yard',
                     tableNumber: 'QR-MESA'
                 };
                 
@@ -803,17 +879,8 @@
                     generateInvoice(payment.transactionId, shoppingCart, total);
                     shoppingCart = [];
                     saveCartToLocal();
-                    
-                    document.getElementById('cartModal').classList.remove('active');
-                    document.body.style.overflow = 'auto';
-                    
+                    closeCartModal();
                     showNotification(`🎉 Pedido #${payment.transactionId.slice(-6)} enviado a cocina!`);
-                    
-                    console.log('========== COMANDA LUCYS YARD ==========');
-                    console.log(`Orden: ${payment.transactionId}`);
-                    console.log('Productos:', orderData.items);
-                    console.log(`Total: $${total}`);
-                    console.log('=========================================');
                 }
                 
             } catch (error) {
@@ -842,15 +909,19 @@
                 
                 items.forEach(item => {
                     const priceDisplay = item.priceText ? item.priceText : `$${item.price.toFixed(2)}`;
+                    const hasExtras = item.hasExtras;
+                    const itemData = JSON.stringify(item).replace(/'/g, "\\'");
+                    
                     html += `
                         <div class="menu-card">
-                            <img src="${item.image}" alt="${item.name}" class="card-image" onerror="this.src='https://placehold.co/400x300?text=Lucy%27s+Yard'">
+                            <img src="${item.image}" class="card-image" onerror="this.src='https://placehold.co/400x300?text=Lucy%27s+Yard'">
                             <div class="card-content">
                                 <h3>${item.name} ${item.badge ? `<span class="badge">${item.badge}</span>` : ''}</h3>
                                 <p>${item.description}</p>
+                                ${hasExtras ? `<div class="addon-info" onclick='window.openExtrasModal(${itemData})'><i class="fas fa-plus-circle"></i> + Agregar proteína</div>` : ''}
                                 <div class="price-row">
                                     <span class="price">${priceDisplay}</span>
-                                    <button class="add-to-cart" onclick='window.addItemToCart(${JSON.stringify(item).replace(/'/g, "\\'")})'>
+                                    <button class="add-to-cart" onclick='window.addItemToCart(${itemData})'>
                                         <i class="fas fa-plus"></i> Agregar
                                     </button>
                                 </div>
@@ -868,39 +939,27 @@
         
         // ==================== UI INTERACCIONES ====================
         function openCartModal() {
-            const modal = document.getElementById('cartModal');
-            if (modal) {
-                modal.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            }
+            document.getElementById('cartModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
         }
         
         function closeCartModal() {
-            const modal = document.getElementById('cartModal');
-            if (modal) {
-                modal.classList.remove('active');
-                document.body.style.overflow = 'auto';
-            }
+            document.getElementById('cartModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
         }
         
-        // ==================== INICIAR APLICACIÓN ====================
-        function initApp() {
-            renderMenu();
-            updateCartUI();
-            
-            const openBtn = document.getElementById('openCartBtn');
-            const closeBtn = document.getElementById('closeCartBtn');
-            const checkoutBtn = document.getElementById('checkoutBtn');
-            
-            if (openBtn) openBtn.addEventListener('click', openCartModal);
-            if (closeBtn) closeBtn.addEventListener('click', closeCartModal);
-            if (checkoutBtn) checkoutBtn.addEventListener('click', checkout);
-            
-            console.log('🚀 Lucy\'s Yard QR Menu listo!');
-            console.log('📦 Total productos:', menuItems.length);
-        }
+        // ==================== INICIAR ====================
+        document.getElementById('openCartBtn').onclick = openCartModal;
+        document.getElementById('closeCartBtn').onclick = closeCartModal;
+        document.getElementById('checkoutBtn').onclick = checkout;
+        document.getElementById('extrasCancelBtn').onclick = closeExtrasModal;
+        document.getElementById('extrasConfirmBtn').onclick = confirmExtrasAndAdd;
         
-        initApp();
+        renderMenu();
+        updateCartUI();
+        
+        console.log('🚀 Lucy\'s Yard QR Menu listo!');
+        console.log('💡 Productos con extras: Loaded Nachos, Power Bowl, Veggie Bowl');
     </script>
 </body>
 </html>
