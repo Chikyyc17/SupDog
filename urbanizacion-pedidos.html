@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SupDog - Pedidos Exclusivos | Urbanización</title>
+    <title>SupDog - Exclusive Orders | Residential Community</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -44,7 +44,7 @@
             padding-bottom: 100px;
         }
 
-        h1, h2, h3, h4, .logo-text, .price, .category-title { 
+        h1, h2, h3, h4, .logo-text, .price-tag, .category-title { 
             font-family: 'Bangers', cursive; 
             letter-spacing: 0.5px; 
         }
@@ -52,7 +52,7 @@
         /* ============ HEADER ============ */
         .header-exclusivo {
             background: linear-gradient(135deg, #DB3606 0%, #BA6990 100%);
-            padding: 1rem;
+            padding: 1.2rem 1rem;
             text-align: center;
             position: sticky;
             top: 0;
@@ -65,9 +65,9 @@
             display: inline-block;
             background: rgba(0,0,0,0.3);
             color: var(--color-amarillo-cheddar);
-            padding: 5px 15px;
+            padding: 6px 18px;
             border-radius: 30px;
-            font-size: 0.7rem;
+            font-size: 0.8rem;
             font-weight: bold;
             margin-bottom: 0.5rem;
             letter-spacing: 1px;
@@ -75,7 +75,7 @@
         }
 
         .logo-text {
-            font-size: 2rem;
+            font-size: clamp(2rem, 5vw, 3rem);
             color: white;
             text-shadow: 2px 2px 0px rgba(0,0,0,0.5);
         }
@@ -86,7 +86,7 @@
 
         .header-subtitle {
             color: rgba(255,255,255,0.9);
-            font-size: 0.8rem;
+            font-size: clamp(0.8rem, 2vw, 1rem);
             font-weight: 600;
         }
 
@@ -102,15 +102,16 @@
             gap: 10px;
             background: var(--color-verde-whatsapp);
             color: white;
-            padding: 14px 24px;
+            padding: clamp(12px, 2vw, 16px) clamp(20px, 3vw, 28px);
             border-radius: 50px;
             font-weight: bold;
-            font-size: 0.9rem;
+            font-size: clamp(0.85rem, 1.5vw, 1rem);
             cursor: pointer;
             box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
             border: none;
             animation: pulseCart 2s infinite;
             max-width: 90%;
+            white-space: nowrap;
         }
 
         .cart-float-btn:active {
@@ -121,13 +122,13 @@
             background: white;
             color: #128C7E;
             border-radius: 50%;
-            width: 26px;
-            height: 26px;
+            width: clamp(24px, 3vw, 28px);
+            height: clamp(24px, 3vw, 28px);
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: bold;
-            font-size: 0.85rem;
+            font-size: clamp(0.8rem, 1.5vw, 0.9rem);
         }
 
         @keyframes pulseCart {
@@ -137,13 +138,14 @@
 
         /* ============ CONTENIDO PRINCIPAL ============ */
         .menu-section {
-            padding: 1.5rem 1rem;
-            max-width: 650px;
+            padding: clamp(1.5rem, 3vw, 3rem) clamp(1rem, 3vw, 2rem);
+            max-width: 800px;
             margin: 0 auto;
+            width: 100%;
         }
 
         .section-title {
-            font-size: 1.8rem;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
             color: var(--color-amarillo-cheddar);
             text-align: center;
             margin-bottom: 0.3rem;
@@ -153,15 +155,15 @@
         .section-subtitle {
             text-align: center;
             color: #aaa;
-            font-size: 0.8rem;
+            font-size: clamp(0.8rem, 1.5vw, 1rem);
             margin-bottom: 1.5rem;
         }
 
         /* ============ CATEGORÍAS ============ */
         .category-title {
-            font-size: 1.4rem;
+            font-size: clamp(1.3rem, 3vw, 1.8rem);
             color: white;
-            margin: 1.5rem 0 0.8rem 0;
+            margin: 2rem 0 0.8rem 0;
             padding-bottom: 0.4rem;
             border-bottom: 3px solid var(--color-rojo-fuego);
             display: flex;
@@ -171,7 +173,7 @@
 
         .category-subtitle {
             color: #aaa;
-            font-size: 0.8rem;
+            font-size: clamp(0.75rem, 1.5vw, 0.9rem);
             margin-bottom: 0.8rem;
             font-style: italic;
         }
@@ -187,23 +189,23 @@
             background: rgba(248, 168, 20, 0.15);
             border: 1px solid var(--color-amarillo-cheddar);
             color: var(--color-amarillo-cheddar);
-            padding: 3px 8px;
+            padding: 4px 10px;
             border-radius: 15px;
-            font-size: 0.7rem;
+            font-size: clamp(0.7rem, 1.2vw, 0.8rem);
             font-weight: 600;
         }
 
         /* ============ TARJETAS DE PRODUCTOS ============ */
         .product-card {
             background: #1a1a1a;
-            border-radius: 12px;
-            padding: 1rem;
-            margin-bottom: 0.7rem;
+            border-radius: clamp(12px, 2vw, 16px);
+            padding: clamp(0.8rem, 1.5vw, 1.2rem);
+            margin-bottom: clamp(0.6rem, 1vw, 0.8rem);
             border: 2px solid #2a2a2a;
             transition: all 0.2s ease;
             display: flex;
             align-items: center;
-            gap: 0.8rem;
+            gap: clamp(0.6rem, 1.5vw, 1rem);
             cursor: pointer;
             position: relative;
         }
@@ -224,7 +226,7 @@
         }
 
         .product-info h3 {
-            font-size: 1.1rem;
+            font-size: clamp(1rem, 2vw, 1.3rem);
             color: white;
             font-family: 'Bangers', cursive;
             letter-spacing: 0.5px;
@@ -233,13 +235,13 @@
 
         .product-info .desc {
             color: #999;
-            font-size: 0.75rem;
+            font-size: clamp(0.7rem, 1.3vw, 0.85rem);
             line-height: 1.3;
         }
 
         .product-info .extra {
             color: var(--color-mostaza-suave);
-            font-size: 0.7rem;
+            font-size: clamp(0.65rem, 1.1vw, 0.75rem);
             margin-top: 0.2rem;
             font-style: italic;
         }
@@ -248,13 +250,13 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 0.5rem;
+            gap: clamp(0.4rem, 1vw, 0.6rem);
             flex-shrink: 0;
         }
 
         .price-tag {
             color: var(--color-amarillo-cheddar);
-            font-size: 1.2rem;
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
             font-family: 'Bangers', cursive;
             white-space: nowrap;
         }
@@ -263,9 +265,9 @@
             background: var(--color-rojo-fuego);
             color: white;
             border: none;
-            padding: 8px 18px;
+            padding: clamp(7px, 1vw, 10px) clamp(16px, 2vw, 22px);
             border-radius: 20px;
-            font-size: 0.8rem;
+            font-size: clamp(0.75rem, 1.3vw, 0.9rem);
             font-weight: bold;
             cursor: pointer;
             transition: all 0.2s ease;
@@ -286,18 +288,18 @@
         .qty-controls {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: clamp(6px, 1vw, 10px);
         }
 
         .qty-btn {
             background: #333;
             color: white;
             border: none;
-            width: 30px;
-            height: 30px;
+            width: clamp(28px, 4vw, 34px);
+            height: clamp(28px, 4vw, 34px);
             border-radius: 50%;
             cursor: pointer;
-            font-size: 1rem;
+            font-size: clamp(0.9rem, 1.5vw, 1.1rem);
             font-weight: bold;
             display: flex;
             align-items: center;
@@ -312,8 +314,8 @@
         .qty-number {
             color: white;
             font-weight: bold;
-            font-size: 1rem;
-            min-width: 20px;
+            font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+            min-width: clamp(18px, 3vw, 24px);
             text-align: center;
         }
 
@@ -335,22 +337,22 @@
         .modal-box {
             background: #1a1a1a;
             border-radius: 16px;
-            padding: 1.5rem;
-            max-width: 380px;
-            width: 100%;
+            padding: clamp(1.2rem, 3vw, 2rem);
+            max-width: 420px;
+            width: 90%;
             border: 2px solid var(--color-amarillo-cheddar);
         }
 
         .modal-box h3 {
             color: var(--color-amarillo-cheddar);
             font-family: 'Bangers', cursive;
-            font-size: 1.4rem;
+            font-size: clamp(1.3rem, 3vw, 1.6rem);
             margin-bottom: 0.5rem;
         }
 
         .modal-box p {
             color: #ccc;
-            font-size: 0.85rem;
+            font-size: clamp(0.8rem, 1.5vw, 0.9rem);
             margin-bottom: 1rem;
         }
 
@@ -360,10 +362,10 @@
             background: rgba(255,255,255,0.05);
             border: 2px solid rgba(255,255,255,0.2);
             color: white;
-            padding: 12px;
+            padding: clamp(10px, 2vw, 14px);
             border-radius: 10px;
             cursor: pointer;
-            font-size: 0.9rem;
+            font-size: clamp(0.85rem, 1.5vw, 0.95rem);
             font-family: 'Poppins', sans-serif;
             margin-bottom: 0.5rem;
             text-align: left;
@@ -381,10 +383,10 @@
             background: transparent;
             border: 1px solid #555;
             color: #aaa;
-            padding: 10px;
+            padding: clamp(8px, 1.5vw, 12px);
             border-radius: 10px;
             cursor: pointer;
-            font-size: 0.9rem;
+            font-size: clamp(0.8rem, 1.5vw, 0.9rem);
             font-family: 'Poppins', sans-serif;
             margin-top: 0.5rem;
         }
@@ -392,17 +394,17 @@
         /* ============ FORMULARIO DE DATOS ============ */
         .delivery-form {
             background: #1a1a1a;
-            border-radius: 12px;
-            padding: 1.2rem;
-            margin: 1.5rem 0;
+            border-radius: clamp(12px, 2vw, 16px);
+            padding: clamp(1rem, 2vw, 1.5rem);
+            margin: 2rem 0;
             border: 2px solid #2a2a2a;
         }
 
         .delivery-form h4 {
             color: var(--color-amarillo-cheddar);
             font-family: 'Bangers', cursive;
-            font-size: 1.2rem;
-            margin-bottom: 0.8rem;
+            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+            margin-bottom: 1rem;
         }
 
         .delivery-form input, .delivery-form textarea {
@@ -410,11 +412,11 @@
             background: #0a0a0a;
             border: 1px solid #333;
             color: white;
-            padding: 12px;
+            padding: clamp(10px, 1.5vw, 14px);
             border-radius: 8px;
             font-family: 'Poppins', sans-serif;
-            font-size: 0.9rem;
-            margin-bottom: 0.6rem;
+            font-size: clamp(0.85rem, 1.5vw, 1rem);
+            margin-bottom: 0.8rem;
             transition: border-color 0.3s ease;
         }
 
@@ -435,17 +437,17 @@
         /* ============ RESUMEN DEL PEDIDO ============ */
         .order-summary {
             background: #1a1a1a;
-            border-radius: 12px;
-            padding: 1.2rem;
-            margin: 1rem 0;
+            border-radius: clamp(12px, 2vw, 16px);
+            padding: clamp(1rem, 2vw, 1.5rem);
+            margin: 1.5rem 0;
             border: 2px solid var(--color-amarillo-cheddar);
         }
 
         .order-summary h3 {
             color: var(--color-amarillo-cheddar);
             font-family: 'Bangers', cursive;
-            font-size: 1.3rem;
-            margin-bottom: 0.8rem;
+            font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+            margin-bottom: 1rem;
             text-align: center;
         }
 
@@ -453,9 +455,9 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0.5rem 0;
+            padding: 0.6rem 0;
             border-bottom: 1px solid rgba(255,255,255,0.08);
-            font-size: 0.85rem;
+            font-size: clamp(0.8rem, 1.3vw, 0.9rem);
             gap: 0.5rem;
         }
 
@@ -466,34 +468,35 @@
         .summary-name {
             color: #ddd;
             flex: 1;
-            font-size: 0.8rem;
+            font-size: clamp(0.75rem, 1.3vw, 0.85rem);
         }
 
         .summary-flavor {
             color: var(--color-amarillo-cheddar);
-            font-size: 0.7rem;
+            font-size: clamp(0.65rem, 1.1vw, 0.75rem);
         }
 
         .summary-qty {
             color: var(--color-purpura-berry);
             font-weight: bold;
+            font-size: clamp(0.8rem, 1.3vw, 0.9rem);
         }
 
         .summary-price {
             color: var(--color-amarillo-cheddar);
             font-weight: bold;
             white-space: nowrap;
-            font-size: 0.85rem;
+            font-size: clamp(0.8rem, 1.3vw, 0.9rem);
         }
 
         .summary-total {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-top: 0.8rem;
-            padding-top: 0.8rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
             border-top: 2px solid var(--color-rojo-fuego);
-            font-size: 1.1rem;
+            font-size: clamp(1rem, 2vw, 1.2rem);
             font-weight: bold;
         }
 
@@ -504,7 +507,7 @@
         .summary-total-price {
             color: var(--color-amarillo-cheddar);
             font-family: 'Bangers', cursive;
-            font-size: 1.5rem;
+            font-size: clamp(1.3rem, 2.5vw, 1.8rem);
         }
 
         .empty-order {
@@ -512,7 +515,7 @@
             color: #666;
             padding: 1rem;
             font-style: italic;
-            font-size: 0.85rem;
+            font-size: clamp(0.8rem, 1.3vw, 0.9rem);
         }
 
         /* ============ BOTÓN WHATSAPP ============ */
@@ -522,12 +525,12 @@
             justify-content: center;
             gap: 8px;
             width: 100%;
-            padding: 1rem;
+            padding: clamp(0.8rem, 1.5vw, 1.1rem);
             background: var(--color-verde-whatsapp);
             color: white;
             border: none;
             border-radius: 50px;
-            font-size: 1rem;
+            font-size: clamp(0.9rem, 1.5vw, 1.1rem);
             font-weight: bold;
             cursor: pointer;
             font-family: 'Poppins', sans-serif;
@@ -547,7 +550,7 @@
         }
 
         .whatsapp-submit i {
-            font-size: 1.3rem;
+            font-size: clamp(1.2rem, 2vw, 1.4rem);
         }
 
         /* ============ TOAST ============ */
@@ -564,7 +567,7 @@
             z-index: 300;
             transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-            font-size: 0.85rem;
+            font-size: clamp(0.8rem, 1.3vw, 0.9rem);
             display: flex;
             align-items: center;
             gap: 6px;
@@ -584,24 +587,47 @@
             text-align: center;
             padding: 1.5rem;
             color: #555;
-            font-size: 0.7rem;
+            font-size: clamp(0.7rem, 1.2vw, 0.8rem);
             border-top: 1px solid rgba(255,255,255,0.05);
             margin-top: 2rem;
-            line-height: 1.6;
         }
 
         /* ============ RESPONSIVE ============ */
         @media (min-width: 768px) {
             .menu-section {
-                padding: 2rem;
+                padding: 2.5rem 2rem;
             }
             
             .product-card {
-                padding: 1.2rem;
+                padding: 1.2rem 1.5rem;
             }
             
-            .logo-text {
-                font-size: 2.5rem;
+            .product-card:hover {
+                border-color: rgba(248, 168, 20, 0.5);
+                transform: translateY(-2px);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .menu-section {
+                max-width: 850px;
+                padding: 3rem 2rem;
+            }
+            
+            body {
+                font-size: 17px;
+            }
+        }
+
+        /* iPhone 14 Pro y pantallas pequeñas */
+        @media (max-width: 430px) {
+            .product-right {
+                gap: 0.3rem;
+            }
+            
+            .qty-btn {
+                width: 30px;
+                height: 30px;
             }
         }
 
@@ -616,32 +642,32 @@
     <!-- ============ HEADER ============ -->
     <header class="header-exclusivo">
         <div class="header-badge">
-            <i class="fas fa-lock"></i> ACCESO EXCLUSIVO
+            <i class="fas fa-lock"></i> EXCLUSIVE ACCESS
         </div>
         <div class="logo-text">SUP<span>DOG</span></div>
-        <p class="header-subtitle">🌴 Pedidos Especiales - Urbanización Residencial</p>
+        <p class="header-subtitle">🌴 Exclusive Orders - Residential Community</p>
     </header>
 
-    <!-- ============ MENÚ ============ -->
+    <!-- ============ MENU ============ -->
     <main class="menu-section">
-        <h2 class="section-title">🍽️ MENÚ EXCLUSIVO</h2>
-        <p class="section-subtitle">Selecciona tus productos tocando el botón +</p>
+        <h2 class="section-title">🍽️ EXCLUSIVE MENU</h2>
+        <p class="section-subtitle">Select your items by tapping the + button</p>
 
         <div id="menuContainer"></div>
 
-        <!-- DATOS DE ENTREGA -->
+        <!-- DELIVERY DETAILS -->
         <div class="delivery-form">
-            <h4>📦 Datos de Entrega</h4>
-            <input type="text" id="nombreCliente" placeholder="👤 Tu nombre completo">
-            <input type="text" id="direccionCliente" placeholder="🏠 Tu dirección en la urbanización">
-            <textarea id="notasPedido" placeholder="📝 Notas especiales (opcional): sin cebolla, extra salsa, etc." rows="2"></textarea>
+            <h4>📦 Delivery Details</h4>
+            <input type="text" id="nombreCliente" placeholder="👤 Your full name">
+            <input type="text" id="direccionCliente" placeholder="🏠 Your address in the community">
+            <textarea id="notasPedido" placeholder="📝 Special notes (optional): no onions, extra sauce, allergies, etc." rows="2"></textarea>
         </div>
 
-        <!-- RESUMEN DEL PEDIDO -->
+        <!-- ORDER SUMMARY -->
         <div class="order-summary" id="orderSummary">
-            <h3>🛒 Tu Pedido</h3>
+            <h3>🛒 Your Order</h3>
             <div id="summaryItems">
-                <p class="empty-order">Selecciona productos del menú tocando el botón +</p>
+                <p class="empty-order">Select products from the menu by tapping +</p>
             </div>
             <div class="summary-total" id="summaryTotal" style="display: none;">
                 <span class="summary-total-label">Total:</span>
@@ -649,78 +675,77 @@
             </div>
         </div>
 
-        <!-- BOTÓN WHATSAPP -->
+        <!-- WHATSAPP BUTTON -->
         <button class="whatsapp-submit" id="whatsappBtn" disabled>
-            <i class="fab fa-whatsapp"></i> Enviar Pedido por WhatsApp
+            <i class="fab fa-whatsapp"></i> Send Order via WhatsApp
         </button>
     </main>
 
     <!-- ============ FOOTER ============ -->
     <footer class="footer-info">
-        <p>SupDog <i class="fas fa-fire"></i> Pedidos Exclusivos para Residentes</p>
-        <p>Horario de entregas: Sábados y Domingos | 11:00 AM - 8:00 PM</p>
+        <p>SupDog <i class="fas fa-fire"></i> Exclusive Orders for Residents</p>
     </footer>
 
     <!-- ============ TOAST ============ -->
     <div class="toast" id="toast">
         <i class="fas fa-check-circle"></i>
-        <span id="toastMsg">Producto agregado</span>
+        <span id="toastMsg">Item added</span>
     </div>
 
-    <!-- ============ BOTÓN FLOTANTE ============ -->
+    <!-- ============ FLOATING CART BUTTON ============ -->
     <button class="cart-float-btn" id="cartFloatBtn" onclick="scrollToSummary()">
         <span class="cart-count-float" id="cartCountFloat">0</span>
-        <span>Ver Pedido</span>
+        <span>View Order</span>
         <i class="fas fa-arrow-down"></i>
     </button>
 
     <script>
         // ============================================
-        // PRODUCTOS DEL MENÚ
+        // MENU PRODUCTS
         // ============================================
         const menuProducts = [
             // APPETIZERS
-            { id: 1, name: 'Chips n Queso', desc: 'Tortilla chips con queso derretido', price: 9.95, cat: 'appetizers' },
-            { id: 2, name: 'Nachos', desc: 'Nachos cargados con toppings', price: 9.95, cat: 'appetizers', extra: '+ $5 por proteína extra' },
-            { id: 3, name: 'Chips n Salsa', desc: 'Tortilla chips con salsa fresca', price: 8.95, cat: 'appetizers' },
-            { id: 4, name: 'Smoked House Wings', desc: 'Alitas ahumadas de la casa (6 pzas)', price: 10.95, cat: 'appetizers', hasFlavor: true, flavors: ['Mango Habanero', 'Sweet Chili', 'Garlic Parmesan', 'Classic Buffalo', 'Naked (sin salsa)'] },
+            { id: 1, name: 'Chips n Queso', desc: 'Tortilla chips with melted cheese', price: 9.95, cat: 'appetizers' },
+            { id: 2, name: 'Nachos', desc: 'Loaded nachos with toppings', price: 9.95, cat: 'appetizers', extra: '+ $5 for extra protein' },
+            { id: 3, name: 'Chips n Salsa', desc: 'Tortilla chips with fresh salsa', price: 8.95, cat: 'appetizers' },
+            { id: 4, name: 'Smoked House Wings', desc: 'House smoked wings (6 pcs)', price: 10.95, cat: 'appetizers', hasFlavor: true, flavors: ['Mango Habanero', 'Sweet Chili', 'Garlic Parmesan', 'Classic Buffalo', 'Naked (no sauce)'] },
             
             // HOT DOGS
-            { id: 5, name: 'Sonora Dog', desc: 'Hot Dog estilo Sonora envuelto en tocino', price: 12.95, cat: 'hotdogs', extra: '✅ Incluye papas fritas' },
-            { id: 6, name: 'Mexican Dog', desc: 'Beef Frank, Pico De Gallo, Jalapeños', price: 11.95, cat: 'hotdogs', extra: '✅ Incluye papas fritas' },
-            { id: 7, name: 'German Dog', desc: 'Bratwurst, Grilled Onions, Sauerkraut', price: 11.95, cat: 'hotdogs', extra: '✅ Incluye papas fritas' },
+            { id: 5, name: 'Sonora Dog', desc: 'Bacon-wrapped Sonora style hot dog', price: 12.95, cat: 'hotdogs', extra: '✅ Includes fries' },
+            { id: 6, name: 'Mexican Dog', desc: 'Beef Frank, Pico De Gallo, Jalapeños', price: 11.95, cat: 'hotdogs', extra: '✅ Includes fries' },
+            { id: 7, name: 'German Dog', desc: 'Bratwurst, Grilled Onions, Sauerkraut', price: 11.95, cat: 'hotdogs', extra: '✅ Includes fries' },
             
             // BURGERS
-            { id: 8, name: 'Classic Cheeseburger', desc: 'Hamburguesa clásica con queso americano', price: 12.95, cat: 'burgers', extra: '✅ Incluye papas fritas' },
-            { id: 9, name: 'Double Cheeseburger', desc: 'Doble carne con doble queso', price: 16.95, cat: 'burgers', extra: '✅ Incluye papas fritas' },
-            { id: 10, name: 'Bacon Cheeseburger', desc: 'Hamburguesa con queso y tocino', price: 13.95, cat: 'burgers', extra: '✅ Incluye papas fritas' },
-            { id: 11, name: 'Brisket Sandwich', desc: 'Sándwich de brisket ahumado de la casa', price: 16.95, cat: 'burgers', extra: '✅ Incluye papas fritas' },
+            { id: 8, name: 'Classic Cheeseburger', desc: 'Classic burger with American cheese', price: 12.95, cat: 'burgers', extra: '✅ Includes fries' },
+            { id: 9, name: 'Double Cheeseburger', desc: 'Double patty with double cheese', price: 16.95, cat: 'burgers', extra: '✅ Includes fries' },
+            { id: 10, name: 'Bacon Cheeseburger', desc: 'Burger with cheese and crispy bacon', price: 13.95, cat: 'burgers', extra: '✅ Includes fries' },
+            { id: 11, name: 'Brisket Sandwich', desc: 'House smoked brisket sandwich', price: 16.95, cat: 'burgers', extra: '✅ Includes fries' },
             
             // TWIN TACOS
-            { id: 12, name: 'Twin Tacos - Chicken Fajita', desc: '2 tacos de fajita de pollo', price: 12.95, cat: 'tacos' },
-            { id: 13, name: 'Twin Tacos - Brisket', desc: '2 tacos de brisket ahumado', price: 12.95, cat: 'tacos' },
-            { id: 14, name: 'Twin Tacos - Garlic Shrimp', desc: '2 tacos de camarones al ajo', price: 12.95, cat: 'tacos' },
-            { id: 15, name: 'Twin Tacos - Blackened Fish', desc: '2 tacos de pescado ennegrecido', price: 12.95, cat: 'tacos' },
+            { id: 12, name: 'Twin Tacos - Chicken Fajita', desc: '2 chicken fajita tacos', price: 12.95, cat: 'tacos' },
+            { id: 13, name: 'Twin Tacos - Brisket', desc: '2 smoked brisket tacos', price: 12.95, cat: 'tacos' },
+            { id: 14, name: 'Twin Tacos - Garlic Shrimp', desc: '2 garlic shrimp tacos', price: 12.95, cat: 'tacos' },
+            { id: 15, name: 'Twin Tacos - Blackened Fish', desc: '2 blackened fish tacos', price: 12.95, cat: 'tacos' },
             
             // SIDES
-            { id: 16, name: 'Fries (Papas Fritas)', desc: 'Papas fritas clásicas', price: 6.00, cat: 'sides' },
-            { id: 17, name: 'Truffle Fries', desc: 'Papas con aceite de trufa y parmesano', price: 9.00, cat: 'sides' },
-            { id: 18, name: 'Chips', desc: 'Tortilla chips crujientes', price: 5.00, cat: 'sides' },
+            { id: 16, name: 'Fries', desc: 'Classic french fries', price: 6.00, cat: 'sides' },
+            { id: 17, name: 'Truffle Fries', desc: 'Truffle oil fries with parmesan', price: 9.00, cat: 'sides' },
+            { id: 18, name: 'Chips', desc: 'Crispy tortilla chips', price: 5.00, cat: 'sides' },
             
             // DRINKS
-            { id: 19, name: 'Coca-Cola', desc: 'Lata 12 oz', price: 2.50, cat: 'drinks' },
-            { id: 20, name: 'Diet Coke', desc: 'Lata 12 oz', price: 2.50, cat: 'drinks' },
-            { id: 21, name: 'Sprite', desc: 'Lata 12 oz', price: 2.50, cat: 'drinks' },
-            { id: 22, name: 'Agua Embotellada', desc: 'Botella de agua purificada', price: 2.50, cat: 'drinks' }
+            { id: 19, name: 'Coca-Cola', desc: '12 oz can', price: 2.50, cat: 'drinks' },
+            { id: 20, name: 'Diet Coke', desc: '12 oz can', price: 2.50, cat: 'drinks' },
+            { id: 21, name: 'Sprite', desc: '12 oz can', price: 2.50, cat: 'drinks' },
+            { id: 22, name: 'Bottled Water', desc: 'Purified water bottle', price: 2.50, cat: 'drinks' }
         ];
 
         // ============================================
-        // WHATSAPP DE TU JEFA
+        // WHATSAPP NUMBER - Your boss's number
         // ============================================
         const WHATSAPP_NUMBER = '14698474297'; // +1 469 847 4297
 
         // ============================================
-        // CARRITO
+        // CART
         // ============================================
         let cart = [];
 
@@ -767,7 +792,7 @@
 
             saveCart();
             updateAllUI();
-            showToast(`${product.name} agregado ✅`);
+            showToast(`${product.name} added ✅`);
         }
 
         function removeFromCart(cartKey) {
@@ -793,19 +818,19 @@
         }
 
         // ============================================
-        // MODAL DE SABORES
+        // FLAVOR MODAL
         // ============================================
         function showFlavorModal(product) {
             const overlay = document.createElement('div');
             overlay.className = 'modal-overlay';
             overlay.innerHTML = `
                 <div class="modal-box">
-                    <h3>🍗 Elige el sabor</h3>
-                    <p>Selecciona para tus <strong>${product.name}</strong></p>
+                    <h3>🍗 Choose Flavor</h3>
+                    <p>Select for your <strong>${product.name}</strong></p>
                     ${product.flavors.map(f => `
                         <button class="flavor-option" data-flavor="${f}">🔥 ${f}</button>
                     `).join('')}
-                    <button class="cancel-btn">Cancelar</button>
+                    <button class="cancel-btn">Cancel</button>
                 </div>
             `;
 
@@ -829,18 +854,18 @@
         }
 
         // ============================================
-        // RENDERIZAR MENÚ
+        // RENDER MENU
         // ============================================
         function renderMenu() {
             const container = document.getElementById('menuContainer');
 
             const categories = [
-                { key: 'appetizers', title: '⭐️ APPETIZERS', emoji: '🍟', subtitle: 'Entradas' },
-                { key: 'hotdogs', title: '🌭 HOT DOGS', emoji: '', subtitle: 'Incluyen papas fritas' },
-                { key: 'burgers', title: '🍔 BURGERS', emoji: '', subtitle: 'Incluyen papas fritas' },
-                { key: 'tacos', title: '🌮 TWIN TACOS', emoji: '', subtitle: '2 tacos por orden - $12.95' },
-                { key: 'sides', title: '🍟 SIDES', emoji: '', subtitle: 'Acompañamientos' },
-                { key: 'drinks', title: '🥤 DRINKS', emoji: '', subtitle: 'Refrescos y Agua - $2.50' }
+                { key: 'appetizers', title: '⭐️ APPETIZERS', emoji: '🍟', subtitle: 'Starters' },
+                { key: 'hotdogs', title: '🌭 HOT DOGS', emoji: '', subtitle: 'Includes fries' },
+                { key: 'burgers', title: '🍔 BURGERS', emoji: '', subtitle: 'Includes fries' },
+                { key: 'tacos', title: '🌮 TWIN TACOS', emoji: '', subtitle: '2 tacos per order - $12.95' },
+                { key: 'sides', title: '🍟 SIDES', emoji: '', subtitle: 'Side orders' },
+                { key: 'drinks', title: '🥤 DRINKS', emoji: '', subtitle: 'Soft Drinks & Water - $2.50' }
             ];
 
             let html = '';
@@ -852,7 +877,6 @@
                 html += `<h3 class="category-title">${cat.emoji} ${cat.title}</h3>`;
                 html += `<p class="category-subtitle">${cat.subtitle}</p>`;
 
-                // Mostrar sabores de alitas
                 if (cat.key === 'appetizers') {
                     const wings = products.find(p => p.hasFlavor);
                     if (wings) {
@@ -890,7 +914,7 @@
                                 <span class="price-tag">$${product.price.toFixed(2)}</span>
                                 ${product.hasFlavor ? `
                                     <button class="add-btn" onclick="event.stopPropagation(); addToCart(${product.id})">
-                                        + Agregar
+                                        + Add
                                     </button>
                                 ` : `
                                     <div class="qty-controls">
@@ -913,7 +937,7 @@
         }
 
         // ============================================
-        // ACTUALIZAR RESUMEN
+        // UPDATE SUMMARY
         // ============================================
         function updateSummary() {
             const summaryItems = document.getElementById('summaryItems');
@@ -925,7 +949,7 @@
             cartCountFloat.textContent = getTotalItems();
 
             if (cart.length === 0) {
-                summaryItems.innerHTML = '<p class="empty-order">🛒 Selecciona productos tocando el botón +</p>';
+                summaryItems.innerHTML = '<p class="empty-order">🛒 Select products from the menu by tapping +</p>';
                 summaryTotal.style.display = 'none';
                 whatsappBtn.disabled = true;
             } else {
@@ -951,14 +975,14 @@
         }
 
         // ============================================
-        // SCROLL AL RESUMEN
+        // SCROLL TO SUMMARY
         // ============================================
         function scrollToSummary() {
             document.getElementById('orderSummary').scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
 
         // ============================================
-        // ENVIAR WHATSAPP
+        // SEND WHATSAPP
         // ============================================
         function sendWhatsApp() {
             const nombre = document.getElementById('nombreCliente').value.trim();
@@ -966,20 +990,20 @@
             const notas = document.getElementById('notasPedido').value.trim();
 
             if (!nombre || !direccion) {
-                showToast('⚠️ Completa nombre y dirección', 'warning');
+                showToast('⚠️ Please complete name and address', 'warning');
                 document.querySelector('.delivery-form').scrollIntoView({ behavior: 'smooth' });
                 return;
             }
 
             if (cart.length === 0) {
-                showToast('⚠️ Agrega productos al pedido', 'warning');
+                showToast('⚠️ Add items to your order first', 'warning');
                 return;
             }
 
-            let mensaje = `🍔 *NUEVO PEDIDO - SUPDOG URBANIZACIÓN* 🍔\n\n`;
-            mensaje += `👤 *Cliente:* ${nombre}\n`;
-            mensaje += `🏠 *Dirección:* ${direccion}\n\n`;
-            mensaje += `📋 *PEDIDO:*\n`;
+            let mensaje = `🍔 *NEW ORDER - SUPDOG COMMUNITY* 🍔\n\n`;
+            mensaje += `👤 *Customer:* ${nombre}\n`;
+            mensaje += `🏠 *Address:* ${direccion}\n\n`;
+            mensaje += `📋 *ORDER:*\n`;
 
             cart.forEach((item, i) => {
                 let name = item.name;
@@ -990,14 +1014,14 @@
             mensaje += `\n💰 *TOTAL: $${getTotalPrice().toFixed(2)}*\n`;
 
             if (notas) {
-                mensaje += `\n📝 *Notas:* ${notas}\n`;
+                mensaje += `\n📝 *Notes:* ${notas}\n`;
             }
 
-            mensaje += `\n✅ *Por favor confirmar pedido y tiempo de entrega*`;
+            mensaje += `\n✅ *Please confirm order and delivery time*`;
 
             const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(mensaje)}`;
 
-            showToast('📤 Abriendo WhatsApp...');
+            showToast('📤 Opening WhatsApp...');
             setTimeout(() => window.open(url, '_blank'), 500);
         }
 
@@ -1015,7 +1039,7 @@
         }
 
         // ============================================
-        // INICIO
+        // INIT
         // ============================================
         document.addEventListener('DOMContentLoaded', () => {
             loadCart();
