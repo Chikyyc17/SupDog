@@ -30,7 +30,6 @@
         html {
             scroll-behavior: smooth;
             font-size: 16px;
-            /* Prevenir zoom en doble toque */
             touch-action: manipulation;
         }
 
@@ -44,7 +43,6 @@
             -webkit-text-size-adjust: 100%;
             -webkit-font-smoothing: antialiased;
             padding-bottom: 100px;
-            /* Prevenir zoom */
             touch-action: pan-y pinch-zoom;
         }
 
@@ -113,7 +111,7 @@
             width: 100%;
             height: auto;
             display: block;
-            pointer-events: none; /* Evita interacciones directas con la imagen */
+            pointer-events: none;
             user-select: none;
             -webkit-user-select: none;
         }
@@ -170,7 +168,6 @@
             max-height: 90vh;
             object-fit: contain;
             border-radius: 8px;
-            /* Permitir zoom en el modal */
             touch-action: pinch-zoom;
         }
 
@@ -408,7 +405,6 @@
             background: var(--color-verde-whatsapp) !important;
         }
 
-        /* Controles de cantidad */
         .qty-controls {
             display: flex;
             align-items: center;
@@ -515,7 +511,7 @@
             margin-top: 0.5rem;
         }
 
-        /* ============ FORMULARIO DE DATOS ============ */
+        /* ============ FORMULARIO ============ */
         .delivery-form {
             background: #1a1a1a;
             border-radius: clamp(12px, 2vw, 16px);
@@ -558,7 +554,7 @@
             min-height: 60px;
         }
 
-        /* ============ RESUMEN DEL PEDIDO ============ */
+        /* ============ ORDER SUMMARY ============ */
         .order-summary {
             background: #1a1a1a;
             border-radius: clamp(12px, 2vw, 16px);
@@ -613,12 +609,32 @@
             font-size: clamp(0.8rem, 1.3vw, 0.9rem);
         }
 
+        /* ============ TAX & TOTAL SECTION ============ */
+        .summary-tax {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.6rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            font-size: clamp(0.8rem, 1.3vw, 0.9rem);
+            color: #aaa;
+        }
+
+        .summary-tax-label {
+            color: #aaa;
+        }
+
+        .summary-tax-amount {
+            color: #ccc;
+            font-weight: bold;
+        }
+
         .summary-total {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-top: 1rem;
-            padding-top: 1rem;
+            margin-top: 0.8rem;
+            padding-top: 0.8rem;
             border-top: 2px solid var(--color-rojo-fuego);
             font-size: clamp(1rem, 2vw, 1.2rem);
             font-weight: bold;
@@ -629,9 +645,17 @@
         }
 
         .summary-total-price {
-            color: var(--color-amarillo-cheddar);
+            color: var(--color-verde-whatsapp);
             font-family: 'Bangers', cursive;
             font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+        }
+
+        .tax-note {
+            text-align: center;
+            color: #777;
+            font-size: clamp(0.65rem, 1vw, 0.7rem);
+            margin-top: 0.5rem;
+            font-style: italic;
         }
 
         .empty-order {
@@ -642,7 +666,7 @@
             font-size: clamp(0.8rem, 1.3vw, 0.9rem);
         }
 
-        /* ============ BOTÓN WHATSAPP ============ */
+        /* ============ WHATSAPP BUTTON ============ */
         .whatsapp-submit {
             display: flex;
             align-items: center;
@@ -813,10 +837,21 @@
             <div id="summaryItems">
                 <p class="empty-order">Select products from the menu by tapping +</p>
             </div>
+            <div id="summaryTaxSection" style="display: none;">
+                <div class="summary-tax">
+                    <span class="summary-tax-label">Subtotal:</span>
+                    <span class="summary-tax-amount" id="subtotalPrice">$0.00</span>
+                </div>
+                <div class="summary-tax">
+                    <span class="summary-tax-label">Tax (8.25%):</span>
+                    <span class="summary-tax-amount" id="taxAmount">$0.00</span>
+                </div>
+            </div>
             <div class="summary-total" id="summaryTotal" style="display: none;">
-                <span class="summary-total-label">Total:</span>
+                <span class="summary-total-label">Total with Tax:</span>
                 <span class="summary-total-price" id="totalPrice">$0.00</span>
             </div>
+            <p class="tax-note" id="taxNote" style="display: none;">* Prices include 8.25% sales tax (Grapevine, TX)</p>
         </div>
 
         <!-- WHATSAPP BUTTON -->
@@ -845,13 +880,17 @@
 
     <script>
         // ============================================
+        // TAX RATE - Grapevine, Texas: 8.25%
+        // ============================================
+        const TAX_RATE = 0.0825;
+
+        // ============================================
         // PREVENIR ZOOM EN DOBLE TOQUE
         // ============================================
         document.addEventListener('dblclick', function(e) {
             e.preventDefault();
         }, { passive: false });
 
-        // Prevenir zoom en doble toque para iOS
         let lastTouchEnd = 0;
         document.addEventListener('touchend', function(e) {
             const now = Date.now();
@@ -867,10 +906,8 @@
         const zoomBtn = document.getElementById('zoomBtn');
         const imageModal = document.getElementById('imageModal');
         const closeModalBtn = document.getElementById('closeModalBtn');
-        const modalImage = document.getElementById('modalImage');
         const menuImageContainer = document.getElementById('menuImageContainer');
 
-        // Abrir modal
         zoomBtn.addEventListener('click', function(e) {
             e.preventDefault();
             e.stopPropagation();
@@ -878,16 +915,13 @@
             document.body.style.overflow = 'hidden';
         });
 
-        // También abrir al tocar la imagen
         menuImageContainer.addEventListener('click', function(e) {
-            // Solo si no es el botón de zoom
             if (e.target !== zoomBtn && !zoomBtn.contains(e.target)) {
                 imageModal.classList.add('active');
                 document.body.style.overflow = 'hidden';
             }
         });
 
-        // Cerrar modal
         function closeModal() {
             imageModal.classList.remove('active');
             document.body.style.overflow = '';
@@ -898,14 +932,10 @@
             closeModal();
         });
 
-        // Cerrar al tocar fuera de la imagen
         imageModal.addEventListener('click', function(e) {
-            if (e.target === imageModal) {
-                closeModal();
-            }
+            if (e.target === imageModal) closeModal();
         });
 
-        // Cerrar con tecla ESC
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape' && imageModal.classList.contains('active')) {
                 closeModal();
@@ -1025,8 +1055,16 @@
             return cart.reduce((sum, item) => sum + item.quantity, 0);
         }
 
-        function getTotalPrice() {
+        function getSubtotal() {
             return cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        }
+
+        function getTax() {
+            return getSubtotal() * TAX_RATE;
+        }
+
+        function getTotalWithTax() {
+            return getSubtotal() + getTax();
         }
 
         // ============================================
@@ -1149,12 +1187,16 @@
         }
 
         // ============================================
-        // UPDATE SUMMARY
+        // UPDATE SUMMARY WITH TAX
         // ============================================
         function updateSummary() {
             const summaryItems = document.getElementById('summaryItems');
+            const summaryTaxSection = document.getElementById('summaryTaxSection');
+            const subtotalPrice = document.getElementById('subtotalPrice');
+            const taxAmount = document.getElementById('taxAmount');
             const summaryTotal = document.getElementById('summaryTotal');
             const totalPrice = document.getElementById('totalPrice');
+            const taxNote = document.getElementById('taxNote');
             const whatsappBtn = document.getElementById('whatsappBtn');
             const cartCountFloat = document.getElementById('cartCountFloat');
 
@@ -1162,7 +1204,9 @@
 
             if (cart.length === 0) {
                 summaryItems.innerHTML = '<p class="empty-order">🛒 Select products from the menu by tapping +</p>';
+                summaryTaxSection.style.display = 'none';
                 summaryTotal.style.display = 'none';
+                taxNote.style.display = 'none';
                 whatsappBtn.disabled = true;
             } else {
                 summaryItems.innerHTML = cart.map(item => `
@@ -1175,8 +1219,18 @@
                         <span class="summary-price">$${(item.price * item.quantity).toFixed(2)}</span>
                     </div>
                 `).join('');
+
+                const subtotal = getSubtotal();
+                const tax = getTax();
+                const total = getTotalWithTax();
+
+                subtotalPrice.textContent = `$${subtotal.toFixed(2)}`;
+                taxAmount.textContent = `$${tax.toFixed(2)}`;
+                totalPrice.textContent = `$${total.toFixed(2)}`;
+
+                summaryTaxSection.style.display = 'block';
                 summaryTotal.style.display = 'flex';
-                totalPrice.textContent = `$${getTotalPrice().toFixed(2)}`;
+                taxNote.style.display = 'block';
                 whatsappBtn.disabled = false;
             }
         }
@@ -1212,6 +1266,10 @@
                 return;
             }
 
+            const subtotal = getSubtotal();
+            const tax = getTax();
+            const total = getTotalWithTax();
+
             let mensaje = `🍔 *NEW ORDER - SUPDOG COMMUNITY* 🍔\n\n`;
             mensaje += `👤 *Customer:* ${nombre}\n`;
             mensaje += `🏠 *Address:* ${direccion}\n\n`;
@@ -1223,7 +1281,12 @@
                 mensaje += `  ${i + 1}. ${name} x${item.quantity} = $${(item.price * item.quantity).toFixed(2)}\n`;
             });
 
-            mensaje += `\n💰 *TOTAL: $${getTotalPrice().toFixed(2)}*\n`;
+            mensaje += `\n━━━━━━━━━━━━━━━\n`;
+            mensaje += `📊 *Subtotal:* $${subtotal.toFixed(2)}\n`;
+            mensaje += `🧾 *Tax (8.25%):* $${tax.toFixed(2)}\n`;
+            mensaje += `━━━━━━━━━━━━━━━\n`;
+            mensaje += `💰 *TOTAL:* $${total.toFixed(2)}\n`;
+            mensaje += `📍 *Grapevine, TX*\n`;
 
             if (notas) {
                 mensaje += `\n📝 *Notes:* ${notas}\n`;
