@@ -851,7 +851,7 @@
                 <span class="summary-total-label">Total with Tax:</span>
                 <span class="summary-total-price" id="totalPrice">$0.00</span>
             </div>
-            <p class="tax-note" id="taxNote" style="display: none;">* Prices include 8.25% sales tax (Grapevine, TX)</p>
+            <p class="tax-note" id="taxNote" style="display: none;">* Tax calculated at 8.25%</p>
         </div>
 
         <!-- WHATSAPP BUTTON -->
@@ -880,7 +880,7 @@
 
     <script>
         // ============================================
-        // TAX RATE - Grapevine, Texas: 8.25%
+        // TAX RATE - 8.25%
         // ============================================
         const TAX_RATE = 0.0825;
 
@@ -1286,7 +1286,6 @@
             mensaje += `🧾 *Tax (8.25%):* $${tax.toFixed(2)}\n`;
             mensaje += `━━━━━━━━━━━━━━━\n`;
             mensaje += `💰 *TOTAL:* $${total.toFixed(2)}\n`;
-            mensaje += `📍 *Grapevine, TX*\n`;
 
             if (notas) {
                 mensaje += `\n📝 *Notes:* ${notas}\n`;
