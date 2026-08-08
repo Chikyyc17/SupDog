@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>SupDog - Hot Dogs & Nachos</title>
     
-    <!-- FAVICON para la pestaña del navegador -->
-    <!-- Comentados temporalmente porque no existen los archivos -->
+    <!-- FAVICON -->
     <!-- <link rel="icon" type="image/x-icon" href="favicon.ico"> -->
     <!-- <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png"> -->
     <!-- <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png"> -->
@@ -192,7 +191,6 @@
             font-style: italic;
         }
 
-        /* Carrusel Container */
         .carousel-container {
             position: relative;
             max-width: 1200px;
@@ -263,7 +261,6 @@
             max-width: 600px;
         }
 
-        /* Carousel Navigation */
         .carousel-nav {
             position: absolute;
             top: 50%;
@@ -297,7 +294,6 @@
             transform: scale(1.1);
         }
 
-        /* Carousel Dots */
         .carousel-dots {
             display: flex;
             justify-content: center;
@@ -335,10 +331,207 @@
             }
         }
 
+        /* ============ EVENT HIGHLIGHTS SECTION (VIDEOS 9:16) ============ */
+        .event-highlights-section {
+            padding: 5rem 1.5rem;
+            background: linear-gradient(135deg, #1a0f0f 0%, #0f0f0f 50%, #1a0f0f 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .event-highlights-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--color-rojo-fuego) 0%, #c42f04 100%);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            animation: pulse 2s infinite;
+            box-shadow: 0 4px 12px rgba(219, 54, 6, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .event-highlights-title {
+            font-size: clamp(2.2rem, 5vw, 3rem);
+            color: white;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 0px var(--color-rojo-fuego);
+            position: relative;
+            display: inline-block;
+            font-family: 'Bangers', cursive;
+        }
+
+        .event-highlights-title span {
+            color: var(--color-amarillo-cheddar);
+            text-shadow: 2px 2px 0px var(--color-rojo-fuego);
+        }
+
+        .event-highlights-subtitle {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            color: #ddd;
+            max-width: 600px;
+            margin: 0 auto;
+            font-style: italic;
+        }
+
+        .video-carousel-container {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .video-carousel-wrapper {
+            flex: 1;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+        }
+
+        .video-carousel-track {
+            display: flex;
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            will-change: transform;
+        }
+
+        .video-slide {
+            min-width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0 0.5rem;
+        }
+
+        .video-card {
+            position: relative;
+            width: 100%;
+            max-width: 380px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 3px solid var(--color-amarillo-cheddar);
+            background: #000;
+        }
+
+        .video-card video {
+            width: 100%;
+            height: auto;
+            display: block;
+            aspect-ratio: 9 / 16;
+            object-fit: cover;
+        }
+
+        .video-card-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem 1rem;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+        }
+
+        .video-card-title {
+            color: var(--color-amarillo-cheddar);
+            font-family: 'Bangers', cursive;
+            font-size: 1.3rem;
+            margin-bottom: 0.3rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+        }
+
+        .video-card-date {
+            color: #ccc;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .video-carousel-nav {
+            background: rgba(15, 15, 15, 0.8);
+            border: 2px solid var(--color-amarillo-cheddar);
+            color: white;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            flex-shrink: 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        .video-carousel-nav:hover, .video-carousel-nav:active {
+            background: var(--color-rojo-fuego);
+            border-color: var(--color-rojo-fuego);
+            transform: scale(1.1);
+        }
+
+        .video-carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 2rem;
+        }
+
+        .video-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .video-dot.active {
+            background: var(--color-amarillo-cheddar);
+            transform: scale(1.3);
+            box-shadow: 0 0 10px var(--color-amarillo-cheddar);
+        }
+
+        @media (max-width: 768px) {
+            .video-carousel-container {
+                gap: 0.5rem;
+            }
+            
+            .video-carousel-nav {
+                width: 36px;
+                height: 36px;
+                font-size: 1rem;
+            }
+            
+            .video-card {
+                max-width: 300px;
+            }
+            
+            .event-highlights-title {
+                font-size: 2rem;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .video-card {
+                max-width: 340px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .video-card {
+                max-width: 380px;
+            }
+        }
+
         /* ============ OUR STORY SECTION ============ */
         .our-story-section {
             padding: 5rem 1.5rem;
-            background: linear-gradient(135deg, #1a0f0f 0%, #2a1a1a 100%);
+            background: linear-gradient(135deg, #0f0f0f 0%, #1a0f0f 50%, #0f0f0f 100%);
             position: relative;
             overflow: hidden;
         }
@@ -444,13 +637,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-        }
-
-        .story-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
         }
 
         .story-image-placeholder {
@@ -564,6 +750,36 @@
             font-size: 1.1rem;
         }
 
+        @media (max-width: 768px) {
+            .story-title {
+                font-size: 2.2rem;
+            }
+            
+            .story-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .story-text {
+                padding: 1.5rem;
+            }
+            
+            .story-image-container {
+                min-height: 300px;
+            }
+            
+            .founder-card {
+                padding: 1.5rem;
+            }
+            
+            .founder-name {
+                font-size: 1.5rem;
+            }
+            
+            .quote-text {
+                font-size: 1.2rem;
+            }
+        }
+
         /* ============ HEADER MOBILE OPTIMIZED ============ */
         header {
             display: flex;
@@ -577,7 +793,6 @@
             z-index: 1000;
             border-bottom: 2px solid transparent;
             height: 70px;
-            animation: none;
             backdrop-filter: blur(10px);
             transition: all 0.3s ease;
         }
@@ -714,14 +929,17 @@
             padding-top: 90px; 
             padding-left: 2rem; 
             z-index: 1001;
-            transform: translateX(-100%); 
-            transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+            transform: translate3d(-100%, 0, 0);
+            transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             box-shadow: 5px 0 30px rgba(219, 54, 6, 0.3);
             backdrop-filter: blur(10px);
+            will-change: transform;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
         }
         
         .sidebar.active { 
-            transform: translateX(0); 
+            transform: translate3d(0, 0, 0); 
         }
         
         .sidebar ul { 
@@ -804,7 +1022,7 @@
             z-index: 1000; 
             opacity: 0; 
             visibility: hidden; 
-            transition: all 0.4s ease;
+            transition: all 0.3s ease;
         }
         
         .overlay.active { 
@@ -812,7 +1030,7 @@
             visibility: visible; 
         }
 
-        /* ============ EVENT CART MODAL MOBILE ============ */
+        /* ============ EVENT CART MODAL ============ */
         .event-cart-modal {
             position: fixed;
             top: 0;
@@ -821,15 +1039,16 @@
             height: 100vh;
             background: var(--color-fondo-oscuro);
             z-index: 2000;
-            transform: translateX(100%);
-            transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+            transform: translate3d(100%, 0, 0);
+            transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             display: flex;
             flex-direction: column;
             overflow: hidden;
+            will-change: transform;
         }
 
         .event-cart-modal.active {
-            transform: translateX(0);
+            transform: translate3d(0, 0, 0);
         }
 
         .cart-header {
@@ -1031,7 +1250,7 @@
             animation: pulse 2s infinite;
         }
 
-        /* ============ MENU SECTION MOBILE ============ */
+        /* ============ MENU SECTION ============ */
         .menu-section { 
             padding: 4rem 1.5rem; 
             text-align: center; 
@@ -1101,10 +1320,6 @@
                 padding: 8px 15px;
                 font-size: 0.9rem;
             }
-            
-            .menu-location-option span {
-                display: inline;
-            }
         }
 
         .promo-banner {
@@ -1119,7 +1334,6 @@
             overflow: hidden;
             border-top: 3px solid var(--color-rojo-fuego);
             border-bottom: 3px solid var(--color-rojo-fuego);
-            animation: none;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.8);
         }
 
@@ -1163,67 +1377,24 @@
             z-index: 1;
         }
 
-        .promo-banner::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: repeating-linear-gradient(
-                90deg,
-                transparent,
-                transparent 12px,
-                rgba(219, 54, 6, 0.6) 12px,
-                rgba(219, 54, 6, 0.6) 15px
-            );
-            transform: translateY(-50%);
-            z-index: 1;
-            opacity: 0.7;
-        }
-
         @keyframes scrollText {
-            0% {
-                transform: translateX(0);
-            }
-            100% {
-                transform: translateX(-50%);
-            }
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
         }
 
         @keyframes ledGlow {
-            0% {
-                opacity: 0.2;
-                transform: translateX(-100%);
-            }
-            50% {
-                opacity: 0.8;
-            }
-            100% {
-                opacity: 0.2;
-                transform: translateX(100%);
-            }
+            0% { opacity: 0.2; transform: translateX(-100%); }
+            50% { opacity: 0.8; }
+            100% { opacity: 0.2; transform: translateX(100%); }
         }
 
         @keyframes twinkle {
-            0% {
-                opacity: 0.4;
-                transform: scale(0.8);
-            }
-            100% {
-                opacity: 1;
-                transform: scale(1.2);
-                text-shadow: 0 0 12px var(--color-amarillo-cheddar);
-            }
+            0% { opacity: 0.4; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1.2); text-shadow: 0 0 12px var(--color-amarillo-cheddar); }
         }
 
         .promo-banner:hover .scrolling-container {
             animation-play-state: paused;
-        }
-
-        .promo-banner:hover::before {
-            animation-duration: 1s;
-            opacity: 0.8;
         }
 
         .section-title { 
@@ -1361,7 +1532,6 @@
             animation: float 3s infinite ease-in-out;
         }
 
-        /* Sides & Extras Mobile - AHORA CON IMÁGENES COMO LAS TARJETAS DE HOTDOGS */
         .sides-grid {
             display: grid;
             grid-template-columns: 1fr;
@@ -1440,14 +1610,6 @@
             background: linear-gradient(145deg, #2a1a1a, #221010) !important;
         }
 
-        .drink-special .side-content h4 {
-            color: white;
-        }
-
-        .drink-special .side-price {
-            color: var(--color-amarillo-cheddar);
-        }
-
         .pretzel-special {
             background: linear-gradient(145deg, #2a2a2a, #222);
             border: 2px solid var(--color-amarillo-cheddar);
@@ -1476,7 +1638,7 @@
             }
         }
 
-        /* ============ EVENT PROMO MOBILE ============ */
+        /* ============ EVENT PROMO ============ */
         .event-promo-section {
             padding: 4rem 1.5rem;
             background: linear-gradient(135deg, #1a0f0f 0%, #2a1a1a 100%);
@@ -1529,8 +1691,6 @@
             box-shadow: 0 12px 24px rgba(0,0,0,0.3);
             margin-bottom: 2.5rem;
             animation: fadeIn 1s ease-out 0.5s both;
-            position: relative;
-            overflow: hidden;
         }
 
         .promo-features {
@@ -1578,42 +1738,6 @@
             max-width: 300px;
         }
 
-        .location-box {
-            transition: all 0.3s ease;
-        }
-
-        .location-box:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-        }
-
-        .location-box .btn {
-            width: 100%;
-            margin-top: 1rem;
-        }
-
-        .location-badge {
-            background: var(--color-amarillo-cheddar);
-            color: #000;
-            font-size: 0.7rem;
-            padding: 2px 6px;
-            border-radius: 30px;
-            margin-left: 5px;
-            animation: pulse 2s infinite;
-        }
-
-        @media (max-width: 768px) {
-            .location-section > div {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .location-box {
-                width: 100%;
-                max-width: 400px;
-            }
-        }
-
         /* ============ LOCATION SECTION ============ */
         .location-section { 
             padding: 4rem 1.5rem; 
@@ -1629,7 +1753,6 @@
             font-size: 2.5rem; 
             margin-bottom: 2.5rem; 
             text-shadow: 1px 1px 0px rgba(255,255,255,0.5);
-            position: relative;
             animation: fadeIn 1s ease-out;
         }
        
@@ -1645,7 +1768,6 @@
             z-index: 2;
             animation: fadeIn 1s ease-out 0.5s both;
             border: 2px solid var(--color-rojo-fuego);
-            transition: all 0.3s ease;
         }
 
         .map-container {
@@ -1666,12 +1788,11 @@
             border: 0;
         }
 
-        /* ============ CONTACT SECTION ============ */
+        /* ============ CONTACT ============ */
         .contact-section {
             padding: 4rem 1.5rem;
             text-align: center;
             background: linear-gradient(135deg, #111 0%, #222 100%);
-            position: relative;
         }
 
         .contact-section h3 {
@@ -1700,7 +1821,7 @@
             animation: pulse 2s infinite;
             background: rgba(248, 168, 20, 0.1);
         }
-        
+
         /* ============ FOOTER ============ */
         footer { 
             background: #0a0a0a; 
@@ -1708,7 +1829,6 @@
             text-align: center; 
             color: #777; 
             position: relative;
-            overflow: hidden;
         }
         
         footer:before {
@@ -1732,7 +1852,6 @@
             font-weight: bold;
             font-size: 1rem;
             transition: all 0.3s ease;
-            display: inline-block;
         }
         
         .social-links a:hover {
@@ -1765,13 +1884,8 @@
             opacity: 1;
             visibility: visible;
         }
-        
-        .scroll-top:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 6px 16px rgba(219, 54, 6, 0.4);
-        }
 
-        /* ============ LEGAL CONSENT BANNER ============ */
+        /* ============ LEGAL CONSENT ============ */
         .legal-consent-banner {
             position: fixed;
             bottom: 0;
@@ -1801,11 +1915,6 @@
             gap: 1.5rem;
         }
 
-        .legal-consent-text {
-            flex: 1;
-            min-width: 300px;
-        }
-
         .legal-consent-text h3 {
             color: var(--color-amarillo-cheddar);
             font-size: 1.3rem;
@@ -1822,11 +1931,6 @@
         .legal-consent-text a {
             color: var(--color-mostaza-suave);
             text-decoration: underline;
-            transition: color 0.3s ease;
-        }
-
-        .legal-consent-text a:hover {
-            color: var(--color-amarillo-cheddar);
         }
 
         .legal-consent-buttons {
@@ -1862,16 +1966,6 @@
             box-shadow: 0 4px 12px rgba(186, 105, 144, 0.3);
         }
 
-        .legal-consent-reject:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: var(--color-rojo-fuego);
-        }
-
-        .legal-consent-accept:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(186, 105, 144, 0.4);
-        }
-
         .legal-consent-close {
             position: absolute;
             top: 10px;
@@ -1881,182 +1975,9 @@
             color: #aaa;
             cursor: pointer;
             font-size: 1.2rem;
-            transition: color 0.3s ease;
         }
 
-        .legal-consent-close:hover {
-            color: var(--color-rojo-fuego);
-        }
-
-        /* ============ MEDIA QUERIES Y RESPONSIVE ============ */
-        @media (max-width: 768px) {
-            .legal-consent-content {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .legal-consent-buttons {
-                width: 100%;
-                justify-content: center;
-            }
-            
-            .legal-consent-btn {
-                flex: 1;
-                min-width: 140px;
-            }
-            
-            .story-title {
-                font-size: 2.2rem;
-            }
-            
-            .story-subtitle {
-                font-size: 1.1rem;
-            }
-            
-            .story-text {
-                padding: 1.5rem;
-            }
-            
-            .story-image-container {
-                min-height: 300px;
-            }
-            
-            .founder-card {
-                padding: 1.5rem;
-            }
-            
-            .founder-name {
-                font-size: 1.5rem;
-            }
-            
-            .quote-text {
-                font-size: 1.2rem;
-            }
-        }
-
-        @media (min-width: 768px) {
-            html {
-                font-size: 17px;
-            }
-            
-            .video-hero h1 {
-                font-size: 4rem;
-            }
-            
-            .logo-link {
-                font-size: 2.5rem;
-            }
-            
-            .menu-grid {
-                grid-template-columns: repeat(2, 1fr);
-                max-width: 800px;
-                gap: 2.5rem;
-            }
-            
-            .sides-grid {
-                grid-template-columns: repeat(2, 1fr);
-                max-width: 800px;
-                margin-left: auto;
-                margin-right: auto;
-            }
-            
-            .promo-features {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .event-promo-card {
-                padding: 2.5rem;
-            }
-            
-            .location-box {
-                max-width: 500px;
-                padding: 2.5rem;
-            }
-            
-            .our-story-section {
-                padding: 6rem 2rem;
-            }
-        }
-
-        @media (min-width: 1024px) {
-            .video-hero {
-                background-attachment: fixed;
-            }
-            
-            .menu-grid {
-                grid-template-columns: repeat(3, 1fr);
-                max-width: 1200px;
-            }
-            
-            .sides-grid {
-                grid-template-columns: repeat(3, 1fr);
-                max-width: 1000px;
-            }
-            
-            .promo-features {
-                grid-template-columns: repeat(4, 1fr);
-            }
-            
-            .event-cart-modal {
-                width: 450px;
-            }
-            
-            .btn-text {
-                display: inline !important;
-            }
-            
-            .our-story-section {
-                padding: 8rem 3rem;
-            }
-            
-            .story-title {
-                font-size: 3.5rem;
-            }
-            
-            .story-subtitle {
-                font-size: 1.4rem;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .video-hero {
-                min-height: 500px;
-            }
-            
-            .promo-banner {
-                font-size: 1.4rem;
-                padding: 1rem 0;
-            }
-            
-            .scrolling-text {
-                padding: 0 25px;
-            }
-            
-            .scrolling-text::before,
-            .scrolling-text::after {
-                margin: 0 15px;
-            }
-            
-            .btn-text {
-                display: none !important;
-            }
-        }
-
-        @supports (-webkit-touch-callout: none) {
-            .video-hero {
-                background-attachment: scroll;
-            }
-            
-            .btn, .event-cta-btn, .checkout-btn {
-                min-height: 44px;
-            }
-            
-            input, select, textarea, button {
-                font-size: 16px !important;
-            }
-        }
-
-        /* Estilos específicos para secciones del menú de Allen */
+        /* ============ MENU ALLEN STYLES ============ */
         .menu-category {
             margin-top: 3rem;
             margin-bottom: 2rem;
@@ -2068,19 +1989,16 @@
             margin-bottom: 1.5rem;
             font-family: 'Bangers', cursive;
             text-align: center;
-            position: relative;
             padding-bottom: 0.5rem;
         }
 
         .menu-category-title:after {
             content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
+            display: block;
             width: 80px;
             height: 3px;
             background: var(--color-rojo-fuego);
+            margin: 0.5rem auto 0;
         }
 
         .wings-flavors {
@@ -2152,34 +2070,64 @@
             color: #ddd;
             font-size: 0.95rem;
         }
+
+        /* ============ MEDIA QUERIES ============ */
+        @media (min-width: 768px) {
+            html { font-size: 17px; }
+            .logo-link { font-size: 2.5rem; }
+            .menu-grid { grid-template-columns: repeat(2, 1fr); max-width: 800px; }
+            .sides-grid { grid-template-columns: repeat(2, 1fr); max-width: 800px; margin: 0 auto; }
+            .promo-features { grid-template-columns: repeat(2, 1fr); }
+            .our-story-section { padding: 6rem 2rem; }
+        }
+
+        @media (min-width: 1024px) {
+            .menu-grid { grid-template-columns: repeat(3, 1fr); max-width: 1200px; }
+            .sides-grid { grid-template-columns: repeat(3, 1fr); max-width: 1000px; }
+            .promo-features { grid-template-columns: repeat(4, 1fr); }
+            .event-cart-modal { width: 450px; }
+            .btn-text { display: inline !important; }
+            .our-story-section { padding: 8rem 3rem; }
+            .story-title { font-size: 3.5rem; }
+        }
+
+        @media (max-width: 768px) {
+            .video-hero { min-height: 500px; }
+            .promo-banner { font-size: 1.4rem; padding: 1rem 0; }
+            .scrolling-text { padding: 0 25px; }
+            .scrolling-text::before, .scrolling-text::after { margin: 0 15px; }
+            .btn-text { display: none !important; }
+        }
+
+        @supports (-webkit-touch-callout: none) {
+            .video-hero { background-attachment: scroll; }
+            .btn, .event-cta-btn, .checkout-btn { min-height: 44px; }
+            input, select, textarea, button { font-size: 16px !important; }
+        }
     </style>
 </head>
 <body>
-    <!-- BANNER DE CONSENTIMIENTO LEGAL -->
+    <!-- ============ LEGAL CONSENT BANNER ============ -->
     <div class="legal-consent-banner" id="legalConsentBanner">
-        <button class="legal-consent-close" id="legalConsentClose" aria-label="Cerrar banner de consentimiento">
+        <button class="legal-consent-close" id="legalConsentClose" aria-label="Close consent banner">
             <i class="fas fa-times"></i>
         </button>
-        
         <div class="legal-consent-content">
             <div class="legal-consent-text">
-                <h3><i class="fas fa-balance-scale"></i> Consentimiento Legal</h3>
+                <h3><i class="fas fa-balance-scale"></i> Legal Consent</h3>
                 <p>
-                    Utilizamos cookies y tecnologías similares para mejorar tu experiencia en nuestro sitio. 
-                    Al continuar navegando, aceptas nuestra 
-                    <a href="politica-privacidad.html">Política de Privacidad</a>, 
-                    <a href="terminos-condiciones.html">Términos y Condiciones</a>, y 
-                    <a href="aviso-legal.html">Aviso Legal</a>. 
-                    Tu privacidad es importante para nosotros.
+                    We use cookies to improve your experience. By continuing, you accept our 
+                    <a href="politica-privacidad.html">Privacy Policy</a>, 
+                    <a href="terminos-condiciones.html">Terms & Conditions</a>, and 
+                    <a href="aviso-legal.html">Legal Notice</a>.
                 </p>
             </div>
-            
             <div class="legal-consent-buttons">
                 <button class="legal-consent-btn legal-consent-reject" id="rejectConsent">
-                    <i class="fas fa-times-circle"></i> Rechazar
+                    <i class="fas fa-times-circle"></i> Reject
                 </button>
                 <button class="legal-consent-btn legal-consent-accept" id="acceptConsent">
-                    <i class="fas fa-check-circle"></i> Aceptar
+                    <i class="fas fa-check-circle"></i> Accept
                 </button>
             </div>
         </div>
@@ -2189,17 +2137,13 @@
     
     <div class="event-cart-modal" id="eventCartModal">
         <div class="cart-header">
-            <button class="close-cart" id="closeCartBtn" aria-label="Cerrar carrito de eventos">
+            <button class="close-cart" id="closeCartBtn" aria-label="Close cart">
                 <i class="fas fa-times"></i>
             </button>
             <h2>🛒 Event Cart</h2>
             <p style="color: #ccc; text-align: center; margin-top: 5px; font-size: 0.9rem;">For your special event booking</p>
         </div>
-        
-        <div class="cart-items" id="cartItemsContainer">
-            <!-- Los items se generan dinámicamente con JavaScript -->
-        </div>
-        
+        <div class="cart-items" id="cartItemsContainer"></div>
         <div class="cart-footer">
             <div class="cart-total">
                 <span class="total-label">Total Estimate:</span>
@@ -2211,26 +2155,21 @@
         </div>
     </div>
     
-    <div class="scroll-top" id="scrollTop" aria-label="Volver arriba">
+    <div class="scroll-top" id="scrollTop" aria-label="Scroll to top">
         <i class="fas fa-chevron-up"></i>
     </div>
 
     <header id="mainHeader">
-        <button class="hamburger-btn" id="menuBtn" aria-label="Abrir menú de navegación">
+        <button class="hamburger-btn" id="menuBtn" aria-label="Toggle menu">
             <span></span><span></span><span></span>
         </button>
-        
-        <a href="#" class="logo-link" aria-label="SupDog - Ir al inicio">
-            SUP<span>DOG</span>
-        </a>
-        
-        <!-- HEADER BUTTONS: Cater With Us y Event Cart -->
+        <a href="#" class="logo-link" aria-label="SupDog Home">SUP<span>DOG</span></a>
         <div class="header-buttons">
             <a href="catering.html" class="header-btn cater-btn">
                 <i class="fas fa-utensils" aria-hidden="true"></i>
                 <span class="btn-text">Cater With Us</span>
             </a>
-            <button class="header-btn cart-btn" id="mobileCartBtn" aria-label="Abrir carrito de eventos">
+            <button class="header-btn cart-btn" id="mobileCartBtn" aria-label="Open event cart">
                 <i class="fas fa-calendar-alt" aria-hidden="true"></i>
                 <span class="btn-text">Event Cart</span>
                 <span class="btn-count" id="cartCountHeader">0</span>
@@ -2238,57 +2177,45 @@
         </div>
     </header>
 
-    <nav class="sidebar" id="sidebar" aria-label="Navegación principal">
+    <nav class="sidebar" id="sidebar" aria-label="Main navigation">
         <ul>
             <li><a href="#home" class="menu-link" onclick="toggleMenu()">HOME</a></li>
-            <li><a href="#story" class="menu-link" onclick="toggleMenu()">OUR STORY</a></li>
             <li><a href="#gallery" class="menu-link" onclick="toggleMenu()">PHOTO GALLERY</a></li>
+            <li><a href="#eventHighlights" class="menu-link" onclick="toggleMenu()">EVENT HIGHLIGHTS</a></li>
+            <li><a href="#story" class="menu-link" onclick="toggleMenu()">OUR STORY</a></li>
             <li><a href="#menu" class="menu-link" onclick="toggleMenu()">MENU</a></li>
-            <li><a href="#sides" class="menu-link" onclick="toggleMenu()">SIDES</a></li>
             <li><a href="#location" class="menu-link" onclick="toggleMenu()">LOCATION</a></li>
-            
             <li class="cater-link-special" onclick="toggleMenu()">
-                <a href="catering.html" class="menu-link">
-                    🍽️ CATER WITH US
-                </a>
+                <a href="catering.html" class="menu-link">🍽️ CATER WITH US</a>
             </li>
-            
             <li class="event-link-special" onclick="toggleMenu()">
-                <a href="event-cart.html" class="menu-link">
-                    🎪 EVENT CART
-                </a>
+                <a href="event-cart.html" class="menu-link">🎪 EVENT CART</a>
             </li>
         </ul>
-        
         <div style="margin-top: 40px; padding-right: 20px;">
             <p style="color: var(--color-mostaza-suave); font-size: 1.1rem; margin-bottom: 10px;">Follow the fire!</p>
             <p>
-                <a href="https://www.instagram.com/supdogdfw?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" 
-                   target="_blank" 
+                <a href="https://www.instagram.com/supdogdfw" target="_blank" 
                    style="color: white; text-decoration: none; font-weight: bold; font-size: 1.2rem; display: flex; align-items: center; gap: 8px;" 
-                   aria-label="Síguenos en Instagram">
+                   aria-label="Follow on Instagram">
                     @supdogdfw <i class="fab fa-instagram" aria-hidden="true"></i>
                 </a>
             </p>
         </div>
     </nav>
 
+    <!-- ============ HERO SECTION ============ -->
     <section id="home" class="video-hero">
         <div class="video-container">
-            <!-- Video de fondo - Hot Dogs en la parrilla -->
             <video class="video-background" autoplay muted loop playsinline id="heroVideo">
                 <source src="hotdog-portada.mp4" type="video/mp4">
-                <!-- Respaldo si el video local no carga -->
                 <source src="https://assets.mixkit.co/videos/preview/mixkit-sizzling-hot-dogs-on-a-grill-40156-large.mp4" type="video/mp4">
-                Tu navegador no soporta videos HTML5.
             </video>
             <div class="video-overlay"></div>
         </div>
-        
         <div class="video-hero-content">
             <h1 class="animate-load">SUP<span>DOG</span></h1>
             <p class="animate-load delay-1">Wurst Behavior. Best Flavor. <br> Grapevine & Allen, TX.</p>
-            
             <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;">
                 <a href="#story" class="btn animate-load delay-2">
                     OUR STORY <i class="fas fa-fire" aria-hidden="true"></i>
@@ -2300,25 +2227,137 @@
         </div>
     </section>
 
-    <!-- ==================== OUR STORY SECTION ==================== -->
-    <section id="story" class="our-story-section">
-        <div class="our-story-container">
-            <div class="section-badge">
-                <i class="fas fa-heart"></i> OUR STORY
+    <!-- ============ PHOTO GALLERY SECTION ============ -->
+    <section id="gallery" class="photo-gallery-section">
+        <div class="section-header">
+            <div class="gallery-badge"><i class="fas fa-camera"></i> BEHIND THE SCENES</div>
+            <h2 class="gallery-title">THE <span>SUP DOG</span> EXPERIENCE</h2>
+            <p class="gallery-subtitle">Take a look at our delicious hot dogs, vibrant cart setup, and the amazing atmosphere we bring to every event!</p>
+        </div>
+        <div class="carousel-container">
+            <div class="carousel-track" id="carouselTrack">
+                <div class="carousel-slide active">
+                    <img src="imagenes dog/supdog-cart-event.jpg" alt="SupDog Cart Setup" class="slide-image" loading="lazy">
+                    <div class="slide-overlay">
+                        <h3 class="slide-title">OUR MOBILE CART</h3>
+                        <p class="slide-description">Fully equipped and ready to serve at any event!</p>
+                    </div>
+                </div>
+                <div class="carousel-slide">
+                    <img src="imagenes dog/supdog-gourmet-hotdogs.jpg" alt="Gourmet Hot Dogs" class="slide-image" loading="lazy">
+                    <div class="slide-overlay">
+                        <h3 class="slide-title">GOURMET CREATIONS</h3>
+                        <p class="slide-description">Premium ingredients and creative toppings that explode with flavor.</p>
+                    </div>
+                </div>
+                <div class="carousel-slide">
+                    <img src="https://images.unsplash.com/photo-1544787219-7f47ccb76574?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80" alt="Event Service" class="slide-image" loading="lazy">
+                    <div class="slide-overlay">
+                        <h3 class="slide-title">EVENT SERVICE</h3>
+                        <p class="slide-description">We bring the party to you! Perfect for any celebration.</p>
+                    </div>
+                </div>
+                <div class="carousel-slide">
+                    <img src="imagenes dog/supdog-fresh-toppings.jpg" alt="Fresh Toppings" class="slide-image" loading="lazy">
+                    <div class="slide-overlay">
+                        <h3 class="slide-title">FRESH TOPPINGS</h3>
+                        <p class="slide-description">From classic to gourmet toppings for every taste.</p>
+                    </div>
+                </div>
+                <div class="carousel-slide">
+                    <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80" alt="Happy Customers" class="slide-image" loading="lazy">
+                    <div class="slide-overlay">
+                        <h3 class="slide-title">HAPPY CUSTOMERS</h3>
+                        <p class="slide-description">The smiles say it all! Our customers love SupDog.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-nav">
+                <button class="carousel-btn" id="prevBtn" aria-label="Previous slide"><i class="fas fa-chevron-left"></i></button>
+                <button class="carousel-btn" id="nextBtn" aria-label="Next slide"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+        <div class="carousel-dots" id="carouselDots"></div>
+    </section>
+
+    <!-- ============ EVENT HIGHLIGHTS SECTION (VIDEOS 9:16) ============ -->
+    <section id="eventHighlights" class="event-highlights-section">
+        <div class="section-header">
+            <div class="event-highlights-badge">
+                <i class="fas fa-video"></i> EVENT HIGHLIGHTS
+            </div>
+            <h2 class="event-highlights-title">WE'VE <span>BEEN THERE</span></h2>
+            <p class="event-highlights-subtitle">Check out some of the amazing events where SupDog has been serving up the flavor!</p>
+        </div>
+        
+        <div class="video-carousel-container">
+            <button class="video-carousel-nav" id="videoPrevBtn" aria-label="Previous video">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            
+            <div class="video-carousel-wrapper">
+                <div class="video-carousel-track" id="videoCarouselTrack">
+                    <!-- VIDEO 1 -->
+                    <div class="video-slide active">
+                        <div class="video-card">
+                            <video autoplay muted loop playsinline preload="metadata">
+                                <source src="videos/evento1.mp4" type="video/mp4">
+                            </video>
+                            <div class="video-card-overlay">
+                                <h4 class="video-card-title">🎉 Community Festival</h4>
+                                <p class="video-card-date">Grapevine, TX - 2025</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- VIDEO 2 -->
+                    <div class="video-slide">
+                        <div class="video-card">
+                            <video autoplay muted loop playsinline preload="metadata">
+                                <source src="videos/evento2.mp4" type="video/mp4">
+                            </video>
+                            <div class="video-card-overlay">
+                                <h4 class="video-card-title">🎪 Food Truck Rally</h4>
+                                <p class="video-card-date">Allen, TX - 2025</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- VIDEO 3 -->
+                    <div class="video-slide">
+                        <div class="video-card">
+                            <video autoplay muted loop playsinline preload="metadata">
+                                <source src="videos/evento3.mp4" type="video/mp4">
+                            </video>
+                            <div class="video-card-overlay">
+                                <h4 class="video-card-title">🏠 Private Party</h4>
+                                <p class="video-card-date">Grapevine, TX - 2025</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             
+            <button class="video-carousel-nav" id="videoNextBtn" aria-label="Next video">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+        
+        <div class="video-carousel-dots" id="videoCarouselDots"></div>
+    </section>
+
+    <!-- ============ OUR STORY SECTION ============ -->
+    <section id="story" class="our-story-section">
+        <div class="our-story-container">
+            <div class="section-badge"><i class="fas fa-heart"></i> OUR STORY</div>
             <h2 class="story-title">BEHIND THE FLAVOR</h2>
             <p class="story-subtitle">Sup Dog was born as much more than just an idea; it was born from a need to express who we truly are.</p>
-            
             <div class="story-content">
                 <div class="story-text">
                     <p>Behind every dish stands <strong>Jonathan Sotelo</strong>, our creative soul. With over 18 years in the industry, Jonathan has explored diverse culinary cultures, gathering experiences that he now pours into every recipe. For him, Sup Dog is just the beginning—a future built on tireless effort, absolute dedication, and above all, walking hand-in-hand with God.</p>
-                    
                     <p>But every great vision needs a driving force, and that is where <strong>María Colmenarez</strong> comes in. She is the perfect match—a tireless woman who always strives for more. She was the key to propelling this dream forward, turning the Chef's experience and technique into a tangible reality.</p>
-                    
                     <p>For us, Sup Dog is our way of communicating. It represents an informal, genuine, and authentic connection. Because at the end of the day, Sup Dog isn't just a greeting; it is an invitation to be yourself.</p>
                 </div>
-                
                 <div class="story-image-container">
                     <div class="story-image-placeholder">
                         <i class="fas fa-users"></i>
@@ -2327,21 +2366,18 @@
                     </div>
                 </div>
             </div>
-            
             <div class="founders-container">
                 <div class="founder-card">
                     <h3 class="founder-name"><i class="fas fa-chef-hat"></i> Jonathan Sotelo</h3>
                     <div class="founder-role">Creative Soul & Executive Chef</div>
-                    <p class="founder-description">With 18+ years of culinary experience across diverse cultures, Jonathan brings passion, technique, and soul to every recipe. For him, cooking is more than a profession—it's a calling.</p>
+                    <p class="founder-description">With 18+ years of culinary experience across diverse cultures, Jonathan brings passion, technique, and soul to every recipe.</p>
                 </div>
-                
                 <div class="founder-card">
                     <h3 class="founder-name"><i class="fas fa-rocket"></i> María Colmenarez</h3>
                     <div class="founder-role">Driving Force & Visionary</div>
-                    <p class="founder-description">The engine behind the dream, María transforms vision into reality. Her tireless dedication and business acumen make her the perfect match to bring SupDog's mission to life.</p>
+                    <p class="founder-description">The engine behind the dream, María transforms vision into reality with tireless dedication and business acumen.</p>
                 </div>
             </div>
-            
             <div class="story-quote">
                 <p class="quote-text">"At the end of the day, Sup Dog isn't just a greeting; it is an invitation to be yourself."</p>
                 <p class="quote-author">— Jonathan & María, SupDog Founders</p>
@@ -2349,80 +2385,7 @@
         </div>
     </section>
 
-    <!-- ==================== PHOTO GALLERY CAROUSEL SECTION ==================== -->
-    <section id="gallery" class="photo-gallery-section">
-        <div class="section-header">
-            <div class="gallery-badge">
-                <i class="fas fa-camera"></i> BEHIND THE SCENES
-            </div>
-            <h2 class="gallery-title">THE <span>SUP DOG</span> EXPERIENCE</h2>
-            <p class="gallery-subtitle">Take a look at our delicious hot dogs, vibrant cart setup, and the amazing atmosphere we bring to every event!</p>
-        </div>
-        
-        <div class="carousel-container">
-            <div class="carousel-track" id="carouselTrack">
-                <!-- Slide 1 -->
-                <div class="carousel-slide active">
-                    <img src="imagenes dog/supdog-cart-event.jpg" alt="Carrito de SupDog en un evento" class="slide-image" loading="lazy">
-                    <div class="slide-overlay">
-                        <h3 class="slide-title">OUR MOBILE CART</h3>
-                        <p class="slide-description">Fully equipped and ready to serve at any event. Our custom-designed cart brings the authentic SupDog experience to you!</p>
-                    </div>
-                </div>
-                
-                <!-- Slide 2 -->
-                <div class="carousel-slide">
-                    <img src="imagenes dog/supdog-gourmet-hotdogs.jpg" alt="Creaciones gourmet de hot dogs" class="slide-image" loading="lazy">
-                    <div class="slide-overlay">
-                        <h3 class="slide-title">GOURMET CREATIONS</h3>
-                        <p class="slide-description">Each hot dog is crafted with premium ingredients and creative toppings that explode with flavor.</p>
-                    </div>
-                </div>
-                
-                <!-- Slide 3 -->
-                <div class="carousel-slide">
-                    <img src="https://images.unsplash.com/photo-1544787219-7f47ccb76574?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80" alt="Servicio en un evento" class="slide-image" loading="lazy">
-                    <div class="slide-overlay">
-                        <h3 class="slide-title">EVENT SERVICE</h3>
-                        <p class="slide-description">We bring the party to you! Perfect for birthdays, corporate events, festivals, and celebrations of all kinds.</p>
-                    </div>
-                </div>
-                
-                <!-- Slide 4 -->
-                <div class="carousel-slide">
-                    <img src="imagenes dog/supdog-fresh-toppings.jpg" alt="Ingredientes frescos para hot dogs" class="slide-image" loading="lazy">
-                    <div class="slide-overlay">
-                        <h3 class="slide-title">FRESH TOPPINGS</h3>
-                        <p class="slide-description">From classic ketchup and mustard to gourmet toppings like pineapple, bacon, and chipotle sauce.</p>
-                    </div>
-                </div>
-                
-                <!-- Slide 5 -->
-                <div class="carousel-slide">
-                    <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80" alt="Clientes felices en SupDog" class="slide-image" loading="lazy">
-                    <div class="slide-overlay">
-                        <h3 class="slide-title">HAPPY CUSTOMERS</h3>
-                        <p class="slide-description">The smiles say it all! Our customers love the unique flavors and fun experience of SupDog.</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="carousel-nav">
-                <button class="carousel-btn" id="prevBtn" aria-label="Diapositiva anterior">
-                    <i class="fas fa-chevron-left"></i>
-                </button>
-                <button class="carousel-btn" id="nextBtn" aria-label="Diapositiva siguiente">
-                    <i class="fas fa-chevron-right"></i>
-                </button>
-            </div>
-        </div>
-        
-        <div class="carousel-dots" id="carouselDots">
-            <!-- Dots will be generated by JavaScript -->
-        </div>
-    </section>
-
-    <!-- MENU SECTION CON SELECTOR DE UBICACIONES -->
+    <!-- ============ MENU SECTION ============ -->
     <section id="menu" class="menu-section">
         <div class="promo-banner">
             <div class="scrolling-container">
@@ -2431,1017 +2394,443 @@
             </div>
         </div>
 
-        <!-- SELECTOR DE UBICACIONES EN EL MENÚ -->
         <div class="menu-location-selector">
             <button class="menu-location-option active" data-location="grapevine" onclick="switchMenuLocation('grapevine')">
-                <i class="fas fa-map-marker-alt"></i>
-                <span>Grapevine</span>
+                <i class="fas fa-map-marker-alt"></i> <span>Grapevine</span>
             </button>
             <button class="menu-location-option" data-location="allen" onclick="switchMenuLocation('allen')">
-                <i class="fas fa-map-marker-alt"></i>
-                <span>Allen</span>
+                <i class="fas fa-map-marker-alt"></i> <span>Allen</span>
                 <span class="menu-location-badge">NEW!</span>
             </button>
         </div>
 
-        <!-- CONTENEDOR DE MENÚ GRAPEVINE -->
+        <!-- GRAPEVINE MENU -->
         <div id="menu-grapevine-container">
             <h2 class="section-title">The Dogs - Grapevine</h2>
             <p class="section-subtitle">Make it a Combo: Chips & Drink Included for $14.50!</p>
-           
             <div class="menu-grid">
-                <div class="menu-card">
-                    <span class="combo-badge">BEST SELLER</span>
-                    <img src="imagenes dog/mexican-dog.jpg" alt="Mexican Dog" class="card-image" loading="lazy">
-                    <div class="card-content">
-                        <h3>Mexican Dog</h3>
-                        <p>Beef Frank, Pico De Gallo, Jalapeños, Ketchup & Mustard.</p>
-                        <div class="price-row">
-                            <span class="price">$12.50</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="menu-card">
-                    <img src="imagenes dog/german-dog.jpg" alt="German Dog" class="card-image" loading="lazy">
-                    <div class="card-content">
-                        <h3>German Dog</h3>
-                        <p>Bratwurst, Grilled Onions, Sauerkraut, Spicy German Mustard.</p>
-                        <div class="price-row">
-                            <span class="price">$12.50</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="menu-card">
-                    <img src="imagenes dog/hawaiian-dog.jpg" alt="Hawaiian Dog" class="card-image" loading="lazy">
-                    <div class="card-content">
-                        <h3>Hawaiian Dog</h3>
-                        <p>Jalapeño Sausage, Pineapple, Grilled Onions, Bacon Bites.</p>
-                        <div class="price-row">
-                            <span class="price">$12.50</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="menu-card">
-                    <span class="combo-badge">CHICAGO STYLE</span>
-                    <img src="imagenes dog/chicago-dog.jpg" alt="Chicago Dog" class="card-image" loading="lazy">
-                    <div class="card-content">
-                        <h3>Chicago Dog</h3>
-                        <p>Beef Frank, Poppy Seeds Bun, Yellow Mustard, Neon Green Pickles.</p>
-                        <div class="price-row">
-                            <span class="price">$12.50</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="menu-card">
-                    <span class="combo-badge">MOST POPULAR</span>
-                    <img src="imagenes dog/trainwreck.jpg" alt="Trainwreck" class="card-image" loading="lazy">
-                    <div class="card-content">
-                        <h3>Trainwreck</h3>
-                        <p>Beef Frank, Chipotle Sauce, Mayo, Mustard, Onions, Fries, Parmesan, Bacon.</p>
-                        <div class="price-row">
-                            <span class="price">$12.50</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="menu-card">
-                    <img src="imagenes dog/tijuana-dog.jpg" alt="Tijuana Dog" class="card-image" loading="lazy">
-                    <div class="card-content">
-                        <h3>Tijuana Dog</h3>
-                        <p>Jalapeño Sausage, Corn, Chipotle Sauce, Parmesan Cheese, Cilantro.</p>
-                        <div class="price-row">
-                            <span class="price">$12.50</span>
-                        </div>
-                    </div>
-                </div>
-               
-                <div class="menu-card">
-                    <span class="combo-badge">FOR KIDS</span>
-                    <img src="imagenes dog/kids-dog.jpg" alt="Kids Dog" class="card-image" loading="lazy">
-                    <div class="card-content">
-                        <h3>Kids Dog</h3>
-                        <p>Beef Frank, Ketchup, Jello, Kids Juice.</p>
-                        <div class="price-row">
-                            <span class="price">$10.50</span>
-                        </div>
-                    </div>
-                </div>
-               
-                <div class="menu-card">
-                    <img src="imagenes dog/all-naked.jpg" alt="All Naked" class="card-image" loading="lazy">
-                    <div class="card-content">
-                        <h3>All Naked</h3>
-                        <p>Bunless. Bratwurst, Grilled Onions, Sauerkraut.</p>
-                        <div class="price-row">
-                            <span class="price">$12.50</span>
-                        </div>
-                    </div>
-                </div>
+                <div class="menu-card"><span class="combo-badge">BEST SELLER</span><img src="imagenes dog/mexican-dog.jpg" alt="Mexican Dog" class="card-image" loading="lazy"><div class="card-content"><h3>Mexican Dog</h3><p>Beef Frank, Pico De Gallo, Jalapeños, Ketchup & Mustard.</p><div class="price-row"><span class="price">$12.50</span></div></div></div>
+                <div class="menu-card"><img src="imagenes dog/german-dog.jpg" alt="German Dog" class="card-image" loading="lazy"><div class="card-content"><h3>German Dog</h3><p>Bratwurst, Grilled Onions, Sauerkraut, Spicy German Mustard.</p><div class="price-row"><span class="price">$12.50</span></div></div></div>
+                <div class="menu-card"><img src="imagenes dog/hawaiian-dog.jpg" alt="Hawaiian Dog" class="card-image" loading="lazy"><div class="card-content"><h3>Hawaiian Dog</h3><p>Jalapeño Sausage, Pineapple, Grilled Onions, Bacon Bites.</p><div class="price-row"><span class="price">$12.50</span></div></div></div>
+                <div class="menu-card"><span class="combo-badge">CHICAGO STYLE</span><img src="imagenes dog/chicago-dog.jpg" alt="Chicago Dog" class="card-image" loading="lazy"><div class="card-content"><h3>Chicago Dog</h3><p>Beef Frank, Poppy Seeds Bun, Yellow Mustard, Neon Green Pickles.</p><div class="price-row"><span class="price">$12.50</span></div></div></div>
+                <div class="menu-card"><span class="combo-badge">MOST POPULAR</span><img src="imagenes dog/trainwreck.jpg" alt="Trainwreck" class="card-image" loading="lazy"><div class="card-content"><h3>Trainwreck</h3><p>Beef Frank, Chipotle Sauce, Mayo, Mustard, Onions, Fries, Parmesan, Bacon.</p><div class="price-row"><span class="price">$12.50</span></div></div></div>
+                <div class="menu-card"><img src="imagenes dog/tijuana-dog.jpg" alt="Tijuana Dog" class="card-image" loading="lazy"><div class="card-content"><h3>Tijuana Dog</h3><p>Jalapeño Sausage, Corn, Chipotle Sauce, Parmesan Cheese, Cilantro.</p><div class="price-row"><span class="price">$12.50</span></div></div></div>
+                <div class="menu-card"><span class="combo-badge">FOR KIDS</span><img src="imagenes dog/kids-dog.jpg" alt="Kids Dog" class="card-image" loading="lazy"><div class="card-content"><h3>Kids Dog</h3><p>Beef Frank, Ketchup, Jello, Kids Juice.</p><div class="price-row"><span class="price">$10.50</span></div></div></div>
+                <div class="menu-card"><img src="imagenes dog/all-naked.jpg" alt="All Naked" class="card-image" loading="lazy"><div class="card-content"><h3>All Naked</h3><p>Bunless. Bratwurst, Grilled Onions, Sauerkraut.</p><div class="price-row"><span class="price">$12.50</span></div></div></div>
             </div>
 
-            <!-- SECCIÓN EXTRAS & DRINKS CON IMÁGENES -->
             <div id="sides" style="margin-top: 4rem;">
                 <h2 class="section-title">Extras & Drinks - Grapevine</h2>
-               
                 <div class="pretzel-special">
                     <h3 style="color: var(--color-amarillo-cheddar); font-size: 1.8rem; margin-bottom: 0.5rem;">SOFT PRETZELS</h3>
                     <p style="color: #ddd; font-size: 1rem; margin-bottom: 1rem;">Honey Mustard & Beer Cheese Sauce included.</p>
-                    <div style="font-size: 2.2rem; color: white; font-weight: bold; margin: 1.2rem 0; text-shadow: 1px 1px 0px rgba(0,0,0,0.5);">$9.50</div>
+                    <div style="font-size: 2.2rem; color: white; font-weight: bold; margin: 1.2rem 0;">$9.50</div>
                 </div>
-
                 <div class="sides-grid">
-                    <div class="side-card">
-                        <img src="extras & drinks/creamy-slaw.jpg" alt="Creamy Slaw" class="side-image" loading="lazy">
-                        <div class="side-content">
-                            <h4>Creamy Slaw</h4>
-                            <div class="side-price">$4.00</div>
-                        </div>
-                    </div>
-                    
-                    <div class="side-card">
-                        <img src="extras & drinks/chips-bag.jpg" alt="Chips Bag" class="side-image" loading="lazy">
-                        <div class="side-content">
-                            <h4>Chips Bag</h4>
-                            <div class="side-price">$3.00</div>
-                        </div>
-                    </div>
-                    
-                    <div class="side-card">
-                        <img src="extras & drinks/corn-salad.jpg" alt="Corn Salad" class="side-image" loading="lazy">
-                        <div class="side-content">
-                            <h4>Corn Salad</h4>
-                            <div class="side-price">$4.00</div>
-                        </div>
-                    </div>
-                    
-                    <div class="side-card">
-                        <img src="extras & drinks/potato-salad.jpg" alt="Potato Salad" class="side-image" loading="lazy">
-                        <div class="side-content">
-                            <h4>Potato Salad</h4>
-                            <div class="side-price">$4.00</div>
-                        </div>
-                    </div>
-                    
-                    <div class="side-card">
-                        <img src="extras & drinks/baked-beans.jpg" alt="Baked Beans" class="side-image" loading="lazy">
-                        <div class="side-content">
-                            <h4>Baked Beans</h4>
-                            <div class="side-price">$6.00</div>
-                        </div>
-                    </div>
-                    
-                    <div class="side-card drink-special">
-                        <img src="extras & drinks/drinks.jpg" alt="Drinks" class="side-image" loading="lazy">
-                        <div class="side-content">
-                            <h4>DRINKS</h4>
-                            <p style="color: #aaa; font-size: 0.9rem; margin-bottom: 0.5rem;">Cans & Water</p>
-                            <div class="side-price">$2.25</div>
-                        </div>
-                    </div>
+                    <div class="side-card"><img src="extras & drinks/creamy-slaw.jpg" alt="Creamy Slaw" class="side-image" loading="lazy"><div class="side-content"><h4>Creamy Slaw</h4><div class="side-price">$4.00</div></div></div>
+                    <div class="side-card"><img src="extras & drinks/chips-bag.jpg" alt="Chips Bag" class="side-image" loading="lazy"><div class="side-content"><h4>Chips Bag</h4><div class="side-price">$3.00</div></div></div>
+                    <div class="side-card"><img src="extras & drinks/corn-salad.jpg" alt="Corn Salad" class="side-image" loading="lazy"><div class="side-content"><h4>Corn Salad</h4><div class="side-price">$4.00</div></div></div>
+                    <div class="side-card"><img src="extras & drinks/potato-salad.jpg" alt="Potato Salad" class="side-image" loading="lazy"><div class="side-content"><h4>Potato Salad</h4><div class="side-price">$4.00</div></div></div>
+                    <div class="side-card"><img src="extras & drinks/baked-beans.jpg" alt="Baked Beans" class="side-image" loading="lazy"><div class="side-content"><h4>Baked Beans</h4><div class="side-price">$6.00</div></div></div>
+                    <div class="side-card drink-special"><img src="extras & drinks/drinks.jpg" alt="Drinks" class="side-image" loading="lazy"><div class="side-content"><h4>DRINKS</h4><p style="color: #aaa; font-size: 0.9rem;">Cans & Water</p><div class="side-price">$2.25</div></div></div>
                 </div>
             </div>
         </div>
 
-        <!-- CONTENEDOR DE MENÚ ALLEN (oculto por defecto) -->
+        <!-- ALLEN MENU -->
         <div id="menu-allen-container" style="display: none;">
             <h2 class="section-title">Allen Menu</h2>
             <p class="section-subtitle">📍 1070 Watters Creek Blvd, Allen, TX 75013</p>
             
-            <!-- WINGS -->
-            <div class="menu-category">
-                <h3 class="menu-category-title">🔥 WINGS</h3>
-                <div class="wings-flavors">
-                    <span class="flavor-tag">BBQ</span>
-                    <span class="flavor-tag">Mango Habanero</span>
-                    <span class="flavor-tag">Lemon Pepper</span>
-                    <span class="flavor-tag">Buffalo</span>
-                    <span class="flavor-tag">Sweet Chili</span>
-                </div>
-                
+            <div class="menu-category"><h3 class="menu-category-title">🔥 WINGS</h3>
+                <div class="wings-flavors"><span class="flavor-tag">BBQ</span><span class="flavor-tag">Mango Habanero</span><span class="flavor-tag">Lemon Pepper</span><span class="flavor-tag">Buffalo</span><span class="flavor-tag">Sweet Chili</span></div>
                 <div class="menu-grid">
-                    <div class="menu-card">
-                        <img src="imagenes dog/wings.jpg" alt="6 Wings" class="card-image" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1608039829572-78524f79c4c7?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'">
-                        <div class="card-content">
-                            <h3>6 Wings</h3>
-                            <p>Can be mixed (3 & 3)</p>
-                            <div class="price-row">
-                                <span class="price">$11.25</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="menu-card">
-                        <img src="imagenes dog/wings-12.jpg" alt="12 Wings" class="card-image" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1608039829572-78524f79c4c7?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'">
-                        <div class="card-content">
-                            <h3>12 Wings</h3>
-                            <p>Can be mixed (6 & 6)</p>
-                            <div class="price-row">
-                                <span class="price">$18.00</span>
-                            </div>
-                        </div>
-                    </div>
+                    <div class="menu-card"><img src="imagenes dog/wings.jpg" alt="6 Wings" class="card-image" loading="lazy"><div class="card-content"><h3>6 Wings</h3><p>Can be mixed (3 & 3)</p><div class="price-row"><span class="price">$11.25</span></div></div></div>
+                    <div class="menu-card"><img src="imagenes dog/wings-12.jpg" alt="12 Wings" class="card-image" loading="lazy"><div class="card-content"><h3>12 Wings</h3><p>Can be mixed (6 & 6)</p><div class="price-row"><span class="price">$18.00</span></div></div></div>
                 </div>
             </div>
-            
-            <!-- NACHOS -->
-            <div class="menu-category">
-                <h3 class="menu-category-title">🧀 NACHOS</h3>
+
+            <div class="menu-category"><h3 class="menu-category-title">🧀 NACHOS</h3>
                 <div class="menu-grid">
-                    <div class="menu-card">
-                        <img src="imagenes dog/nachos.jpg" alt="Loaded Nachos" class="card-image" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1513456852971-30c0b8199d4d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'">
-                        <div class="card-content">
-                            <h3>Loaded Nachos</h3>
-                            <p>Chips, queso, pico de gallo, jalapeños, sweet potato fries & nachos sauces</p>
-                            <div class="price-row">
-                                <span class="price">$10.00</span>
-                            </div>
-                            <div class="addon-options">
-                                <i class="fas fa-plus-circle"></i> Add Brisket +$6<br>
-                                <i class="fas fa-plus-circle"></i> Add Chicken Fajita +$4<br>
-                                <i class="fas fa-plus-circle"></i> Add Pulled Pork +$5
-                            </div>
-                        </div>
-                    </div>
+                    <div class="menu-card"><img src="imagenes dog/nachos.jpg" alt="Loaded Nachos" class="card-image" loading="lazy"><div class="card-content"><h3>Loaded Nachos</h3><p>Chips, queso, pico de gallo, jalapeños, sweet potato fries & nachos sauces</p><div class="price-row"><span class="price">$10.00</span></div><div class="addon-options"><i class="fas fa-plus-circle"></i> Add Brisket +$6<br><i class="fas fa-plus-circle"></i> Add Chicken Fajita +$4<br><i class="fas fa-plus-circle"></i> Add Pulled Pork +$5</div></div></div>
                 </div>
             </div>
-            
-            <!-- TACOS & QUESADILLAS -->
-            <div class="menu-category">
-                <h3 class="menu-category-title">🌮 TACOS & QUESADILLAS</h3>
+
+            <div class="menu-category"><h3 class="menu-category-title">🌮 TACOS & QUESADILLAS</h3>
                 <div class="menu-grid">
-                    <div class="menu-card">
-                        <img src="imagenes dog/tacos.jpg" alt="Tacos" class="card-image" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1599974579688-8dbdd335c77f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'">
-                        <div class="card-content">
-                            <h3>Tacos - 2 for $12</h3>
-                            <p>Chicken Fajita • Garlic Shrimp • Brisket • Baja Fish</p>
-                            <div class="price-row">
-                                <span class="price">$12.00</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="menu-card">
-                        <img src="imagenes dog/quesadilla.jpg" alt="Quesadilla" class="card-image" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1618040996337-56904b7850b9?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'">
-                        <div class="card-content">
-                            <h3>Quesadilla</h3>
-                            <p>Chicken Fajita • Garlic Shrimp • Brisket • Baja Fish</p>
-                            <div class="price-row">
-                                <span class="price">$12.00</span>
-                            </div>
-                        </div>
-                    </div>
+                    <div class="menu-card"><img src="imagenes dog/tacos.jpg" alt="Tacos" class="card-image" loading="lazy"><div class="card-content"><h3>Tacos - 2 for $12</h3><p>Chicken Fajita • Garlic Shrimp • Brisket • Baja Fish</p><div class="price-row"><span class="price">$12.00</span></div></div></div>
+                    <div class="menu-card"><img src="imagenes dog/quesadilla.jpg" alt="Quesadilla" class="card-image" loading="lazy"><div class="card-content"><h3>Quesadilla</h3><p>Chicken Fajita • Garlic Shrimp • Brisket • Baja Fish</p><div class="price-row"><span class="price">$12.00</span></div></div></div>
                 </div>
             </div>
-            
-            <!-- SLIDERS & ENTREES -->
-            <div class="menu-category">
-                <h3 class="menu-category-title">🍔 SLIDERS & ENTREES</h3>
+
+            <div class="menu-category"><h3 class="menu-category-title">🍔 SLIDERS & ENTREES</h3>
                 <div class="menu-grid">
-                    <div class="menu-card">
-                        <img src="imagenes dog/sliders.jpg" alt="Sliders" class="card-image" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'">
-                        <div class="card-content">
-                            <h3>Sliders - 2 for $12</h3>
-                            <p>Brisket • Original • Pulled Pork</p>
-                            <div class="price-row">
-                                <span class="price">$12.00</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="menu-card">
-                        <img src="imagenes dog/fish-chips.jpg" alt="Fish & Chips" class="card-image" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1579208575657-c595a05383b7?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'">
-                        <div class="card-content">
-                            <h3>Fish & Chips</h3>
-                            <div class="price-row">
-                                <span class="price">$16.00</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="menu-card">
-                        <img src="imagenes dog/shrimp-boil.jpg" alt="Shrimp Boil" class="card-image" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1625943553852-781c6dd46f9c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'">
-                        <div class="card-content">
-                            <h3>Shrimp Boil</h3>
-                            <p>Potatoes, corn, sausage & 1 lb shrimp</p>
-                            <div class="price-row">
-                                <span class="price">$28.00</span>
-                            </div>
-                        </div>
-                    </div>
+                    <div class="menu-card"><img src="imagenes dog/sliders.jpg" alt="Sliders" class="card-image" loading="lazy"><div class="card-content"><h3>Sliders - 2 for $12</h3><p>Brisket • Original • Pulled Pork</p><div class="price-row"><span class="price">$12.00</span></div></div></div>
+                    <div class="menu-card"><img src="imagenes dog/fish-chips.jpg" alt="Fish & Chips" class="card-image" loading="lazy"><div class="card-content"><h3>Fish & Chips</h3><div class="price-row"><span class="price">$16.00</span></div></div></div>
+                    <div class="menu-card"><img src="imagenes dog/shrimp-boil.jpg" alt="Shrimp Boil" class="card-image" loading="lazy"><div class="card-content"><h3>Shrimp Boil</h3><p>Potatoes, corn, sausage & 1 lb shrimp</p><div class="price-row"><span class="price">$28.00</span></div></div></div>
                 </div>
             </div>
-            
-            <!-- SIDES ALLEN -->
-            <div class="menu-category">
-                <h3 class="menu-category-title">🍟 SIDES</h3>
+
+            <div class="menu-category"><h3 class="menu-category-title">🍟 SIDES</h3>
                 <div class="sides-grid">
-                    <div class="side-card">
-                        <img src="extras & drinks/french-fries.jpg" alt="Shoestring Fries" class="side-image" loading="lazy">
-                        <div class="side-content">
-                            <h4>French Fries</h4>
-                            <div class="side-price">$5.00</div>
-                        </div>
-                    </div>
-                    <div class="side-card">
-                        <img src="extras & drinks/slaw.jpg" alt="Slaw" class="side-image" loading="lazy">
-                        <div class="side-content">
-                            <h4>Slaw</h4>
-                            <div class="side-price">$5.00</div>
-                        </div>
-                    </div>
-                    <div class="side-card">
-                        <img src="extras & drinks/mac-cheese.jpg" alt="Mac & Cheese" class="side-image" loading="lazy">
-                        <div class="side-content">
-                            <h4>Mac & Cheese</h4>
-                            <div class="side-price">$5.00</div>
-                            <div class="addon-options">
-                                <i class="fas fa-plus-circle"></i> Add Chicken Tender +$
-                            </div>
-                        </div>
-                    </div>
-                    <div class="side-card">
-                        <img src="extras & drinks/chips-queso.jpg" alt="Chips & Queso" class="side-image" loading="lazy">
-                        <div class="side-content">
-                            <h4>Chips & Queso</h4>
-                            <div class="side-price">$10.00</div>
-                        </div>
-                    </div>
-                    <div class="side-card">
-                        <img src="extras & drinks/chips-salsa.jpg" alt="Chips & Salsa" class="side-image" loading="lazy">
-                        <div class="side-content">
-                            <h4>Chips & Salsa</h4>
-                            <div class="side-price">$8.00</div>
-                        </div>
-                    </div>
+                    <div class="side-card"><img src="extras & drinks/french-fries.jpg" alt="French Fries" class="side-image" loading="lazy"><div class="side-content"><h4>French Fries</h4><div class="side-price">$5.00</div></div></div>
+                    <div class="side-card"><img src="extras & drinks/slaw.jpg" alt="Slaw" class="side-image" loading="lazy"><div class="side-content"><h4>Slaw</h4><div class="side-price">$5.00</div></div></div>
+                    <div class="side-card"><img src="extras & drinks/mac-cheese.jpg" alt="Mac & Cheese" class="side-image" loading="lazy"><div class="side-content"><h4>Mac & Cheese</h4><div class="side-price">$5.00</div><div class="addon-options"><i class="fas fa-plus-circle"></i> Add Chicken Tender +$</div></div></div>
+                    <div class="side-card"><img src="extras & drinks/chips-queso.jpg" alt="Chips & Queso" class="side-image" loading="lazy"><div class="side-content"><h4>Chips & Queso</h4><div class="side-price">$10.00</div></div></div>
+                    <div class="side-card"><img src="extras & drinks/chips-salsa.jpg" alt="Chips & Salsa" class="side-image" loading="lazy"><div class="side-content"><h4>Chips & Salsa</h4><div class="side-price">$8.00</div></div></div>
                 </div>
             </div>
-            
-            <!-- KIDS MENU -->
-            <div class="menu-category">
-                <h3 class="menu-category-title">👶 KIDS MENU</h3>
+
+            <div class="menu-category"><h3 class="menu-category-title">👶 KIDS MENU</h3>
                 <p class="price-note">All kids meals served with fries, jello & juice</p>
                 <div class="sides-grid">
-                    <div class="side-card">
-                        <img src="imagenes dog/kids-tenders.jpg" alt="Kids Tenders" class="side-image" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1619895098996-1e5f1a9e3b9e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'">
-                        <div class="side-content">
-                            <h4>Kids Tenders</h4>
-                            <div class="side-price">$10.50</div>
-                        </div>
-                    </div>
-                    <div class="side-card">
-                        <img src="imagenes dog/kids-fish.jpg" alt="Kids Fish" class="side-image" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1579208575657-c595a05383b7?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'">
-                        <div class="side-content">
-                            <h4>Kids Fish</h4>
-                            <div class="side-price">$10.50</div>
-                        </div>
-                    </div>
-                    <div class="side-card">
-                        <img src="imagenes dog/kids-shrimp.jpg" alt="Kids Shrimp" class="side-image" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1625943553852-781c6dd46f9c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'">
-                        <div class="side-content">
-                            <h4>Kids Shrimp</h4>
-                            <div class="side-price">$10.50</div>
-                        </div>
-                    </div>
-                    <div class="side-card">
-                        <img src="imagenes dog/kids-corn-dog.jpg" alt="Kids Corn Dog" class="side-image" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1599490659213-e2b9527bd6a4?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'">
-                        <div class="side-content">
-                            <h4>Kids Corn Dog</h4>
-                            <div class="side-price">$10.50</div>
-                        </div>
-                    </div>
-                    <div class="side-card">
-                        <img src="imagenes dog/kids-cheeseburger.jpg" alt="Kids Cheeseburger" class="side-image" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1571091718767-18b5b1457add?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'">
-                        <div class="side-content">
-                            <h4>Kids Cheeseburger</h4>
-                            <div class="side-price">$10.50</div>
-                        </div>
-                    </div>
-                    <div class="side-card">
-                        <img src="imagenes dog/kids-quesadilla.jpg" alt="Kids Quesadilla" class="side-image" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1571091718767-18b5b1457add?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'">
-                        <div class="side-content">
-                            <h4>Kids Quesadilla</h4>
-                            <div class="side-price">$10.50</div>
-                       </div>
-                    </div>
+                    <div class="side-card"><img src="imagenes dog/kids-tenders.jpg" alt="Kids Tenders" class="side-image" loading="lazy"><div class="side-content"><h4>Kids Tenders</h4><div class="side-price">$10.50</div></div></div>
+                    <div class="side-card"><img src="imagenes dog/kids-fish.jpg" alt="Kids Fish" class="side-image" loading="lazy"><div class="side-content"><h4>Kids Fish</h4><div class="side-price">$10.50</div></div></div>
+                    <div class="side-card"><img src="imagenes dog/kids-shrimp.jpg" alt="Kids Shrimp" class="side-image" loading="lazy"><div class="side-content"><h4>Kids Shrimp</h4><div class="side-price">$10.50</div></div></div>
+                    <div class="side-card"><img src="imagenes dog/kids-corn-dog.jpg" alt="Kids Corn Dog" class="side-image" loading="lazy"><div class="side-content"><h4>Kids Corn Dog</h4><div class="side-price">$10.50</div></div></div>
+                    <div class="side-card"><img src="imagenes dog/kids-cheeseburger.jpg" alt="Kids Cheeseburger" class="side-image" loading="lazy"><div class="side-content"><h4>Kids Cheeseburger</h4><div class="side-price">$10.50</div></div></div>
+                    <div class="side-card"><img src="imagenes dog/kids-quesadilla.jpg" alt="Kids Quesadilla" class="side-image" loading="lazy"><div class="side-content"><h4>Kids Quesadilla</h4><div class="side-price">$10.50</div></div></div>
                 </div>
             </div>
-            
-            <!-- BRUNCH (WEEKENDS ONLY) -->
+
             <div class="menu-category">
-                <div class="brunch-note">
-                    <i class="fas fa-mug-hot"></i> WEEKENDS ONLY 9 AM - 4 PM
-                </div>
+                <div class="brunch-note"><i class="fas fa-mug-hot"></i> WEEKENDS ONLY 9 AM - 4 PM</div>
                 <h3 class="menu-category-title">🍳 BRUNCH</h3>
                 <div class="menu-grid">
-                    <div class="menu-card">
-                        <img src="imagenes dog/chilaquiles.jpg" alt="Chilaquiles" class="card-image" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'">
-                        <div class="card-content">
-                            <h3>Chilaquiles</h3>
-                            <p>Green or Red Sauce - Served with egg, fresh cheese, sour cream & side of beans</p>
-                            <div class="price-row">
-                                <span class="price">$12.00</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="menu-card">
-                        <img src="imagenes dog/breakfast-tacos.jpg" alt="Breakfast Tacos" class="card-image" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1626700051175-6818013e1d4f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'">
-                        <div class="card-content">
-                            <h3>Breakfast Tacos</h3>
-                            <p>2 tacos - Mix & match: Chorizo & Egg • Potato & Egg</p>
-                            <div class="price-row">
-                                <span class="price">$10.00</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="menu-card">
-                        <img src="imagenes dog/steak-eggs.jpg" alt="Steak & Eggs" class="card-image" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1596040033229-3a0e3c7b3b5e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'">
-                        <div class="card-content">
-                            <h3>Steak & Eggs</h3>
-                            <p>Country potatoes, 2 eggs & 6 oz steak</p>
-                            <div class="price-row">
-                                <span class="price">$16.50</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="menu-card">
-                        <img src="imagenes dog/breakfast-plate.jpg" alt="Breakfast Plate" class="card-image" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'">
-                        <div class="card-content">
-                            <h3>Breakfast Plate</h3>
-                            <p>2 eggs + country potatoes + bacon</p>
-                            <div class="price-row">
-                                <span class="price">$12.00</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="menu-card">
-                        <img src="imagenes dog/kids-plate2.jpg" alt="Kids Plate" class="card-image" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1586444248902-2f64eddc13df?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'">
-                        <div class="card-content">
-                            <h3>Kids Plate</h3>
-                            <p>2 pancakes + 2 eggs + 1 bacon + jello</p>
-                            <div class="price-row">
-                                <span class="price">$10.50</span>
-                            </div>
-                        </div>
-                    </div>
+                    <div class="menu-card"><img src="imagenes dog/chilaquiles.jpg" alt="Chilaquiles" class="card-image" loading="lazy"><div class="card-content"><h3>Chilaquiles</h3><p>Green or Red Sauce - Served with egg, fresh cheese, sour cream & side of beans</p><div class="price-row"><span class="price">$12.00</span></div></div></div>
+                    <div class="menu-card"><img src="imagenes dog/breakfast-tacos.jpg" alt="Breakfast Tacos" class="card-image" loading="lazy"><div class="card-content"><h3>Breakfast Tacos</h3><p>2 tacos - Mix & match: Chorizo & Egg • Potato & Egg</p><div class="price-row"><span class="price">$10.00</span></div></div></div>
+                    <div class="menu-card"><img src="imagenes dog/steak-eggs.jpg" alt="Steak & Eggs" class="card-image" loading="lazy"><div class="card-content"><h3>Steak & Eggs</h3><p>Country potatoes, 2 eggs & 6 oz steak</p><div class="price-row"><span class="price">$16.50</span></div></div></div>
+                    <div class="menu-card"><img src="imagenes dog/breakfast-plate.jpg" alt="Breakfast Plate" class="card-image" loading="lazy"><div class="card-content"><h3>Breakfast Plate</h3><p>2 eggs + country potatoes + bacon</p><div class="price-row"><span class="price">$12.00</span></div></div></div>
+                    <div class="menu-card"><img src="imagenes dog/kids-plate2.jpg" alt="Kids Plate" class="card-image" loading="lazy"><div class="card-content"><h3>Kids Plate</h3><p>2 pancakes + 2 eggs + 1 bacon + jello</p><div class="price-row"><span class="price">$10.50</span></div></div></div>
                 </div>
-                
-                <div class="chef-special">
-                    <h4>👨‍🍳 Chef's Special</h4>
-                    <p>Different every week! Ask your server about today's special.</p>
-                    <p style="color: var(--color-amarillo-cheddar); font-size: 1.2rem; margin-top: 0.5rem;">Market Price</p>
-                </div>
+                <div class="chef-special"><h4>👨‍🍳 Chef's Special</h4><p>Different every week! Ask your server about today's special.</p><p style="color: var(--color-amarillo-cheddar); font-size: 1.2rem; margin-top: 0.5rem;">Market Price</p></div>
             </div>
         </div>
     </section>
 
+    <!-- ============ EVENT PROMO ============ -->
     <section class="event-promo-section" id="eventPromo">
         <div class="event-promo-container">
-            <div class="promo-badge">
-                🎉 NEW SERVICE! 🎉
-            </div>
-            
+            <div class="promo-badge">🎉 NEW SERVICE! 🎉</div>
             <h2 class="event-promo-title">THEMED EVENT CART</h2>
             <p class="event-promo-subtitle">Bring SupDog to your next celebration! Perfect for birthdays, parties, and special events.</p>
-            
             <div class="event-promo-card">
                 <div class="promo-features">
-                    <div class="promo-feature">
-                        <i class="fas fa-birthday-cake" aria-hidden="true"></i>
-                        <h4>Custom Themes</h4>
-                        <p>Decorated according to your party theme</p>
-                    </div>
-                    
-                    <div class="promo-feature">
-                        <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-                        <h4>Book in Advance</h4>
-                        <p>Reserve 2 weeks ahead for planning</p>
-                    </div>
-                    
-                    <div class="promo-feature">
-                        <i class="fas fa-hotdog" aria-hidden="true"></i>
-                        <h4>Full Menu</h4>
-                        <p>All your favorite SupDog creations</p>
-                    </div>
-                    
-                    <div class="promo-feature">
-                        <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
-                        <h4>We Come to You</h4>
-                        <p>Set up at your venue in Grapevine/Allen area</p>
-                    </div>
+                    <div class="promo-feature"><i class="fas fa-birthday-cake" aria-hidden="true"></i><h4>Custom Themes</h4><p>Decorated according to your party theme</p></div>
+                    <div class="promo-feature"><i class="fas fa-calendar-alt" aria-hidden="true"></i><h4>Book in Advance</h4><p>Reserve 2 weeks ahead for planning</p></div>
+                    <div class="promo-feature"><i class="fas fa-hotdog" aria-hidden="true"></i><h4>Full Menu</h4><p>All your favorite SupDog creations</p></div>
+                    <div class="promo-feature"><i class="fas fa-map-marker-alt" aria-hidden="true"></i><h4>We Come to You</h4><p>Set up at your venue in Grapevine/Allen area</p></div>
                 </div>
-                
-                <a href="event-cart.html" class="btn event-cta-btn">
-                    🎪 BOOK EVENT <i class="fas fa-arrow-right" aria-hidden="true"></i>
-                </a>
-                
-                <p style="margin-top: 1.5rem; color: #ccc; font-size: 0.9rem;">
-                    <i class="fas fa-exclamation-circle" aria-hidden="true"></i> Limited availability - Book early!
-                </p>
+                <a href="event-cart.html" class="btn event-cta-btn">🎪 BOOK EVENT <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                <p style="margin-top: 1.5rem; color: #ccc; font-size: 0.9rem;"><i class="fas fa-exclamation-circle" aria-hidden="true"></i> Limited availability - Book early!</p>
             </div>
         </div>
     </section>
 
+    <!-- ============ LOCATION ============ -->
     <section id="location" class="location-section">
         <h2>📍 Our Locations</h2>
-       
         <div style="display: flex; flex-wrap: wrap; gap: 2rem; justify-content: center; max-width: 1200px; margin: 0 auto;">
-            <!-- Location 1: Grapevine -->
             <div class="location-box" style="flex: 1; min-width: 300px;">
                 <div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 1rem;">
                     <i class="fas fa-map-pin" style="color: var(--color-rojo-fuego); font-size: 1.5rem;" aria-hidden="true"></i>
                     <h3 style="font-size: 2rem; color: var(--color-rojo-fuego);">Grapevine</h3>
                 </div>
                 <p style="font-size: 1.1rem; font-weight: bold; color: #333;">815 S Main St, Grapevine, TX 76051</p>
-                
-                <div class="map-container" style="height: 200px;">
-                    <iframe 
-                        src="https://maps.google.com/maps?q=815+S+Main+St,+Grapevine,+TX+76051&t=&z=15&ie=UTF8&iwloc=&output=embed" 
-                        allowfullscreen="" 
-                        loading="lazy" 
-                        referrerpolicy="no-referrer-when-downgrade"
-                        title="Mapa de la ubicación en Grapevine">
-                    </iframe>
-                </div>
-
+                <div class="map-container" style="height: 200px;"><iframe src="https://maps.google.com/maps?q=815+S+Main+St,+Grapevine,+TX+76051&t=&z=15&ie=UTF8&iwloc=&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Grapevine Location"></iframe></div>
                 <div style="border-top: 2px dashed #ccc; padding-top: 1rem;">
                     <p style="font-weight: bold; color: #333; font-size: 1.1rem;">🕒 Open Hours:</p>
                     <p style="color: #555; font-size: 1rem; margin: 0.4rem 0;">Sun - Thu: 11:00 AM - 9:00 PM</p>
                     <p style="color: #555; font-size: 1rem;">Fri - Sat: 11:00 AM - 11:00 PM</p>
                 </div>
             </div>
-
-            <!-- Location 2: Allen (NEW) -->
             <div class="location-box" style="flex: 1; min-width: 300px; border-color: var(--color-purpura-berry);">
                 <div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 1rem;">
                     <i class="fas fa-map-pin" style="color: var(--color-purpura-berry); font-size: 1.5rem;" aria-hidden="true"></i>
                     <h3 style="font-size: 2rem; color: var(--color-purpura-berry);">Allen <span style="font-size: 1rem; background: var(--color-amarillo-cheddar); color: #000; padding: 3px 8px; border-radius: 30px;">NEW</span></h3>
                 </div>
                 <p style="font-size: 1.1rem; font-weight: bold; color: #333;">1070 Watters Creek Blvd, Allen, TX 75013</p>
-                
-                <div class="map-container" style="height: 200px;">
-                    <iframe 
-                        src="https://maps.google.com/maps?q=1070+Watters+Creek+Blvd,+Allen,+TX+75013&t=&z=15&ie=UTF8&iwloc=&output=embed" 
-                        allowfullscreen="" 
-                        loading="lazy" 
-                        referrerpolicy="no-referrer-when-downgrade"
-                        title="Mapa de la ubicación en Allen">
-                    </iframe>
-                </div>
-
+                <div class="map-container" style="height: 200px;"><iframe src="https://maps.google.com/maps?q=1070+Watters+Creek+Blvd,+Allen,+TX+75013&t=&z=15&ie=UTF8&iwloc=&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Allen Location"></iframe></div>
                 <div style="border-top: 2px dashed #ccc; padding-top: 1rem;">
                     <p style="font-weight: bold; color: #333; font-size: 1.1rem;">🕒 Open Hours:</p>
                     <p style="color: #555; font-size: 1rem; margin: 0.4rem 0;">Sun - Thu: 9:00 AM - 11:00 PM</p>
                     <p style="color: #555; font-size: 1rem;">Fri - Sat: 9:00 AM - 11:00 PM</p>
-                    <p style="color: var(--color-purpura-berry); font-size: 0.9rem; margin-top: 0.5rem;">
-                        <i class="fas fa-parking" aria-hidden="true"></i> Free parking available
-                    </p>
+                    <p style="color: var(--color-purpura-berry); font-size: 0.9rem; margin-top: 0.5rem;"><i class="fas fa-parking" aria-hidden="true"></i> Free parking available</p>
                 </div>
             </div>
         </div>
-
         <div style="margin-top: 2rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-            <a href="https://www.google.com/maps/dir//815+S+Main+St,+Grapevine,+TX+76051" target="_blank" class="btn" style="background: #1a1a1a;">
-                Directions to Grapevine <i class="fas fa-location-arrow" aria-hidden="true"></i>
-            </a>
-            <a href="https://www.google.com/maps/dir//1070+Watters+Creek+Blvd,+Allen,+TX+75013" target="_blank" class="btn" style="background: var(--color-purpura-berry);">
-                Directions to Allen <i class="fas fa-location-arrow" aria-hidden="true"></i>
-            </a>
+            <a href="https://www.google.com/maps/dir//815+S+Main+St,+Grapevine,+TX+76051" target="_blank" class="btn" style="background: #1a1a1a;">Directions to Grapevine <i class="fas fa-location-arrow" aria-hidden="true"></i></a>
+            <a href="https://www.google.com/maps/dir//1070+Watters+Creek+Blvd,+Allen,+TX+75013" target="_blank" class="btn" style="background: var(--color-purpura-berry);">Directions to Allen <i class="fas fa-location-arrow" aria-hidden="true"></i></a>
         </div>
     </section>
 
+    <!-- ============ CONTACT ============ -->
     <section id="contact" class="contact-section">
         <h3>Catering or Big Orders?</h3>
         <p>Call or text us directly!</p>
-        <a href="tel:+16828024868" class="contact-phone">
-            <i class="fas fa-phone-alt" aria-hidden="true"></i> (682) 802-4868
-        </a>
-        <p style="margin-top: 1.5rem; font-size: 1rem; color: var(--color-mostaza-suave); padding: 0 1rem;">
-            <i class="fas fa-info-circle" aria-hidden="true"></i> For event cart reservations, visit our 
-            <a href="event-cart.html" style="color: var(--color-purpura-berry); font-weight: bold;">Event Cart Page</a>
-        </p>
+        <a href="tel:+16828024868" class="contact-phone"><i class="fas fa-phone-alt" aria-hidden="true"></i> (682) 802-4868</a>
+        <p style="margin-top: 1.5rem; font-size: 1rem; color: var(--color-mostaza-suave); padding: 0 1rem;"><i class="fas fa-info-circle" aria-hidden="true"></i> For event cart reservations, visit our <a href="event-cart.html" style="color: var(--color-purpura-berry); font-weight: bold;">Event Cart Page</a></p>
     </section>
 
+    <!-- ============ FOOTER ============ -->
     <footer>
         <p style="font-size: 1rem; margin-bottom: 1rem; color: #aaa;">© 2026 SupDog Hot Dogs. All rights reserved.</p>
         <div class="social-links">
-            <p style="font-size: 1rem;">
-                Follow:
-                <a href="https://www.instagram.com/supdogdfw?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">
-                    Instagram
-                </a> | 
-                <a href="event-cart.html" style="color: var(--color-purpura-berry); font-weight: bold;">Event Cart</a> | 
-                <a href="catering.html" style="color: var(--color-rojo-fuego); font-weight: bold;">Cater With Us</a> |
-                <a href="#menu">Menu</a>
-            </p>
+            <p style="font-size: 1rem;">Follow: <a href="https://www.instagram.com/supdogdfw" target="_blank">Instagram</a> | <a href="event-cart.html" style="color: var(--color-purpura-berry); font-weight: bold;">Event Cart</a> | <a href="catering.html" style="color: var(--color-rojo-fuego); font-weight: bold;">Cater With Us</a> | <a href="#menu">Menu</a></p>
         </div>
-        
-        <!-- ENLACES LEGALES -->
         <div style="margin-top: 1.5rem; margin-bottom: 1rem; padding: 15px; background: rgba(255,255,255,0.05); border-radius: 8px;">
             <p style="font-size: 0.9rem; color: var(--color-mostaza-suave); margin-bottom: 8px;">Legal Information:</p>
             <div style="font-size: 0.85rem;">
-                <a href="politica-privacidad.html" style="color: #ccc; margin: 0 10px; text-decoration: none; transition: color 0.3s;">
-                    <i class="fas fa-user-shield" aria-hidden="true"></i> Privacy Policy
-                </a> | 
-                <a href="terminos-condiciones.html" style="color: #ccc; margin: 0 10px; text-decoration: none; transition: color 0.3s;">
-                    <i class="fas fa-file-contract" aria-hidden="true"></i> Terms & Conditions
-                </a> | 
-                <a href="aviso-legal.html" style="color: #ccc; margin: 0 10px; text-decoration: none; transition: color 0.3s;">
-                    <i class="fas fa-balance-scale" aria-hidden="true"></i> Legal Notice
-                </a>
+                <a href="politica-privacidad.html" style="color: #ccc; margin: 0 10px;"><i class="fas fa-user-shield" aria-hidden="true"></i> Privacy Policy</a> | 
+                <a href="terminos-condiciones.html" style="color: #ccc; margin: 0 10px;"><i class="fas fa-file-contract" aria-hidden="true"></i> Terms & Conditions</a> | 
+                <a href="aviso-legal.html" style="color: #ccc; margin: 0 10px;"><i class="fas fa-balance-scale" aria-hidden="true"></i> Legal Notice</a>
             </div>
         </div>
-        
-        <p style="margin-top: 1rem; font-size: 0.8rem; color: #777; padding: 0 1rem;">
-            Event cart reservations require 2 weeks advance notice for themed decorations.
-        </p>
+        <p style="margin-top: 1rem; font-size: 0.8rem; color: #777;">Event cart reservations require 2 weeks advance notice for themed decorations.</p>
     </footer>
 
     <script>
         // ============================================
-        // FUNCIONES AUXILIARES GLOBALES
+        // GLOBAL NOTIFICATION
         // ============================================
         function showGlobalNotification(message, type = 'success') {
             const notification = document.createElement('div');
-            const iconMap = {
-                success: 'fa-check-circle',
-                info: 'fa-info-circle',
-                warning: 'fa-exclamation-triangle'
-            };
+            const iconMap = { success: 'fa-check-circle', info: 'fa-info-circle', warning: 'fa-exclamation-triangle' };
             const icon = iconMap[type] || iconMap.success;
             
-            notification.className = 'global-notification';
             notification.style.cssText = `
-                position: fixed;
-                top: 80px;
-                right: 50%;
-                transform: translateX(50%);
-                background: linear-gradient(135deg, var(--color-purpura-berry), var(--color-rojo-fuego));
-                color: white;
-                padding: 12px 20px;
-                border-radius: 10px;
-                z-index: 9999;
-                font-weight: bold;
-                box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-                animation: fadeIn 0.3s ease-out;
-                display: flex;
-                align-items: center;
-                gap: 10px;
-                max-width: 90%;
-                text-align: center;
+                position: fixed; top: 80px; left: 50%; transform: translateX(-50%);
+                background: linear-gradient(135deg, #BA6990, #DB3606); color: white;
+                padding: 12px 20px; border-radius: 10px; z-index: 9999; font-weight: bold;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.3); animation: fadeIn 0.3s ease-out;
+                display: flex; align-items: center; gap: 10px; max-width: 90%; text-align: center;
             `;
-            
-            notification.innerHTML = `
-                <i class="fas ${icon}"></i>
-                <span>${message}</span>
-            `;
-            
+            notification.innerHTML = `<i class="fas ${icon}"></i><span>${message}</span>`;
             document.body.appendChild(notification);
-            
             setTimeout(() => {
                 notification.style.animation = 'fadeIn 0.3s ease-out reverse';
-                setTimeout(() => {
-                    if (notification.parentNode) {
-                        notification.parentNode.removeChild(notification);
-                    }
-                }, 300);
+                setTimeout(() => { if (notification.parentNode) notification.parentNode.removeChild(notification); }, 300);
             }, 3000);
         }
 
         // ============================================
-        // CLASE DEL CARRITO DE EVENTOS (EVENT CART)
+        // EVENT CART CLASS
         // ============================================
         class EventCart {
             constructor() {
                 this.items = JSON.parse(localStorage.getItem('supdogEventCart')) || [];
                 this.updateCartDisplay();
-                this.setupTouchEvents();
             }
-
-            setupTouchEvents() {
-                // Prevent double-tap zoom on buttons
-                document.querySelectorAll('.btn, .event-cta-btn, .checkout-btn').forEach(btn => {
-                    btn.addEventListener('touchstart', function(e) {
-                        if (!this.classList.contains('touched')) {
-                            this.classList.add('touched');
-                            setTimeout(() => {
-                                this.classList.remove('touched');
-                            }, 300);
-                        }
-                    }, {passive: true});
-                });
-            }
-
             addItem(name, price) {
                 const existingItem = this.items.find(item => item.name === name);
-                
-                if (existingItem) {
-                    existingItem.quantity += 1;
-                } else {
-                    this.items.push({
-                        name: name,
-                        price: parseFloat(price),
-                        quantity: 1
-                    });
-                }
-                
-                this.saveCart();
-                this.updateCartDisplay();
+                if (existingItem) { existingItem.quantity += 1; }
+                else { this.items.push({ name: name, price: parseFloat(price), quantity: 1 }); }
+                this.saveCart(); this.updateCartDisplay();
                 showGlobalNotification(`${name} added to event cart!`);
             }
-
-            removeItem(index) {
-                this.items.splice(index, 1);
-                this.saveCart();
-                this.updateCartDisplay();
-            }
-
+            removeItem(index) { this.items.splice(index, 1); this.saveCart(); this.updateCartDisplay(); }
             updateQuantity(index, quantity) {
                 quantity = parseInt(quantity);
-                if (isNaN(quantity) || quantity <= 0) {
-                    this.removeItem(index);
-                } else {
-                    this.items[index].quantity = quantity;
-                    this.saveCart();
-                    this.updateCartDisplay();
-                }
+                if (isNaN(quantity) || quantity <= 0) { this.removeItem(index); }
+                else { this.items[index].quantity = quantity; this.saveCart(); this.updateCartDisplay(); }
             }
-
-            getTotal() {
-                return this.items.reduce((total, item) => {
-                    return total + (item.price * item.quantity);
-                }, 0);
-            }
-
-            getItemCount() {
-                return this.items.reduce((count, item) => count + item.quantity, 0);
-            }
-
-            saveCart() {
-                localStorage.setItem('supdogEventCart', JSON.stringify(this.items));
-            }
-
-            clearCart() {
-                this.items = [];
-                this.saveCart();
-                this.updateCartDisplay();
-            }
-
+            getTotal() { return this.items.reduce((total, item) => total + (item.price * item.quantity), 0); }
+            getItemCount() { return this.items.reduce((count, item) => count + item.quantity, 0); }
+            saveCart() { localStorage.setItem('supdogEventCart', JSON.stringify(this.items)); }
+            clearCart() { this.items = []; this.saveCart(); this.updateCartDisplay(); }
             updateCartDisplay() {
                 const cartCount = document.getElementById('cartCountHeader');
                 const cartItemsContainer = document.getElementById('cartItemsContainer');
                 const cartTotal = document.getElementById('cartTotal');
-                
-                // Update cart count
-                if (cartCount) {
-                    cartCount.textContent = this.getItemCount();
-                }
-                
-                // Update cart items display
+                if (cartCount) cartCount.textContent = this.getItemCount();
                 if (cartItemsContainer) {
                     if (this.items.length === 0) {
-                        cartItemsContainer.innerHTML = `
-                            <div class="empty-cart">
-                                <i class="fas fa-calendar-times"></i>
-                                <h3>Your event cart is empty</h3>
-                                <p>Add items from our menu to start planning your event!</p>
-                            </div>
-                        `;
+                        cartItemsContainer.innerHTML = '<div class="empty-cart"><i class="fas fa-calendar-times"></i><h3>Your event cart is empty</h3><p>Add items from our menu to start planning your event!</p></div>';
                     } else {
                         cartItemsContainer.innerHTML = this.items.map((item, index) => `
                             <div class="cart-item">
-                                <div class="item-info">
-                                    <h4>${item.name}</h4>
-                                    <div class="item-price">$${(item.price * item.quantity).toFixed(2)}</div>
-                                </div>
+                                <div class="item-info"><h4>${item.name}</h4><div class="item-price">$${(item.price * item.quantity).toFixed(2)}</div></div>
                                 <div class="item-quantity">
                                     <button class="quantity-btn" onclick="eventCart.decreaseQuantity(${index})">-</button>
-                                    <input type="number" class="quantity-input" value="${item.quantity}" min="1" 
-                                           onchange="eventCart.updateQuantity(${index}, this.value)">
+                                    <input type="number" class="quantity-input" value="${item.quantity}" min="1" onchange="eventCart.updateQuantity(${index}, this.value)">
                                     <button class="quantity-btn" onclick="eventCart.increaseQuantity(${index})">+</button>
-                                    <button class="remove-item" onclick="eventCart.removeItem(${index})">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
+                                    <button class="remove-item" onclick="eventCart.removeItem(${index})"><i class="fas fa-trash"></i></button>
                                 </div>
                             </div>
                         `).join('');
                     }
                 }
-                
-                // Update total
-                if (cartTotal) {
-                    cartTotal.textContent = `$${this.getTotal().toFixed(2)}`;
-                }
+                if (cartTotal) cartTotal.textContent = `$${this.getTotal().toFixed(2)}`;
             }
-
-            increaseQuantity(index) {
-                this.items[index].quantity += 1;
-                this.saveCart();
-                this.updateCartDisplay();
-            }
-
+            increaseQuantity(index) { this.items[index].quantity += 1; this.saveCart(); this.updateCartDisplay(); }
             decreaseQuantity(index) {
-                if (this.items[index].quantity > 1) {
-                    this.items[index].quantity -= 1;
-                    this.saveCart();
-                    this.updateCartDisplay();
-                } else {
-                    this.removeItem(index);
-                }
+                if (this.items[index].quantity > 1) { this.items[index].quantity -= 1; this.saveCart(); this.updateCartDisplay(); }
+                else { this.removeItem(index); }
             }
         }
-
-        // Initialize cart
         const eventCart = new EventCart();
 
         // ============================================
-        // PHOTO GALLERY CAROUSEL CLASS
+        // PHOTO CAROUSEL
         // ============================================
         class PhotoCarousel {
             constructor() {
                 this.track = document.getElementById('carouselTrack');
                 if (!this.track) return;
-                
                 this.slides = Array.from(this.track.querySelectorAll('.carousel-slide'));
                 this.nextBtn = document.getElementById('nextBtn');
                 this.prevBtn = document.getElementById('prevBtn');
                 this.dotsContainer = document.getElementById('carouselDots');
-                
                 this.currentIndex = 0;
                 this.slideCount = this.slides.length;
                 this.autoSlideInterval = null;
-                
                 this.init();
             }
-            
             init() {
-                // Create dots
                 this.createDots();
-                
-                // Event listeners
-                if (this.nextBtn) {
-                    this.nextBtn.addEventListener('click', () => this.nextSlide());
-                }
-                if (this.prevBtn) {
-                    this.prevBtn.addEventListener('click', () => this.prevSlide());
-                }
-                
-                // Touch events for mobile swipe
+                if (this.nextBtn) this.nextBtn.addEventListener('click', () => this.nextSlide());
+                if (this.prevBtn) this.prevBtn.addEventListener('click', () => this.prevSlide());
                 this.setupTouchEvents();
-                
-                // Auto slide
                 this.startAutoSlide();
-                
-                // Pause auto slide on hover
                 if (this.track) {
                     this.track.addEventListener('mouseenter', () => this.stopAutoSlide());
                     this.track.addEventListener('mouseleave', () => this.startAutoSlide());
                 }
-                
-                // Update active states
                 this.updateActiveStates();
             }
-            
             createDots() {
                 if (!this.dotsContainer) return;
-                
+                this.dotsContainer.innerHTML = '';
                 for (let i = 0; i < this.slideCount; i++) {
                     const dot = document.createElement('button');
                     dot.classList.add('carousel-dot');
                     if (i === 0) dot.classList.add('active');
                     dot.setAttribute('data-index', i);
-                    dot.setAttribute('aria-label', `Ir a la diapositiva ${i + 1}`);
+                    dot.setAttribute('aria-label', `Slide ${i + 1}`);
                     dot.addEventListener('click', () => this.goToSlide(i));
                     this.dotsContainer.appendChild(dot);
                 }
                 this.dots = Array.from(this.dotsContainer.querySelectorAll('.carousel-dot'));
             }
-            
             setupTouchEvents() {
                 if (!this.track) return;
-                
                 let startX = 0;
-                let endX = 0;
-                
-                this.track.addEventListener('touchstart', (e) => {
-                    startX = e.touches[0].clientX;
-                    this.stopAutoSlide();
-                }, {passive: true});
-                
-                this.track.addEventListener('touchmove', (e) => {
-                    endX = e.touches[0].clientX;
-                }, {passive: true});
-                
-                this.track.addEventListener('touchend', () => {
-                    const threshold = 50;
+                this.track.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; this.stopAutoSlide(); }, {passive: true});
+                this.track.addEventListener('touchend', (e) => {
+                    const endX = e.changedTouches[0].clientX;
                     const diff = startX - endX;
-                    
-                    if (Math.abs(diff) > threshold) {
-                        if (diff > 0) {
-                            this.nextSlide();
-                        } else {
-                            this.prevSlide();
-                        }
-                    }
-                    
+                    if (Math.abs(diff) > 50) { if (diff > 0) this.nextSlide(); else this.prevSlide(); }
                     this.startAutoSlide();
                 });
             }
-            
-            nextSlide() {
-                this.currentIndex = (this.currentIndex + 1) % this.slideCount;
-                this.updateSlidePosition();
-                this.updateActiveStates();
-            }
-            
-            prevSlide() {
-                this.currentIndex = (this.currentIndex - 1 + this.slideCount) % this.slideCount;
-                this.updateSlidePosition();
-                this.updateActiveStates();
-            }
-            
-            goToSlide(index) {
-                this.currentIndex = index;
-                this.updateSlidePosition();
-                this.updateActiveStates();
-            }
-            
-            updateSlidePosition() {
-                if (!this.track) return;
-                const slideWidth = 100; // percentage
-                this.track.style.transform = `translateX(-${this.currentIndex * slideWidth}%)`;
-            }
-            
+            nextSlide() { this.currentIndex = (this.currentIndex + 1) % this.slideCount; this.updateSlidePosition(); this.updateActiveStates(); }
+            prevSlide() { this.currentIndex = (this.currentIndex - 1 + this.slideCount) % this.slideCount; this.updateSlidePosition(); this.updateActiveStates(); }
+            goToSlide(index) { this.currentIndex = index; this.updateSlidePosition(); this.updateActiveStates(); }
+            updateSlidePosition() { if (this.track) this.track.style.transform = `translateX(-${this.currentIndex * 100}%)`; }
             updateActiveStates() {
-                // Update slides
-                this.slides.forEach((slide, index) => {
-                    slide.classList.toggle('active', index === this.currentIndex);
+                this.slides.forEach((slide, index) => slide.classList.toggle('active', index === this.currentIndex));
+                if (this.dots) this.dots.forEach((dot, index) => dot.classList.toggle('active', index === this.currentIndex));
+            }
+            startAutoSlide() { this.stopAutoSlide(); this.autoSlideInterval = setInterval(() => this.nextSlide(), 5000); }
+            stopAutoSlide() { if (this.autoSlideInterval) { clearInterval(this.autoSlideInterval); this.autoSlideInterval = null; } }
+        }
+
+        // ============================================
+        // VIDEO CAROUSEL (EVENT HIGHLIGHTS)
+        // ============================================
+        class VideoCarousel {
+            constructor() {
+                this.track = document.getElementById('videoCarouselTrack');
+                if (!this.track) return;
+                this.slides = Array.from(this.track.querySelectorAll('.video-slide'));
+                this.videos = Array.from(this.track.querySelectorAll('video'));
+                this.prevBtn = document.getElementById('videoPrevBtn');
+                this.nextBtn = document.getElementById('videoNextBtn');
+                this.dotsContainer = document.getElementById('videoCarouselDots');
+                this.currentIndex = 0;
+                this.slideCount = this.slides.length;
+                this.autoSlideInterval = null;
+                this.init();
+            }
+            init() {
+                this.createDots();
+                if (this.nextBtn) this.nextBtn.addEventListener('click', () => this.nextSlide());
+                if (this.prevBtn) this.prevBtn.addEventListener('click', () => this.prevSlide());
+                this.setupTouchEvents();
+                this.startAutoSlide();
+                if (this.track) {
+                    this.track.addEventListener('mouseenter', () => this.stopAutoSlide());
+                    this.track.addEventListener('mouseleave', () => this.startAutoSlide());
+                }
+                this.updateActiveStates();
+                this.playCurrentVideo();
+            }
+            createDots() {
+                if (!this.dotsContainer) return;
+                this.dotsContainer.innerHTML = '';
+                for (let i = 0; i < this.slideCount; i++) {
+                    const dot = document.createElement('button');
+                    dot.classList.add('video-dot');
+                    if (i === 0) dot.classList.add('active');
+                    dot.setAttribute('data-index', i);
+                    dot.setAttribute('aria-label', `Video ${i + 1}`);
+                    dot.addEventListener('click', () => this.goToSlide(i));
+                    this.dotsContainer.appendChild(dot);
+                }
+                this.dots = Array.from(this.dotsContainer.querySelectorAll('.video-dot'));
+            }
+            setupTouchEvents() {
+                if (!this.track) return;
+                let startX = 0;
+                this.track.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; this.stopAutoSlide(); }, {passive: true});
+                this.track.addEventListener('touchend', (e) => {
+                    const endX = e.changedTouches[0].clientX;
+                    const diff = startX - endX;
+                    if (Math.abs(diff) > 50) { if (diff > 0) this.nextSlide(); else this.prevSlide(); }
+                    this.startAutoSlide();
                 });
-                
-                // Update dots
-                if (this.dots) {
-                    this.dots.forEach((dot, index) => {
-                        dot.classList.toggle('active', index === this.currentIndex);
-                    });
-                }
             }
-            
-            startAutoSlide() {
-                this.stopAutoSlide();
-                this.autoSlideInterval = setInterval(() => {
-                    this.nextSlide();
-                }, 5000);
+            nextSlide() { this.currentIndex = (this.currentIndex + 1) % this.slideCount; this.updateSlidePosition(); this.updateActiveStates(); this.playCurrentVideo(); }
+            prevSlide() { this.currentIndex = (this.currentIndex - 1 + this.slideCount) % this.slideCount; this.updateSlidePosition(); this.updateActiveStates(); this.playCurrentVideo(); }
+            goToSlide(index) { this.currentIndex = index; this.updateSlidePosition(); this.updateActiveStates(); this.playCurrentVideo(); }
+            updateSlidePosition() { if (this.track) this.track.style.transform = `translateX(-${this.currentIndex * 100}%)`; }
+            updateActiveStates() {
+                this.slides.forEach((slide, index) => slide.classList.toggle('active', index === this.currentIndex));
+                if (this.dots) this.dots.forEach((dot, index) => dot.classList.toggle('active', index === this.currentIndex));
             }
-            
-            stopAutoSlide() {
-                if (this.autoSlideInterval) {
-                    clearInterval(this.autoSlideInterval);
-                    this.autoSlideInterval = null;
-                }
+            playCurrentVideo() {
+                this.videos.forEach(v => { v.pause(); v.currentTime = 0; });
+                const currentVideo = this.slides[this.currentIndex].querySelector('video');
+                if (currentVideo) currentVideo.play().catch(e => console.log('Video play error:', e));
             }
+            startAutoSlide() { this.stopAutoSlide(); this.autoSlideInterval = setInterval(() => this.nextSlide(), 6000); }
+            stopAutoSlide() { if (this.autoSlideInterval) { clearInterval(this.autoSlideInterval); this.autoSlideInterval = null; } }
         }
 
         // ============================================
         // MENU LOCATION SWITCHER
         // ============================================
         function switchMenuLocation(location) {
-            // Actualizar clases activas en los botones del selector de menú
             document.querySelectorAll('.menu-location-option').forEach(btn => {
                 btn.classList.remove('active');
-                if (btn.dataset.location === location) {
-                    btn.classList.add('active');
-                }
+                if (btn.dataset.location === location) btn.classList.add('active');
             });
-            
-            // Mostrar/Ocultar los contenedores de menú correspondientes
             const menuGrapevine = document.getElementById('menu-grapevine-container');
             const menuAllen = document.getElementById('menu-allen-container');
-            
             if (location === 'grapevine') {
                 if (menuGrapevine) menuGrapevine.style.display = 'block';
                 if (menuAllen) menuAllen.style.display = 'none';
-                
-                // Guardar preferencia
                 localStorage.setItem('supdogPreferredLocation', 'grapevine');
-                
             } else {
                 if (menuGrapevine) menuGrapevine.style.display = 'none';
                 if (menuAllen) menuAllen.style.display = 'block';
-                
-                // Guardar preferencia
                 localStorage.setItem('supdogPreferredLocation', 'allen');
             }
         }
 
         // ============================================
-        // DOM ELEMENTS Y EVENT LISTENERS PRINCIPALES
+        // DOM ELEMENTS
         // ============================================
         const menuBtn = document.getElementById('menuBtn');
         const sidebar = document.getElementById('sidebar');
@@ -3453,62 +2842,50 @@
         const checkoutBtn = document.getElementById('checkoutBtn');
         const mobileCartBtn = document.getElementById('mobileCartBtn');
 
-        // Toggle Menu Function
         function toggleMenu() {
-            sidebar.classList.toggle('active');
-            overlay.classList.toggle('active');
-            const spans = menuBtn.querySelectorAll('span');
-            
-            if (sidebar.classList.contains('active')) {
+            const isActive = sidebar.classList.contains('active');
+            if (isActive) {
+                sidebar.classList.remove('active'); overlay.classList.remove('active');
+                const spans = menuBtn.querySelectorAll('span');
+                spans[0].style.transform = 'none'; spans[1].style.opacity = '1'; spans[2].style.transform = 'none';
+                document.body.style.overflow = 'auto'; document.body.style.position = ''; document.body.style.top = '';
+                window.scrollTo(0, parseInt(document.body.style.top || '0') * -1);
+            } else {
+                sidebar.classList.add('active'); overlay.classList.add('active');
+                const spans = menuBtn.querySelectorAll('span');
                 spans[0].style.transform = 'rotate(45deg) translate(5px, 6px)';
                 spans[1].style.opacity = '0';
                 spans[2].style.transform = 'rotate(-45deg) translate(5px, -6px)';
-                document.body.style.overflow = 'hidden';
-            } else {
-                spans[0].style.transform = 'none'; 
-                spans[1].style.opacity = '1'; 
-                spans[2].style.transform = 'none';
-                document.body.style.overflow = 'auto';
+                const scrollY = window.scrollY;
+                document.body.style.position = 'fixed'; document.body.style.top = `-${scrollY}px`; document.body.style.overflow = 'hidden';
             }
         }
-        
-        // Toggle Cart Function
+
         function toggleCart() {
-            eventCartModal.classList.toggle('active');
-            overlay.classList.toggle('active');
-            document.body.style.overflow = eventCartModal.classList.contains('active') ? 'hidden' : 'auto';
+            const isActive = eventCartModal.classList.contains('active');
+            if (isActive) {
+                eventCartModal.classList.remove('active'); overlay.classList.remove('active');
+                document.body.style.overflow = 'auto'; document.body.style.position = ''; document.body.style.top = '';
+                window.scrollTo(0, parseInt(document.body.style.top || '0') * -1);
+            } else {
+                eventCartModal.classList.add('active'); overlay.classList.add('active');
+                const scrollY = window.scrollY;
+                document.body.style.position = 'fixed'; document.body.style.top = `-${scrollY}px`; document.body.style.overflow = 'hidden';
+            }
         }
-        
-        // Event Listeners
-        if (menuBtn) {
-            menuBtn.addEventListener('click', toggleMenu);
-        }
-        
-        if (closeCartBtn) {
-            closeCartBtn.addEventListener('click', toggleCart);
-        }
-        
-        if (mobileCartBtn) {
-            mobileCartBtn.addEventListener('click', toggleCart);
-        }
-        
-        // Close overlays on click
+
+        if (menuBtn) menuBtn.addEventListener('click', toggleMenu);
+        if (closeCartBtn) closeCartBtn.addEventListener('click', toggleCart);
+        if (mobileCartBtn) mobileCartBtn.addEventListener('click', toggleCart);
         overlay.addEventListener('click', () => {
             if (sidebar.classList.contains('active')) toggleMenu();
             if (eventCartModal.classList.contains('active')) toggleCart();
         });
-        
-        // Checkout button
         if (checkoutBtn) {
             checkoutBtn.addEventListener('click', function() {
-                if (eventCart.getItemCount() === 0) {
-                    showGlobalNotification('Please add items to your cart first!', 'warning');
-                    return;
-                }
+                if (eventCart.getItemCount() === 0) { showGlobalNotification('Please add items to your cart first!', 'warning'); return; }
                 toggleCart();
-                setTimeout(() => {
-                    window.location.href = 'event-cart.html';
-                }, 400);
+                setTimeout(() => { window.location.href = 'event-cart.html'; }, 400);
             });
         }
 
@@ -3517,163 +2894,73 @@
         // ============================================
         window.addEventListener('scroll', function() {
             const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-            
-            // Header scroll effect
-            if (header) {
-                if (currentScroll > 50) {
-                    header.classList.add('scrolled');
-                } else {
-                    header.classList.remove('scrolled');
-                }
-            }
-            
-            // Scroll to top button visibility
-            if (scrollTopBtn) {
-                if (currentScroll > 300) {
-                    scrollTopBtn.classList.add('visible');
-                } else {
-                    scrollTopBtn.classList.remove('visible');
-                }
-            }
-            
-            // Animate menu cards on scroll
-            const menuCards = document.querySelectorAll('.menu-card');
-            const sideCards = document.querySelectorAll('.side-card');
-            
-            const screenPosition = window.innerHeight / 1.1;
-            
-            menuCards.forEach(card => {
-                const cardPosition = card.getBoundingClientRect().top;
-                if (cardPosition < screenPosition) {
-                    card.classList.add('visible');
-                }
-            });
-            
-            sideCards.forEach(card => {
-                const cardPosition = card.getBoundingClientRect().top;
-                if (cardPosition < screenPosition) {
-                    card.classList.add('visible');
-                }
-            });
+            if (header) { if (currentScroll > 50) header.classList.add('scrolled'); else header.classList.remove('scrolled'); }
+            if (scrollTopBtn) { if (currentScroll > 300) scrollTopBtn.classList.add('visible'); else scrollTopBtn.classList.remove('visible'); }
         }, {passive: true});
-        
-        // ============================================
-        // INICIALIZACIÓN AL CARGAR EL DOM
-        // ============================================
-        document.addEventListener('DOMContentLoaded', function() {
-            // Initialize carousel
-            if (document.getElementById('carouselTrack')) {
-                new PhotoCarousel();
-            }
-            
-            // Trigger scroll event to check initial visibility
-            setTimeout(() => {
-                window.dispatchEvent(new Event('scroll'));
-            }, 100);
-            
-            // Add loading animation
-            document.body.style.opacity = '0';
-            document.body.style.transition = 'opacity 0.3s ease';
-            setTimeout(() => {
-                document.body.style.opacity = '1';
-            }, 100);
-            
-            // Video se reproduce automáticamente en todos los dispositivos
-            const heroVideo = document.getElementById('heroVideo');
-            if (heroVideo) {
-                heroVideo.play().catch(e => {
-                    console.log("Video autoplay fallback:", e);
-                });
-            }
-            
-            // Mostrar banner de consentimiento legal si no hay preferencia guardada
-            const legalConsent = localStorage.getItem('supdogLegalConsent');
-            const legalConsentBanner = document.getElementById('legalConsentBanner');
-            
-            if (!legalConsent && legalConsentBanner) {
-                setTimeout(() => {
-                    legalConsentBanner.classList.add('active');
-                }, 2000);
-            }
-            
-            // Cargar ubicación preferida
-            const savedLocation = localStorage.getItem('supdogPreferredLocation');
-            if (savedLocation && (savedLocation === 'grapevine' || savedLocation === 'allen')) {
-                switchMenuLocation(savedLocation);
-            }
-        });
-        
-        // ============================================
-        // SCROLL TO TOP
-        // ============================================
+
         if (scrollTopBtn) {
-            scrollTopBtn.addEventListener('click', function() {
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-            });
+            scrollTopBtn.addEventListener('click', function() { window.scrollTo({ top: 0, behavior: 'smooth' }); });
         }
-        
-        // ============================================
-        // FIX IOS VIEWPORT HEIGHT
-        // ============================================
-        function setVH() {
-            let vh = window.innerHeight * 0.01;
-            document.documentElement.style.setProperty('--vh', `${vh}px`);
-        }
-        
+
+        function setVH() { let vh = window.innerHeight * 0.01; document.documentElement.style.setProperty('--vh', `${vh}px`); }
         setVH();
         window.addEventListener('resize', setVH);
         window.addEventListener('orientationchange', setVH);
 
         // ============================================
-        // BANNER DE CONSENTIMIENTO LEGAL
+        // LEGAL CONSENT
         // ============================================
         const legalConsentBanner = document.getElementById('legalConsentBanner');
         const acceptConsentBtn = document.getElementById('acceptConsent');
         const rejectConsentBtn = document.getElementById('rejectConsent');
         const legalConsentCloseBtn = document.getElementById('legalConsentClose');
 
-        // Función para cerrar el banner
         function closeLegalConsentBanner() {
-            if (legalConsentBanner) {
-                legalConsentBanner.classList.remove('active');
-                // Asegurarse de que el banner no vuelva a aparecer
-                setTimeout(() => {
-                    legalConsentBanner.style.display = 'none';
-                }, 400);
-            }
+            if (legalConsentBanner) { legalConsentBanner.classList.remove('active'); setTimeout(() => { legalConsentBanner.style.display = 'none'; }, 400); }
         }
-
-        // Aceptar consentimiento
         if (acceptConsentBtn) {
             acceptConsentBtn.addEventListener('click', function() {
                 localStorage.setItem('supdogLegalConsent', 'accepted');
                 localStorage.setItem('supdogLegalConsentDate', new Date().toISOString());
-                showGlobalNotification('¡Gracias por aceptar nuestros términos!', 'success');
                 closeLegalConsentBanner();
             });
         }
-
-        // Rechazar consentimiento
         if (rejectConsentBtn) {
             rejectConsentBtn.addEventListener('click', function() {
                 localStorage.setItem('supdogLegalConsent', 'rejected');
-                localStorage.setItem('supdogLegalConsentDate', new Date().toISOString());
-                showGlobalNotification('Algunas funciones pueden estar limitadas', 'info');
                 closeLegalConsentBanner();
             });
+        }
+        if (legalConsentCloseBtn) {
+            legalConsentCloseBtn.addEventListener('click', function() { closeLegalConsentBanner(); });
         }
 
-        // Cerrar banner (X)
-        if (legalConsentCloseBtn) {
-            legalConsentCloseBtn.addEventListener('click', function() {
-                // Al cerrar sin decidir, no guardamos preferencia
-                closeLegalConsentBanner();
-                showGlobalNotification('Por favor, acepta nuestros términos para una mejor experiencia', 'warning');
-            });
-        }
+        // ============================================
+        // INIT
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            if (document.getElementById('carouselTrack')) new PhotoCarousel();
+            if (document.getElementById('videoCarouselTrack')) new VideoCarousel();
+            
+            setTimeout(() => window.dispatchEvent(new Event('scroll')), 100);
+            
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.3s ease';
+            setTimeout(() => { document.body.style.opacity = '1'; }, 100);
+            
+            const heroVideo = document.getElementById('heroVideo');
+            if (heroVideo) heroVideo.play().catch(e => console.log('Video autoplay:', e));
+            
+            const legalConsent = localStorage.getItem('supdogLegalConsent');
+            if (!legalConsent && legalConsentBanner) {
+                setTimeout(() => { legalConsentBanner.classList.add('active'); }, 2000);
+            }
+            
+            const savedLocation = localStorage.getItem('supdogPreferredLocation');
+            if (savedLocation && (savedLocation === 'grapevine' || savedLocation === 'allen')) {
+                switchMenuLocation(savedLocation);
+            }
+        });
     </script>
 </body>
 </html>
