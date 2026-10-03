@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>SupDog - Hot Dogs & Nachos 🎃 Halloween Edition</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Poppins:wght@400;700&family=Creepster&family=Nosifer&family=Eater&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Poppins:wght@400;700&family=Creepster&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
@@ -18,21 +18,17 @@
             --color-texto-claro: #ffffff;
             --color-gris-claro: #e0e0e0;
             --hw-orange: #FF6B00;
-            --hw-pumpkin: #FF7518;
             --hw-purple: #6B2D8B;
             --hw-purple-dark: #3D1A5B;
             --hw-green: #7CB342;
             --hw-green-slime: #9ACD32;
             --hw-blood: #8B0000;
             --hw-black: #0a0a0a;
-            --hw-dark: #1a0a2a;
             --banner-height: 45px;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-
         html { scroll-behavior: smooth; scroll-padding-top: 80px; font-size: 16px; }
-
         body {
             font-family: 'Poppins', sans-serif;
             background-color: var(--hw-black);
@@ -46,282 +42,132 @@
                 radial-gradient(circle at 85% 75%, rgba(107, 45, 139, 0.1) 0%, transparent 40%);
             background-attachment: fixed;
         }
+        h1, h2, h3, .menu-link, .btn, .price-badge, .logo-text { font-family: 'Creepster', cursive; letter-spacing: 1px; }
 
-        h1, h2, h3, .menu-link, .btn, .price-badge, .logo-text { 
-            font-family: 'Creepster', cursive; 
-            letter-spacing: 1px; 
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.03); }
-            100% { transform: scale(1); }
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes spookyFloat {
-            0%, 100% { transform: translateY(0) rotate(-5deg); }
-            50% { transform: translateY(-15px) rotate(5deg); }
-        }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.03); } 100% { transform: scale(1); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes spookyFloat { 0%, 100% { transform: translateY(0) rotate(-5deg); } 50% { transform: translateY(-15px) rotate(5deg); } }
         @keyframes batFly {
             0% { transform: translateX(-100px) translateY(0) rotate(0deg); opacity: 0; }
             10% { opacity: 0.6; }
             90% { opacity: 0.6; }
             100% { transform: translateX(100vw) translateY(-80px) rotate(360deg); opacity: 0; }
         }
-        @keyframes flicker {
-            0%, 100% { opacity: 1; }
-            45% { opacity: 0.85; }
-            55% { opacity: 0.7; }
-            75% { opacity: 0.95; }
-        }
-        @keyframes ghostFloat {
-            0%, 100% { transform: translateY(0) translateX(0); }
-            25% { transform: translateY(-15px) translateX(10px); }
-            50% { transform: translateY(-25px) translateX(0); }
-            75% { transform: translateY(-15px) translateX(-10px); }
-        }
+        @keyframes flicker { 0%, 100% { opacity: 1; } 45% { opacity: 0.85; } 55% { opacity: 0.7; } 75% { opacity: 0.95; } }
+        @keyframes ghostFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-25px); } }
         @keyframes creepyGlow {
-            0%, 100% { 
-                text-shadow: 0 0 5px var(--hw-orange), 0 0 10px var(--hw-orange), 0 0 20px var(--hw-purple);
-                color: var(--hw-orange);
-            }
-            50% { 
-                text-shadow: 0 0 10px var(--hw-green), 0 0 20px var(--hw-green), 0 0 30px var(--hw-orange);
-                color: var(--hw-green-slime);
-            }
+            0%, 100% { text-shadow: 0 0 5px var(--hw-orange), 0 0 10px var(--hw-orange), 0 0 20px var(--hw-purple); color: var(--hw-orange); }
+            50% { text-shadow: 0 0 10px var(--hw-green), 0 0 20px var(--hw-green), 0 0 30px var(--hw-orange); color: var(--hw-green-slime); }
         }
-        @keyframes sway {
-            0%, 100% { transform: rotate(-3deg); }
-            50% { transform: rotate(3deg); }
-        }
-        @keyframes bannerScroll {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 200% 50%; }
-        }
+        @keyframes sway { 0%, 100% { transform: rotate(-3deg); } 50% { transform: rotate(3deg); } }
+        @keyframes bannerScroll { 0% { background-position: 0% 50%; } 100% { background-position: 200% 50%; } }
 
-        /* ============ HALLOWEEN BANNER ============ */
+        /* BANNER */
         .halloween-banner {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background: linear-gradient(90deg, 
-                var(--hw-purple) 0%, var(--hw-orange) 25%,
-                var(--hw-purple) 50%, var(--hw-orange) 75%, var(--hw-purple) 100%);
+            position: fixed; top: 0; left: 0; width: 100%;
+            background: linear-gradient(90deg, var(--hw-purple) 0%, var(--hw-orange) 25%, var(--hw-purple) 50%, var(--hw-orange) 75%, var(--hw-purple) 100%);
             background-size: 200% 100%;
-            padding: 10px 0;
-            text-align: center;
-            z-index: 1001;
+            padding: 10px 0; text-align: center; z-index: 1001;
             border-bottom: 3px solid var(--hw-green);
             overflow: hidden;
             box-shadow: 0 4px 20px rgba(255, 107, 0, 0.5);
             animation: bannerScroll 10s linear infinite;
             transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
             height: var(--banner-height);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: flex; align-items: center; justify-content: center;
         }
-
-        .halloween-banner.hidden {
-            transform: translateY(-100%);
-        }
-
+        .halloween-banner.hidden { transform: translateY(-100%); }
         .halloween-banner-text {
-            color: white;
-            font-family: 'Creepster', cursive;
-            font-size: 1.1rem;
-            letter-spacing: 3px;
-            text-transform: uppercase;
+            color: white; font-family: 'Creepster', cursive;
+            font-size: 1.1rem; letter-spacing: 3px; text-transform: uppercase;
             animation: flicker 3s infinite;
-            text-shadow: 
-                0 0 10px rgba(255, 107, 0, 0.9),
-                2px 2px 0 var(--hw-purple-dark),
-                0 0 20px rgba(107, 45, 139, 0.7);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
-            padding: 0 15px;
-            white-space: nowrap;
-            overflow: hidden;
+            text-shadow: 0 0 10px rgba(255, 107, 0, 0.9), 2px 2px 0 var(--hw-purple-dark), 0 0 20px rgba(107, 45, 139, 0.7);
+            display: flex; align-items: center; justify-content: center;
+            gap: 15px; flex-wrap: wrap; padding: 0 15px;
+            white-space: nowrap; overflow: hidden;
         }
+        .halloween-banner-text i { animation: spookyFloat 2s infinite; display: inline-block; color: var(--hw-green-slime); text-shadow: 0 0 10px var(--hw-green); }
 
-        .halloween-banner-text i {
-            animation: spookyFloat 2s infinite;
-            display: inline-block;
-            color: var(--hw-green-slime);
-            text-shadow: 0 0 10px var(--hw-green);
-        }
-
-        /* ============ FLOATING DECORATIONS ============ */
-        .floating-decorations {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            pointer-events: none;
-            z-index: 5;
-            overflow: hidden;
-        }
-        .floating-bat {
-            position: absolute;
-            color: var(--hw-purple);
-            font-size: 1.5rem;
-            text-shadow: 0 0 10px var(--hw-purple);
-        }
+        /* FLOATING DECORATIONS */
+        .floating-decorations { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 5; overflow: hidden; }
+        .floating-bat { position: absolute; color: var(--hw-purple); font-size: 1.5rem; text-shadow: 0 0 10px var(--hw-purple); }
         .floating-bat i { animation: sway 1s infinite alternate; display: inline-block; }
         .bat-1 { top: 20%; animation: batFly 22s linear infinite; animation-delay: 0s; }
         .bat-2 { top: 35%; animation: batFly 28s linear infinite; animation-delay: 7s; }
         .bat-3 { top: 60%; animation: batFly 25s linear infinite; animation-delay: 14s; }
         .bat-4 { top: 80%; animation: batFly 30s linear infinite; animation-delay: 4s; }
-        .floating-spider {
-            position: fixed;
-            color: var(--hw-green-slime);
-            font-size: 1.8rem;
-            opacity: 0.4;
-            z-index: 5;
-            pointer-events: none;
-            animation: ghostFloat 6s ease-in-out infinite;
-        }
+        .floating-spider { position: fixed; color: var(--hw-green-slime); font-size: 1.8rem; opacity: 0.4; z-index: 5; pointer-events: none; animation: ghostFloat 6s ease-in-out infinite; }
         .spider-1 { top: 10%; left: 5%; animation-delay: 0s; }
         .spider-2 { top: 30%; right: 8%; animation-delay: 2s; }
         .spider-3 { bottom: 20%; left: 10%; animation-delay: 4s; }
         .spider-4 { bottom: 40%; right: 5%; animation-delay: 1s; }
 
-        /* ============ HEADER ============ */
+        /* HEADER */
         header {
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            display: flex; justify-content: center; align-items: center;
             padding: 0.8rem 5%;
             background: rgba(10, 10, 10, 0.98);
-            position: fixed;
-            top: var(--banner-height);
-            width: 100%;
+            position: fixed; top: var(--banner-height); width: 100%;
             z-index: 1000;
             border-bottom: 2px solid transparent;
             height: 70px;
             backdrop-filter: blur(10px);
             transition: top 0.4s cubic-bezier(0.77, 0, 0.175, 1);
         }
-
         header.scrolled {
             background: rgba(10, 10, 10, 0.99);
             box-shadow: 0 4px 20px rgba(255, 107, 0, 0.4);
             border-bottom: 2px solid var(--hw-orange);
         }
-
         body.banner-hidden header { top: 0; }
-
         .logo-link {
             font-family: 'Creepster', cursive;
-            font-size: 2.4rem;
-            line-height: 1;
-            text-transform: uppercase;
-            cursor: pointer;
-            color: white;
-            text-decoration: none;
+            font-size: 2.4rem; line-height: 1; text-transform: uppercase;
+            cursor: pointer; color: white; text-decoration: none;
             text-shadow: 3px 3px 0 var(--hw-purple), 0 0 20px rgba(255, 107, 0, 0.6);
             transition: all 0.3s ease;
             animation: flicker 2s infinite;
             letter-spacing: 3px;
         }
-        .logo-link span {
-            color: var(--hw-orange);
-            text-shadow: 3px 3px 0 var(--hw-purple), 0 0 20px var(--hw-orange), 0 0 30px var(--hw-purple);
-        }
+        .logo-link span { color: var(--hw-orange); text-shadow: 3px 3px 0 var(--hw-purple), 0 0 20px var(--hw-orange), 0 0 30px var(--hw-purple); }
         .logo-link:hover { transform: scale(1.05) rotate(-2deg); }
-
-        .header-buttons {
-            position: absolute;
-            right: 5%;
-            top: 50%;
-            transform: translateY(-50%);
-            display: flex;
-            gap: 10px;
-            z-index: 1002;
-        }
-
+        .header-buttons { position: absolute; right: 5%; top: 50%; transform: translateY(-50%); display: flex; gap: 10px; z-index: 1002; }
         .header-btn {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            padding: 8px 15px;
-            border-radius: 50px;
-            color: white;
-            font-family: 'Poppins', sans-serif;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            font-size: 0.9rem;
+            display: flex; align-items: center; gap: 6px;
+            padding: 8px 15px; border-radius: 50px;
+            color: white; font-family: 'Poppins', sans-serif; font-weight: bold;
+            transition: all 0.3s ease; font-size: 0.9rem;
             text-decoration: none;
             box-shadow: 0 3px 10px rgba(0,0,0,0.3);
         }
-        .cater-btn {
-            background: linear-gradient(135deg, var(--hw-orange) 0%, var(--hw-blood) 100%);
-            animation: pulse 2s infinite;
-            border: 2px solid var(--hw-orange);
-        }
+        .cater-btn { background: linear-gradient(135deg, var(--hw-orange) 0%, var(--hw-blood) 100%); animation: pulse 2s infinite; border: 2px solid var(--hw-orange); }
         .cater-btn i { color: var(--hw-green-slime); }
-        .cart-btn {
-            background: linear-gradient(135deg, var(--hw-purple) 0%, #4a1e6b 100%);
-            border: 2px solid var(--hw-purple);
-        }
+        .cart-btn { background: linear-gradient(135deg, var(--hw-purple) 0%, #4a1e6b 100%); border: 2px solid var(--hw-purple); }
         .btn-text { display: none; }
         .btn-count {
-            background-color: var(--hw-orange);
-            color: white;
-            border-radius: 50%;
-            width: 20px;
-            height: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.8rem;
-            animation: pulse 1.5s infinite;
+            background-color: var(--hw-orange); color: white;
+            border-radius: 50%; width: 20px; height: 20px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.8rem; animation: pulse 1.5s infinite;
         }
-        @media (min-width: 768px) {
-            .btn-text { display: inline; margin-left: 5px; }
-            .header-btn { padding: 8px 20px; }
-        }
-
+        @media (min-width: 768px) { .btn-text { display: inline; margin-left: 5px; } .header-btn { padding: 8px 20px; } }
         .hamburger-btn {
-            position: absolute;
-            left: 5%;
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
-            border: none;
-            cursor: pointer;
-            z-index: 1002;
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-            padding: 8px;
-            border-radius: 5px;
-            transition: all 0.3s ease;
-            width: 44px;
-            height: 44px;
-            justify-content: center;
+            position: absolute; left: 5%; top: 50%; transform: translateY(-50%);
+            background: none; border: none; cursor: pointer; z-index: 1002;
+            display: flex; flex-direction: column; gap: 4px;
+            padding: 8px; border-radius: 5px; transition: all 0.3s ease;
+            width: 44px; height: 44px; justify-content: center;
         }
         .hamburger-btn span {
-            display: block;
-            width: 24px;
-            height: 3px;
-            background-color: var(--hw-orange);
-            border-radius: 3px;
+            display: block; width: 24px; height: 3px;
+            background-color: var(--hw-orange); border-radius: 3px;
             transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
             box-shadow: 0 0 5px var(--hw-orange);
         }
 
-        /* ============ SIDEBAR ============ */
+        /* SIDEBAR */
         .sidebar {
-            position: fixed; 
-            top: 0; left: 0;
-            width: 280px; height: 100vh;
+            position: fixed; top: 0; left: 0; width: 280px; height: 100vh;
             background: linear-gradient(180deg, rgba(10, 10, 10, 0.99) 0%, rgba(26, 10, 42, 0.99) 100%);
             border-right: 3px solid var(--hw-orange);
             padding-top: 100px; padding-left: 2rem;
@@ -330,115 +176,62 @@
             transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             box-shadow: 5px 0 30px rgba(255, 107, 0, 0.4);
             backdrop-filter: blur(10px);
-            overflow-y: auto;
-            -webkit-overflow-scrolling: touch;
+            overflow-y: auto; -webkit-overflow-scrolling: touch;
         }
         .sidebar.active { transform: translate3d(0, 0, 0); }
         .sidebar ul { list-style: none; }
-        .sidebar li { 
-            margin-bottom: 1.8rem; 
-            opacity: 0;
-            transform: translateX(-20px);
-            transition: all 0.4s ease;
-        }
+        .sidebar li { margin-bottom: 1.8rem; opacity: 0; transform: translateX(-20px); transition: all 0.4s ease; }
         .sidebar.active li { opacity: 1; transform: translateX(0); }
-        .menu-link { 
-            text-decoration: none;
-            font-size: 1.8rem;
-            color: var(--color-texto-claro);
-            transition: all 0.3s ease;
-            display: inline-block;
-            padding: 4px 0;
-            font-family: 'Creepster', cursive;
-            letter-spacing: 2px;
+        .menu-link {
+            text-decoration: none; font-size: 1.8rem;
+            color: var(--color-texto-claro); transition: all 0.3s ease;
+            display: inline-block; padding: 4px 0;
+            font-family: 'Creepster', cursive; letter-spacing: 2px;
         }
-        .menu-link:hover { 
-            color: var(--hw-orange); 
-            transform: translateX(10px);
-            text-shadow: 0 0 15px var(--hw-orange);
-        }
+        .menu-link:hover { color: var(--hw-orange); transform: translateX(10px); text-shadow: 0 0 15px var(--hw-orange); }
         .cater-link-special {
             background: linear-gradient(135deg, rgba(255, 107, 0, 0.2) 0%, rgba(139, 0, 0, 0.2) 100%);
-            padding: 12px 16px;
-            border-radius: 12px;
-            margin-right: 15px;
-            border: 2px solid var(--hw-orange);
-            animation: pulse 2s infinite;
+            padding: 12px 16px; border-radius: 12px; margin-right: 15px;
+            border: 2px solid var(--hw-orange); animation: pulse 2s infinite;
         }
         .cater-link-special .menu-link { color: var(--hw-orange); font-size: 2rem; padding-right: 35px; }
         .event-link-special {
             background: linear-gradient(135deg, rgba(107, 45, 139, 0.3) 0%, rgba(255, 107, 0, 0.2) 100%);
-            padding: 12px 16px;
-            border-radius: 12px;
-            margin-right: 15px;
+            padding: 12px 16px; border-radius: 12px; margin-right: 15px;
             border: 2px solid var(--hw-purple);
         }
         .event-link-special .menu-link { color: var(--hw-green-slime); font-size: 2rem; padding-right: 35px; }
-
         .overlay {
-            position: fixed; top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            backdrop-filter: blur(3px);
-            z-index: 1000;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.9); backdrop-filter: blur(3px);
+            z-index: 1000; opacity: 0; visibility: hidden; transition: all 0.3s ease;
         }
         .overlay.active { opacity: 1; visibility: visible; }
 
-        /* ============ HERO ============ */
-        .video-hero {
-            position: relative;
-            height: 100vh;
-            min-height: 600px;
-            overflow: hidden;
-            margin-top: calc(var(--banner-height) + 70px);
-        }
-        .video-container {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            z-index: 1;
-            overflow: hidden;
-        }
-        .video-background {
-            width: 100%; height: 100%;
-            object-fit: cover;
-            filter: brightness(0.4) saturate(1.3) hue-rotate(-10deg);
-        }
+        /* HERO */
+        .video-hero { position: relative; height: 100vh; min-height: 600px; overflow: hidden; margin-top: calc(var(--banner-height) + 70px); }
+        .video-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; overflow: hidden; background: linear-gradient(135deg, #1a0a2a 0%, #0a0a0a 100%); }
+        .video-background { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.4) saturate(1.3) hue-rotate(-10deg); }
         .video-overlay {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background: 
                 radial-gradient(circle at 50% 40%, rgba(107, 45, 139, 0.4) 0%, transparent 60%),
                 linear-gradient(135deg, rgba(10, 10, 10, 0.9) 0%, rgba(107, 45, 139, 0.5) 50%, rgba(255, 107, 0, 0.4) 100%);
             z-index: 2;
         }
         .video-hero-content {
-            position: relative;
-            z-index: 3;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 0 1.5rem;
-            max-width: 900px;
-            margin: 0 auto;
+            position: relative; z-index: 3; height: 100%;
+            display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            text-align: center; padding: 0 1.5rem;
+            max-width: 900px; margin: 0 auto;
         }
         .halloween-badge {
             display: inline-block;
             background: linear-gradient(135deg, var(--hw-orange) 0%, var(--hw-purple) 100%);
-            color: white;
-            padding: 10px 25px;
-            border-radius: 50px;
-            font-family: 'Creepster', cursive;
-            font-size: 1.2rem;
-            letter-spacing: 3px;
-            margin-bottom: 1.5rem;
+            color: white; padding: 10px 25px; border-radius: 50px;
+            font-family: 'Creepster', cursive; font-size: 1.2rem;
+            letter-spacing: 3px; margin-bottom: 1.5rem;
             border: 2px solid var(--hw-green);
             box-shadow: 0 0 25px rgba(255, 107, 0, 0.6);
             animation: pulse 2s infinite;
@@ -447,157 +240,84 @@
         .hero-title-halloween {
             font-family: 'Creepster', cursive;
             font-size: clamp(3rem, 10vw, 6.5rem);
-            line-height: 1;
-            margin-bottom: 1rem;
+            line-height: 1; margin-bottom: 1rem;
             color: var(--hw-orange);
             text-shadow: 4px 4px 0 var(--hw-purple), 0 0 30px var(--hw-orange), 0 0 60px var(--hw-purple);
             letter-spacing: 5px;
             animation: creepyGlow 3s infinite;
         }
-        .hero-title-halloween span {
-            color: var(--hw-green-slime);
-            text-shadow: 4px 4px 0 var(--hw-purple), 0 0 30px var(--hw-green);
-        }
+        .hero-title-halloween span { color: var(--hw-green-slime); text-shadow: 4px 4px 0 var(--hw-purple), 0 0 30px var(--hw-green); }
         .hero-subtitle-halloween {
-            font-size: 1.3rem;
-            color: #ddd;
-            margin-bottom: 2rem;
-            max-width: 600px;
-            font-style: italic;
+            font-size: 1.3rem; color: #ddd; margin-bottom: 2rem;
+            max-width: 600px; font-style: italic;
             text-shadow: 0 0 10px rgba(0,0,0,0.8);
         }
         .hero-subtitle-halloween i { color: var(--hw-orange); margin: 0 5px; }
 
-        /* ============ BUTTONS ============ */
+        /* BUTTONS */
         .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            padding: 14px 28px;
+            display: inline-flex; align-items: center; justify-content: center;
+            gap: 8px; padding: 14px 28px;
             background: linear-gradient(135deg, var(--hw-orange) 0%, var(--hw-blood) 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            border: 2px solid var(--hw-orange);
+            color: white; text-decoration: none; border-radius: 50px;
+            font-size: 1.1rem; border: 2px solid var(--hw-orange);
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             box-shadow: 0 4px 15px rgba(255, 107, 0, 0.4);
-            min-height: 48px;
-            min-width: 140px;
-            font-family: 'Creepster', cursive;
-            letter-spacing: 2px;
+            min-height: 48px; min-width: 140px;
+            font-family: 'Creepster', cursive; letter-spacing: 2px;
         }
-        .btn:hover {
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 8px 25px rgba(255, 107, 0, 0.7);
-            border-color: var(--hw-green-slime);
-        }
-        .btn-cater {
-            background: linear-gradient(135deg, var(--hw-purple) 0%, var(--hw-orange) 100%);
-            animation: pulse 2s infinite;
-        }
+        .btn:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 8px 25px rgba(255, 107, 0, 0.7); border-color: var(--hw-green-slime); }
+        .btn-cater { background: linear-gradient(135deg, var(--hw-purple) 0%, var(--hw-orange) 100%); animation: pulse 2s infinite; }
 
-        /* ============ PHOTO GALLERY ============ */
-        .photo-gallery-section {
-            padding: 5rem 0;
-            background: linear-gradient(135deg, #1a0a2a 0%, #0a0a0a 50%, #1a0a2a 100%);
-            position: relative;
-            overflow: hidden;
-        }
-        .section-header {
-            text-align: center;
-            margin-bottom: 3rem;
-            padding: 0 1.5rem;
-            position: relative;
-            z-index: 2;
-        }
+        /* SECTION HEADERS */
+        .photo-gallery-section { padding: 5rem 0; background: linear-gradient(135deg, #1a0a2a 0%, #0a0a0a 50%, #1a0a2a 100%); position: relative; overflow: hidden; }
+        .section-header { text-align: center; margin-bottom: 3rem; padding: 0 1.5rem; }
         .gallery-badge {
             display: inline-block;
             background: linear-gradient(135deg, var(--hw-purple) 0%, var(--hw-orange) 100%);
-            color: white;
-            padding: 10px 25px;
-            border-radius: 50px;
-            font-family: 'Creepster', cursive;
-            font-size: 1.1rem;
-            letter-spacing: 3px;
-            margin-bottom: 1.5rem;
+            color: white; padding: 10px 25px; border-radius: 50px;
+            font-family: 'Creepster', cursive; font-size: 1.1rem;
+            letter-spacing: 3px; margin-bottom: 1.5rem;
             animation: pulse 2s infinite;
             box-shadow: 0 4px 15px rgba(107, 45, 139, 0.5);
-            border: 2px solid var(--hw-green);
-            text-transform: uppercase;
+            border: 2px solid var(--hw-green); text-transform: uppercase;
         }
         .gallery-title {
             font-family: 'Creepster', cursive;
-            font-size: 3rem;
-            color: white;
-            margin-bottom: 1rem;
+            font-size: 3rem; color: white; margin-bottom: 1rem;
             text-shadow: 3px 3px 0 var(--hw-purple), 0 0 25px rgba(255, 107, 0, 0.5);
-            display: inline-block;
-            letter-spacing: 3px;
-            animation: flicker 3s infinite;
-            position: relative;
+            display: inline-block; letter-spacing: 3px;
+            animation: flicker 3s infinite; position: relative;
         }
-        .gallery-title span {
-            color: var(--hw-orange);
-            text-shadow: 3px 3px 0 var(--hw-purple), 0 0 25px var(--hw-orange);
-        }
+        .gallery-title span { color: var(--hw-orange); text-shadow: 3px 3px 0 var(--hw-purple), 0 0 25px var(--hw-orange); }
         .gallery-title:after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 120px;
-            height: 4px;
+            content: ''; position: absolute; bottom: -10px; left: 50%;
+            transform: translateX(-50%); width: 120px; height: 4px;
             background: linear-gradient(90deg, var(--hw-purple), var(--hw-orange), var(--hw-green));
-            border-radius: 2px;
-            box-shadow: 0 0 15px var(--hw-orange);
+            border-radius: 2px; box-shadow: 0 0 15px var(--hw-orange);
         }
-        .gallery-subtitle {
-            font-size: 1.2rem;
-            color: #ddd;
-            max-width: 600px;
-            margin: 0 auto;
-            font-style: italic;
-        }
+        .gallery-subtitle { font-size: 1.2rem; color: #ddd; max-width: 600px; margin: 0 auto; font-style: italic; }
+
+        /* CAROUSEL PHOTO */
         .carousel-container {
-            position: relative;
-            max-width: 1200px;
-            margin: 0 auto;
-            overflow: hidden;
-            border-radius: 20px;
+            position: relative; max-width: 1200px; margin: 0 auto;
+            overflow: hidden; border-radius: 20px;
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
-            border: 3px solid var(--hw-purple);
-            background: #0a0a0a;
+            border: 3px solid var(--hw-purple); background: #0a0a0a;
         }
-        .carousel-track {
-            display: flex;
-            transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);
-            height: 500px;
-        }
+        .carousel-track { display: flex; transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1); height: 500px; }
         @media (max-width: 768px) { .carousel-track { height: 350px; } }
-        .carousel-slide {
-            min-width: 100%;
-            height: 100%;
-            position: relative;
-            overflow: hidden;
-            background: #1a0a2a;
-        }
+        .carousel-slide { min-width: 100%; height: 100%; position: relative; overflow: hidden; background: #1a0a2a; }
         .slide-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+            width: 100%; height: 100%; object-fit: cover;
             filter: brightness(0.85) saturate(1.2);
             transition: transform 10s ease;
-            display: block;
+            display: block; background: #1a0a2a;
         }
         .carousel-slide.active .slide-image { transform: scale(1.05); }
         .slide-overlay {
-            position: absolute;
-            bottom: 0; left: 0;
-            width: 100%;
+            position: absolute; bottom: 0; left: 0; width: 100%;
             padding: 2rem;
             background: linear-gradient(transparent, rgba(10, 10, 10, 0.95));
             color: white;
@@ -606,208 +326,86 @@
         }
         .carousel-slide.active .slide-overlay { transform: translateY(0); }
         .slide-title {
-            font-size: 2rem;
-            color: var(--hw-orange);
-            margin-bottom: 0.5rem;
+            font-size: 2rem; color: var(--hw-orange); margin-bottom: 0.5rem;
             font-family: 'Creepster', cursive;
             text-shadow: 2px 2px 0 var(--hw-purple), 0 0 15px var(--hw-orange);
             letter-spacing: 2px;
         }
         .slide-description { font-size: 1rem; color: #eee; max-width: 600px; }
         .carousel-nav {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            padding: 0 1rem;
-            z-index: 10;
+            position: absolute; top: 50%; transform: translateY(-50%);
+            width: 100%; display: flex; justify-content: space-between;
+            padding: 0 1rem; z-index: 10;
         }
         .carousel-btn {
             background: rgba(107, 45, 139, 0.8);
             border: 2px solid var(--hw-orange);
             color: var(--hw-orange);
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
+            width: 50px; height: 50px; border-radius: 50%;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            transition: all 0.3s ease;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem; transition: all 0.3s ease;
             backdrop-filter: blur(5px);
             box-shadow: 0 4px 15px rgba(255, 107, 0, 0.3);
         }
-        .carousel-btn:hover {
-            background: var(--hw-orange);
-            color: white;
-            transform: scale(1.1);
-            box-shadow: 0 0 25px var(--hw-orange);
-        }
-        .carousel-dots {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 2rem;
-        }
+        .carousel-btn:hover { background: var(--hw-orange); color: white; transform: scale(1.1); box-shadow: 0 0 25px var(--hw-orange); }
+        .carousel-dots { display: flex; justify-content: center; gap: 10px; margin-top: 2rem; }
         .carousel-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
+            width: 12px; height: 12px; border-radius: 50%;
             background: rgba(255, 255, 255, 0.3);
             border: 2px solid var(--hw-purple);
-            cursor: pointer;
-            transition: all 0.3s ease;
+            cursor: pointer; transition: all 0.3s ease;
         }
-        .carousel-dot.active {
-            background: var(--hw-orange);
-            transform: scale(1.3);
-            box-shadow: 0 0 15px var(--hw-orange);
-        }
+        .carousel-dot.active { background: var(--hw-orange); transform: scale(1.3); box-shadow: 0 0 15px var(--hw-orange); }
 
-        /* ============ EVENT HIGHLIGHTS (VIDEOS) ============ */
-        .event-highlights-section {
-            padding: 5rem 1.5rem;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a0a2a 50%, #0a0a0a 100%);
-            position: relative;
-            overflow: hidden;
-        }
+        /* EVENT HIGHLIGHTS VIDEOS */
+        .event-highlights-section { padding: 5rem 1.5rem; background: linear-gradient(135deg, #0a0a0a 0%, #1a0a2a 50%, #0a0a0a 100%); position: relative; overflow: hidden; }
         .event-highlights-badge {
             display: inline-block;
             background: linear-gradient(135deg, var(--hw-purple) 0%, var(--hw-blood) 100%);
-            color: white;
-            padding: 10px 25px;
-            border-radius: 50px;
-            font-family: 'Creepster', cursive;
-            font-size: 1.1rem;
-            letter-spacing: 3px;
-            margin-bottom: 1.5rem;
+            color: white; padding: 10px 25px; border-radius: 50px;
+            font-family: 'Creepster', cursive; font-size: 1.1rem;
+            letter-spacing: 3px; margin-bottom: 1.5rem;
             animation: pulse 2s infinite;
             box-shadow: 0 4px 15px rgba(139, 0, 0, 0.5);
-            border: 2px solid var(--hw-orange);
-            text-transform: uppercase;
+            border: 2px solid var(--hw-orange); text-transform: uppercase;
         }
         .event-highlights-title {
             font-family: 'Creepster', cursive;
-            font-size: clamp(2.2rem, 5vw, 3rem);
-            color: white;
+            font-size: clamp(2.2rem, 5vw, 3rem); color: white;
             margin-bottom: 1rem;
             text-shadow: 3px 3px 0 var(--hw-purple), 0 0 25px rgba(255, 107, 0, 0.5);
-            display: inline-block;
-            letter-spacing: 3px;
+            display: inline-block; letter-spacing: 3px;
             animation: flicker 3s infinite;
         }
-        .event-highlights-title span {
-            color: var(--hw-orange);
-            text-shadow: 3px 3px 0 var(--hw-purple), 0 0 25px var(--hw-orange);
-        }
-        .event-highlights-subtitle {
-            font-size: clamp(1rem, 2vw, 1.2rem);
-            color: #ddd;
-            max-width: 600px;
-            margin: 0 auto;
-            font-style: italic;
-        }
-        .video-carousel-container {
-            position: relative;
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-        .video-carousel-wrapper {
-            flex: 1;
-            overflow: hidden;
-            border-radius: 20px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
-        }
-        .video-carousel-track {
-            display: flex;
-            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            will-change: transform;
-        }
-        .video-slide {
-            min-width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 0 0.5rem;
-        }
+        .event-highlights-title span { color: var(--hw-orange); text-shadow: 3px 3px 0 var(--hw-purple), 0 0 25px var(--hw-orange); }
+        .event-highlights-subtitle { font-size: clamp(1rem, 2vw, 1.2rem); color: #ddd; max-width: 600px; margin: 0 auto; font-style: italic; }
+        .video-carousel-container { position: relative; max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 1rem; }
+        .video-carousel-wrapper { flex: 1; overflow: hidden; border-radius: 20px; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6); }
+        .video-carousel-track { display: flex; transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); will-change: transform; }
+        .video-slide { min-width: 100%; display: flex; justify-content: center; align-items: center; padding: 0 0.5rem; }
         .video-card {
-            position: relative;
-            width: 100%;
-            max-width: 380px;
-            border-radius: 20px;
-            overflow: hidden;
+            position: relative; width: 100%; max-width: 380px;
+            border-radius: 20px; overflow: hidden;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
             border: 3px solid var(--hw-orange);
-            background: #1a0a2a;
-            transition: all 0.3s ease;
+            background: #1a0a2a; transition: all 0.3s ease;
         }
-        .video-card:hover {
-            box-shadow: 0 0 40px rgba(255, 107, 0, 0.5);
-            border-color: var(--hw-green-slime);
-        }
+        .video-card:hover { box-shadow: 0 0 40px rgba(255, 107, 0, 0.5); border-color: var(--hw-green-slime); }
         .video-card video {
-            width: 100%;
-            height: auto;
-            display: block;
-            aspect-ratio: 9 / 16;
-            object-fit: cover;
+            width: 100%; height: auto; display: block;
+            aspect-ratio: 9 / 16; object-fit: cover;
             background: #1a0a2a;
-            position: relative;
-            z-index: 2;
         }
-
-        /* Placeholder: solo se muestra si el video NO carga (video-error) */
-        .video-placeholder {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            display: none; /* OCULTO por defecto */
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, #1a0a2a 0%, #0f0518 100%);
-            color: var(--hw-orange);
-            font-family: 'Creepster', cursive;
-            font-size: 1.5rem;
-            letter-spacing: 3px;
-            text-align: center;
-            padding: 1rem;
-            z-index: 1;
-            pointer-events: none;
-        }
-        .video-placeholder i {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-            text-shadow: 0 0 25px var(--hw-orange);
-            animation: pulse 2s infinite;
-        }
-        .video-placeholder span {
-            text-shadow: 1px 1px 0 var(--hw-purple);
-        }
-        /* SOLO mostrar si hay error */
-        .video-card.video-error .video-placeholder { display: flex; }
-        .video-card.video-error video { visibility: hidden; }
-
         .video-card-overlay {
-            position: absolute;
-            bottom: 0; left: 0;
-            width: 100%;
+            position: absolute; bottom: 0; left: 0; width: 100%;
             padding: 1.5rem 1rem;
             background: linear-gradient(transparent, rgba(10, 10, 10, 0.95));
-            z-index: 3;
-            pointer-events: none;
+            z-index: 2; pointer-events: none;
         }
         .video-card-title {
-            color: var(--hw-orange);
-            font-family: 'Creepster', cursive;
-            font-size: 1.4rem;
-            margin-bottom: 0.3rem;
+            color: var(--hw-orange); font-family: 'Creepster', cursive;
+            font-size: 1.4rem; margin-bottom: 0.3rem;
             text-shadow: 1px 1px 0 var(--hw-purple), 0 0 10px var(--hw-orange);
             letter-spacing: 1px;
         }
@@ -816,304 +414,143 @@
             background: rgba(107, 45, 139, 0.8);
             border: 2px solid var(--hw-orange);
             color: var(--hw-orange);
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
+            width: 44px; height: 44px; border-radius: 50%;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(5px);
-            flex-shrink: 0;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; transition: all 0.3s ease;
+            backdrop-filter: blur(5px); flex-shrink: 0;
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
-        .video-carousel-nav:hover, .video-carousel-nav:active {
-            background: var(--hw-orange);
-            color: white;
-            transform: scale(1.1);
-            box-shadow: 0 0 25px var(--hw-orange);
-        }
-        .video-carousel-dots {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 2rem;
-        }
+        .video-carousel-nav:hover { background: var(--hw-orange); color: white; transform: scale(1.1); box-shadow: 0 0 25px var(--hw-orange); }
+        .video-carousel-dots { display: flex; justify-content: center; gap: 10px; margin-top: 2rem; }
         .video-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
+            width: 12px; height: 12px; border-radius: 50%;
             background: rgba(255, 255, 255, 0.3);
             border: 2px solid var(--hw-purple);
-            cursor: pointer;
-            transition: all 0.3s ease;
+            cursor: pointer; transition: all 0.3s ease;
         }
-        .video-dot.active {
-            background: var(--hw-orange);
-            transform: scale(1.3);
-            box-shadow: 0 0 15px var(--hw-orange);
-        }
+        .video-dot.active { background: var(--hw-orange); transform: scale(1.3); box-shadow: 0 0 15px var(--hw-orange); }
 
-        /* ============ OUR STORY ============ */
-        .our-story-section {
-            padding: 5rem 1.5rem;
-            background: linear-gradient(135deg, #1a0a2a 0%, #0a0a0a 50%, #1a0a2a 100%);
-            position: relative;
-            overflow: hidden;
-        }
-        .our-story-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 2;
-        }
+        /* OUR STORY */
+        .our-story-section { padding: 5rem 1.5rem; background: linear-gradient(135deg, #1a0a2a 0%, #0a0a0a 50%, #1a0a2a 100%); position: relative; overflow: hidden; }
+        .our-story-container { max-width: 1200px; margin: 0 auto; position: relative; z-index: 2; }
         .section-badge {
             display: inline-block;
             background: linear-gradient(135deg, var(--hw-purple) 0%, var(--hw-blood) 100%);
-            color: white;
-            padding: 10px 25px;
-            border-radius: 50px;
-            font-family: 'Creepster', cursive;
-            font-size: 1.1rem;
-            letter-spacing: 3px;
-            margin-bottom: 1.5rem;
+            color: white; padding: 10px 25px; border-radius: 50px;
+            font-family: 'Creepster', cursive; font-size: 1.1rem;
+            letter-spacing: 3px; margin-bottom: 1.5rem;
             animation: pulse 2s infinite;
             box-shadow: 0 4px 15px rgba(107, 45, 139, 0.5);
             border: 2px solid var(--hw-orange);
         }
         .story-title {
             font-family: 'Creepster', cursive;
-            font-size: 3rem;
-            color: var(--hw-orange);
-            margin-bottom: 2rem;
+            font-size: 3rem; color: var(--hw-orange); margin-bottom: 2rem;
             text-align: center;
             text-shadow: 3px 3px 0 var(--hw-purple), 0 0 25px var(--hw-orange);
-            position: relative;
-            padding-bottom: 1rem;
-            letter-spacing: 3px;
-            animation: flicker 3s infinite;
+            position: relative; padding-bottom: 1rem;
+            letter-spacing: 3px; animation: flicker 3s infinite;
         }
         .story-title:after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 120px;
-            height: 4px;
+            content: ''; position: absolute; bottom: 0; left: 50%;
+            transform: translateX(-50%); width: 120px; height: 4px;
             background: linear-gradient(90deg, var(--hw-purple), var(--hw-orange), var(--hw-green));
-            border-radius: 2px;
-            box-shadow: 0 0 15px var(--hw-orange);
+            border-radius: 2px; box-shadow: 0 0 15px var(--hw-orange);
         }
-        .story-subtitle {
-            font-size: 1.3rem;
-            color: #ddd;
-            text-align: center;
-            margin-bottom: 3rem;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-            font-style: italic;
-            padding: 0 1rem;
-        }
-        .story-content {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
+        .story-subtitle { font-size: 1.3rem; color: #ddd; text-align: center; margin-bottom: 3rem; max-width: 800px; margin-left: auto; margin-right: auto; font-style: italic; padding: 0 1rem; }
+        .story-content { display: grid; grid-template-columns: 1fr; gap: 3rem; align-items: center; }
         @media (min-width: 992px) { .story-content { grid-template-columns: 1fr 1fr; } }
         .story-text {
             background: rgba(107, 45, 139, 0.15);
-            padding: 2rem;
-            border-radius: 20px;
+            padding: 2rem; border-radius: 20px;
             border: 2px solid var(--hw-purple);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             backdrop-filter: blur(10px);
         }
-        .story-text p {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: var(--color-gris-claro);
-            margin-bottom: 1.5rem;
-            text-align: justify;
-        }
+        .story-text p { font-size: 1.1rem; line-height: 1.8; color: var(--color-gris-claro); margin-bottom: 1.5rem; text-align: justify; }
         .story-text p:last-child { margin-bottom: 0; }
         .story-text strong { color: var(--hw-orange); }
         .story-image-container {
-            position: relative;
-            border-radius: 20px;
-            overflow: hidden;
+            position: relative; border-radius: 20px; overflow: hidden;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
             border: 3px solid var(--hw-orange);
             background: linear-gradient(135deg, #1a0a2a 0%, #0a0a0a 100%);
             min-height: 400px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: flex; align-items: center; justify-content: center;
         }
         .story-image-placeholder {
             width: 100%; height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-            text-align: center;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            padding: 2rem; text-align: center;
             background: linear-gradient(135deg, rgba(255, 107, 0, 0.1) 0%, rgba(107, 45, 139, 0.2) 100%);
         }
-        .story-image-placeholder i {
-            font-size: 4rem;
-            color: var(--hw-orange);
-            margin-bottom: 1rem;
-            animation: spookyFloat 3s ease-in-out infinite;
-            text-shadow: 0 0 25px var(--hw-orange);
-        }
-        .story-image-placeholder p {
-            color: var(--hw-green-slime);
-            font-size: 1.2rem;
-            font-weight: bold;
-            font-family: 'Creepster', cursive;
-            letter-spacing: 2px;
-        }
-        .founders-container {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 2rem;
-            margin-top: 3rem;
-        }
+        .story-image-placeholder i { font-size: 4rem; color: var(--hw-orange); margin-bottom: 1rem; animation: spookyFloat 3s ease-in-out infinite; text-shadow: 0 0 25px var(--hw-orange); }
+        .story-image-placeholder p { color: var(--hw-green-slime); font-size: 1.2rem; font-weight: bold; font-family: 'Creepster', cursive; letter-spacing: 2px; }
+        .founders-container { display: grid; grid-template-columns: 1fr; gap: 2rem; margin-top: 3rem; }
         @media (min-width: 768px) { .founders-container { grid-template-columns: 1fr 1fr; } }
         .founder-card {
             background: linear-gradient(145deg, rgba(107, 45, 139, 0.15), rgba(255, 107, 0, 0.05));
-            border-radius: 15px;
-            padding: 2rem;
+            border-radius: 15px; padding: 2rem;
             border-left: 4px solid var(--hw-orange);
             transition: all 0.3s ease;
         }
-        .founder-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 0 30px rgba(255, 107, 0, 0.3);
-            border-left-color: var(--hw-green-slime);
-        }
+        .founder-card:hover { transform: translateY(-5px); box-shadow: 0 0 30px rgba(255, 107, 0, 0.3); border-left-color: var(--hw-green-slime); }
         .founder-name {
-            color: var(--hw-orange);
-            font-size: 1.8rem;
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-family: 'Creepster', cursive;
-            letter-spacing: 2px;
+            color: var(--hw-orange); font-size: 1.8rem; margin-bottom: 0.5rem;
+            display: flex; align-items: center; gap: 10px;
+            font-family: 'Creepster', cursive; letter-spacing: 2px;
             text-shadow: 1px 1px 0 var(--hw-purple);
         }
-        .founder-role {
-            color: var(--hw-green-slime);
-            font-size: 1rem;
-            font-weight: bold;
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
+        .founder-role { color: var(--hw-green-slime); font-size: 1rem; font-weight: bold; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 1px; }
         .founder-description { color: #ccc; font-size: 1rem; line-height: 1.6; }
         .story-quote {
-            margin-top: 3rem;
-            padding: 2rem;
+            margin-top: 3rem; padding: 2rem;
             background: linear-gradient(135deg, rgba(255, 107, 0, 0.15) 0%, rgba(107, 45, 139, 0.15) 100%);
             border-radius: 15px;
             border: 2px dashed var(--hw-orange);
-            text-align: center;
-            position: relative;
+            text-align: center; position: relative;
         }
         .story-quote:before {
-            content: '"';
-            position: absolute;
-            top: -25px; left: 20px;
-            font-size: 5rem;
-            color: var(--hw-orange);
+            content: '"'; position: absolute; top: -25px; left: 20px;
+            font-size: 5rem; color: var(--hw-orange);
             font-family: 'Creepster', cursive;
-            opacity: 0.7;
-            text-shadow: 0 0 20px var(--hw-orange);
+            opacity: 0.7; text-shadow: 0 0 20px var(--hw-orange);
         }
-        .quote-text {
-            font-size: 1.4rem;
-            color: white;
-            font-style: italic;
-            margin-bottom: 1rem;
-            line-height: 1.6;
-        }
+        .quote-text { font-size: 1.4rem; color: white; font-style: italic; margin-bottom: 1rem; line-height: 1.6; }
         .quote-author { color: var(--hw-orange); font-weight: bold; font-size: 1.1rem; }
 
-        /* ============ MENU SECTION ============ */
-        .menu-section { 
-            padding: 4rem 1.5rem; 
-            text-align: center; 
-            background: linear-gradient(180deg, var(--hw-black) 0%, #0f0518 50%, var(--hw-black) 100%);
-            position: relative;
-            overflow: hidden;
-        }
+        /* MENU */
+        .menu-section { padding: 4rem 1.5rem; text-align: center; background: linear-gradient(180deg, var(--hw-black) 0%, #0f0518 50%, var(--hw-black) 100%); position: relative; overflow: hidden; }
         .promo-banner {
             background: linear-gradient(90deg, var(--hw-purple-dark) 0%, var(--hw-purple) 50%, var(--hw-purple-dark) 100%);
-            color: var(--hw-orange);
-            padding: 1.2rem 0;
-            margin-bottom: 3rem;
-            font-family: 'Creepster', cursive;
-            font-size: 1.8rem;
-            letter-spacing: 3px;
-            position: relative;
-            overflow: hidden;
+            color: var(--hw-orange); padding: 1.2rem 0; margin-bottom: 3rem;
+            font-family: 'Creepster', cursive; font-size: 1.8rem;
+            letter-spacing: 3px; position: relative; overflow: hidden;
             border-top: 3px solid var(--hw-orange);
             border-bottom: 3px solid var(--hw-orange);
             box-shadow: 0 5px 25px rgba(255, 107, 0, 0.4);
         }
-        .scrolling-container {
-            display: flex;
-            white-space: nowrap;
-            animation: scrollText 25s linear infinite;
-            padding: 0.5rem 0;
-        }
-        .scrolling-text {
-            display: inline-block;
-            padding: 0 40px;
-            text-shadow: 0 0 10px var(--hw-orange), 0 0 20px var(--hw-purple);
-        }
-        .scrolling-text::before,
-        .scrolling-text::after {
-            content: '🎃';
-            margin: 0 25px;
-            animation: spookyFloat 2s infinite alternate;
-            display: inline-block;
-        }
-        @keyframes scrollText {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
+        .scrolling-container { display: flex; white-space: nowrap; animation: scrollText 25s linear infinite; padding: 0.5rem 0; }
+        .scrolling-text { display: inline-block; padding: 0 40px; text-shadow: 0 0 10px var(--hw-orange), 0 0 20px var(--hw-purple); }
+        .scrolling-text::before, .scrolling-text::after { content: '🎃'; margin: 0 25px; animation: spookyFloat 2s infinite alternate; display: inline-block; }
+        @keyframes scrollText { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
         .menu-location-selector {
-            display: inline-flex;
-            gap: 10px;
+            display: inline-flex; gap: 10px;
             background: rgba(107, 45, 139, 0.2);
-            padding: 8px;
-            border-radius: 50px;
+            padding: 8px; border-radius: 50px;
             border: 2px solid var(--hw-orange);
             backdrop-filter: blur(10px);
             margin-bottom: 2rem;
             box-shadow: 0 4px 20px rgba(255, 107, 0, 0.3);
-            position: relative;
-            z-index: 2;
+            position: relative; z-index: 2;
         }
         .menu-location-option {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 20px;
-            border-radius: 40px;
-            background: transparent;
-            color: white;
-            border: none;
-            cursor: pointer;
-            font-size: 1rem;
-            font-weight: bold;
+            display: flex; align-items: center; gap: 8px;
+            padding: 10px 20px; border-radius: 40px;
+            background: transparent; color: white; border: none;
+            cursor: pointer; font-size: 1rem; font-weight: bold;
             transition: all 0.3s ease;
         }
         .menu-location-option i { color: var(--hw-orange); font-size: 1rem; }
@@ -1124,523 +561,143 @@
         }
         .menu-location-option.active i { color: white; }
         .menu-location-badge {
-            background: var(--hw-green-slime);
-            color: var(--hw-black);
-            font-size: 0.7rem;
-            padding: 2px 6px;
-            border-radius: 30px;
-            margin-left: 5px;
-            animation: pulse 2s infinite;
-            font-weight: bold;
+            background: var(--hw-green-slime); color: var(--hw-black);
+            font-size: 0.7rem; padding: 2px 6px; border-radius: 30px;
+            margin-left: 5px; animation: pulse 2s infinite; font-weight: bold;
         }
-        @media (max-width: 768px) {
-            .menu-location-selector { width: 100%; justify-content: center; }
-            .menu-location-option { padding: 8px 15px; font-size: 0.9rem; }
-        }
-        .section-title { 
+        @media (max-width: 768px) { .menu-location-selector { width: 100%; justify-content: center; } .menu-location-option { padding: 8px 15px; font-size: 0.9rem; } }
+        .section-title {
             font-family: 'Creepster', cursive;
-            font-size: 2.8rem; 
-            color: var(--hw-orange); 
-            margin-bottom: 1.2rem; 
-            display: inline-block;
+            font-size: 2.8rem; color: var(--hw-orange);
+            margin-bottom: 1.2rem; display: inline-block;
             text-shadow: 3px 3px 0 var(--hw-purple), 0 0 25px var(--hw-orange);
-            letter-spacing: 3px;
-            animation: flicker 3s infinite;
-            position: relative;
-            z-index: 2;
+            letter-spacing: 3px; animation: flicker 3s infinite;
+            position: relative; z-index: 2;
         }
         .section-title:after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 120px;
-            height: 3px;
-            background-color: var(--hw-orange);
-            border-radius: 2px;
+            content: ''; position: absolute; bottom: -8px; left: 50%;
+            transform: translateX(-50%); width: 120px; height: 3px;
+            background-color: var(--hw-orange); border-radius: 2px;
             box-shadow: 0 0 15px var(--hw-orange);
         }
-        .section-subtitle { 
-            font-size: 1.1rem; 
-            color: #ccc; 
-            margin-bottom: 3rem; 
-            font-style: italic;
-            padding: 0 0.5rem;
-            position: relative;
-            z-index: 2;
-        }
-        .menu-grid { 
-            display: grid; 
-            grid-template-columns: 1fr; 
-            gap: 2rem; 
-            max-width: 400px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 2;
-        }
+        .section-subtitle { font-size: 1.1rem; color: #ccc; margin-bottom: 3rem; font-style: italic; padding: 0 0.5rem; position: relative; z-index: 2; }
+        .menu-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; max-width: 400px; margin: 0 auto; position: relative; z-index: 2; }
         .menu-card {
             background: linear-gradient(145deg, #1a0a2a, #0f0518);
-            border-radius: 16px;
-            overflow: hidden;
+            border-radius: 16px; overflow: hidden;
             border: 2px solid var(--hw-purple);
             transition: all 0.4s ease;
-            display: flex;
-            flex-direction: column;
+            display: flex; flex-direction: column;
             box-shadow: 0 8px 20px rgba(107, 45, 139, 0.3);
+            position: relative;
         }
-        .menu-card:hover { 
-            transform: translateY(-8px); 
-            border-color: var(--hw-orange); 
-            box-shadow: 0 15px 40px rgba(255, 107, 0, 0.4), 0 0 30px rgba(255, 107, 0, 0.3);
-        }
+        .menu-card:hover { transform: translateY(-8px); border-color: var(--hw-orange); box-shadow: 0 15px 40px rgba(255, 107, 0, 0.4), 0 0 30px rgba(255, 107, 0, 0.3); }
         .card-image {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
+            width: 100%; height: 200px; object-fit: cover;
             border-bottom: 2px solid var(--hw-orange);
             background-color: #1a0a2a;
             filter: saturate(1.1) contrast(1.05);
             display: block;
         }
-        .card-content { 
-            padding: 1.5rem; 
-            text-align: left; 
-            flex-grow: 1; 
-            display: flex; 
-            flex-direction: column; 
-        }
-        .card-content h3 { 
+        .card-content { padding: 1.5rem; text-align: left; flex-grow: 1; display: flex; flex-direction: column; }
+        .card-content h3 {
             font-family: 'Creepster', cursive;
-            font-size: 1.6rem; 
-            color: white; 
-            margin-bottom: 0.6rem; 
-            transition: all 0.3s ease;
-            letter-spacing: 2px;
+            font-size: 1.6rem; color: white; margin-bottom: 0.6rem;
+            transition: all 0.3s ease; letter-spacing: 2px;
             text-shadow: 1px 1px 0 var(--hw-purple);
         }
-        .menu-card:hover .card-content h3 {
-            color: var(--hw-orange);
-            text-shadow: 1px 1px 0 var(--hw-purple), 0 0 15px var(--hw-orange);
+        .menu-card:hover .card-content h3 { color: var(--hw-orange); text-shadow: 1px 1px 0 var(--hw-purple), 0 0 15px var(--hw-orange); }
+        .card-content p { color: #aaa; font-size: 0.95rem; margin-bottom: 1.2rem; flex-grow: 1; line-height: 1.5; }
+        .price-row {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-top: auto;
+            border-top: 1px solid rgba(255, 107, 0, 0.3);
+            padding-top: 1.2rem; gap: 1rem;
         }
-        .card-content p { 
-            color: #aaa; 
-            font-size: 0.95rem; 
-            margin-bottom: 1.2rem; 
-            flex-grow: 1; 
-            line-height: 1.5;
-        }
-        .price-row { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            margin-top: auto; 
-            border-top: 1px solid rgba(255, 107, 0, 0.3); 
-            padding-top: 1.2rem; 
-            gap: 1rem;
-        }
-        .price { 
-            color: var(--hw-orange); 
-            font-weight: bold; 
-            font-size: 1.5rem; 
-            font-family: 'Creepster', cursive;
+        .price {
+            color: var(--hw-orange); font-weight: bold;
+            font-size: 1.5rem; font-family: 'Creepster', cursive;
             text-shadow: 0 0 10px var(--hw-orange), 1px 1px 0 var(--hw-purple);
-            white-space: nowrap;
-            letter-spacing: 1px;
+            white-space: nowrap; letter-spacing: 1px;
         }
         .combo-badge {
             background: linear-gradient(135deg, var(--hw-purple) 0%, var(--hw-orange) 100%);
-            color: white;
-            font-size: 0.8rem;
-            padding: 4px 10px;
-            border-radius: 15px;
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            font-weight: bold;
-            z-index: 3;
+            color: white; font-size: 0.8rem; padding: 4px 10px;
+            border-radius: 15px; position: absolute; top: 12px; right: 12px;
+            font-weight: bold; z-index: 3;
             box-shadow: 0 3px 15px rgba(255, 107, 0, 0.5);
             animation: spookyFloat 3s infinite ease-in-out;
-            font-family: 'Creepster', cursive;
-            letter-spacing: 1px;
+            font-family: 'Creepster', cursive; letter-spacing: 1px;
             border: 1px solid var(--hw-green-slime);
         }
 
-        /* ============ SIDES ============ */
-        .sides-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 2rem;
-            max-width: 400px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 2;
-        }
+        /* SIDES */
+        .sides-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; max-width: 400px; margin: 0 auto; position: relative; z-index: 2; }
         .side-card {
             background: linear-gradient(145deg, #1a0a2a, #0f0518);
-            border-radius: 16px;
-            overflow: hidden;
+            border-radius: 16px; overflow: hidden;
             border: 2px solid var(--hw-purple);
             transition: all 0.4s ease;
-            display: flex;
-            flex-direction: column;
+            display: flex; flex-direction: column;
             box-shadow: 0 8px 20px rgba(107, 45, 139, 0.3);
         }
-        .side-card:hover { 
-            transform: translateY(-8px); 
-            border-color: var(--hw-orange); 
-            box-shadow: 0 15px 40px rgba(255, 107, 0, 0.4), 0 0 30px rgba(255, 107, 0, 0.3);
-        }
+        .side-card:hover { transform: translateY(-8px); border-color: var(--hw-orange); box-shadow: 0 15px 40px rgba(255, 107, 0, 0.4), 0 0 30px rgba(255, 107, 0, 0.3); }
         .side-image {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
+            width: 100%; height: 180px; object-fit: cover;
             border-bottom: 2px solid var(--hw-orange);
             background-color: #1a0a2a;
             filter: saturate(1.1) contrast(1.05);
             display: block;
         }
-        .side-content { 
-            padding: 1.5rem; 
-            text-align: left; 
-            flex-grow: 1; 
-            display: flex; 
-            flex-direction: column; 
-        }
-        .side-content h4 { 
+        .side-content { padding: 1.5rem; text-align: left; flex-grow: 1; display: flex; flex-direction: column; }
+        .side-content h4 {
             font-family: 'Creepster', cursive;
-            font-size: 1.6rem; 
-            color: white; 
-            margin-bottom: 0.6rem; 
-            transition: all 0.3s ease;
-            letter-spacing: 2px;
+            font-size: 1.6rem; color: white; margin-bottom: 0.6rem;
+            transition: all 0.3s ease; letter-spacing: 2px;
             text-shadow: 1px 1px 0 var(--hw-purple);
         }
-        .side-card:hover .side-content h4 {
-            color: var(--hw-orange);
-            text-shadow: 1px 1px 0 var(--hw-purple), 0 0 15px var(--hw-orange);
-        }
-        .side-price { 
-            color: var(--hw-orange); 
-            font-weight: bold; 
-            font-size: 1.4rem; 
+        .side-card:hover .side-content h4 { color: var(--hw-orange); text-shadow: 1px 1px 0 var(--hw-purple), 0 0 15px var(--hw-orange); }
+        .side-price {
+            color: var(--hw-orange); font-weight: bold; font-size: 1.4rem;
             font-family: 'Creepster', cursive;
             text-shadow: 0 0 10px var(--hw-orange), 1px 1px 0 var(--hw-purple);
-            white-space: nowrap;
-            margin-top: 0.5rem;
-            letter-spacing: 1px;
+            white-space: nowrap; margin-top: 0.5rem; letter-spacing: 1px;
         }
-        .drink-special {
-            border: 2px solid var(--hw-orange) !important;
-            background: linear-gradient(145deg, #1a0a2a, #2a0f0f) !important;
-        }
-        .drink-special .side-price {
-            color: var(--hw-green-slime);
-            text-shadow: 0 0 10px var(--hw-green), 1px 1px 0 var(--hw-purple);
-        }
+        .drink-special { border: 2px solid var(--hw-orange) !important; background: linear-gradient(145deg, #1a0a2a, #2a0f0f) !important; }
+        .drink-special .side-price { color: var(--hw-green-slime); text-shadow: 0 0 10px var(--hw-green), 1px 1px 0 var(--hw-purple); }
         .pretzel-special {
             background: linear-gradient(145deg, #1a0a2a, #0f0518);
             border: 2px solid var(--hw-orange);
-            padding: 2rem 1.5rem;
-            border-radius: 16px;
-            margin-bottom: 2.5rem;
-            max-width: 400px;
-            margin-left: auto;
-            margin-right: auto;
+            padding: 2rem 1.5rem; border-radius: 16px; margin-bottom: 2.5rem;
+            max-width: 400px; margin-left: auto; margin-right: auto;
             box-shadow: 0 8px 20px rgba(255, 107, 0, 0.2), 0 0 20px rgba(255, 107, 0, 0.1);
-            position: relative;
-            z-index: 2;
+            position: relative; z-index: 2;
         }
-        @media (min-width: 768px) {
-            .sides-grid { grid-template-columns: repeat(2, 1fr); max-width: 800px; gap: 2.5rem; }
-        }
-        @media (min-width: 1024px) {
-            .sides-grid { grid-template-columns: repeat(3, 1fr); max-width: 1000px; }
-        }
+        @media (min-width: 768px) { .sides-grid { grid-template-columns: repeat(2, 1fr); max-width: 800px; gap: 2.5rem; } }
+        @media (min-width: 1024px) { .sides-grid { grid-template-columns: repeat(3, 1fr); max-width: 1000px; } }
 
-        /* ============ EVENT PROMO ============ */
-        .event-promo-section {
-            padding: 4rem 1.5rem;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a0a2a 50%, #0a0a0a 100%);
-            position: relative;
-            overflow: hidden;
-            text-align: center;
-        }
-        .event-promo-container {
-            position: relative;
-            z-index: 2;
-            max-width: 500px;
-            margin: 0 auto;
-        }
-        .promo-badge {
-            display: inline-block;
-            background: linear-gradient(135deg, var(--hw-purple) 0%, var(--hw-orange) 100%);
-            color: white;
-            padding: 8px 20px;
-            border-radius: 50px;
-            font-family: 'Creepster', cursive;
-            font-size: 1.1rem;
-            letter-spacing: 3px;
-            margin-bottom: 1.5rem;
-            animation: pulse 2s infinite;
-            box-shadow: 0 4px 15px rgba(107, 45, 139, 0.5);
-            border: 2px solid var(--hw-green);
-        }
-        .event-promo-title {
-            font-family: 'Creepster', cursive;
-            font-size: 2.4rem;
-            color: var(--hw-orange);
-            margin-bottom: 1.2rem;
-            text-shadow: 3px 3px 0 var(--hw-purple), 0 0 25px var(--hw-orange);
-            letter-spacing: 3px;
-            animation: flicker 3s infinite;
-        }
-        .event-promo-subtitle { font-size: 1.2rem; color: #ddd; margin-bottom: 2rem; padding: 0 0.5rem; }
-        .event-promo-card {
-            background: linear-gradient(145deg, #1a0a2a, #0f0518);
-            border-radius: 16px;
-            padding: 2rem 1.5rem;
-            border: 2px solid var(--hw-purple);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.4), 0 0 30px rgba(107, 45, 139, 0.3);
-            margin-bottom: 2.5rem;
-        }
-        .promo-features {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-        .promo-feature {
-            background: rgba(107, 45, 139, 0.15);
-            padding: 1.2rem;
-            border-radius: 12px;
-            border-left: 4px solid var(--hw-orange);
-            transition: all 0.3s ease;
-            text-align: left;
-        }
-        .promo-feature:hover {
-            background: rgba(255, 107, 0, 0.1);
-            border-left-color: var(--hw-green-slime);
-            transform: translateX(5px);
-        }
-        .promo-feature i {
-            font-size: 2rem;
-            color: var(--hw-orange);
-            margin-bottom: 0.8rem;
-            text-shadow: 0 0 15px var(--hw-orange);
-        }
-        .promo-feature h4 {
-            font-family: 'Creepster', cursive;
-            font-size: 1.4rem;
-            color: white;
-            margin-bottom: 0.4rem;
-            letter-spacing: 2px;
-            text-shadow: 1px 1px 0 var(--hw-purple);
-        }
-        .promo-feature p { color: #ccc; font-size: 0.95rem; }
-        .event-cta-btn {
-            background: linear-gradient(135deg, var(--hw-purple) 0%, var(--hw-orange) 100%);
-            padding: 16px 32px;
-            font-size: 1.2rem;
-            animation: pulse 2s infinite;
-            width: 100%;
-            max-width: 300px;
-            font-family: 'Creepster', cursive;
-            letter-spacing: 2px;
-            border: 2px solid var(--hw-green);
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            cursor: pointer;
-        }
-
-        /* ============ LOCATION ============ */
-        .location-section { 
-            padding: 4rem 1.5rem; 
-            background: linear-gradient(135deg, var(--hw-purple-dark) 0%, var(--hw-purple) 100%);
-            color: #1a1a1a; 
-            text-align: center; 
-        }
-        .location-section h2 {
-            font-family: 'Creepster', cursive;
-            color: var(--hw-orange); 
-            font-size: 2.8rem; 
-            margin-bottom: 2.5rem; 
-            text-shadow: 3px 3px 0 var(--hw-black), 0 0 25px var(--hw-orange);
-            letter-spacing: 3px;
-            animation: flicker 3s infinite;
-        }
-        .location-box { 
-            background: rgba(255,255,255,0.95); 
-            padding: 2rem 1.5rem; 
-            border-radius: 20px; 
-            display: inline-block; 
-            max-width: 500px;
-            width: 100%; 
-            box-shadow: 0 12px 30px rgba(0,0,0,0.3); 
-            border: 3px solid var(--hw-orange);
-            transition: all 0.3s ease;
-        }
-        .location-box:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.3), 0 0 30px rgba(255, 107, 0, 0.4);
-        }
-        .location-box h3 { font-family: 'Creepster', cursive !important; letter-spacing: 2px !important; }
-        .location-box .btn { width: 100%; margin-top: 1rem; }
-        .map-container {
-            width: 100%;
-            height: 300px;
-            border-radius: 16px;
-            overflow: hidden;
-            margin: 1.5rem 0;
-            border: 3px solid var(--hw-purple);
-            background: #eee;
-        }
-        .map-container iframe { width: 100%; height: 100%; border: 0; }
-        @media (max-width: 768px) {
-            .location-section > div { flex-direction: column; align-items: center; }
-            .location-box { width: 100%; max-width: 400px; }
-        }
-
-        /* ============ CONTACT ============ */
-        .contact-section {
-            padding: 4rem 1.5rem;
-            text-align: center;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a0a2a 100%);
-        }
-        .contact-section h3 {
-            font-family: 'Creepster', cursive;
-            color: var(--hw-orange); 
-            font-size: 2.2rem; 
-            margin-bottom: 1.2rem;
-            text-shadow: 2px 2px 0 var(--hw-purple), 0 0 20px var(--hw-orange);
-            letter-spacing: 3px;
-            animation: flicker 3s infinite;
-        }
-        .contact-section p { font-size: 1.2rem; margin-bottom: 0.5rem; }
-        .contact-phone {
-            color: var(--hw-green-slime);
-            font-weight: bold;
-            text-decoration: none;
-            font-size: 1.5rem;
-            display: inline-block;
-            margin-top: 1rem;
-            padding: 12px 24px;
-            border-radius: 12px;
-            animation: pulse 2s infinite;
-            background: rgba(255, 107, 0, 0.15);
-            border: 2px solid var(--hw-orange);
-            text-shadow: 0 0 10px var(--hw-green);
-        }
-        .contact-phone:hover {
-            background: rgba(255, 107, 0, 0.3);
-            transform: scale(1.05);
-            box-shadow: 0 0 25px var(--hw-orange);
-        }
-
-        /* ============ FOOTER ============ */
-        footer { 
-            background: linear-gradient(180deg, #0a0a0a 0%, #1a0a2a 100%); 
-            padding: 2.5rem 1.5rem; 
-            text-align: center; 
-            color: #777; 
-            position: relative;
-            overflow: hidden;
-        }
-        footer:before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 3px;
-            background: linear-gradient(90deg, var(--hw-purple), var(--hw-orange), var(--hw-green), var(--hw-orange), var(--hw-purple));
-            box-shadow: 0 0 15px var(--hw-orange);
-        }
-        .social-links { margin-top: 1.5rem; }
-        .social-links a {
-            color: var(--hw-orange);
-            text-decoration: none;
-            margin: 0 10px;
-            font-weight: bold;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            display: inline-block;
-            text-shadow: 0 0 10px rgba(255, 107, 0, 0.5);
-        }
-        .social-links a:hover {
-            color: var(--hw-green-slime);
-            transform: translateY(-2px);
-            text-shadow: 0 0 15px var(--hw-green);
-        }
-
-        /* ============ SCROLL TOP ============ */
-        .scroll-top {
-            position: fixed;
-            bottom: 20px; right: 20px;
-            width: 50px; height: 50px;
-            background: linear-gradient(135deg, var(--hw-orange) 0%, var(--hw-purple) 100%);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            z-index: 999;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(255, 107, 0, 0.5), 0 0 25px rgba(107, 45, 139, 0.4);
-            font-size: 1.3rem;
-            border: 2px solid var(--hw-orange);
-        }
-        .scroll-top.visible { opacity: 1; visibility: visible; }
-        .scroll-top:hover {
-            transform: translateY(-3px) scale(1.1);
-            box-shadow: 0 8px 25px rgba(255, 107, 0, 0.7), 0 0 35px rgba(107, 45, 139, 0.6);
-        }
-
-        /* ============ MENU CATEGORY (ALLEN) ============ */
+        /* MENU CATEGORY */
         .menu-category { margin-top: 3rem; margin-bottom: 2rem; position: relative; z-index: 2; }
         .menu-category-title {
             font-family: 'Creepster', cursive;
-            color: var(--hw-orange);
-            font-size: 2.2rem;
-            margin-bottom: 1.5rem;
-            text-align: center;
-            position: relative;
-            padding-bottom: 0.5rem;
+            color: var(--hw-orange); font-size: 2.2rem;
+            margin-bottom: 1.5rem; text-align: center;
+            position: relative; padding-bottom: 0.5rem;
             text-shadow: 2px 2px 0 var(--hw-purple), 0 0 20px var(--hw-orange);
-            letter-spacing: 3px;
-            animation: flicker 3s infinite;
+            letter-spacing: 3px; animation: flicker 3s infinite;
         }
         .menu-category-title:after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 3px;
-            background: var(--hw-orange);
-            box-shadow: 0 0 15px var(--hw-orange);
+            content: ''; position: absolute; bottom: 0; left: 50%;
+            transform: translateX(-50%); width: 100px; height: 3px;
+            background: var(--hw-orange); box-shadow: 0 0 15px var(--hw-orange);
         }
-        .wings-flavors {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            justify-content: center;
-            margin: 1rem 0 1.5rem;
-        }
+        .wings-flavors { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin: 1rem 0 1.5rem; }
         .flavor-tag {
             background: rgba(255, 107, 0, 0.2);
             border: 2px solid var(--hw-orange);
             color: var(--hw-orange);
-            padding: 5px 12px;
-            border-radius: 30px;
-            font-size: 0.9rem;
-            font-weight: bold;
+            padding: 5px 12px; border-radius: 30px;
+            font-size: 0.9rem; font-weight: bold;
             box-shadow: 0 0 10px rgba(255, 107, 0, 0.3);
         }
         .price-note { color: #ccc; font-size: 0.9rem; margin-top: 0.5rem; font-style: italic; }
@@ -1648,189 +705,250 @@
         .addon-options i { color: var(--hw-orange); margin-right: 5px; }
         .brunch-note {
             background: linear-gradient(135deg, var(--hw-purple) 0%, var(--hw-orange) 100%);
-            color: white;
-            padding: 8px 20px;
-            border-radius: 30px;
-            display: inline-block;
-            margin-bottom: 1rem;
-            font-weight: bold;
-            font-size: 0.9rem;
+            color: white; padding: 8px 20px; border-radius: 30px;
+            display: inline-block; margin-bottom: 1rem;
+            font-weight: bold; font-size: 0.9rem;
             animation: pulse 2s infinite;
             box-shadow: 0 0 20px rgba(255, 107, 0, 0.4);
-            font-family: 'Creepster', cursive;
-            letter-spacing: 2px;
+            font-family: 'Creepster', cursive; letter-spacing: 2px;
         }
         .chef-special {
             background: linear-gradient(145deg, #1a0a2a, #0f0518);
             border: 2px solid var(--hw-orange);
-            padding: 1.5rem;
-            border-radius: 16px;
-            margin: 2rem auto;
-            max-width: 400px;
+            padding: 1.5rem; border-radius: 16px;
+            margin: 2rem auto; max-width: 400px;
             text-align: center;
             box-shadow: 0 0 25px rgba(255, 107, 0, 0.3);
         }
         .chef-special h4 {
             font-family: 'Creepster', cursive;
-            color: var(--hw-orange);
-            font-size: 1.6rem;
-            margin-bottom: 0.5rem;
-            letter-spacing: 2px;
+            color: var(--hw-orange); font-size: 1.6rem;
+            margin-bottom: 0.5rem; letter-spacing: 2px;
             text-shadow: 1px 1px 0 var(--hw-purple);
         }
         .chef-special p { color: #ddd; font-size: 0.95rem; }
 
-        /* ============ EVENT CART MODAL ============ */
+        /* EVENT PROMO */
+        .event-promo-section { padding: 4rem 1.5rem; background: linear-gradient(135deg, #0a0a0a 0%, #1a0a2a 50%, #0a0a0a 100%); position: relative; overflow: hidden; text-align: center; }
+        .event-promo-container { position: relative; z-index: 2; max-width: 500px; margin: 0 auto; }
+        .promo-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--hw-purple) 0%, var(--hw-orange) 100%);
+            color: white; padding: 8px 20px; border-radius: 50px;
+            font-family: 'Creepster', cursive; font-size: 1.1rem;
+            letter-spacing: 3px; margin-bottom: 1.5rem;
+            animation: pulse 2s infinite;
+            box-shadow: 0 4px 15px rgba(107, 45, 139, 0.5);
+            border: 2px solid var(--hw-green);
+        }
+        .event-promo-title {
+            font-family: 'Creepster', cursive;
+            font-size: 2.4rem; color: var(--hw-orange); margin-bottom: 1.2rem;
+            text-shadow: 3px 3px 0 var(--hw-purple), 0 0 25px var(--hw-orange);
+            letter-spacing: 3px; animation: flicker 3s infinite;
+        }
+        .event-promo-subtitle { font-size: 1.2rem; color: #ddd; margin-bottom: 2rem; padding: 0 0.5rem; }
+        .event-promo-card {
+            background: linear-gradient(145deg, #1a0a2a, #0f0518);
+            border-radius: 16px; padding: 2rem 1.5rem;
+            border: 2px solid var(--hw-purple);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.4), 0 0 30px rgba(107, 45, 139, 0.3);
+            margin-bottom: 2.5rem;
+        }
+        .promo-features { display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin-bottom: 2rem; }
+        .promo-feature {
+            background: rgba(107, 45, 139, 0.15);
+            padding: 1.2rem; border-radius: 12px;
+            border-left: 4px solid var(--hw-orange);
+            transition: all 0.3s ease; text-align: left;
+        }
+        .promo-feature:hover { background: rgba(255, 107, 0, 0.1); border-left-color: var(--hw-green-slime); transform: translateX(5px); }
+        .promo-feature i { font-size: 2rem; color: var(--hw-orange); margin-bottom: 0.8rem; text-shadow: 0 0 15px var(--hw-orange); }
+        .promo-feature h4 {
+            font-family: 'Creepster', cursive;
+            font-size: 1.4rem; color: white; margin-bottom: 0.4rem;
+            letter-spacing: 2px; text-shadow: 1px 1px 0 var(--hw-purple);
+        }
+        .promo-feature p { color: #ccc; font-size: 0.95rem; }
+        .event-cta-btn {
+            background: linear-gradient(135deg, var(--hw-purple) 0%, var(--hw-orange) 100%);
+            padding: 16px 32px; font-size: 1.2rem;
+            animation: pulse 2s infinite; width: 100%; max-width: 300px;
+            font-family: 'Creepster', cursive; letter-spacing: 2px;
+            border: 2px solid var(--hw-green);
+            display: inline-flex; align-items: center; justify-content: center;
+            color: white; text-decoration: none; border-radius: 50px;
+            cursor: pointer;
+        }
+
+        /* LOCATION */
+        .location-section { padding: 4rem 1.5rem; background: linear-gradient(135deg, var(--hw-purple-dark) 0%, var(--hw-purple) 100%); color: #1a1a1a; text-align: center; }
+        .location-section h2 {
+            font-family: 'Creepster', cursive;
+            color: var(--hw-orange); font-size: 2.8rem; margin-bottom: 2.5rem;
+            text-shadow: 3px 3px 0 var(--hw-black), 0 0 25px var(--hw-orange);
+            letter-spacing: 3px; animation: flicker 3s infinite;
+        }
+        .location-box {
+            background: rgba(255,255,255,0.95);
+            padding: 2rem 1.5rem; border-radius: 20px;
+            display: inline-block; max-width: 500px; width: 100%;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+            border: 3px solid var(--hw-orange);
+            transition: all 0.3s ease;
+        }
+        .location-box:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(0,0,0,0.3), 0 0 30px rgba(255, 107, 0, 0.4); }
+        .location-box h3 { font-family: 'Creepster', cursive !important; letter-spacing: 2px !important; }
+        .location-box .btn { width: 100%; margin-top: 1rem; }
+        .map-container {
+            width: 100%; height: 300px; border-radius: 16px;
+            overflow: hidden; margin: 1.5rem 0;
+            border: 3px solid var(--hw-purple); background: #eee;
+        }
+        .map-container iframe { width: 100%; height: 100%; border: 0; }
+        @media (max-width: 768px) { .location-section > div { flex-direction: column; align-items: center; } .location-box { width: 100%; max-width: 400px; } }
+
+        /* CONTACT */
+        .contact-section { padding: 4rem 1.5rem; text-align: center; background: linear-gradient(135deg, #0a0a0a 0%, #1a0a2a 100%); }
+        .contact-section h3 {
+            font-family: 'Creepster', cursive;
+            color: var(--hw-orange); font-size: 2.2rem; margin-bottom: 1.2rem;
+            text-shadow: 2px 2px 0 var(--hw-purple), 0 0 20px var(--hw-orange);
+            letter-spacing: 3px; animation: flicker 3s infinite;
+        }
+        .contact-section p { font-size: 1.2rem; margin-bottom: 0.5rem; }
+        .contact-phone {
+            color: var(--hw-green-slime); font-weight: bold;
+            text-decoration: none; font-size: 1.5rem;
+            display: inline-block; margin-top: 1rem;
+            padding: 12px 24px; border-radius: 12px;
+            animation: pulse 2s infinite;
+            background: rgba(255, 107, 0, 0.15);
+            border: 2px solid var(--hw-orange);
+            text-shadow: 0 0 10px var(--hw-green);
+        }
+        .contact-phone:hover { background: rgba(255, 107, 0, 0.3); transform: scale(1.05); box-shadow: 0 0 25px var(--hw-orange); }
+
+        /* FOOTER */
+        footer { background: linear-gradient(180deg, #0a0a0a 0%, #1a0a2a 100%); padding: 2.5rem 1.5rem; text-align: center; color: #777; position: relative; overflow: hidden; }
+        footer:before {
+            content: ''; position: absolute; top: 0; left: 0;
+            width: 100%; height: 3px;
+            background: linear-gradient(90deg, var(--hw-purple), var(--hw-orange), var(--hw-green), var(--hw-orange), var(--hw-purple));
+            box-shadow: 0 0 15px var(--hw-orange);
+        }
+        .social-links { margin-top: 1.5rem; }
+        .social-links a {
+            color: var(--hw-orange); text-decoration: none; margin: 0 10px;
+            font-weight: bold; font-size: 1rem;
+            transition: all 0.3s ease; display: inline-block;
+            text-shadow: 0 0 10px rgba(255, 107, 0, 0.5);
+        }
+        .social-links a:hover { color: var(--hw-green-slime); transform: translateY(-2px); text-shadow: 0 0 15px var(--hw-green); }
+
+        /* SCROLL TOP */
+        .scroll-top {
+            position: fixed; bottom: 20px; right: 20px;
+            width: 50px; height: 50px;
+            background: linear-gradient(135deg, var(--hw-orange) 0%, var(--hw-purple) 100%);
+            color: white; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; z-index: 999;
+            opacity: 0; visibility: hidden; transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 107, 0, 0.5), 0 0 25px rgba(107, 45, 139, 0.4);
+            font-size: 1.3rem; border: 2px solid var(--hw-orange);
+        }
+        .scroll-top.visible { opacity: 1; visibility: visible; }
+        .scroll-top:hover { transform: translateY(-3px) scale(1.1); box-shadow: 0 8px 25px rgba(255, 107, 0, 0.7), 0 0 35px rgba(107, 45, 139, 0.6); }
+
+        /* EVENT CART MODAL */
         .event-cart-modal {
-            position: fixed;
-            top: 0; right: 0;
-            width: 100%; height: 100vh;
-            background: var(--hw-black);
-            z-index: 2000;
+            position: fixed; top: 0; right: 0; width: 100%; height: 100vh;
+            background: var(--hw-black); z-index: 2000;
             transform: translate3d(100%, 0, 0);
             transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
+            display: flex; flex-direction: column; overflow: hidden;
         }
         .event-cart-modal.active { transform: translate3d(0, 0, 0); }
         .cart-header {
             padding: 1.5rem;
             background: linear-gradient(135deg, rgba(107, 45, 139, 0.3) 0%, rgba(255, 107, 0, 0.2) 100%);
             border-bottom: 2px solid var(--hw-orange);
-            position: relative;
-            padding-top: 3rem;
+            position: relative; padding-top: 3rem;
         }
         .cart-header h2 {
             font-family: 'Creepster', cursive;
-            color: var(--hw-orange);
-            font-size: 2rem;
-            text-align: center;
+            color: var(--hw-orange); font-size: 2rem; text-align: center;
             text-shadow: 2px 2px 0 var(--hw-purple), 0 0 15px var(--hw-orange);
             letter-spacing: 3px;
         }
         .close-cart {
-            position: absolute;
-            top: 15px; right: 15px;
+            position: absolute; top: 15px; right: 15px;
             background: rgba(255, 107, 0, 0.2);
             border: 2px solid var(--hw-orange);
-            color: white;
-            font-size: 1.3rem;
-            cursor: pointer;
+            color: white; font-size: 1.3rem; cursor: pointer;
             width: 40px; height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: flex; align-items: center; justify-content: center;
             border-radius: 50%;
         }
         .cart-items { flex: 1; padding: 1rem; overflow-y: auto; }
         .cart-item {
             background: rgba(107, 45, 139, 0.15);
-            border-radius: 8px;
-            padding: 1rem;
+            border-radius: 8px; padding: 1rem;
             margin-bottom: 0.8rem;
             border: 1px solid var(--hw-purple);
-            display: flex;
-            flex-direction: column;
-            gap: 0.8rem;
+            display: flex; flex-direction: column; gap: 0.8rem;
         }
-        .item-info h4 {
-            color: white;
-            font-size: 1.1rem;
-            margin-bottom: 0.3rem;
-            font-family: 'Creepster', cursive;
-            letter-spacing: 1px;
-        }
+        .item-info h4 { color: white; font-size: 1.1rem; margin-bottom: 0.3rem; font-family: 'Creepster', cursive; letter-spacing: 1px; }
         .item-price { color: var(--hw-orange); font-weight: bold; font-size: 1rem; }
         .item-quantity { display: flex; align-items: center; gap: 10px; justify-content: space-between; }
         .quantity-btn {
             background: var(--hw-purple);
             border: 2px solid var(--hw-orange);
-            color: white;
-            width: 36px; height: 36px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            color: white; width: 36px; height: 36px;
+            border-radius: 50%; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
             font-size: 1.1rem;
         }
         .quantity-input {
-            width: 60px;
-            text-align: center;
+            width: 60px; text-align: center;
             background: rgba(107, 45, 139, 0.3);
             border: 2px solid var(--hw-purple);
-            color: white;
-            padding: 8px;
-            border-radius: 8px;
-            font-size: 1rem;
+            color: white; padding: 8px; border-radius: 8px; font-size: 1rem;
         }
-        .remove-item {
-            background: none;
-            border: none;
-            color: #ff6b6b;
-            cursor: pointer;
-            font-size: 1.1rem;
-            padding: 8px;
-        }
+        .remove-item { background: none; border: none; color: #ff6b6b; cursor: pointer; font-size: 1.1rem; padding: 8px; }
         .cart-footer {
             padding: 1.5rem;
             background: linear-gradient(135deg, rgba(107, 45, 139, 0.3) 0%, rgba(255, 107, 0, 0.2) 100%);
-            border-top: 2px solid var(--hw-orange);
-            padding-bottom: 2rem;
+            border-top: 2px solid var(--hw-orange); padding-bottom: 2rem;
         }
         .cart-total {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.2rem;
-            padding-bottom: 1rem;
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 1.2rem; padding-bottom: 1rem;
             border-bottom: 1px solid rgba(255, 107, 0, 0.3);
         }
         .total-label { color: var(--color-gris-claro); font-size: 1.1rem; }
         .total-amount {
-            color: var(--hw-orange);
-            font-size: 1.5rem;
-            font-weight: bold;
+            color: var(--hw-orange); font-size: 1.5rem; font-weight: bold;
             font-family: 'Creepster', cursive;
-            text-shadow: 0 0 15px var(--hw-orange);
-            letter-spacing: 2px;
+            text-shadow: 0 0 15px var(--hw-orange); letter-spacing: 2px;
         }
         .checkout-btn {
-            width: 100%;
-            padding: 1rem;
+            width: 100%; padding: 1rem;
             background: linear-gradient(135deg, var(--hw-purple) 0%, var(--hw-orange) 100%);
-            color: white;
-            border: 2px solid var(--hw-orange);
-            border-radius: 12px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            font-family: 'Creepster', cursive;
-            letter-spacing: 2px;
+            color: white; border: 2px solid var(--hw-orange);
+            border-radius: 12px; font-size: 1.1rem; font-weight: bold;
+            cursor: pointer; display: flex; align-items: center; justify-content: center;
+            gap: 10px; font-family: 'Creepster', cursive; letter-spacing: 2px;
         }
         .empty-cart { text-align: center; padding: 3rem 1rem; color: var(--color-gris-claro); }
-        .empty-cart i {
-            font-size: 2.5rem;
-            color: var(--hw-purple);
-            margin-bottom: 1rem;
-            display: block;
-            text-shadow: 0 0 20px var(--hw-purple);
-        }
+        .empty-cart i { font-size: 2.5rem; color: var(--hw-purple); margin-bottom: 1rem; display: block; text-shadow: 0 0 20px var(--hw-purple); }
 
-        /* ============ LEGAL CONSENT ============ */
+        /* LEGAL CONSENT */
         .legal-consent-banner {
-            position: fixed;
-            bottom: 0; left: 0;
-            width: 100%;
+            position: fixed; bottom: 0; left: 0; width: 100%;
             background: linear-gradient(135deg, #1a0a2a 0%, #0a0a0a 100%);
-            color: white;
-            padding: 1.5rem;
-            z-index: 9999;
+            color: white; padding: 1.5rem; z-index: 9999;
             box-shadow: 0 -5px 25px rgba(0, 0, 0, 0.9);
             border-top: 3px solid var(--hw-orange);
             transform: translateY(100%);
@@ -1838,56 +956,37 @@
         }
         .legal-consent-banner.active { transform: translateY(0); }
         .legal-consent-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: center;
-            gap: 1.5rem;
+            max-width: 1200px; margin: 0 auto;
+            display: flex; flex-wrap: wrap;
+            justify-content: space-between; align-items: center; gap: 1.5rem;
         }
         .legal-consent-text { flex: 1; min-width: 300px; }
         .legal-consent-text h3 {
-            color: var(--hw-orange);
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-            font-family: 'Creepster', cursive;
-            letter-spacing: 2px;
+            color: var(--hw-orange); font-size: 1.3rem; margin-bottom: 0.5rem;
+            font-family: 'Creepster', cursive; letter-spacing: 2px;
         }
         .legal-consent-text p { color: #ddd; font-size: 0.95rem; line-height: 1.5; }
         .legal-consent-text a { color: var(--hw-green-slime); text-decoration: underline; }
         .legal-consent-buttons { display: flex; gap: 1rem; flex-wrap: wrap; }
         .legal-consent-btn {
-            padding: 12px 24px;
-            border-radius: 50px;
-            font-weight: bold;
-            cursor: pointer;
-            border: none;
-            font-size: 1rem;
-            min-width: 120px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
+            padding: 12px 24px; border-radius: 50px;
+            font-weight: bold; cursor: pointer; border: none;
+            font-size: 1rem; min-width: 120px;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
         }
         .legal-consent-reject { background: transparent; color: white; border: 2px solid #666; }
         .legal-consent-accept {
             background: linear-gradient(135deg, var(--hw-purple) 0%, var(--hw-orange) 100%);
-            color: white;
-            box-shadow: 0 4px 15px rgba(107, 45, 139, 0.4);
+            color: white; box-shadow: 0 4px 15px rgba(107, 45, 139, 0.4);
             border: 2px solid var(--hw-orange);
         }
         .legal-consent-close {
-            position: absolute;
-            top: 10px; right: 10px;
-            background: transparent;
-            border: none;
-            color: #aaa;
-            cursor: pointer;
-            font-size: 1.2rem;
+            position: absolute; top: 10px; right: 10px;
+            background: transparent; border: none;
+            color: #aaa; cursor: pointer; font-size: 1.2rem;
         }
 
-        /* ============ RESPONSIVE ============ */
+        /* RESPONSIVE */
         @media (max-width: 768px) {
             .halloween-banner-text { font-size: 0.85rem; gap: 6px; letter-spacing: 1.5px; }
             .hero-title-halloween { font-size: clamp(2.5rem, 12vw, 4rem); }
@@ -1902,9 +1001,7 @@
             .legal-consent-buttons { width: 100%; justify-content: center; }
             .legal-consent-btn { flex: 1; min-width: 140px; }
         }
-        @media (max-width: 480px) {
-            .halloween-banner-text { font-size: 0.75rem; letter-spacing: 1px; gap: 4px; }
-        }
+        @media (max-width: 480px) { .halloween-banner-text { font-size: 0.75rem; letter-spacing: 1px; gap: 4px; } }
         @media (min-width: 768px) {
             html { font-size: 17px; }
             .menu-grid { grid-template-columns: repeat(2, 1fr); max-width: 800px; gap: 2.5rem; }
@@ -1926,7 +1023,7 @@
     </style>
 </head>
 <body>
-    <!-- HALLOWEEN BANNER -->
+    <!-- BANNER HALLOWEEN -->
     <div class="halloween-banner" id="halloweenBanner">
         <div class="halloween-banner-text">
             <i class="fas fa-ghost"></i>
@@ -2030,7 +1127,7 @@
     <!-- HERO -->
     <section id="home" class="video-hero">
         <div class="video-container">
-            <video class="video-background" autoplay muted loop playsinline id="heroVideo">
+            <video class="video-background" autoplay muted loop playsinline id="heroVideo" preload="none">
                 <source src="hotdog-portada.mp4" type="video/mp4">
                 <source src="https://assets.mixkit.co/videos/preview/mixkit-sizzling-hot-dogs-on-a-grill-40156-large.mp4" type="video/mp4">
             </video>
@@ -2103,35 +1200,35 @@
         <div class="carousel-container">
             <div class="carousel-track" id="carouselTrack">
                 <div class="carousel-slide active">
-                    <img src="imagenes dog/supdog-cart-event.jpg" alt="SupDog Hot Dog Cart Setup" class="slide-image" onerror="this.src='https://images.unsplash.com/photo-1552566626-52f8b828add9?w=1600&q=80'">
+                    <img src="imagenes dog/supdog-cart-event.jpg" alt="SupDog Cart Setup" class="slide-image" loading="lazy" onerror="this.style.display='none'">
                     <div class="slide-overlay">
                         <h3 class="slide-title">OUR MOBILE CART</h3>
                         <p class="slide-description">Fully equipped and ready to serve at any event. Our custom-designed cart brings the authentic SupDog experience to you!</p>
                     </div>
                 </div>
                 <div class="carousel-slide">
-                    <img src="imagenes dog/supdog-gourmet-hotdogs.jpg" alt="Gourmet Hot Dogs" class="slide-image" onerror="this.src='https://images.unsplash.com/photo-1612392062422-ef19b42f74df?w=1600&q=80'">
+                    <img src="imagenes dog/supdog-gourmet-hotdogs.jpg" alt="Gourmet Hot Dogs" class="slide-image" loading="lazy" onerror="this.style.display='none'">
                     <div class="slide-overlay">
                         <h3 class="slide-title">GOURMET CREATIONS</h3>
                         <p class="slide-description">Each hot dog is crafted with premium ingredients and creative toppings that explode with flavor.</p>
                     </div>
                 </div>
                 <div class="carousel-slide">
-                    <img src="https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=1600&q=80" alt="Event Service" class="slide-image">
+                    <img src="imagenes dog/supdog-event-service.jpg" alt="Event Service" class="slide-image" loading="lazy" onerror="this.style.display='none'">
                     <div class="slide-overlay">
                         <h3 class="slide-title">EVENT SERVICE</h3>
                         <p class="slide-description">We bring the party to you! Perfect for birthdays, corporate events, festivals, and celebrations of all kinds.</p>
                     </div>
                 </div>
                 <div class="carousel-slide">
-                    <img src="imagenes dog/supdog-fresh-toppings.jpg" alt="Delicious Toppings" class="slide-image" onerror="this.src='https://images.unsplash.com/photo-1626082927389-6cd097cee6a6?w=1600&q=80'">
+                    <img src="imagenes dog/supdog-fresh-toppings.jpg" alt="Fresh Toppings" class="slide-image" loading="lazy" onerror="this.style.display='none'">
                     <div class="slide-overlay">
                         <h3 class="slide-title">FRESH TOPPINGS</h3>
                         <p class="slide-description">From classic ketchup and mustard to gourmet toppings like pineapple, bacon, and chipotle sauce.</p>
                     </div>
                 </div>
                 <div class="carousel-slide">
-                    <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=1600&q=80" alt="Happy Customers" class="slide-image">
+                    <img src="imagenes dog/supdog-happy-customers.jpg" alt="Happy Customers" class="slide-image" loading="lazy" onerror="this.style.display='none'">
                     <div class="slide-overlay">
                         <h3 class="slide-title">HAPPY CUSTOMERS</h3>
                         <p class="slide-description">The smiles say it all! Our customers love the unique flavors and fun experience of SupDog.</p>
@@ -2146,7 +1243,7 @@
         <div class="carousel-dots" id="carouselDots"></div>
     </section>
 
-    <!-- EVENT HIGHLIGHTS (VIDEOS - NOMBRES ORIGINALES) -->
+    <!-- EVENT HIGHLIGHTS - VIDEOS CON NOMBRES ORIGINALES Y preload="none" -->
     <section id="highlights" class="event-highlights-section">
         <div style="text-align: center; margin-bottom: 3rem; padding: 0 1.5rem;">
             <div class="event-highlights-badge"><i class="fas fa-video"></i> EVENT HIGHLIGHTS <i class="fas fa-star"></i></div>
@@ -2161,21 +1258,13 @@
             
             <div class="video-carousel-wrapper">
                 <div class="video-carousel-track" id="videoTrack">
-                    <!-- Video 1 -->
+                    <!-- Video 1: Rose Soiree -->
                     <div class="video-slide">
-                        <div class="video-card" id="videoCard1">
-                            <video controls playsinline preload="metadata" 
-                                   data-video-id="1"
-                                   onloadeddata="handleVideoLoaded(this)"
-                                   onerror="handleVideoError(this)">
+                        <div class="video-card">
+                            <video controls playsinline preload="none">
                                 <source src="videos/event-1.mp4" type="video/mp4">
                                 Tu navegador no soporta videos.
                             </video>
-                            <div class="video-placeholder">
-                                <i class="fas fa-play-circle"></i>
-                                <span>ROSE SOIREE</span>
-                                <span style="font-size: 0.8rem; font-family: 'Poppins', sans-serif; letter-spacing: 1px; margin-top: 10px; color: #ccc;">VIDEO NOT AVAILABLE</span>
-                            </div>
                             <div class="video-card-overlay">
                                 <h4 class="video-card-title">🌸 Rose Soiree</h4>
                                 <p class="video-card-date">Spring 2026</p>
@@ -2185,44 +1274,28 @@
                     
                     <!-- Video 2 -->
                     <div class="video-slide">
-                        <div class="video-card" id="videoCard2">
-                            <video controls playsinline preload="metadata" 
-                                   data-video-id="2"
-                                   onloadeddata="handleVideoLoaded(this)"
-                                   onerror="handleVideoError(this)">
+                        <div class="video-card">
+                            <video controls playsinline preload="none">
                                 <source src="videos/event-2.mp4" type="video/mp4">
                                 Tu navegador no soporta videos.
                             </video>
-                            <div class="video-placeholder">
-                                <i class="fas fa-play-circle"></i>
-                                <span>HALLOWEEN PARTY</span>
-                                <span style="font-size: 0.8rem; font-family: 'Poppins', sans-serif; letter-spacing: 1px; margin-top: 10px; color: #ccc;">VIDEO NOT AVAILABLE</span>
-                            </div>
                             <div class="video-card-overlay">
-                                <h4 class="video-card-title">🎃 Halloween Party</h4>
-                                <p class="video-card-date">October 2026</p>
+                                <h4 class="video-card-title">🎉 Event 2</h4>
+                                <p class="video-card-date">2026</p>
                             </div>
                         </div>
                     </div>
                     
                     <!-- Video 3 -->
                     <div class="video-slide">
-                        <div class="video-card" id="videoCard3">
-                            <video controls playsinline preload="metadata" 
-                                   data-video-id="3"
-                                   onloadeddata="handleVideoLoaded(this)"
-                                   onerror="handleVideoError(this)">
+                        <div class="video-card">
+                            <video controls playsinline preload="none">
                                 <source src="videos/event-3.mp4" type="video/mp4">
                                 Tu navegador no soporta videos.
                             </video>
-                            <div class="video-placeholder">
-                                <i class="fas fa-play-circle"></i>
-                                <span>PRIVATE EVENT</span>
-                                <span style="font-size: 0.8rem; font-family: 'Poppins', sans-serif; letter-spacing: 1px; margin-top: 10px; color: #ccc;">VIDEO NOT AVAILABLE</span>
-                            </div>
                             <div class="video-card-overlay">
-                                <h4 class="video-card-title">🎉 Private Event</h4>
-                                <p class="video-card-date">Summer 2026</p>
+                                <h4 class="video-card-title">🎊 Event 3</h4>
+                                <p class="video-card-date">2026</p>
                             </div>
                         </div>
                     </div>
@@ -2236,7 +1309,7 @@
         <div class="video-carousel-dots" id="videoDots"></div>
     </section>
 
-    <!-- MENU SECTION -->
+    <!-- MENU -->
     <section id="menu" class="menu-section">
         <div class="promo-banner">
             <div class="scrolling-container">
@@ -2263,7 +1336,7 @@
             <div class="menu-grid">
                 <div class="menu-card">
                     <span class="combo-badge">BEST SELLER</span>
-                    <img src="imagenes dog/mexican-dog.jpg" alt="Mexican Dog" class="card-image" onerror="this.src='https://images.unsplash.com/photo-1612392062422-ef19b42f74df?w=500&q=80'">
+                    <img src="imagenes dog/mexican-dog.jpg" alt="Mexican Dog" class="card-image" loading="lazy" onerror="this.style.display='none'">
                     <div class="card-content">
                         <h3>Mexican Dog</h3>
                         <p>Beef Frank, Pico De Gallo, Jalapeños, Ketchup & Mustard.</p>
@@ -2271,7 +1344,7 @@
                     </div>
                 </div>
                 <div class="menu-card">
-                    <img src="imagenes dog/german-dog.jpg" alt="German Dog" class="card-image" onerror="this.src='https://images.unsplash.com/photo-1599599810694-b5b37304c041?w=500&q=80'">
+                    <img src="imagenes dog/german-dog.jpg" alt="German Dog" class="card-image" loading="lazy" onerror="this.style.display='none'">
                     <div class="card-content">
                         <h3>German Dog</h3>
                         <p>Bratwurst, Grilled Onions, Sauerkraut, Spicy German Mustard.</p>
@@ -2279,7 +1352,7 @@
                     </div>
                 </div>
                 <div class="menu-card">
-                    <img src="imagenes dog/hawaiian-dog.jpg" alt="Hawaiian Dog" class="card-image" onerror="this.src='https://images.unsplash.com/photo-1599974579688-8dbdd335c77f?w=500&q=80'">
+                    <img src="imagenes dog/hawaiian-dog.jpg" alt="Hawaiian Dog" class="card-image" loading="lazy" onerror="this.style.display='none'">
                     <div class="card-content">
                         <h3>Hawaiian Dog</h3>
                         <p>Jalapeño Sausage, Pineapple, Grilled Onions, Bacon Bites.</p>
@@ -2288,7 +1361,7 @@
                 </div>
                 <div class="menu-card">
                     <span class="combo-badge">CHICAGO STYLE</span>
-                    <img src="imagenes dog/chicago-dog.jpg" alt="Chicago Dog" class="card-image" onerror="this.src='https://images.unsplash.com/photo-1612392062422-ef19b42f74df?w=500&q=80'">
+                    <img src="imagenes dog/chicago-dog.jpg" alt="Chicago Dog" class="card-image" loading="lazy" onerror="this.style.display='none'">
                     <div class="card-content">
                         <h3>Chicago Dog</h3>
                         <p>Beef Frank, Poppy Seeds Bun, Yellow Mustard, Neon Green Pickles.</p>
@@ -2297,7 +1370,7 @@
                 </div>
                 <div class="menu-card">
                     <span class="combo-badge">MOST POPULAR</span>
-                    <img src="imagenes dog/trainwreck.jpg" alt="Trainwreck" class="card-image" onerror="this.src='https://images.unsplash.com/photo-1626082927389-6cd097cee6a6?w=500&q=80'">
+                    <img src="imagenes dog/trainwreck.jpg" alt="Trainwreck" class="card-image" loading="lazy" onerror="this.style.display='none'">
                     <div class="card-content">
                         <h3>Trainwreck</h3>
                         <p>Beef Frank, Chipotle Sauce, Mayo, Mustard, Onions, Fries, Parmesan, Bacon.</p>
@@ -2305,7 +1378,7 @@
                     </div>
                 </div>
                 <div class="menu-card">
-                    <img src="imagenes dog/tijuana-dog.jpg" alt="Tijuana Dog" class="card-image" onerror="this.src='https://images.unsplash.com/photo-1599974579688-8dbdd335c77f?w=500&q=80'">
+                    <img src="imagenes dog/tijuana-dog.jpg" alt="Tijuana Dog" class="card-image" loading="lazy" onerror="this.style.display='none'">
                     <div class="card-content">
                         <h3>Tijuana Dog</h3>
                         <p>Jalapeño Sausage, Corn, Chipotle Sauce, Parmesan Cheese, Cilantro.</p>
@@ -2314,7 +1387,7 @@
                 </div>
                 <div class="menu-card">
                     <span class="combo-badge">FOR KIDS</span>
-                    <img src="imagenes dog/kids-dog.jpg" alt="Kids Dog" class="card-image" onerror="this.src='https://images.unsplash.com/photo-1612392062422-ef19b42f74df?w=500&q=80'">
+                    <img src="imagenes dog/kids-dog.jpg" alt="Kids Dog" class="card-image" loading="lazy" onerror="this.style.display='none'">
                     <div class="card-content">
                         <h3>Kids Dog</h3>
                         <p>Beef Frank, Ketchup, Jello, Kids Juice.</p>
@@ -2322,7 +1395,7 @@
                     </div>
                 </div>
                 <div class="menu-card">
-                    <img src="imagenes dog/all-naked.jpg" alt="All Naked" class="card-image" onerror="this.src='https://images.unsplash.com/photo-1599599810694-b5b37304c041?w=500&q=80'">
+                    <img src="imagenes dog/all-naked.jpg" alt="All Naked" class="card-image" loading="lazy" onerror="this.style.display='none'">
                     <div class="card-content">
                         <h3>All Naked</h3>
                         <p>Bunless. Bratwurst, Grilled Onions, Sauerkraut.</p>
@@ -2341,27 +1414,27 @@
 
                 <div class="sides-grid">
                     <div class="side-card">
-                        <img src="extras & drinks/creamy-slaw.jpg" alt="Creamy Slaw" class="side-image" onerror="this.src='https://images.unsplash.com/photo-1625943553852-781c6dd46f9c?w=500&q=80'">
+                        <img src="extras & drinks/creamy-slaw.jpg" alt="Creamy Slaw" class="side-image" loading="lazy" onerror="this.style.display='none'">
                         <div class="side-content"><h4>Creamy Slaw</h4><div class="side-price">$4.00</div></div>
                     </div>
                     <div class="side-card">
-                        <img src="extras & drinks/chips-bag.jpg" alt="Chips Bag" class="side-image" onerror="this.src='https://images.unsplash.com/photo-1566478989037-eec170784d0b?w=500&q=80'">
+                        <img src="extras & drinks/chips-bag.jpg" alt="Chips Bag" class="side-image" loading="lazy" onerror="this.style.display='none'">
                         <div class="side-content"><h4>Chips Bag</h4><div class="side-price">$3.00</div></div>
                     </div>
                     <div class="side-card">
-                        <img src="extras & drinks/corn-salad.jpg" alt="Corn Salad" class="side-image" onerror="this.src='https://images.unsplash.com/photo-1625943553852-781c6dd46f9c?w=500&q=80'">
+                        <img src="extras & drinks/corn-salad.jpg" alt="Corn Salad" class="side-image" loading="lazy" onerror="this.style.display='none'">
                         <div class="side-content"><h4>Corn Salad</h4><div class="side-price">$4.00</div></div>
                     </div>
                     <div class="side-card">
-                        <img src="extras & drinks/potato-salad.jpg" alt="Potato Salad" class="side-image" onerror="this.src='https://images.unsplash.com/photo-1625943553852-781c6dd46f9c?w=500&q=80'">
+                        <img src="extras & drinks/potato-salad.jpg" alt="Potato Salad" class="side-image" loading="lazy" onerror="this.style.display='none'">
                         <div class="side-content"><h4>Potato Salad</h4><div class="side-price">$4.00</div></div>
                     </div>
                     <div class="side-card">
-                        <img src="extras & drinks/baked-beans.jpg" alt="Baked Beans" class="side-image" onerror="this.src='https://images.unsplash.com/photo-1588168333986-5078d3ae3976?w=500&q=80'">
+                        <img src="extras & drinks/baked-beans.jpg" alt="Baked Beans" class="side-image" loading="lazy" onerror="this.style.display='none'">
                         <div class="side-content"><h4>Baked Beans</h4><div class="side-price">$6.00</div></div>
                     </div>
                     <div class="side-card drink-special">
-                        <img src="extras & drinks/drinks.jpg" alt="Drinks" class="side-image" onerror="this.src='https://images.unsplash.com/photo-1581636625402-29b2a704ef13?w=500&q=80'">
+                        <img src="extras & drinks/drinks.jpg" alt="Drinks" class="side-image" loading="lazy" onerror="this.style.display='none'">
                         <div class="side-content">
                             <h4>DRINKS</h4>
                             <p style="color: #aaa; font-size: 0.9rem; margin-bottom: 0.5rem;">Cans & Water</p>
@@ -2388,7 +1461,7 @@
                 </div>
                 <div class="menu-grid">
                     <div class="menu-card">
-                        <img src="imagenes dog/wings.jpg" alt="6 Wings" class="card-image" onerror="this.src='https://images.unsplash.com/photo-1608039829572-78524f79c4c7?w=500&q=80'">
+                        <img src="imagenes dog/wings.jpg" alt="6 Wings" class="card-image" loading="lazy" onerror="this.style.display='none'">
                         <div class="card-content">
                             <h3>6 Wings</h3>
                             <p>Can be mixed (3 & 3)</p>
@@ -2396,7 +1469,7 @@
                         </div>
                     </div>
                     <div class="menu-card">
-                        <img src="imagenes dog/wings-12.jpg" alt="12 Wings" class="card-image" onerror="this.src='https://images.unsplash.com/photo-1608039829572-78524f79c4c7?w=500&q=80'">
+                        <img src="imagenes dog/wings-12.jpg" alt="12 Wings" class="card-image" loading="lazy" onerror="this.style.display='none'">
                         <div class="card-content">
                             <h3>12 Wings</h3>
                             <p>Can be mixed (6 & 6)</p>
@@ -2410,7 +1483,7 @@
                 <h3 class="menu-category-title">🧀 NACHOS</h3>
                 <div class="menu-grid">
                     <div class="menu-card">
-                        <img src="imagenes dog/nachos.jpg" alt="Loaded Nachos" class="card-image" onerror="this.src='https://images.unsplash.com/photo-1513456852971-30c0b8199d4d?w=500&q=80'">
+                        <img src="imagenes dog/nachos.jpg" alt="Loaded Nachos" class="card-image" loading="lazy" onerror="this.style.display='none'">
                         <div class="card-content">
                             <h3>Loaded Nachos</h3>
                             <p>Chips, queso, pico de gallo, jalapeños, sweet potato fries & nachos sauces</p>
@@ -2429,7 +1502,7 @@
                 <h3 class="menu-category-title">🌮 TACOS & QUESADILLAS</h3>
                 <div class="menu-grid">
                     <div class="menu-card">
-                        <img src="imagenes dog/tacos.jpg" alt="Tacos" class="card-image" onerror="this.src='https://images.unsplash.com/photo-1599974579688-8dbdd335c77f?w=500&q=80'">
+                        <img src="imagenes dog/tacos.jpg" alt="Tacos" class="card-image" loading="lazy" onerror="this.style.display='none'">
                         <div class="card-content">
                             <h3>Tacos - 2 for $12</h3>
                             <p>Chicken Fajita • Garlic Shrimp • Brisket • Baja Fish</p>
@@ -2437,7 +1510,7 @@
                         </div>
                     </div>
                     <div class="menu-card">
-                        <img src="imagenes dog/quesadilla.jpg" alt="Quesadilla" class="card-image" onerror="this.src='https://images.unsplash.com/photo-1618040996337-56904b7850b9?w=500&q=80'">
+                        <img src="imagenes dog/quesadilla.jpg" alt="Quesadilla" class="card-image" loading="lazy" onerror="this.style.display='none'">
                         <div class="card-content">
                             <h3>Quesadilla</h3>
                             <p>Chicken Fajita • Garlic Shrimp • Brisket • Baja Fish</p>
@@ -2451,7 +1524,7 @@
                 <h3 class="menu-category-title">🍔 SLIDERS & ENTREES</h3>
                 <div class="menu-grid">
                     <div class="menu-card">
-                        <img src="imagenes dog/sliders.jpg" alt="Sliders" class="card-image" onerror="this.src='https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?w=500&q=80'">
+                        <img src="imagenes dog/sliders.jpg" alt="Sliders" class="card-image" loading="lazy" onerror="this.style.display='none'">
                         <div class="card-content">
                             <h3>Sliders - 2 for $12</h3>
                             <p>Brisket • Original • Pulled Pork</p>
@@ -2459,14 +1532,14 @@
                         </div>
                     </div>
                     <div class="menu-card">
-                        <img src="imagenes dog/fish-chips.jpg" alt="Fish & Chips" class="card-image" onerror="this.src='https://images.unsplash.com/photo-1579208575657-c595a05383b7?w=500&q=80'">
+                        <img src="imagenes dog/fish-chips.jpg" alt="Fish & Chips" class="card-image" loading="lazy" onerror="this.style.display='none'">
                         <div class="card-content">
                             <h3>Fish & Chips</h3>
                             <div class="price-row"><span class="price">$16.00</span></div>
                         </div>
                     </div>
                     <div class="menu-card">
-                        <img src="imagenes dog/shrimp-boil.jpg" alt="Shrimp Boil" class="card-image" onerror="this.src='https://images.unsplash.com/photo-1625943553852-781c6dd46f9c?w=500&q=80'">
+                        <img src="imagenes dog/shrimp-boil.jpg" alt="Shrimp Boil" class="card-image" loading="lazy" onerror="this.style.display='none'">
                         <div class="card-content">
                             <h3>Shrimp Boil</h3>
                             <p>Potatoes, corn, sausage & 1 lb shrimp</p>
@@ -2480,15 +1553,15 @@
                 <h3 class="menu-category-title">🍟 SIDES</h3>
                 <div class="sides-grid">
                     <div class="side-card">
-                        <img src="extras & drinks/french-fries.jpg" alt="Shoestring Fries" class="side-image" onerror="this.src='https://images.unsplash.com/photo-1630384060421-cb20d0e0649d?w=500&q=80'">
+                        <img src="extras & drinks/french-fries.jpg" alt="French Fries" class="side-image" loading="lazy" onerror="this.style.display='none'">
                         <div class="side-content"><h4>French Fries</h4><div class="side-price">$5.00</div></div>
                     </div>
                     <div class="side-card">
-                        <img src="extras & drinks/slaw.jpg" alt="Slaw" class="side-image" onerror="this.src='https://images.unsplash.com/photo-1625943553852-781c6dd46f9c?w=500&q=80'">
+                        <img src="extras & drinks/slaw.jpg" alt="Slaw" class="side-image" loading="lazy" onerror="this.style.display='none'">
                         <div class="side-content"><h4>Slaw</h4><div class="side-price">$5.00</div></div>
                     </div>
                     <div class="side-card">
-                        <img src="extras & drinks/mac-cheese.jpg" alt="Mac & Cheese" class="side-image" onerror="this.src='https://images.unsplash.com/photo-1543339494-b4cd4f7ba686?w=500&q=80'">
+                        <img src="extras & drinks/mac-cheese.jpg" alt="Mac & Cheese" class="side-image" loading="lazy" onerror="this.style.display='none'">
                         <div class="side-content">
                             <h4>Mac & Cheese</h4>
                             <div class="side-price">$5.00</div>
@@ -2496,11 +1569,11 @@
                         </div>
                     </div>
                     <div class="side-card">
-                        <img src="extras & drinks/chips-queso.jpg" alt="Chips & Queso" class="side-image" onerror="this.src='https://images.unsplash.com/photo-1513456852971-30c0b8199d4d?w=500&q=80'">
+                        <img src="extras & drinks/chips-queso.jpg" alt="Chips & Queso" class="side-image" loading="lazy" onerror="this.style.display='none'">
                         <div class="side-content"><h4>Chips & Queso</h4><div class="side-price">$10.00</div></div>
                     </div>
                     <div class="side-card">
-                        <img src="extras & drinks/chips-salsa.jpg" alt="Chips & Salsa" class="side-image" onerror="this.src='https://images.unsplash.com/photo-1513456852971-30c0b8199d4d?w=500&q=80'">
+                        <img src="extras & drinks/chips-salsa.jpg" alt="Chips & Salsa" class="side-image" loading="lazy" onerror="this.style.display='none'">
                         <div class="side-content"><h4>Chips & Salsa</h4><div class="side-price">$8.00</div></div>
                     </div>
                 </div>
@@ -2511,27 +1584,27 @@
                 <p class="price-note">All kids meals served with fries, jello & juice</p>
                 <div class="sides-grid">
                     <div class="side-card">
-                        <img src="imagenes dog/kids-tenders.jpg" alt="Kids Tenders" class="side-image" onerror="this.src='https://images.unsplash.com/photo-1562967914-608f82629710?w=500&q=80'">
+                        <img src="imagenes dog/kids-tenders.jpg" alt="Kids Tenders" class="side-image" loading="lazy" onerror="this.style.display='none'">
                         <div class="side-content"><h4>Kids Tenders</h4><div class="side-price">$10.50</div></div>
                     </div>
                     <div class="side-card">
-                        <img src="imagenes dog/kids-fish.jpg" alt="Kids Fish" class="side-image" onerror="this.src='https://images.unsplash.com/photo-1579208575657-c595a05383b7?w=500&q=80'">
+                        <img src="imagenes dog/kids-fish.jpg" alt="Kids Fish" class="side-image" loading="lazy" onerror="this.style.display='none'">
                         <div class="side-content"><h4>Kids Fish</h4><div class="side-price">$10.50</div></div>
                     </div>
                     <div class="side-card">
-                        <img src="imagenes dog/kids-shrimp.jpg" alt="Kids Shrimp" class="side-image" onerror="this.src='https://images.unsplash.com/photo-1625943553852-781c6dd46f9c?w=500&q=80'">
+                        <img src="imagenes dog/kids-shrimp.jpg" alt="Kids Shrimp" class="side-image" loading="lazy" onerror="this.style.display='none'">
                         <div class="side-content"><h4>Kids Shrimp</h4><div class="side-price">$10.50</div></div>
                     </div>
                     <div class="side-card">
-                        <img src="imagenes dog/kids-corn-dog.jpg" alt="Kids Corn Dog" class="side-image" onerror="this.src='https://images.unsplash.com/photo-1599490659213-e2b9527bd6a4?w=500&q=80'">
+                        <img src="imagenes dog/kids-corn-dog.jpg" alt="Kids Corn Dog" class="side-image" loading="lazy" onerror="this.style.display='none'">
                         <div class="side-content"><h4>Kids Corn Dog</h4><div class="side-price">$10.50</div></div>
                     </div>
                     <div class="side-card">
-                        <img src="imagenes dog/kids-cheeseburger.jpg" alt="Kids Cheeseburger" class="side-image" onerror="this.src='https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=500&q=80'">
+                        <img src="imagenes dog/kids-cheeseburger.jpg" alt="Kids Cheeseburger" class="side-image" loading="lazy" onerror="this.style.display='none'">
                         <div class="side-content"><h4>Kids Cheeseburger</h4><div class="side-price">$10.50</div></div>
                     </div>
                     <div class="side-card">
-                        <img src="imagenes dog/kids-quesadilla.jpg" alt="Kids Quesadilla" class="side-image" onerror="this.src='https://images.unsplash.com/photo-1618040996337-56904b7850b9?w=500&q=80'">
+                        <img src="imagenes dog/kids-quesadilla.jpg" alt="Kids Quesadilla" class="side-image" loading="lazy" onerror="this.style.display='none'">
                         <div class="side-content"><h4>Kids Quesadilla</h4><div class="side-price">$10.50</div></div>
                     </div>
                 </div>
@@ -2542,7 +1615,7 @@
                 <h3 class="menu-category-title">🍳 BRUNCH</h3>
                 <div class="menu-grid">
                     <div class="menu-card">
-                        <img src="imagenes dog/chilaquiles.jpg" alt="Chilaquiles" class="card-image" onerror="this.src='https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?w=500&q=80'">
+                        <img src="imagenes dog/chilaquiles.jpg" alt="Chilaquiles" class="card-image" loading="lazy" onerror="this.style.display='none'">
                         <div class="card-content">
                             <h3>Chilaquiles</h3>
                             <p>Green or Red Sauce - Served with egg, fresh cheese, sour cream & side of beans</p>
@@ -2550,7 +1623,7 @@
                         </div>
                     </div>
                     <div class="menu-card">
-                        <img src="imagenes dog/breakfast-tacos.jpg" alt="Breakfast Tacos" class="card-image" onerror="this.src='https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=500&q=80'">
+                        <img src="imagenes dog/breakfast-tacos.jpg" alt="Breakfast Tacos" class="card-image" loading="lazy" onerror="this.style.display='none'">
                         <div class="card-content">
                             <h3>Breakfast Tacos</h3>
                             <p>2 tacos - Mix & match: Chorizo & Egg • Potato & Egg</p>
@@ -2558,7 +1631,7 @@
                         </div>
                     </div>
                     <div class="menu-card">
-                        <img src="imagenes dog/steak-eggs.jpg" alt="Steak & Eggs" class="card-image" onerror="this.src='https://images.unsplash.com/photo-1596040033229-3a0e3c7b3b5e?w=500&q=80'">
+                        <img src="imagenes dog/steak-eggs.jpg" alt="Steak & Eggs" class="card-image" loading="lazy" onerror="this.style.display='none'">
                         <div class="card-content">
                             <h3>Steak & Eggs</h3>
                             <p>Country potatoes, 2 eggs & 6 oz steak</p>
@@ -2566,7 +1639,7 @@
                         </div>
                     </div>
                     <div class="menu-card">
-                        <img src="imagenes dog/breakfast-plate.jpg" alt="Breakfast Plate" class="card-image" onerror="this.src='https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?w=500&q=80'">
+                        <img src="imagenes dog/breakfast-plate.jpg" alt="Breakfast Plate" class="card-image" loading="lazy" onerror="this.style.display='none'">
                         <div class="card-content">
                             <h3>Breakfast Plate</h3>
                             <p>2 eggs + country potatoes + bacon</p>
@@ -2574,7 +1647,7 @@
                         </div>
                     </div>
                     <div class="menu-card">
-                        <img src="imagenes dog/kids-plate2.jpg" alt="Kids Plate" class="card-image" onerror="this.src='https://images.unsplash.com/photo-1586444248902-2f64eddc13df?w=500&q=80'">
+                        <img src="imagenes dog/kids-plate2.jpg" alt="Kids Plate" class="card-image" loading="lazy" onerror="this.style.display='none'">
                         <div class="card-content">
                             <h3>Kids Plate</h3>
                             <p>2 pancakes + 2 eggs + 1 bacon + jello</p>
@@ -2708,58 +1781,17 @@
     </footer>
 
     <script>
-        // ============ VIDEO HANDLING - FIX PARA QUE SE VEAN LOS VIDEOS ============
-        function handleVideoLoaded(video) {
-            // Cuando el video carga bien, quitamos el estado de error por si acaso
-            const card = video.closest('.video-card');
-            if (card) {
-                card.classList.remove('video-error');
-            }
-            console.log('✅ Video cargado correctamente:', video.querySelector('source').src);
-        }
-
-        function handleVideoError(video) {
-            // Cuando el video falla, mostramos el placeholder
-            const card = video.closest('.video-card');
-            if (card) {
-                card.classList.add('video-error');
-            }
-            console.log('❌ Video no encontrado:', video.querySelector('source').src);
-        }
-
-        // Verificar cada video al cargar la página
-        document.addEventListener('DOMContentLoaded', function() {
-            document.querySelectorAll('.video-card video').forEach(video => {
-                // Verificar el estado después de un tiempo
-                setTimeout(() => {
-                    // Si el video tiene readyState >= 2 significa que cargó metadata
-                    if (video.readyState >= 2) {
-                        handleVideoLoaded(video);
-                    } else if (video.networkState === 3) { // NETWORK_NO_SOURCE
-                        handleVideoError(video);
-                    }
-                }, 1500);
-                
-                // También verificar en el evento canplay
-                video.addEventListener('canplay', function() {
-                    handleVideoLoaded(this);
-                });
-            });
-        });
-
-        // ============ HALLOWEEN BANNER AUTO-HIDE ============
+        // ============ BANNER AUTO-HIDE ============
         const halloweenBanner = document.getElementById('halloweenBanner');
         let bannerHidden = false;
         
         function handleBannerScroll() {
             const currentScrollY = window.scrollY;
-            
             if (currentScrollY > 50 && !bannerHidden) {
                 halloweenBanner.classList.add('hidden');
                 document.body.classList.add('banner-hidden');
                 bannerHidden = true;
-            } 
-            else if (currentScrollY <= 50 && bannerHidden) {
+            } else if (currentScrollY <= 50 && bannerHidden) {
                 halloweenBanner.classList.remove('hidden');
                 document.body.classList.remove('banner-hidden');
                 bannerHidden = false;
@@ -2783,35 +1815,27 @@
                 this.items = JSON.parse(localStorage.getItem('supdogEventCart')) || [];
                 this.updateCartDisplay();
             }
-
             addItem(name, price) {
-                const existingItem = this.items.find(item => item.name === name);
-                if (existingItem) { existingItem.quantity += 1; } 
+                const existing = this.items.find(item => item.name === name);
+                if (existing) { existing.quantity += 1; } 
                 else { this.items.push({ name: name, price: parseFloat(price), quantity: 1 }); }
-                this.saveCart();
-                this.updateCartDisplay();
+                this.saveCart(); this.updateCartDisplay();
                 this.showNotification(`${name} added to event cart!`);
             }
-
             removeItem(index) { this.items.splice(index, 1); this.saveCart(); this.updateCartDisplay(); }
-
             updateQuantity(index, quantity) {
                 quantity = parseInt(quantity);
                 if (isNaN(quantity) || quantity <= 0) { this.removeItem(index); } 
                 else { this.items[index].quantity = quantity; this.saveCart(); this.updateCartDisplay(); }
             }
-
             getTotal() { return this.items.reduce((total, item) => total + (item.price * item.quantity), 0); }
             getItemCount() { return this.items.reduce((count, item) => count + item.quantity, 0); }
             saveCart() { localStorage.setItem('supdogEventCart', JSON.stringify(this.items)); }
-
             updateCartDisplay() {
                 const cartCount = document.getElementById('cartCountHeader');
                 const cartItemsContainer = document.getElementById('cartItemsContainer');
                 const cartTotal = document.getElementById('cartTotal');
-                
                 if (cartCount) cartCount.textContent = this.getItemCount();
-                
                 if (cartItemsContainer) {
                     if (this.items.length === 0) {
                         cartItemsContainer.innerHTML = `
@@ -2836,20 +1860,16 @@
                             </div>`).join('');
                     }
                 }
-                
                 if (cartTotal) cartTotal.textContent = `$${this.getTotal().toFixed(2)}`;
             }
-
             increaseQuantity(index) { this.items[index].quantity += 1; this.saveCart(); this.updateCartDisplay(); }
             decreaseQuantity(index) {
                 if (this.items[index].quantity > 1) { this.items[index].quantity -= 1; this.saveCart(); this.updateCartDisplay(); } 
                 else { this.removeItem(index); }
             }
-
             showNotification(message) {
-                const existingNotification = document.querySelector('.cart-notification');
-                if (existingNotification) existingNotification.remove();
-
+                const existing = document.querySelector('.cart-notification');
+                if (existing) existing.remove();
                 const notification = document.createElement('div');
                 notification.className = 'cart-notification';
                 notification.style.cssText = `
@@ -2867,7 +1887,6 @@
                 }, 2000);
             }
         }
-
         const eventCart = new EventCart();
 
         const menuBtn = document.getElementById('menuBtn');
@@ -2889,33 +1908,24 @@
                 spans[2].style.transform = 'rotate(-45deg) translate(5px, -6px)';
                 document.body.style.overflow = 'hidden';
             } else {
-                spans[0].style.transform = 'none'; 
-                spans[1].style.opacity = '1'; 
-                spans[2].style.transform = 'none';
+                spans[0].style.transform = 'none'; spans[1].style.opacity = '1'; spans[2].style.transform = 'none';
                 document.body.style.overflow = 'auto';
             }
         }
-        
         function toggleCart() {
             eventCartModal.classList.toggle('active');
             overlay.classList.toggle('active');
             document.body.style.overflow = eventCartModal.classList.contains('active') ? 'hidden' : 'auto';
         }
-        
         if (menuBtn) menuBtn.addEventListener('click', toggleMenu);
         if (closeCartBtn) closeCartBtn.addEventListener('click', toggleCart);
-        
         overlay.addEventListener('click', () => {
             if (sidebar.classList.contains('active')) toggleMenu();
             if (eventCartModal.classList.contains('active')) toggleCart();
         });
-        
         if (checkoutBtn) {
             checkoutBtn.addEventListener('click', function() {
-                if (eventCart.getItemCount() === 0) {
-                    eventCart.showNotification('Please add items to your cart first!');
-                    return;
-                }
+                if (eventCart.getItemCount() === 0) { eventCart.showNotification('Please add items to your cart first!'); return; }
                 toggleCart();
                 setTimeout(() => { window.location.href = 'event-cart.html'; }, 400);
             });
@@ -2924,18 +1934,19 @@
         window.addEventListener('scroll', function() {
             const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
             if (header) {
-                if (currentScroll > 50) header.classList.add('scrolled');
-                else header.classList.remove('scrolled');
+                if (currentScroll > 50) header.classList.add('scrolled'); else header.classList.remove('scrolled');
             }
             if (scrollTopBtn) {
-                if (currentScroll > 300) scrollTopBtn.classList.add('visible');
-                else scrollTopBtn.classList.remove('visible');
+                if (currentScroll > 300) scrollTopBtn.classList.add('visible'); else scrollTopBtn.classList.remove('visible');
             }
         }, {passive: true});
         
         document.addEventListener('DOMContentLoaded', function() {
             const heroVideo = document.getElementById('heroVideo');
-            if (heroVideo) heroVideo.play().catch(e => console.log("Video autoplay fallback:", e));
+            if (heroVideo) {
+                // Intentar reproducir solo cuando esté listo
+                heroVideo.play().catch(e => console.log("Video autoplay:", e));
+            }
             
             const legalConsent = localStorage.getItem('supdogLegalConsent');
             const legalConsentBanner = document.getElementById('legalConsentBanner');
@@ -2950,9 +1961,7 @@
         });
         
         if (scrollTopBtn) {
-            scrollTopBtn.addEventListener('click', function() {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
+            scrollTopBtn.addEventListener('click', function() { window.scrollTo({ top: 0, behavior: 'smooth' }); });
         }
         
         let lastTouchEnd = 0;
@@ -2981,7 +1990,6 @@
                 setTimeout(() => { legalConsentBanner.style.display = 'none'; }, 400);
             }
         }
-
         if (acceptConsentBtn) {
             acceptConsentBtn.addEventListener('click', function() {
                 localStorage.setItem('supdogLegalConsent', 'accepted');
@@ -2990,7 +1998,6 @@
                 closeLegalConsentBanner();
             });
         }
-
         if (rejectConsentBtn) {
             rejectConsentBtn.addEventListener('click', function() {
                 localStorage.setItem('supdogLegalConsent', 'rejected');
@@ -2998,12 +2005,11 @@
                 closeLegalConsentBanner();
             });
         }
-
         if (legalConsentCloseBtn) {
             legalConsentCloseBtn.addEventListener('click', closeLegalConsentBanner);
         }
 
-        // ============ PHOTO GALLERY CAROUSEL ============
+        // ============ PHOTO CAROUSEL ============
         let currentSlide = 0;
         const track = document.getElementById('carouselTrack');
         const slides = document.querySelectorAll('.carousel-slide');
@@ -3017,7 +2023,6 @@
             slides.forEach((slide, i) => slide.classList.toggle('active', i === currentSlide));
             document.querySelectorAll('.carousel-dot').forEach((dot, i) => dot.classList.toggle('active', i === currentSlide));
         }
-        
         if (slides.length > 0 && dotsContainer) {
             for (let i = 0; i < slides.length; i++) {
                 const dot = document.createElement('button');
@@ -3026,14 +2031,8 @@
                 dot.addEventListener('click', () => { currentSlide = i; updateCarousel(); });
                 dotsContainer.appendChild(dot);
             }
-            if (prevBtn) prevBtn.addEventListener('click', () => {
-                currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-                updateCarousel();
-            });
-            if (nextBtn) nextBtn.addEventListener('click', () => {
-                currentSlide = (currentSlide + 1) % slides.length;
-                updateCarousel();
-            });
+            if (prevBtn) prevBtn.addEventListener('click', () => { currentSlide = (currentSlide - 1 + slides.length) % slides.length; updateCarousel(); });
+            if (nextBtn) nextBtn.addEventListener('click', () => { currentSlide = (currentSlide + 1) % slides.length; updateCarousel(); });
         }
 
         // ============ VIDEO CAROUSEL ============
@@ -3049,7 +2048,6 @@
             videoTrack.style.transform = `translateX(-${currentVideo * 100}%)`;
             document.querySelectorAll('.video-dot').forEach((dot, i) => dot.classList.toggle('active', i === currentVideo));
         }
-        
         if (videoSlides.length > 0 && videoDots) {
             for (let i = 0; i < videoSlides.length; i++) {
                 const dot = document.createElement('button');
@@ -3058,14 +2056,8 @@
                 dot.addEventListener('click', () => { currentVideo = i; updateVideoCarousel(); });
                 videoDots.appendChild(dot);
             }
-            if (videoPrevBtn) videoPrevBtn.addEventListener('click', () => {
-                currentVideo = (currentVideo - 1 + videoSlides.length) % videoSlides.length;
-                updateVideoCarousel();
-            });
-            if (videoNextBtn) videoNextBtn.addEventListener('click', () => {
-                currentVideo = (currentVideo + 1) % videoSlides.length;
-                updateVideoCarousel();
-            });
+            if (videoPrevBtn) videoPrevBtn.addEventListener('click', () => { currentVideo = (currentVideo - 1 + videoSlides.length) % videoSlides.length; updateVideoCarousel(); });
+            if (videoNextBtn) videoNextBtn.addEventListener('click', () => { currentVideo = (currentVideo + 1) % videoSlides.length; updateVideoCarousel(); });
         }
 
         // ============ MENU LOCATION SWITCHER ============
@@ -3073,9 +2065,7 @@
             const grapevineMenu = document.getElementById('menu-grapevine-container');
             const allenMenu = document.getElementById('menu-allen-container');
             const buttons = document.querySelectorAll('.menu-location-option');
-            
             buttons.forEach(btn => btn.classList.remove('active'));
-            
             if (location === 'grapevine') {
                 if (grapevineMenu) grapevineMenu.style.display = 'block';
                 if (allenMenu) allenMenu.style.display = 'none';
