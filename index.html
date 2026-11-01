@@ -5,15 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>SupDog - Hot Dogs & Nachos</title>
     
-    <!-- ============ PWA META TAGS ============ -->
     <meta name="theme-color" content="#DB3606">
     <meta name="description" content="SupDog - Wurst Behavior. Best Flavor. Only in Grapevine, TX. Hot Dogs, Nachos & more!">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="SupDog">
-    <meta name="mobile-web-app-capable" content="yes">
-    <link rel="manifest" href="manifest.json">
-    <link rel="apple-touch-icon" href="icono-192.png">
     
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -1494,7 +1487,6 @@
             .legal-consent-content { flex-direction: column; text-align: center; }
             .legal-consent-buttons { width: 100%; justify-content: center; }
             .legal-consent-btn { flex: 1; min-width: 140px; }
-            .pwa-install-banner { bottom: 15px; padding: 0.8rem 1rem; }
         }
         @media (min-width: 768px) {
             html { font-size: 17px; }
@@ -2049,15 +2041,7 @@
         <p style="margin-top: 1rem; font-size: 0.8rem; color: #777; padding: 0 1rem;">Event cart reservations require 2 weeks advance notice for themed decorations.</p>
     </footer>
 
-        // ============ PWA - SERVICE WORKER ============
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('sw.js')
-                    .then(reg => console.log('✅ Service Worker registrado:', reg.scope))
-                    .catch(err => console.log('❌ Service Worker error:', err));
-            });
-        }
-
+    <script>
         // ============ EVENT CART ============
         class EventCart {
             constructor() {
