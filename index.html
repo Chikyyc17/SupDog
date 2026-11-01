@@ -1481,64 +1481,6 @@
             font-size: 1.2rem;
         }
 
-        /* ============ PWA INSTALL BANNER ============ */
-        .pwa-install-banner {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%) translateY(200px);
-            background: linear-gradient(135deg, var(--color-rojo-fuego) 0%, var(--color-purpura-berry) 100%);
-            color: white;
-            padding: 1rem 1.5rem;
-            border-radius: 15px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-            z-index: 9998;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            max-width: 90%;
-            transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
-            border: 2px solid var(--color-amarillo-cheddar);
-        }
-        .pwa-install-banner.show {
-            transform: translateX(-50%) translateY(0);
-        }
-        .pwa-install-banner i {
-            font-size: 2rem;
-            color: var(--color-amarillo-cheddar);
-        }
-        .pwa-install-banner .pwa-text { flex: 1; }
-        .pwa-install-banner .pwa-text strong {
-            display: block;
-            font-family: 'Bangers', cursive;
-            font-size: 1.2rem;
-            letter-spacing: 1px;
-            margin-bottom: 2px;
-        }
-        .pwa-install-banner .pwa-text small {
-            font-size: 0.85rem;
-            opacity: 0.9;
-        }
-        .pwa-install-btn {
-            background: white;
-            color: var(--color-rojo-fuego);
-            border: none;
-            padding: 10px 18px;
-            border-radius: 30px;
-            font-weight: bold;
-            cursor: pointer;
-            font-size: 0.9rem;
-            white-space: nowrap;
-        }
-        .pwa-close-btn {
-            background: transparent;
-            border: none;
-            color: white;
-            font-size: 1.2rem;
-            cursor: pointer;
-            padding: 5px;
-        }
-
         /* ============ RESPONSIVE ============ */
         @media (max-width: 768px) {
             .hero-title { font-size: clamp(2.5rem, 12vw, 4rem); }
@@ -1591,17 +1533,6 @@
                 <button class="legal-consent-btn legal-consent-accept" id="acceptConsent"><i class="fas fa-check-circle"></i> Accept</button>
             </div>
         </div>
-    </div>
-
-    <!-- PWA INSTALL BANNER -->
-    <div class="pwa-install-banner" id="pwaInstallBanner">
-        <i class="fas fa-download"></i>
-        <div class="pwa-text">
-            <strong>Install SupDog App</strong>
-            <small>Add to your home screen for quick access</small>
-        </div>
-        <button class="pwa-install-btn" id="pwaInstallBtn">Install</button>
-        <button class="pwa-close-btn" id="pwaCloseBtn"><i class="fas fa-times"></i></button>
     </div>
 
     <div class="overlay" id="overlay"></div>
@@ -2117,45 +2048,6 @@
         </div>
         <p style="margin-top: 1rem; font-size: 0.8rem; color: #777; padding: 0 1rem;">Event cart reservations require 2 weeks advance notice for themed decorations.</p>
     </footer>
-
-    <script>
-        // ============ PWA - INSTALL PROMPT ============
-        let deferredPrompt;
-        const pwaInstallBanner = document.getElementById('pwaInstallBanner');
-        const pwaInstallBtn = document.getElementById('pwaInstallBtn');
-        const pwaCloseBtn = document.getElementById('pwaCloseBtn');
-
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-            
-            // Mostrar el banner después de 3 segundos si no se ha cerrado antes
-            if (!localStorage.getItem('pwaBannerClosed')) {
-                setTimeout(() => {
-                    pwaInstallBanner.classList.add('show');
-                }, 3000);
-            }
-        });
-
-        pwaInstallBtn.addEventListener('click', async () => {
-            if (!deferredPrompt) return;
-            deferredPrompt.prompt();
-            const { outcome } = await deferredPrompt.userChoice;
-            console.log('PWA install:', outcome);
-            deferredPrompt = null;
-            pwaInstallBanner.classList.remove('show');
-        });
-
-        pwaCloseBtn.addEventListener('click', () => {
-            pwaInstallBanner.classList.remove('show');
-            localStorage.setItem('pwaBannerClosed', 'true');
-        });
-
-        window.addEventListener('appinstalled', () => {
-            console.log('PWA installed');
-            pwaInstallBanner.classList.remove('show');
-            deferredPrompt = null;
-        });
 
         // ============ PWA - SERVICE WORKER ============
         if ('serviceWorker' in navigator) {
